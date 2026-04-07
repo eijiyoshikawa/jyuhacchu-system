@@ -1,0 +1,263 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ユーザーロール
+enum UserRole {
+  ADMIN          // 管理者
+  CONTRACTOR     // 元請会社
+  SUBCONTRACTOR  // 協力会社
+}
+
+// 会社種別
+enum CompanyType {
+  GENERAL_CONTRACTOR  // 元請会社
+  SUBCONTRACTOR       // 協力会社
+}
+
+// 案件ステータス
+enum ProjectStatus {
+  IN_PROGRESS  // 進行中
+  COMPLETED    // 完了
+  CANCELLED    // 中止
+}
+
+// 発注ステータス
+enum OrderStatus {
+  DRAFT              // 下書き
+  PENDING_APPROVAL   // 申請中
+  APPROVED           // 承認済
+  ORDERED            // 発注済
+  ACCEPTED           // 請負済
+  DELIVERY_REPORTED  // 納品完了
+  INSPECTED          // 検収完了
+  REJECTED           // 却下
+  CANCELLED          // 取消
+}
+
+// 請求ステータス
+enum InvoiceStatus {
+  DRAFT      // 下書き
+  SUBMITTED  // 提出済
+  APPROVED   // 承認済
+  REJECTED   // 却下
+  PAID       // 支払済
+}
+
+// 承認フロー対象種別
+enum ApprovalTargetType {
+  ORDER    // 発注
+  INVOICE  // 請求
+}
+
+// 承認ステータス
+enum ApprovalStatus {
+  PENDING   // 保留
+  APPROVED  // 承認
+  REJECTED  // 却下
+}
+
+// ==============================
+// 会社
+// ==============================
+model Company {
+  id                 String      @id @default(cuid())
+  name               String      // 会社名
+  code               String      @unique // 会社コード
+  companyType        CompanyType // 会社種別
+  postalCode         String?     // 郵便番号
+  address            String?     // 住所
+  phone              String?     // 電話番号
+  email              String?     // メールアドレス
+  registrationNumber String?     // 適格請求書発行事業者登録番号
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  users             User[]
+  projects          Project[]
+  issuedOrders      PurchaseOrder[] @relation("OrderIssuer")
+  receivedOrders    PurchaseOrder[] @relation("OrderReceiver")
+  issuedInvoices    Invoice[]       @relation("InvoiceIssuer")
+  receivedInvoices  Invoice[]       @relation("InvoiceReceiver")
+}
+
+// ==============================
+// ユーザー
+// ==============================
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String   // bcrypt hashed
+  role      UserRole
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdOrders   PurchaseOrder[] @relation("OrderCreatedBy")
+  createdInvoices Invoice[]       @relation("InvoiceCreatedBy")
+  approvalSteps   ApprovalStep[]
+  approvalFlows   ApprovalFlow[]  @relation("ApprovalRequester")
+}
+
+// ==============================
+// 案件
+// ==============================
+model Project {
+  id          String        @id @default(cuid())
+  projectCode String       @unique // PJ-YYYYMMDD-XXXX
+  name        String
+  description String?
+  status      ProjectStatus @default(IN_PROGRESS)
+  companyId   String
+  company     Company       @relation(fields: [companyId], references: [id])
+  address     String?
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  orders   PurchaseOrder[]
+  invoices Invoice[]
+}
+
+// ==============================
+// 発注書
+// ==============================
+model PurchaseOrder {
+  id               String      @id @default(cuid())
+  orderNumber      String      @unique // PO-YYYYMMDD-XXXX
+  projectId        String
+  project          Project     @relation(fields: [projectId], references: [id])
+  issuerId         String
+  issuer           Company     @relation("OrderIssuer", fields: [issuerId], references: [id])
+  receiverId       String
+  receiver         Company     @relation("OrderReceiver", fields: [receiverId], references: [id])
+  createdById      String
+  createdBy        User        @relation("OrderCreatedBy", fields: [createdById], references: [id])
+  subject          String
+  orderType        String?     // 工事/材料/その他
+  status           OrderStatus @default(DRAFT)
+  subtotal         Float       @default(0)
+  taxRate          Float       @default(0.1)
+  taxAmount        Float       @default(0)
+  totalAmount      Float       @default(0)
+  notes            String?
+  issuedAt         DateTime?
+  deliveryDeadline DateTime?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  items        PurchaseOrderItem[]
+  approvalFlow ApprovalFlow?
+  invoices     Invoice[]
+}
+
+// ==============================
+// 発注明細
+// ==============================
+model PurchaseOrderItem {
+  id              String        @id @default(cuid())
+  purchaseOrderId String
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+  itemOrder       Int
+  name            String
+  specification   String?
+  quantity        Float
+  unit            String        // 式, m, m2, m3, kg, 本, 個 等
+  unitPrice       Float
+  amount          Float
+  remarks         String?
+}
+
+// ==============================
+// 請求書
+// ==============================
+model Invoice {
+  id              String         @id @default(cuid())
+  invoiceNumber   String         @unique // INV-YYYYMMDD-XXXX
+  purchaseOrderId String?
+  purchaseOrder   PurchaseOrder? @relation(fields: [purchaseOrderId], references: [id])
+  projectId       String
+  project         Project        @relation(fields: [projectId], references: [id])
+  issuerId        String
+  issuer          Company        @relation("InvoiceIssuer", fields: [issuerId], references: [id])
+  receiverId      String
+  receiver        Company        @relation("InvoiceReceiver", fields: [receiverId], references: [id])
+  createdById     String
+  createdBy       User           @relation("InvoiceCreatedBy", fields: [createdById], references: [id])
+  subject         String
+  status          InvoiceStatus  @default(DRAFT)
+  subtotal        Float          @default(0)
+  taxRate         Float          @default(0.1)
+  taxAmount       Float          @default(0)
+  totalAmount     Float          @default(0)
+  dueDate         DateTime?
+  notes           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  items        InvoiceItem[]
+  approvalFlow ApprovalFlow?
+}
+
+// ==============================
+// 請求明細
+// ==============================
+model InvoiceItem {
+  id            String  @id @default(cuid())
+  invoiceId     String
+  invoice       Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  itemOrder     Int
+  name          String
+  specification String?
+  quantity      Float
+  unit          String
+  unitPrice     Float
+  amount        Float
+  remarks       String?
+}
+
+// ==============================
+// 承認フロー
+// ==============================
+model ApprovalFlow {
+  id              String             @id @default(cuid())
+  targetType      ApprovalTargetType
+  purchaseOrderId String?            @unique
+  purchaseOrder   PurchaseOrder?     @relation(fields: [purchaseOrderId], references: [id])
+  invoiceId       String?            @unique
+  invoice         Invoice?           @relation(fields: [invoiceId], references: [id])
+  status          ApprovalStatus     @default(PENDING)
+  requestedById   String
+  requestedBy     User               @relation("ApprovalRequester", fields: [requestedById], references: [id])
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  steps ApprovalStep[]
+}
+
+// ==============================
+// 承認ステップ
+// ==============================
+model ApprovalStep {
+  id             String         @id @default(cuid())
+  approvalFlowId String
+  approvalFlow   ApprovalFlow   @relation(fields: [approvalFlowId], references: [id], onDelete: Cascade)
+  stepOrder      Int
+  approverId     String
+  approver       User           @relation(fields: [approverId], references: [id])
+  status         ApprovalStatus @default(PENDING)
+  comment        String?
+  decidedAt      DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@unique([approvalFlowId, stepOrder])
+}
