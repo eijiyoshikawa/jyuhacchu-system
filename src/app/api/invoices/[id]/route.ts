@@ -43,6 +43,9 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   if (existing.status !== "DRAFT") {
     return NextResponse.json({ error: "下書き状態の請求書のみ編集できます" }, { status: 400 })
   }
+  if (existing.confirmedAt) {
+    return NextResponse.json({ error: "確定済みの請求書は編集できません" }, { status: 400 })
+  }
 
   const body = await req.json()
 

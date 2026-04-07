@@ -51,6 +51,12 @@ export async function PUT(
       { status: 400 }
     )
   }
+  if (existing.confirmedAt) {
+    return NextResponse.json(
+      { error: "確定済みの発注書は編集できません" },
+      { status: 400 }
+    )
+  }
 
   const body = await req.json()
   const items = body.items || []

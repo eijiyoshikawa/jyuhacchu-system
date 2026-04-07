@@ -84,6 +84,16 @@ export function Sidebar() {
           </>
         )}
       </nav>
+      <div className="border-t px-6 py-3">
+        <div className="flex gap-3 text-xs text-gray-400">
+          <Link href="/terms" className="hover:text-gray-600 hover:underline">
+            利用規約
+          </Link>
+          <Link href="/privacy" className="hover:text-gray-600 hover:underline">
+            プライバシーポリシー
+          </Link>
+        </div>
+      </div>
     </aside>
   )
 }

@@ -151,6 +151,16 @@ model PurchaseOrder {
   notes            String?
   issuedAt         DateTime?
   deliveryDeadline DateTime?
+  // 電子帳簿保存法対応
+  confirmedAt      DateTime?   // 確定日時（タイムスタンプ）
+  confirmedHash    String?     // 確定時のハッシュ値（改ざん防止）
+  // 建設業法対応
+  constructionName        String?    // 工事名称
+  constructionSite        String?    // 工事場所
+  constructionPeriodStart DateTime?  // 工期開始
+  constructionPeriodEnd   DateTime?  // 工期終了
+  paymentTerms            String?    // 支払条件
+  defectWarranty          String?    // 瑕疵担保責任
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
 
@@ -200,6 +210,9 @@ model Invoice {
   totalAmount     Float          @default(0)
   dueDate         DateTime?
   notes           String?
+  // 電子帳簿保存法対応
+  confirmedAt     DateTime?      // 確定日時（タイムスタンプ）
+  confirmedHash   String?        // 確定時のハッシュ値（改ざん防止）
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 
