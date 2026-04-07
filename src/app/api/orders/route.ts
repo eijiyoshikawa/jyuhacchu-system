@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { auth } from "@/lib/auth"
+import { orderSchema } from "@/lib/validations/order"
+import { validateBody, apiError, apiSuccess } from "@/lib/api-helpers"
 
 export async function GET(req: NextRequest) {
   const session = await auth()
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  if (!session) return apiError("Unauthorized", 401)
 
   const searchParams = req.nextUrl.searchParams
   const search = searchParams.get("search") || ""
@@ -36,14 +38,16 @@ export async function GET(req: NextRequest) {
     orderBy: { createdAt: "desc" },
   })
 
-  return NextResponse.json(orders)
+  return apiSuccess(orders)
 }
 
 export async function POST(req: NextRequest) {
   const session = await auth()
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  if (!session) return apiError("Unauthorized", 401)
 
-  const body = await req.json()
+  const result = await validateBody(req, orderSchema)
+  if (result.error) return result.error
+  const body = result.data
 
   const today = new Date().toISOString().slice(0, 10).replace(/-/g, "")
   const count = await prisma.purchaseOrder.count({
@@ -112,5 +116,5 @@ export async function POST(req: NextRequest) {
     },
   })
 
-  return NextResponse.json(order, { status: 201 })
+  return apiSuccess(order, 201)
 }

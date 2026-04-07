@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useSession } from "next-auth/react"
 import { cn } from "@/lib/utils"
 import {
   LayoutDashboard,
@@ -10,6 +11,7 @@ import {
   FolderOpen,
   Receipt,
   ClipboardCheck,
+  ScrollText,
 } from "lucide-react"
 
 const navigation = [
@@ -21,8 +23,14 @@ const navigation = [
   { name: "協力会社管理", href: "/partners", icon: Building2 },
 ]
 
+const adminNavigation = [
+  { name: "監査ログ", href: "/admin/audit-logs", icon: ScrollText },
+]
+
 export function Sidebar() {
   const pathname = usePathname()
+  const { data: session } = useSession()
+  const isAdmin = session?.user?.role === "ADMIN"
 
   return (
     <aside className="flex h-full w-64 flex-col border-r bg-white">
@@ -51,6 +59,30 @@ export function Sidebar() {
             </Link>
           )
         })}
+
+        {isAdmin && (
+          <>
+            <div className="my-3 border-t" />
+            {adminNavigation.map((item) => {
+              const isActive = pathname.startsWith(item.href)
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-gray-100 text-gray-900"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  )}
+                >
+                  <item.icon className="h-5 w-5" />
+                  {item.name}
+                </Link>
+              )
+            })}
+          </>
+        )}
       </nav>
     </aside>
   )

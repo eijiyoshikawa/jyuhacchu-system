@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { auth } from "@/lib/auth"
+import { companySchema } from "@/lib/validations/company"
+import { validateBody, apiError, apiSuccess } from "@/lib/api-helpers"
 
 export async function GET(req: NextRequest) {
   const session = await auth()
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  if (!session) return apiError("Unauthorized", 401)
 
   const searchParams = req.nextUrl.searchParams
   const search = searchParams.get("search") || ""
@@ -23,17 +25,19 @@ export async function GET(req: NextRequest) {
     orderBy: { createdAt: "desc" },
   })
 
-  return NextResponse.json(companies)
+  return apiSuccess(companies)
 }
 
 export async function POST(req: NextRequest) {
   const session = await auth()
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  if (!session) return apiError("Unauthorized", 401)
   if (session.user.role !== "ADMIN") {
-    return NextResponse.json({ error: "権限がありません" }, { status: 403 })
+    return apiError("権限がありません", 403)
   }
 
-  const body = await req.json()
-  const company = await prisma.company.create({ data: body })
-  return NextResponse.json(company, { status: 201 })
+  const result = await validateBody(req, companySchema)
+  if (result.error) return result.error
+
+  const company = await prisma.company.create({ data: result.data })
+  return apiSuccess(company, 201)
 }
