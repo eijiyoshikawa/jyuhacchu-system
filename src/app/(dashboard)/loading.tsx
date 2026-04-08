@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 
 function Skeleton({ className }: { className?: string }) {
-  return <div className={cn("animate-pulse rounded-md bg-gray-200", className)} />
+  return <div className={cn("animate-pulse rounded-sm bg-gray-200", className)} />
 }
 
 export default function DashboardLoading() {
@@ -12,7 +12,7 @@ export default function DashboardLoading() {
       {/* Summary cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="rounded-xl border bg-card p-6 shadow">
+          <div key={i} className="rounded-sm border bg-card p-6">
             <div className="flex items-center justify-between pb-2">
               <Skeleton className="h-4 w-24" />
               <Skeleton className="h-5 w-5" />
@@ -24,7 +24,7 @@ export default function DashboardLoading() {
 
       {/* Skeleton tables */}
       {Array.from({ length: 2 }).map((_, i) => (
-        <div key={i} className="rounded-xl border bg-card p-6 shadow">
+        <div key={i} className="rounded-sm border bg-card p-6">
           <Skeleton className="mb-4 h-6 w-32" />
           <div className="space-y-3">
             <Skeleton className="h-10 w-full" />

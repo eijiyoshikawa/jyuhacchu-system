@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 
 function Skeleton({ className }: { className?: string }) {
-  return <div className={cn("animate-pulse rounded-md bg-gray-200", className)} />
+  return <div className={cn("animate-pulse rounded-sm bg-gray-200", className)} />
 }
 
 export default function PartnersLoading() {
@@ -14,7 +14,7 @@ export default function PartnersLoading() {
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border bg-card p-6 shadow">
+      <div className="rounded-sm border bg-card p-6">
         <div className="space-y-3">
           <Skeleton className="h-10 w-full" />
           {Array.from({ length: 5 }).map((_, i) => (

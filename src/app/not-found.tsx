@@ -9,7 +9,7 @@ export default function NotFound() {
         <p className="text-gray-600">お探しのページは存在しないか、移動した可能性があります。</p>
         <Link
           href="/"
-          className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
+          className="inline-flex h-9 items-center justify-center rounded-sm bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
         >
           ダッシュボードに戻る
         </Link>

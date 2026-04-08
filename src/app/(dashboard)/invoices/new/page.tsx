@@ -161,7 +161,7 @@ export default function NewInvoicePage() {
                 <Label htmlFor="projectId">案件選択 *</Label>
                 <select
                   id="projectId"
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm"
                   value={projectId}
                   onChange={(e) => setProjectId(e.target.value)}
                   required
@@ -178,7 +178,7 @@ export default function NewInvoicePage() {
                 <Label htmlFor="receiverId">請求先選択 *</Label>
                 <select
                   id="receiverId"
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm"
                   value={receiverId}
                   onChange={(e) => setReceiverId(e.target.value)}
                   required
@@ -196,7 +196,7 @@ export default function NewInvoicePage() {
               <Label htmlFor="purchaseOrderId">関連発注書</Label>
               <select
                 id="purchaseOrderId"
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                className="flex h-10 w-full rounded-sm border border-input bg-background px-3 py-2 text-sm"
                 value={purchaseOrderId}
                 onChange={(e) => handleOrderChange(e.target.value)}
               >

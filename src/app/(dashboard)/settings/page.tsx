@@ -79,7 +79,7 @@ export default function SettingsPage() {
         <CardContent>
           {message && (
             <div
-              className={`mb-4 rounded-md p-3 text-sm ${
+              className={`mb-4 rounded-sm p-3 text-sm ${
                 message.type === "success"
                   ? "bg-green-50 text-green-800 border border-green-200"
                   : "bg-red-50 text-red-800 border border-red-200"

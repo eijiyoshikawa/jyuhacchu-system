@@ -41,11 +41,13 @@ export function Sidebar({ onNavigate }: SidebarProps) {
   const isAdmin = session?.user?.role === "ADMIN"
 
   return (
-    <aside className="flex h-full w-64 flex-col border-r bg-white">
-      <div className="flex h-16 items-center border-b px-6">
-        <h1 className="text-lg font-bold text-gray-900">受発注管理</h1>
+    <aside className="flex h-full w-64 flex-col bg-[#1a2332]">
+      <div className="flex h-16 items-center border-b border-white/10 px-6">
+        <h1 className="text-lg font-bold text-white">
+          建設<span className="text-orange-500">L</span>システム
+        </h1>
       </div>
-      <nav className="flex-1 space-y-1 px-3 py-4">
+      <nav className="flex-1 space-y-0.5 px-3 py-4">
         {navigation.map((item) => {
           const isActive =
             item.href === "/"
@@ -57,10 +59,10 @@ export function Sidebar({ onNavigate }: SidebarProps) {
               href={item.href}
               onClick={onNavigate}
               className={cn(
-                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                "flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-gray-100 text-gray-900"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  ? "bg-orange-500/15 text-orange-400 border-l-2 border-orange-500"
+                  : "text-slate-300 hover:bg-white/5 hover:text-white"
               )}
             >
               <item.icon className="h-5 w-5" />
@@ -71,7 +73,10 @@ export function Sidebar({ onNavigate }: SidebarProps) {
 
         {isAdmin && (
           <>
-            <div className="my-3 border-t" />
+            <div className="my-3 border-t border-white/10" />
+            <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+              管理者メニュー
+            </div>
             {adminNavigation.map((item) => {
               const isActive = pathname.startsWith(item.href)
               return (
@@ -80,10 +85,10 @@ export function Sidebar({ onNavigate }: SidebarProps) {
                   href={item.href}
                   onClick={onNavigate}
                   className={cn(
-                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    "flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-gray-100 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      ? "bg-orange-500/15 text-orange-400 border-l-2 border-orange-500"
+                      : "text-slate-300 hover:bg-white/5 hover:text-white"
                   )}
                 >
                   <item.icon className="h-5 w-5" />
@@ -94,12 +99,12 @@ export function Sidebar({ onNavigate }: SidebarProps) {
           </>
         )}
       </nav>
-      <div className="border-t px-6 py-3">
-        <div className="flex gap-3 text-xs text-gray-400">
-          <Link href="/terms" className="hover:text-gray-600 hover:underline">
+      <div className="border-t border-white/10 px-6 py-3">
+        <div className="flex gap-3 text-xs text-slate-500">
+          <Link href="/terms" className="hover:text-slate-300 hover:underline">
             利用規約
           </Link>
-          <Link href="/privacy" className="hover:text-gray-600 hover:underline">
+          <Link href="/privacy" className="hover:text-slate-300 hover:underline">
             プライバシーポリシー
           </Link>
         </div>

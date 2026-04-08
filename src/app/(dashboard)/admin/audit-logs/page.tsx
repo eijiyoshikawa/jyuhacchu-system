@@ -47,7 +47,7 @@ export default async function AuditLogsPage({
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">監査ログ</h1>
 
-      <div className="rounded-md border">
+      <div className="rounded-sm border">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b bg-gray-50">
@@ -112,12 +112,12 @@ export default async function AuditLogsPage({
           {page > 1 ? (
             <Link
               href={`/admin/audit-logs?page=${page - 1}`}
-              className="inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
+              className="inline-flex h-9 items-center justify-center rounded-sm px-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
             >
               前へ
             </Link>
           ) : (
-            <span className="inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium opacity-50">
+            <span className="inline-flex h-9 items-center justify-center rounded-sm px-3 text-sm font-medium opacity-50">
               前へ
             </span>
           )}
@@ -129,12 +129,12 @@ export default async function AuditLogsPage({
           {page < totalPages ? (
             <Link
               href={`/admin/audit-logs?page=${page + 1}`}
-              className="inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
+              className="inline-flex h-9 items-center justify-center rounded-sm px-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
             >
               次へ
             </Link>
           ) : (
-            <span className="inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium opacity-50">
+            <span className="inline-flex h-9 items-center justify-center rounded-sm px-3 text-sm font-medium opacity-50">
               次へ
             </span>
           )}

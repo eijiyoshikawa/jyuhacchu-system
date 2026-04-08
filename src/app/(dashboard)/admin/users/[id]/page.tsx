@@ -113,7 +113,7 @@ export default function EditUserPage() {
         </CardHeader>
         <CardContent>
           {error && (
-            <div className="mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+            <div className="mb-4 rounded-sm border border-red-200 bg-red-50 p-3 text-sm text-red-800">
               {error}
             </div>
           )}

@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
       </p>
 
       <p className="mb-8 leading-relaxed text-gray-700">
-        当社は、建設業向け受発注管理システム（以下「本サービス」といいます）の提供にあたり、ユーザーの個人情報の保護を重要な責務と認識し、個人情報の保護に関する法律（個人情報保護法）およびその他の関連法令を遵守します。本プライバシーポリシーは、本サービスにおける個人情報の取扱いについて定めるものです。
+        当社は、建設Lシステム（以下「本サービス」といいます）の提供にあたり、ユーザーの個人情報の保護を重要な責務と認識し、個人情報の保護に関する法律（個人情報保護法）およびその他の関連法令を遵守します。本プライバシーポリシーは、本サービスにおける個人情報の取扱いについて定めるものです。
       </p>
 
       <div className="space-y-8 text-gray-700">
@@ -162,8 +162,8 @@ export default function PrivacyPolicyPage() {
           <p className="leading-relaxed">
             個人情報の取扱いに関するお問い合わせは、以下の窓口までご連絡ください。
           </p>
-          <div className="mt-3 rounded-md bg-gray-100 p-4 text-sm">
-            <p>受発注管理システム 個人情報お問い合わせ窓口</p>
+          <div className="mt-3 rounded-sm bg-gray-100 p-4 text-sm">
+            <p>建設Lシステム 個人情報お問い合わせ窓口</p>
             <p className="mt-1">
               メール: <span className="text-blue-600">privacy@example.co.jp</span>
             </p>

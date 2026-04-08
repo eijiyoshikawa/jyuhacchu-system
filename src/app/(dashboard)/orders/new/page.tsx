@@ -176,7 +176,7 @@ export default function NewOrderPage() {
             <CardTitle>明細</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="rounded-lg border">
+            <div className="rounded-sm border">
               <Table>
                 <TableHeader>
                   <TableRow>

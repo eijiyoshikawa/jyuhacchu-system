@@ -29,7 +29,7 @@ export default async function UsersPage() {
         createLabel="ユーザー追加"
       />
 
-      <div className="rounded-md border">
+      <div className="rounded-sm border">
         <Table>
           <TableHeader>
             <TableRow>

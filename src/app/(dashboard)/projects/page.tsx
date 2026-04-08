@@ -65,7 +65,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
         baseUrl="/projects"
       />
 
-      <div className="overflow-x-auto rounded-lg border bg-white">
+      <div className="overflow-x-auto rounded-sm border bg-white">
         <Table>
           <TableHeader>
             <TableRow>

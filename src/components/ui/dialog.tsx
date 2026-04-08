@@ -43,7 +43,7 @@ function DialogContent({ children, className }: { children: React.ReactNode; cla
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="fixed inset-0 bg-black/80" onClick={() => setOpen(false)} />
       <div className={cn(
-        "fixed z-50 grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg sm:rounded-lg",
+        "fixed z-50 grid w-full max-w-lg gap-4 border bg-background p-6 shadow-lg sm:rounded-sm",
         className
       )}>
         {children}

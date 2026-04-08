@@ -3,8 +3,8 @@ import { Providers } from "./providers"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "受発注管理システム",
-  description: "建設業向け受発注管理システム",
+  title: "建設Lシステム",
+  description: "建設業向け受発注管理プラットフォーム",
 }
 
 export default function RootLayout({

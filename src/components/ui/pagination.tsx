@@ -48,7 +48,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, baseUrl, sea
           key={pageNum}
           href={buildHref(pageNum)}
           className={cn(
-            "inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-medium transition-colors",
+            "inline-flex h-9 w-9 items-center justify-center rounded-sm text-sm font-medium transition-colors",
             isActive
               ? "bg-primary text-primary-foreground"
               : "hover:bg-accent hover:text-accent-foreground"
@@ -81,7 +81,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, baseUrl, sea
         <Link
           href={prevDisabled ? "#" : buildHref(currentPage - 1)}
           className={cn(
-            "inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors",
+            "inline-flex h-9 items-center justify-center rounded-sm px-3 text-sm font-medium transition-colors",
             prevDisabled
               ? "pointer-events-none opacity-50"
               : "hover:bg-accent hover:text-accent-foreground"
@@ -94,7 +94,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, baseUrl, sea
         <Link
           href={nextDisabled ? "#" : buildHref(currentPage + 1)}
           className={cn(
-            "inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors",
+            "inline-flex h-9 items-center justify-center rounded-sm px-3 text-sm font-medium transition-colors",
             nextDisabled
               ? "pointer-events-none opacity-50"
               : "hover:bg-accent hover:text-accent-foreground"

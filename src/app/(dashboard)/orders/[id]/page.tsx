@@ -222,7 +222,7 @@ export default function OrderDetailPage() {
           <CardTitle>明細</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="rounded-lg border">
+          <div className="rounded-sm border">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -280,7 +280,7 @@ export default function OrderDetailPage() {
               {order.approvalFlow.steps.map((step) => (
                 <div
                   key={step.id}
-                  className="flex items-center justify-between rounded-lg border p-3"
+                  className="flex items-center justify-between rounded-sm border p-3"
                 >
                   <div>
                     <p className="text-sm font-medium">

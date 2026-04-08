@@ -47,7 +47,7 @@ export function Toaster() {
         <div
           key={t.id}
           className={cn(
-            "rounded-md px-4 py-3 text-sm font-medium shadow-lg transition-all",
+            "rounded-sm px-4 py-3 text-sm font-bold shadow-lg transition-all",
             "animate-in slide-in-from-top-2 fade-in duration-200",
             toastStyles[t.type]
           )}

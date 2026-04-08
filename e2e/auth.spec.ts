@@ -5,7 +5,7 @@ test.describe("認証", () => {
     await page.goto("/auth/login")
 
     // ページタイトルとフォーム要素が表示される
-    await expect(page.getByText("受発注管理システム")).toBeVisible()
+    await expect(page.getByText("建設Lシステム")).toBeVisible()
     await expect(page.getByText("ログインしてください")).toBeVisible()
     await expect(page.getByLabel("メールアドレス")).toBeVisible()
     await expect(page.getByLabel("パスワード")).toBeVisible()

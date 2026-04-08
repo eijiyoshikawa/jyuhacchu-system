@@ -46,7 +46,7 @@ export default async function ApprovalsPage() {
         description="あなたの承認を待っている申請一覧です"
       />
 
-      <div className="rounded-lg border bg-white">
+      <div className="rounded-sm border bg-white">
         <Table>
           <TableHeader>
             <TableRow>

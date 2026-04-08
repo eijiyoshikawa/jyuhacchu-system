@@ -97,7 +97,7 @@ export default async function InvoicesPage({ searchParams }: { searchParams: Pro
         baseUrl="/invoices"
       />
 
-      <div className="overflow-x-auto rounded-lg border bg-white">
+      <div className="overflow-x-auto rounded-sm border bg-white">
         <Table>
           <TableHeader>
             <TableRow>

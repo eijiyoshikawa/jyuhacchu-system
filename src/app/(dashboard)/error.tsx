@@ -25,7 +25,7 @@ export default function DashboardError({
           <CardTitle className="text-center text-xl">エラーが発生しました</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <details className="rounded-md border bg-gray-50 p-4 text-sm text-gray-600">
+          <details className="rounded-sm border bg-gray-50 p-4 text-sm text-gray-600">
             <summary className="cursor-pointer font-medium">エラー詳細</summary>
             <p className="mt-2">{error.message}</p>
           </details>
@@ -33,7 +33,7 @@ export default function DashboardError({
             <Button onClick={reset}>再試行</Button>
             <Link
               href="/"
-              className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground"
+              className="inline-flex h-9 items-center justify-center rounded-sm border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground"
             >
               ホームに戻る
             </Link>

@@ -12,7 +12,7 @@
 
 1. https://neon.tech にアクセス → **Sign Up**（GitHub連携推奨）
 2. **Create Project** をクリック
-   - Project name: `jyuhacchu-system`
+   - Project name: `kensetsu-l-system`
    - Region: **Asia Pacific (Tokyo)** を選択
    - PostgreSQL version: `16`
 3. 作成完了後、**Connection Details** から接続URLをコピー：
@@ -78,7 +78,7 @@ DATABASE_URL="postgresql://..." npx tsx prisma/seed.ts
 1. https://sentry.io にアクセス → **Sign Up**（GitHub連携）
 2. **Create Project**:
    - Platform: **Next.js**
-   - Project name: `jyuhacchu-system`
+   - Project name: `kensetsu-l-system`
 3. 表示される **DSN** をコピー（例: `https://xxx@xxx.ingest.sentry.io/xxx`）
 4. Vercelダッシュボード → Settings → Environment Variables に追加:
 
@@ -86,7 +86,7 @@ DATABASE_URL="postgresql://..." npx tsx prisma/seed.ts
    |--------|-----|
    | `NEXT_PUBLIC_SENTRY_DSN` | コピーしたDSN |
    | `SENTRY_ORG` | Sentryの組織名 |
-   | `SENTRY_PROJECT` | `jyuhacchu-system` |
+   | `SENTRY_PROJECT` | `kensetsu-l-system` |
 
 5. **Redeploy** を実行
 

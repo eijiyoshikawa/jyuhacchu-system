@@ -81,7 +81,7 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
         baseUrl="/orders"
       />
 
-      <div className="overflow-x-auto rounded-lg border bg-white">
+      <div className="overflow-x-auto rounded-sm border bg-white">
         <Table>
           <TableHeader>
             <TableRow>

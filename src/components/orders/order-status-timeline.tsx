@@ -31,7 +31,7 @@ export function OrderStatusTimeline({ currentStatus }: OrderStatusTimelineProps)
   const isRejectedOrCancelled = currentStatus === "REJECTED" || currentStatus === "CANCELLED"
 
   return (
-    <div className="rounded-lg border bg-white p-4">
+    <div className="rounded-sm border bg-white p-4">
       <div className="flex items-center justify-between">
         {TIMELINE_STEPS.map((step, index) => {
           const isCompleted = currentIndex > index
@@ -81,7 +81,7 @@ export function OrderStatusTimeline({ currentStatus }: OrderStatusTimelineProps)
         })}
       </div>
       {isRejectedOrCancelled && (
-        <div className="mt-3 rounded-md bg-red-50 px-3 py-2 text-center text-sm font-medium text-red-600">
+        <div className="mt-3 rounded-sm bg-red-50 border border-red-200 px-3 py-2 text-center text-sm font-bold text-red-700">
           {currentStatus === "REJECTED" ? "却下されました" : "取消されました"}
         </div>
       )}

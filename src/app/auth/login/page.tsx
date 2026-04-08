@@ -40,21 +40,25 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">受発注管理システム</CardTitle>
-          <CardDescription>ログインしてください</CardDescription>
+    <div className="flex min-h-screen items-center justify-center bg-[#1a2332]">
+      <Card className="w-full max-w-md border-0 rounded-sm shadow-2xl">
+        <CardHeader className="text-center pb-2">
+          <CardTitle className="text-2xl font-black tracking-tight text-slate-800">
+            建設<span className="text-orange-500">L</span>システム
+          </CardTitle>
+          <CardDescription className="text-sm text-slate-500">
+            受発注管理プラットフォーム
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="rounded-md bg-red-50 p-3 text-sm text-red-600">
+              <div className="rounded-sm border border-red-300 bg-red-50 p-3 text-sm font-medium text-red-700">
                 {error}
               </div>
             )}
             <div className="space-y-2">
-              <Label htmlFor="email">メールアドレス</Label>
+              <Label htmlFor="email" className="text-sm font-semibold text-slate-700">メールアドレス</Label>
               <Input
                 id="email"
                 name="email"
@@ -64,7 +68,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">パスワード</Label>
+              <Label htmlFor="password" className="text-sm font-semibold text-slate-700">パスワード</Label>
               <Input
                 id="password"
                 name="password"
@@ -72,19 +76,19 @@ export default function LoginPage() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white" disabled={loading}>
               {loading ? "ログイン中..." : "ログイン"}
             </Button>
           </form>
         </CardContent>
         <CardFooter>
-          <p className="w-full text-center text-xs text-gray-500">
+          <p className="w-full text-center text-xs text-slate-400">
             ログインすることで、
-            <Link href="/terms" className="text-blue-600 hover:underline">
+            <Link href="/terms" className="text-orange-500 hover:underline">
               利用規約
             </Link>
             {" "}および{" "}
-            <Link href="/privacy" className="text-blue-600 hover:underline">
+            <Link href="/privacy" className="text-orange-500 hover:underline">
               プライバシーポリシー
             </Link>
             {" "}に同意したものとみなされます。
