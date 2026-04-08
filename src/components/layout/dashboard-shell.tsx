@@ -24,11 +24,11 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             onClick={() => setSidebarOpen(false)}
           />
           {/* Sidebar panel */}
-          <div className="relative z-50 flex h-full w-64 flex-col">
+          <div className="relative z-50 flex h-full w-64 flex-col shadow-xl">
             <div className="absolute right-2 top-3 z-10">
               <button
                 onClick={() => setSidebarOpen(false)}
-                className="rounded-sm p-2 text-slate-400 hover:bg-white/10 hover:text-white"
+                className="rounded-sm p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
               >
                 <X className="h-5 w-5" />
               </button>

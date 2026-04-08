@@ -57,13 +57,13 @@
   --input: #d1d5db;
   --ring: #f97316;
   --radius: 0.25rem;
-  --sidebar-background: #1a2332;
-  --sidebar-foreground: #e2e8f0;
+  --sidebar-background: #ffffff;
+  --sidebar-foreground: #374151;
   --sidebar-primary: #f97316;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: rgba(249, 115, 22, 0.15);
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #2d3a4a;
+  --sidebar-accent: #fff7ed;
+  --sidebar-accent-foreground: #ea580c;
+  --sidebar-border: #e5e7eb;
   --sidebar-ring: #f97316;
 }
 
