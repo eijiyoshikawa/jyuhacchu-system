@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ConfirmDialog } from "@/components/ui/confirm-dialog"
+import { InvoiceNumberInput } from "@/components/ui/invoice-number-input"
 
 interface Company {
   id: string
@@ -120,8 +121,8 @@ export default function PartnerDetailPage() {
               <Input id="email" name="email" type="email" defaultValue={company.email || ""} />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="registrationNumber">適格請求書発行事業者登録番号</Label>
-              <Input id="registrationNumber" name="registrationNumber" defaultValue={company.registrationNumber || ""} />
+              <Label htmlFor="registrationNumber">適格請求書発行事業者登録番号（インボイス番号）</Label>
+              <InvoiceNumberInput id="registrationNumber" name="registrationNumber" defaultValue={company.registrationNumber || ""} />
             </div>
             <div className="flex flex-col sm:flex-row gap-2 pt-4">
               <Button type="submit" disabled={loading} className="w-full sm:w-auto">

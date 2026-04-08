@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { InvoiceNumberInput } from "@/components/ui/invoice-number-input"
 
 export default function NewPartnerPage() {
   const router = useRouter()
@@ -88,8 +89,8 @@ export default function NewPartnerPage() {
               <Input id="email" name="email" type="email" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="registrationNumber">適格請求書発行事業者登録番号</Label>
-              <Input id="registrationNumber" name="registrationNumber" placeholder="T1234567890123" />
+              <Label htmlFor="registrationNumber">適格請求書発行事業者登録番号（インボイス番号）</Label>
+              <InvoiceNumberInput id="registrationNumber" name="registrationNumber" placeholder="T1234567890123" />
             </div>
             <div className="flex flex-col sm:flex-row gap-2 pt-4">
               <Button type="submit" disabled={loading} className="w-full sm:w-auto">
