@@ -6,10 +6,9 @@ export function middleware(req: NextRequest) {
   const isApiAuth = req.nextUrl.pathname.startsWith("/api/auth")
   const isLegalPage = req.nextUrl.pathname === "/terms" || req.nextUrl.pathname === "/privacy"
   const isApiHealth = req.nextUrl.pathname === "/api/health"
-  const isApiSeed = req.nextUrl.pathname === "/api/seed"
 
   // Public routes
-  if (isApiAuth || isLegalPage || isApiHealth || isApiSeed) return NextResponse.next()
+  if (isApiAuth || isLegalPage || isApiHealth) return NextResponse.next()
 
   // Check for NextAuth session token cookie
   const sessionToken =
