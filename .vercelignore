@@ -1,0 +1,6 @@
+prisma/seed.ts
+docker-compose.yml
+Dockerfile
+.github/
+e2e/
+playwright.config.ts
