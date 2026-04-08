@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
 
   const projects = await prisma.project.findMany({
     where: {
-      companyId: session.user.companyId,
+      ...(session.user.role !== "ADMIN" && { companyId: session.user.companyId }),
       ...(search && {
         OR: [
           { name: { contains: search, mode: "insensitive" } },

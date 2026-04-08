@@ -2,12 +2,48 @@ import { prisma } from "@/lib/prisma"
 import { PageHeader } from "@/components/ui/page-header"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
+import { SearchFilterBar } from "@/components/ui/search-filter-bar"
+import { Pagination } from "@/components/ui/pagination"
 import Link from "next/link"
+import { Prisma } from "@prisma/client"
 
-export default async function PartnersPage() {
-  const companies = await prisma.company.findMany({
-    orderBy: { createdAt: "desc" },
-  })
+const PAGE_SIZE = 20
+
+const typeOptions = [
+  { value: "", label: "全て" },
+  { value: "GENERAL_CONTRACTOR", label: "元請" },
+  { value: "SUBCONTRACTOR", label: "協力会社" },
+]
+
+export default async function PartnersPage({ searchParams }: { searchParams: Promise<{ search?: string; status?: string; page?: string }> }) {
+  const params = await searchParams
+  const search = params.search ?? ""
+  const type = params.status ?? ""
+  const page = Math.max(1, parseInt(params.page ?? "1", 10))
+
+  const where: Prisma.CompanyWhereInput = {
+    ...(type ? { companyType: type as Prisma.CompanyWhereInput["companyType"] } : {}),
+    ...(search
+      ? {
+          OR: [
+            { name: { contains: search, mode: "insensitive" as const } },
+            { code: { contains: search, mode: "insensitive" as const } },
+          ],
+        }
+      : {}),
+  }
+
+  const [companies, totalCount] = await Promise.all([
+    prisma.company.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      take: PAGE_SIZE,
+      skip: (page - 1) * PAGE_SIZE,
+    }),
+    prisma.company.count({ where }),
+  ])
+
+  const totalPages = Math.ceil(totalCount / PAGE_SIZE)
 
   return (
     <div>
@@ -18,16 +54,22 @@ export default async function PartnersPage() {
         createLabel="新規登録"
       />
 
-      <div className="rounded-lg border bg-white">
+      <SearchFilterBar
+        searchPlaceholder="会社名・会社コードで検索"
+        statusOptions={typeOptions}
+        baseUrl="/partners"
+      />
+
+      <div className="overflow-x-auto rounded-lg border bg-white">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>会社コード</TableHead>
               <TableHead>会社名</TableHead>
               <TableHead>種別</TableHead>
-              <TableHead>電話番号</TableHead>
-              <TableHead>メール</TableHead>
-              <TableHead>インボイス番号</TableHead>
+              <TableHead className="hidden md:table-cell">電話番号</TableHead>
+              <TableHead className="hidden md:table-cell">メール</TableHead>
+              <TableHead className="hidden lg:table-cell">インボイス番号</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -51,14 +93,23 @@ export default async function PartnersPage() {
                       {company.companyType === "GENERAL_CONTRACTOR" ? "元請" : "協力会社"}
                     </Badge>
                   </TableCell>
-                  <TableCell>{company.phone || "-"}</TableCell>
-                  <TableCell>{company.email || "-"}</TableCell>
-                  <TableCell>{company.registrationNumber || "-"}</TableCell>
+                  <TableCell className="hidden md:table-cell">{company.phone || "-"}</TableCell>
+                  <TableCell className="hidden md:table-cell">{company.email || "-"}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{company.registrationNumber || "-"}</TableCell>
                 </TableRow>
               ))
             )}
           </TableBody>
         </Table>
+      </div>
+
+      <div className="mt-4">
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          baseUrl="/partners"
+          searchParams={{ search, status: type }}
+        />
       </div>
     </div>
   )

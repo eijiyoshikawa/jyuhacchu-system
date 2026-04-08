@@ -3,18 +3,52 @@ import { auth } from "@/lib/auth"
 import { PageHeader } from "@/components/ui/page-header"
 import { ProjectStatusBadge } from "@/components/ui/status-badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { SearchFilterBar } from "@/components/ui/search-filter-bar"
+import { Pagination } from "@/components/ui/pagination"
 import { formatDate } from "@/lib/utils"
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import { Prisma } from "@prisma/client"
 
-export default async function ProjectsPage() {
+const PAGE_SIZE = 20
+
+const statusOptions = [
+  { value: "", label: "全て" },
+  { value: "IN_PROGRESS", label: "進行中" },
+  { value: "COMPLETED", label: "完了" },
+  { value: "CANCELLED", label: "中止" },
+]
+
+export default async function ProjectsPage({ searchParams }: { searchParams: Promise<{ search?: string; status?: string; page?: string }> }) {
   const session = await auth()
   if (!session) redirect("/auth/login")
 
-  const projects = await prisma.project.findMany({
-    where: { companyId: session.user.companyId },
-    orderBy: { createdAt: "desc" },
-  })
+  const params = await searchParams
+  const search = params.search ?? ""
+  const status = params.status ?? ""
+  const page = Math.max(1, parseInt(params.page ?? "1", 10))
+
+  const where: Prisma.ProjectWhereInput = {
+    companyId: session.user.companyId,
+    ...(status ? { status: status as Prisma.ProjectWhereInput["status"] } : {}),
+    ...(search
+      ? {
+          name: { contains: search, mode: "insensitive" as const },
+        }
+      : {}),
+  }
+
+  const [projects, totalCount] = await Promise.all([
+    prisma.project.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      take: PAGE_SIZE,
+      skip: (page - 1) * PAGE_SIZE,
+    }),
+    prisma.project.count({ where }),
+  ])
+
+  const totalPages = Math.ceil(totalCount / PAGE_SIZE)
 
   return (
     <div>
@@ -25,16 +59,22 @@ export default async function ProjectsPage() {
         createLabel="新規作成"
       />
 
-      <div className="rounded-lg border bg-white">
+      <SearchFilterBar
+        searchPlaceholder="案件名で検索"
+        statusOptions={statusOptions}
+        baseUrl="/projects"
+      />
+
+      <div className="overflow-x-auto rounded-lg border bg-white">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>案件コード</TableHead>
               <TableHead>案件名</TableHead>
               <TableHead>ステータス</TableHead>
-              <TableHead>現場住所</TableHead>
-              <TableHead>着工日</TableHead>
-              <TableHead>完工予定日</TableHead>
+              <TableHead className="hidden md:table-cell">現場住所</TableHead>
+              <TableHead className="hidden lg:table-cell">着工日</TableHead>
+              <TableHead className="hidden lg:table-cell">完工予定日</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -56,14 +96,23 @@ export default async function ProjectsPage() {
                   <TableCell>
                     <ProjectStatusBadge status={project.status} />
                   </TableCell>
-                  <TableCell>{project.address || "-"}</TableCell>
-                  <TableCell>{project.startDate ? formatDate(project.startDate) : "-"}</TableCell>
-                  <TableCell>{project.endDate ? formatDate(project.endDate) : "-"}</TableCell>
+                  <TableCell className="hidden md:table-cell">{project.address || "-"}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{project.startDate ? formatDate(project.startDate) : "-"}</TableCell>
+                  <TableCell className="hidden lg:table-cell">{project.endDate ? formatDate(project.endDate) : "-"}</TableCell>
                 </TableRow>
               ))
             )}
           </TableBody>
         </Table>
+      </div>
+
+      <div className="mt-4">
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          baseUrl="/projects"
+          searchParams={{ search, status }}
+        />
       </div>
     </div>
   )

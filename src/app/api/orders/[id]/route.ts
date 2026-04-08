@@ -31,6 +31,15 @@ export async function GET(
 
   if (!order) return NextResponse.json({ error: "Not found" }, { status: 404 })
 
+  // Multi-tenant isolation: verify user's company is issuer or receiver (ADMIN can see all)
+  if (
+    session.user.role !== "ADMIN" &&
+    order.issuerId !== session.user.companyId &&
+    order.receiverId !== session.user.companyId
+  ) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
+  }
+
   return NextResponse.json(order)
 }
 
@@ -45,6 +54,16 @@ export async function PUT(
   const existing = await prisma.purchaseOrder.findUnique({ where: { id } })
 
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+  // Multi-tenant isolation
+  if (
+    session.user.role !== "ADMIN" &&
+    existing.issuerId !== session.user.companyId &&
+    existing.receiverId !== session.user.companyId
+  ) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
+  }
+
   if (existing.status !== "DRAFT") {
     return NextResponse.json(
       { error: "下書き状態の発注書のみ編集できます" },
@@ -136,6 +155,16 @@ export async function DELETE(
   const existing = await prisma.purchaseOrder.findUnique({ where: { id } })
 
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+  // Multi-tenant isolation
+  if (
+    session.user.role !== "ADMIN" &&
+    existing.issuerId !== session.user.companyId &&
+    existing.receiverId !== session.user.companyId
+  ) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
+  }
+
   if (existing.status !== "DRAFT") {
     return NextResponse.json(
       { error: "下書き状態の発注書のみ削除できます" },

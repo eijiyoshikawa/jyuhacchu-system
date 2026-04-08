@@ -5,8 +5,12 @@ import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Textarea } from "@/components/ui/textarea"
 import { InvoiceStatusBadge } from "@/components/ui/status-badge"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 import { formatCurrency, formatDate } from "@/lib/utils"
+import Link from "next/link"
+import { Printer } from "lucide-react"
 
 interface InvoiceDetail {
   id: string
@@ -56,6 +60,12 @@ export default function InvoiceDetailPage() {
   const [invoice, setInvoice] = useState<InvoiceDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [actionLoading, setActionLoading] = useState(false)
+  const [showSubmitConfirm, setShowSubmitConfirm] = useState(false)
+  const [showApproveConfirm, setShowApproveConfirm] = useState(false)
+  const [showRejectConfirm, setShowRejectConfirm] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [rejectComment, setRejectComment] = useState("")
+  const [showRejectForm, setShowRejectForm] = useState(false)
 
   const fetchInvoice = useCallback(async () => {
     const res = await fetch(`/api/invoices/${params.id}`)
@@ -88,21 +98,21 @@ export default function InvoiceDetailPage() {
   }
 
   async function handleReject() {
-    const comment = prompt("却下理由を入力してください")
-    if (comment === null) return
-
     setActionLoading(true)
     const res = await fetch(`/api/invoices/${params.id}/reject`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ comment }),
+      body: JSON.stringify({ comment: rejectComment }),
     })
     setActionLoading(false)
-    if (res.ok) fetchInvoice()
+    if (res.ok) {
+      setShowRejectForm(false)
+      setRejectComment("")
+      fetchInvoice()
+    }
   }
 
   async function handleDelete() {
-    if (!confirm("この請求書を削除しますか？")) return
     const res = await fetch(`/api/invoices/${params.id}`, { method: "DELETE" })
     if (res.ok) {
       router.push("/invoices")
@@ -126,23 +136,29 @@ export default function InvoiceDetailPage() {
           <p className="text-sm text-muted-foreground mt-1">{invoice.subject}</p>
         </div>
         <div className="flex items-center gap-2">
+          <Link href={`/invoices/${invoice.id}/print`} target="_blank">
+            <Button variant="outline" size="sm">
+              <Printer className="mr-2 h-4 w-4" />
+              印刷/PDF
+            </Button>
+          </Link>
           <InvoiceStatusBadge status={invoice.status} />
           {invoice.status === "DRAFT" && (
             <>
-              <Button onClick={handleSubmit} disabled={actionLoading}>
+              <Button onClick={() => setShowSubmitConfirm(true)} disabled={actionLoading}>
                 提出
               </Button>
-              <Button variant="destructive" onClick={handleDelete} disabled={actionLoading}>
+              <Button variant="destructive" onClick={() => setShowDeleteConfirm(true)} disabled={actionLoading}>
                 削除
               </Button>
             </>
           )}
           {invoice.status === "SUBMITTED" && (
             <>
-              <Button onClick={handleApprove} disabled={actionLoading}>
+              <Button onClick={() => setShowApproveConfirm(true)} disabled={actionLoading}>
                 承認
               </Button>
-              <Button variant="destructive" onClick={handleReject} disabled={actionLoading}>
+              <Button variant="destructive" onClick={() => setShowRejectForm(!showRejectForm)} disabled={actionLoading}>
                 却下
               </Button>
             </>
@@ -280,6 +296,75 @@ export default function InvoiceDetailPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Reject Comment Form */}
+      {showRejectForm && (
+        <Card>
+          <CardHeader>
+            <CardTitle>却下理由</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Textarea
+              value={rejectComment}
+              onChange={(e) => setRejectComment(e.target.value)}
+              placeholder="却下理由を入力してください"
+              rows={3}
+            />
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setShowRejectConfirm(true)} disabled={actionLoading}>
+                {actionLoading ? "処理中..." : "却下を確定"}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowRejectForm(false)
+                  setRejectComment("")
+                }}
+              >
+                キャンセル
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <ConfirmDialog
+        open={showSubmitConfirm}
+        onOpenChange={setShowSubmitConfirm}
+        title="請求書の提出"
+        description="請求書を提出しますか？提出後は編集できなくなります。"
+        onConfirm={handleSubmit}
+        confirmLabel="提出"
+      />
+
+      <ConfirmDialog
+        open={showApproveConfirm}
+        onOpenChange={setShowApproveConfirm}
+        title="請求書の承認"
+        description="この請求書を承認しますか？"
+        onConfirm={handleApprove}
+        confirmLabel="承認"
+      />
+
+      <ConfirmDialog
+        open={showRejectConfirm}
+        onOpenChange={setShowRejectConfirm}
+        title="請求書の却下"
+        description="この請求書を却下しますか？"
+        onConfirm={handleReject}
+        confirmLabel="却下"
+        variant="destructive"
+      />
+
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        onOpenChange={setShowDeleteConfirm}
+        title="請求書の削除"
+        description="この請求書を削除してもよろしいですか？この操作は取り消せません。"
+        onConfirm={handleDelete}
+        confirmLabel="削除"
+        variant="destructive"
+      />
     </div>
   )
 }

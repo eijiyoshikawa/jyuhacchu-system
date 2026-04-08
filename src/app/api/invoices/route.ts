@@ -14,10 +14,12 @@ export async function GET(req: NextRequest) {
 
   const invoices = await prisma.invoice.findMany({
     where: {
-      OR: [
-        { issuerId: session.user.companyId },
-        { receiverId: session.user.companyId },
-      ],
+      ...(session.user.role !== "ADMIN" && {
+        OR: [
+          { issuerId: session.user.companyId },
+          { receiverId: session.user.companyId },
+        ],
+      }),
       ...(search && {
         AND: {
           OR: [
@@ -55,63 +57,71 @@ export async function POST(req: NextRequest) {
   })
   const invoiceNumber = `INV-${today}-${String(count + 1).padStart(4, "0")}`
 
-  // Calculate totals from items
   const items = body.items || []
-  const subtotal = items.reduce(
-    (sum: number, item: { amount: number }) => sum + item.amount,
-    0
-  )
-  const taxRate = 0.1
-  const taxAmount = Math.floor(subtotal * taxRate)
-  const totalAmount = subtotal + taxAmount
 
-  const invoice = await prisma.invoice.create({
-    data: {
-      invoiceNumber,
-      projectId: body.projectId,
-      issuerId: session.user.companyId,
-      receiverId: body.receiverId,
-      createdById: session.user.id,
-      subject: body.subject,
-      purchaseOrderId: body.purchaseOrderId || null,
-      subtotal,
-      taxRate,
-      taxAmount,
-      totalAmount,
-      dueDate: body.dueDate ? new Date(body.dueDate) : null,
-      notes: body.notes || null,
-      items: {
-        create: items.map(
-          (
-            item: {
-              name: string
-              specification?: string
-              quantity: number
-              unit: string
-              unitPrice: number
-              amount: number
-              remarks?: string
-            },
-            index: number
-          ) => ({
-            itemOrder: index + 1,
-            name: item.name,
-            specification: item.specification || null,
-            quantity: item.quantity,
-            unit: item.unit,
-            unitPrice: item.unitPrice,
-            amount: item.amount,
-            remarks: item.remarks || null,
-          })
-        ),
+  const invoice = await prisma.$transaction(async (tx) => {
+    const newInvoice = await tx.invoice.create({
+      data: {
+        invoiceNumber,
+        projectId: body.projectId,
+        issuerId: session.user.companyId,
+        receiverId: body.receiverId,
+        createdById: session.user.id,
+        subject: body.subject,
+        purchaseOrderId: body.purchaseOrderId || null,
+        subtotal: 0,
+        taxRate: 0.1,
+        taxAmount: 0,
+        totalAmount: 0,
+        dueDate: body.dueDate ? new Date(body.dueDate) : null,
+        notes: body.notes || null,
       },
-    },
-    include: {
-      items: true,
-      project: true,
-      issuer: true,
-      receiver: true,
-    },
+    })
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i] as {
+        name: string
+        specification?: string
+        quantity: number
+        unit: string
+        unitPrice: number
+        amount: number
+        remarks?: string
+      }
+      await tx.invoiceItem.create({
+        data: {
+          invoiceId: newInvoice.id,
+          itemOrder: i + 1,
+          name: item.name,
+          specification: item.specification || null,
+          quantity: item.quantity,
+          unit: item.unit,
+          unitPrice: item.unitPrice,
+          amount: item.amount,
+          remarks: item.remarks || null,
+        },
+      })
+    }
+
+    // Recalculate totals from created items
+    const createdItems = await tx.invoiceItem.findMany({
+      where: { invoiceId: newInvoice.id },
+    })
+    const subtotal = createdItems.reduce((sum, item) => sum + item.amount, 0)
+    const taxRate = 0.1
+    const taxAmount = Math.floor(subtotal * taxRate)
+    const totalAmount = subtotal + taxAmount
+
+    return tx.invoice.update({
+      where: { id: newInvoice.id },
+      data: { subtotal, taxAmount, totalAmount },
+      include: {
+        items: true,
+        project: true,
+        issuer: true,
+        receiver: true,
+      },
+    })
   })
 
   return apiSuccess(invoice, 201)

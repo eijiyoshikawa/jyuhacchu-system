@@ -8,8 +8,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { OrderStatusBadge } from "@/components/ui/status-badge"
 import { OrderStatusTimeline } from "@/components/orders/order-status-timeline"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 import { formatCurrency, formatDate } from "@/lib/utils"
 import { orderStatusLabels } from "@/lib/auth-helpers"
+import Link from "next/link"
+import { Printer } from "lucide-react"
 
 interface OrderItem {
   id: string
@@ -66,6 +69,10 @@ export default function OrderDetailPage() {
   const [loading, setLoading] = useState(false)
   const [rejectComment, setRejectComment] = useState("")
   const [showRejectForm, setShowRejectForm] = useState(false)
+  const [showSubmitConfirm, setShowSubmitConfirm] = useState(false)
+  const [showApproveConfirm, setShowApproveConfirm] = useState(false)
+  const [showRejectConfirm, setShowRejectConfirm] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   function fetchOrder() {
     fetch(`/api/orders/${params.id}`)
@@ -125,7 +132,6 @@ export default function OrderDetailPage() {
   }
 
   async function handleDelete() {
-    if (!confirm("この発注書を削除してもよろしいですか？")) return
     setLoading(true)
     const res = await fetch(`/api/orders/${params.id}`, { method: "DELETE" })
     setLoading(false)
@@ -149,6 +155,12 @@ export default function OrderDetailPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Link href={`/orders/${order.id}/print`} target="_blank">
+            <Button variant="outline" size="sm">
+              <Printer className="mr-2 h-4 w-4" />
+              印刷/PDF
+            </Button>
+          </Link>
           <OrderStatusBadge status={order.status} />
         </div>
       </div>
@@ -307,17 +319,17 @@ export default function OrderDetailPage() {
       <div className="flex gap-2">
         {order.status === "DRAFT" && (
           <>
-            <Button onClick={handleSubmit} disabled={loading}>
+            <Button onClick={() => setShowSubmitConfirm(true)} disabled={loading}>
               {loading ? "処理中..." : "申請"}
             </Button>
-            <Button variant="outline" onClick={handleDelete} disabled={loading}>
+            <Button variant="outline" onClick={() => setShowDeleteConfirm(true)} disabled={loading}>
               削除
             </Button>
           </>
         )}
         {order.status === "PENDING_APPROVAL" && (
           <>
-            <Button onClick={handleApprove} disabled={loading}>
+            <Button onClick={() => setShowApproveConfirm(true)} disabled={loading}>
               {loading ? "処理中..." : "承認"}
             </Button>
             <Button
@@ -348,7 +360,7 @@ export default function OrderDetailPage() {
               rows={3}
             />
             <div className="flex gap-2">
-              <Button variant="outline" onClick={handleReject} disabled={loading}>
+              <Button variant="outline" onClick={() => setShowRejectConfirm(true)} disabled={loading}>
                 {loading ? "処理中..." : "却下を確定"}
               </Button>
               <Button
@@ -364,6 +376,44 @@ export default function OrderDetailPage() {
           </CardContent>
         </Card>
       )}
+
+      <ConfirmDialog
+        open={showSubmitConfirm}
+        onOpenChange={setShowSubmitConfirm}
+        title="発注書の申請"
+        description="発注書を申請しますか？申請後は編集できなくなります。"
+        onConfirm={handleSubmit}
+        confirmLabel="申請"
+      />
+
+      <ConfirmDialog
+        open={showApproveConfirm}
+        onOpenChange={setShowApproveConfirm}
+        title="発注書の承認"
+        description="この発注書を承認しますか？"
+        onConfirm={handleApprove}
+        confirmLabel="承認"
+      />
+
+      <ConfirmDialog
+        open={showRejectConfirm}
+        onOpenChange={setShowRejectConfirm}
+        title="発注書の却下"
+        description="この発注書を却下しますか？"
+        onConfirm={handleReject}
+        confirmLabel="却下"
+        variant="destructive"
+      />
+
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        onOpenChange={setShowDeleteConfirm}
+        title="発注書の削除"
+        description="この発注書を削除してもよろしいですか？この操作は取り消せません。"
+        onConfirm={handleDelete}
+        confirmLabel="削除"
+        variant="destructive"
+      />
     </div>
   )
 }

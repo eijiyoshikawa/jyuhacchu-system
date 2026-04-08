@@ -30,6 +30,15 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
   if (!invoice) return NextResponse.json({ error: "Not found" }, { status: 404 })
 
+  // Multi-tenant isolation: verify user's company is issuer or receiver (ADMIN can see all)
+  if (
+    session.user.role !== "ADMIN" &&
+    invoice.issuerId !== session.user.companyId &&
+    invoice.receiverId !== session.user.companyId
+  ) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
+  }
+
   return NextResponse.json(invoice)
 }
 
@@ -40,6 +49,16 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   const { id } = await params
   const existing = await prisma.invoice.findUnique({ where: { id } })
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+  // Multi-tenant isolation
+  if (
+    session.user.role !== "ADMIN" &&
+    existing.issuerId !== session.user.companyId &&
+    existing.receiverId !== session.user.companyId
+  ) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
+  }
+
   if (existing.status !== "DRAFT") {
     return NextResponse.json({ error: "下書き状態の請求書のみ編集できます" }, { status: 400 })
   }
@@ -119,6 +138,16 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   const { id } = await params
   const existing = await prisma.invoice.findUnique({ where: { id } })
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+  // Multi-tenant isolation
+  if (
+    session.user.role !== "ADMIN" &&
+    existing.issuerId !== session.user.companyId &&
+    existing.receiverId !== session.user.companyId
+  ) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 })
+  }
+
   if (existing.status !== "DRAFT") {
     return NextResponse.json({ error: "下書き状態の請求書のみ削除できます" }, { status: 400 })
   }

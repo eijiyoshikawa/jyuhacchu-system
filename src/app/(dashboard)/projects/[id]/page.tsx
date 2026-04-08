@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 
 interface Project {
   id: string
@@ -24,6 +25,7 @@ export default function ProjectDetailPage() {
   const params = useParams()
   const [project, setProject] = useState<Project | null>(null)
   const [loading, setLoading] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   useEffect(() => {
     fetch(`/api/projects/${params.id}`)
@@ -59,8 +61,6 @@ export default function ProjectDetailPage() {
   }
 
   async function handleDelete() {
-    if (!confirm("この案件を削除してもよろしいですか？")) return
-
     const res = await fetch(`/api/projects/${params.id}`, {
       method: "DELETE",
     })
@@ -133,13 +133,23 @@ export default function ProjectDetailPage() {
               <Button type="button" variant="outline" onClick={() => router.back()}>
                 戻る
               </Button>
-              <Button type="button" variant="destructive" onClick={handleDelete} className="ml-auto">
+              <Button type="button" variant="destructive" onClick={() => setShowDeleteConfirm(true)} className="ml-auto">
                 削除
               </Button>
             </div>
           </form>
         </CardContent>
       </Card>
+
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        onOpenChange={setShowDeleteConfirm}
+        title="案件の削除"
+        description="この案件を削除してもよろしいですか？この操作は取り消せません。"
+        onConfirm={handleDelete}
+        confirmLabel="削除"
+        variant="destructive"
+      />
     </div>
   )
 }

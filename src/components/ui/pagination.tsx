@@ -9,12 +9,26 @@ interface PaginationProps {
   totalPages: number
   onPageChange?: (page: number) => void
   baseUrl?: string
+  searchParams?: Record<string, string>
 }
 
-export function Pagination({ currentPage, totalPages, onPageChange, baseUrl }: PaginationProps) {
+export function Pagination({ currentPage, totalPages, onPageChange, baseUrl, searchParams }: PaginationProps) {
   if (totalPages <= 1) return null
 
   const pages = getPageNumbers(currentPage, totalPages)
+
+  function buildHref(page: number): string {
+    const params = new URLSearchParams()
+    if (searchParams) {
+      Object.entries(searchParams).forEach(([key, value]) => {
+        if (value && key !== "page") {
+          params.set(key, value)
+        }
+      })
+    }
+    params.set("page", String(page))
+    return `${baseUrl}?${params.toString()}`
+  }
 
   function renderPageButton(page: number | string, index: number) {
     if (page === "...") {
@@ -32,7 +46,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, baseUrl }: P
       return (
         <Link
           key={pageNum}
-          href={`${baseUrl}?page=${pageNum}`}
+          href={buildHref(pageNum)}
           className={cn(
             "inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-medium transition-colors",
             isActive
@@ -63,9 +77,9 @@ export function Pagination({ currentPage, totalPages, onPageChange, baseUrl }: P
 
   if (baseUrl) {
     return (
-      <nav className="flex items-center gap-1">
+      <nav className="flex items-center justify-center gap-1">
         <Link
-          href={prevDisabled ? "#" : `${baseUrl}?page=${currentPage - 1}`}
+          href={prevDisabled ? "#" : buildHref(currentPage - 1)}
           className={cn(
             "inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors",
             prevDisabled
@@ -78,7 +92,7 @@ export function Pagination({ currentPage, totalPages, onPageChange, baseUrl }: P
         </Link>
         {pages.map((page, i) => renderPageButton(page, i))}
         <Link
-          href={nextDisabled ? "#" : `${baseUrl}?page=${currentPage + 1}`}
+          href={nextDisabled ? "#" : buildHref(currentPage + 1)}
           className={cn(
             "inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors",
             nextDisabled

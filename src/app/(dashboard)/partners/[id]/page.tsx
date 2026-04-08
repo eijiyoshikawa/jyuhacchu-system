@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 
 interface Company {
   id: string
@@ -25,6 +26,7 @@ export default function PartnerDetailPage() {
   const params = useParams()
   const [company, setCompany] = useState<Company | null>(null)
   const [loading, setLoading] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   useEffect(() => {
     fetch(`/api/companies/${params.id}`)
@@ -55,6 +57,16 @@ export default function PartnerDetailPage() {
     })
 
     setLoading(false)
+    if (res.ok) {
+      router.push("/partners")
+      router.refresh()
+    }
+  }
+
+  async function handleDelete() {
+    const res = await fetch(`/api/companies/${params.id}`, {
+      method: "DELETE",
+    })
     if (res.ok) {
       router.push("/partners")
       router.refresh()
@@ -118,10 +130,28 @@ export default function PartnerDetailPage() {
               <Button type="button" variant="outline" onClick={() => router.back()}>
                 戻る
               </Button>
+              <Button
+                type="button"
+                variant="destructive"
+                onClick={() => setShowDeleteConfirm(true)}
+                className="ml-auto"
+              >
+                削除
+              </Button>
             </div>
           </form>
         </CardContent>
       </Card>
+
+      <ConfirmDialog
+        open={showDeleteConfirm}
+        onOpenChange={setShowDeleteConfirm}
+        title="会社情報の削除"
+        description="この会社情報を削除してもよろしいですか？この操作は取り消せません。"
+        onConfirm={handleDelete}
+        confirmLabel="削除"
+        variant="destructive"
+      />
     </div>
   )
 }
