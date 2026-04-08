@@ -43,15 +43,15 @@ export default function NewPartnerPage() {
   }
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">会社新規登録</h1>
+    <div className="max-w-2xl mx-auto sm:mx-0">
+      <h1 className="mb-6 text-xl sm:text-2xl font-bold">会社新規登録</h1>
       <Card>
         <CardHeader>
           <CardTitle>会社情報</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="code">会社コード *</Label>
                 <Input id="code" name="code" required />
@@ -69,7 +69,7 @@ export default function NewPartnerPage() {
               <Label htmlFor="name">会社名 *</Label>
               <Input id="name" name="name" required />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="postalCode">郵便番号</Label>
                 <Input id="postalCode" name="postalCode" placeholder="100-0001" />
@@ -91,11 +91,11 @@ export default function NewPartnerPage() {
               <Label htmlFor="registrationNumber">適格請求書発行事業者登録番号</Label>
               <Input id="registrationNumber" name="registrationNumber" placeholder="T1234567890123" />
             </div>
-            <div className="flex gap-2 pt-4">
-              <Button type="submit" disabled={loading}>
+            <div className="flex flex-col sm:flex-row gap-2 pt-4">
+              <Button type="submit" disabled={loading} className="w-full sm:w-auto">
                 {loading ? "保存中..." : "登録"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => router.back()}>
+              <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
                 キャンセル
               </Button>
             </div>

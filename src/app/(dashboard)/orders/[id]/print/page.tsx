@@ -47,7 +47,7 @@ export default async function OrderPrintPage({
         <PrintButton />
       </div>
 
-      <div className="mx-auto max-w-[210mm] p-8 font-sans text-sm text-gray-900">
+      <div className="mx-auto max-w-[210mm] p-4 sm:p-8 font-sans text-sm text-gray-900">
         {/* Header: Issuer Info */}
         <div className="mb-8 text-right text-xs leading-relaxed">
           <p className="font-bold text-sm">{order.issuer.name}</p>
@@ -65,14 +65,14 @@ export default async function OrderPrintPage({
         </h1>
 
         {/* Order Info and Receiver */}
-        <div className="mb-6 flex justify-between">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:justify-between">
           <div className="space-y-2">
-            <p className="text-lg font-bold border-b border-gray-800 pb-1">
+            <p className="text-base sm:text-lg font-bold border-b border-gray-800 pb-1">
               {order.receiver.name}　御中
             </p>
             <p className="text-xs text-gray-600">下記のとおり発注いたします。</p>
           </div>
-          <div className="text-right text-xs space-y-1">
+          <div className="text-left sm:text-right text-xs space-y-1">
             <p>発注番号: {order.orderNumber}</p>
             <p>発注日: {order.issuedAt ? formatDate(order.issuedAt) : formatDate(order.createdAt)}</p>
             {order.deliveryDeadline && (
@@ -83,20 +83,21 @@ export default async function OrderPrintPage({
 
         {/* Subject and Total */}
         <div className="mb-6 rounded border border-gray-300 p-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
             <div>
               <p className="text-xs text-gray-500">件名</p>
               <p className="font-bold">{order.subject}</p>
             </div>
-            <div className="text-right">
+            <div className="sm:text-right">
               <p className="text-xs text-gray-500">合計金額（税込）</p>
-              <p className="text-xl font-bold">{formatCurrency(order.totalAmount)}</p>
+              <p className="text-lg sm:text-xl font-bold">{formatCurrency(order.totalAmount)}</p>
             </div>
           </div>
         </div>
 
         {/* Items Table */}
-        <table className="mb-6 w-full border-collapse text-xs">
+        <div className="overflow-x-auto mb-6">
+        <table className="w-full border-collapse text-xs min-w-[500px]">
           <thead>
             <tr className="bg-gray-100">
               <th className="border border-gray-300 px-2 py-2 text-center w-8">No.</th>
@@ -134,6 +135,7 @@ export default async function OrderPrintPage({
             ))}
           </tbody>
         </table>
+        </div>
 
         {/* Totals */}
         <div className="mb-8 flex justify-end">

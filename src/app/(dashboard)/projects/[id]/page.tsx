@@ -74,8 +74,8 @@ export default function ProjectDetailPage() {
   if (!project) return <div className="text-center py-8">読み込み中...</div>
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">案件詳細</h1>
+    <div className="max-w-2xl mx-auto sm:mx-0">
+      <h1 className="mb-6 text-xl sm:text-2xl font-bold">案件詳細</h1>
       <Card>
         <CardHeader>
           <CardTitle>{project.projectCode} - {project.name}</CardTitle>
@@ -106,7 +106,7 @@ export default function ProjectDetailPage() {
               <Label htmlFor="address">現場住所</Label>
               <Input id="address" name="address" defaultValue={project.address || ""} />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="startDate">着工日</Label>
                 <Input
@@ -126,14 +126,14 @@ export default function ProjectDetailPage() {
                 />
               </div>
             </div>
-            <div className="flex gap-2 pt-4">
-              <Button type="submit" disabled={loading}>
+            <div className="flex flex-col sm:flex-row gap-2 pt-4">
+              <Button type="submit" disabled={loading} className="w-full sm:w-auto">
                 {loading ? "保存中..." : "更新"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => router.back()}>
+              <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
                 戻る
               </Button>
-              <Button type="button" variant="destructive" onClick={() => setShowDeleteConfirm(true)} className="ml-auto">
+              <Button type="button" variant="destructive" onClick={() => setShowDeleteConfirm(true)} className="w-full sm:w-auto sm:ml-auto">
                 削除
               </Button>
             </div>

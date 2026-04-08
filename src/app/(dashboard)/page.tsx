@@ -62,7 +62,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">ダッシュボード</h1>
+      <h1 className="text-xl sm:text-2xl font-bold">ダッシュボード</h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {summaryCards.map((card) => (
@@ -83,7 +83,7 @@ export default async function DashboardPage() {
       {/* Recent Orders */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
+          <CardTitle className="flex items-center justify-between text-base sm:text-lg">
             最近の発注
             <Link href="/orders" className="text-sm font-normal text-blue-600 hover:underline">
               すべて表示
@@ -91,51 +91,53 @@ export default async function DashboardPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>発注番号</TableHead>
-                <TableHead>案件名</TableHead>
-                <TableHead>発注先</TableHead>
-                <TableHead className="text-right">金額</TableHead>
-                <TableHead>ステータス</TableHead>
-                <TableHead>作成日</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {recentOrders.length === 0 ? (
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center text-muted-foreground py-4">
-                    発注データがありません
-                  </TableCell>
+                  <TableHead>発注番号</TableHead>
+                  <TableHead className="hidden sm:table-cell">案件名</TableHead>
+                  <TableHead className="hidden md:table-cell">発注先</TableHead>
+                  <TableHead className="text-right">金額</TableHead>
+                  <TableHead>ステータス</TableHead>
+                  <TableHead className="hidden md:table-cell">作成日</TableHead>
                 </TableRow>
-              ) : (
-                recentOrders.map((order) => (
-                  <TableRow key={order.id}>
-                    <TableCell>
-                      <Link href={`/orders/${order.id}`} className="text-blue-600 hover:underline">
-                        {order.orderNumber}
-                      </Link>
+              </TableHeader>
+              <TableBody>
+                {recentOrders.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center text-muted-foreground py-4">
+                      発注データがありません
                     </TableCell>
-                    <TableCell>{order.project.name}</TableCell>
-                    <TableCell>{order.receiver.name}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(order.totalAmount)}</TableCell>
-                    <TableCell>
-                      <OrderStatusBadge status={order.status} />
-                    </TableCell>
-                    <TableCell>{formatDate(order.createdAt)}</TableCell>
                   </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
+                ) : (
+                  recentOrders.map((order) => (
+                    <TableRow key={order.id}>
+                      <TableCell>
+                        <Link href={`/orders/${order.id}`} className="text-blue-600 hover:underline">
+                          {order.orderNumber}
+                        </Link>
+                      </TableCell>
+                      <TableCell className="hidden sm:table-cell">{order.project.name}</TableCell>
+                      <TableCell className="hidden md:table-cell">{order.receiver.name}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(order.totalAmount)}</TableCell>
+                      <TableCell>
+                        <OrderStatusBadge status={order.status} />
+                      </TableCell>
+                      <TableCell className="hidden md:table-cell">{formatDate(order.createdAt)}</TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
 
       {/* Recent Invoices */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
+          <CardTitle className="flex items-center justify-between text-base sm:text-lg">
             最近の請求
             <Link href="/invoices" className="text-sm font-normal text-blue-600 hover:underline">
               すべて表示
@@ -143,46 +145,48 @@ export default async function DashboardPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>請求番号</TableHead>
-                <TableHead>案件名</TableHead>
-                <TableHead>請求元</TableHead>
-                <TableHead>請求先</TableHead>
-                <TableHead className="text-right">金額</TableHead>
-                <TableHead>ステータス</TableHead>
-                <TableHead>作成日</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {recentInvoices.length === 0 ? (
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center text-muted-foreground py-4">
-                    請求データがありません
-                  </TableCell>
+                  <TableHead>請求番号</TableHead>
+                  <TableHead className="hidden sm:table-cell">案件名</TableHead>
+                  <TableHead className="hidden md:table-cell">請求元</TableHead>
+                  <TableHead className="hidden lg:table-cell">請求先</TableHead>
+                  <TableHead className="text-right">金額</TableHead>
+                  <TableHead>ステータス</TableHead>
+                  <TableHead className="hidden md:table-cell">作成日</TableHead>
                 </TableRow>
-              ) : (
-                recentInvoices.map((invoice) => (
-                  <TableRow key={invoice.id}>
-                    <TableCell>
-                      <Link href={`/invoices/${invoice.id}`} className="text-blue-600 hover:underline">
-                        {invoice.invoiceNumber}
-                      </Link>
+              </TableHeader>
+              <TableBody>
+                {recentInvoices.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={7} className="text-center text-muted-foreground py-4">
+                      請求データがありません
                     </TableCell>
-                    <TableCell>{invoice.project.name}</TableCell>
-                    <TableCell>{invoice.issuer.name}</TableCell>
-                    <TableCell>{invoice.receiver.name}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(invoice.totalAmount)}</TableCell>
-                    <TableCell>
-                      <InvoiceStatusBadge status={invoice.status} />
-                    </TableCell>
-                    <TableCell>{formatDate(invoice.createdAt)}</TableCell>
                   </TableRow>
-                ))
-              )}
-            </TableBody>
-          </Table>
+                ) : (
+                  recentInvoices.map((invoice) => (
+                    <TableRow key={invoice.id}>
+                      <TableCell>
+                        <Link href={`/invoices/${invoice.id}`} className="text-blue-600 hover:underline">
+                          {invoice.invoiceNumber}
+                        </Link>
+                      </TableCell>
+                      <TableCell className="hidden sm:table-cell">{invoice.project.name}</TableCell>
+                      <TableCell className="hidden md:table-cell">{invoice.issuer.name}</TableCell>
+                      <TableCell className="hidden lg:table-cell">{invoice.receiver.name}</TableCell>
+                      <TableCell className="text-right">{formatCurrency(invoice.totalAmount)}</TableCell>
+                      <TableCell>
+                        <InvoiceStatusBadge status={invoice.status} />
+                      </TableCell>
+                      <TableCell className="hidden md:table-cell">{formatDate(invoice.createdAt)}</TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

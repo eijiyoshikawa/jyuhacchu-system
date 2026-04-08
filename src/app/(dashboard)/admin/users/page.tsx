@@ -29,15 +29,15 @@ export default async function UsersPage() {
         createLabel="ユーザー追加"
       />
 
-      <div className="rounded-sm border">
+      <div className="overflow-x-auto rounded-sm border bg-white">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>名前</TableHead>
-              <TableHead>メール</TableHead>
+              <TableHead className="hidden sm:table-cell">メール</TableHead>
               <TableHead>ロール</TableHead>
-              <TableHead>会社名</TableHead>
-              <TableHead>作成日</TableHead>
+              <TableHead className="hidden md:table-cell">会社名</TableHead>
+              <TableHead className="hidden lg:table-cell">作成日</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -58,10 +58,10 @@ export default async function UsersPage() {
                       {user.name}
                     </Link>
                   </TableCell>
-                  <TableCell>{user.email}</TableCell>
+                  <TableCell className="hidden sm:table-cell">{user.email}</TableCell>
                   <TableCell>{roleLabels[user.role] || user.role}</TableCell>
-                  <TableCell>{user.company.name}</TableCell>
-                  <TableCell className="text-gray-500">
+                  <TableCell className="hidden md:table-cell">{user.company.name}</TableCell>
+                  <TableCell className="hidden lg:table-cell text-gray-500">
                     {formatDate(user.createdAt)}
                   </TableCell>
                 </TableRow>

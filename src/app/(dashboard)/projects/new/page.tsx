@@ -39,8 +39,8 @@ export default function NewProjectPage() {
   }
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">案件新規作成</h1>
+    <div className="max-w-2xl mx-auto sm:mx-0">
+      <h1 className="mb-6 text-xl sm:text-2xl font-bold">案件新規作成</h1>
       <Card>
         <CardHeader>
           <CardTitle>案件情報</CardTitle>
@@ -59,7 +59,7 @@ export default function NewProjectPage() {
               <Label htmlFor="address">現場住所</Label>
               <Input id="address" name="address" />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="startDate">着工日</Label>
                 <Input id="startDate" name="startDate" type="date" />
@@ -69,11 +69,11 @@ export default function NewProjectPage() {
                 <Input id="endDate" name="endDate" type="date" />
               </div>
             </div>
-            <div className="flex gap-2 pt-4">
-              <Button type="submit" disabled={loading}>
+            <div className="flex flex-col sm:flex-row gap-2 pt-4">
+              <Button type="submit" disabled={loading} className="w-full sm:w-auto">
                 {loading ? "保存中..." : "登録"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => router.back()}>
+              <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
                 キャンセル
               </Button>
             </div>

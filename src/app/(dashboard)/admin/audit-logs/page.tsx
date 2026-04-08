@@ -45,17 +45,17 @@ export default async function AuditLogsPage({
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">監査ログ</h1>
+      <h1 className="text-xl sm:text-2xl font-bold">監査ログ</h1>
 
-      <div className="rounded-sm border">
+      <div className="overflow-x-auto rounded-sm border bg-white">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b bg-gray-50">
               <th className="px-4 py-3 text-left font-medium text-gray-500">日時</th>
-              <th className="px-4 py-3 text-left font-medium text-gray-500">ユーザー</th>
+              <th className="hidden sm:table-cell px-4 py-3 text-left font-medium text-gray-500">ユーザー</th>
               <th className="px-4 py-3 text-left font-medium text-gray-500">操作</th>
               <th className="px-4 py-3 text-left font-medium text-gray-500">対象</th>
-              <th className="px-4 py-3 text-left font-medium text-gray-500">詳細</th>
+              <th className="hidden md:table-cell px-4 py-3 text-left font-medium text-gray-500">詳細</th>
             </tr>
           </thead>
           <tbody>
@@ -84,7 +84,7 @@ export default async function AuditLogsPage({
                     <td className="whitespace-nowrap px-4 py-3 text-gray-600">
                       {formatDate(log.createdAt)}
                     </td>
-                    <td className="px-4 py-3">{log.userName}</td>
+                    <td className="hidden sm:table-cell px-4 py-3">{log.userName}</td>
                     <td className="px-4 py-3">
                       {actionLabels[log.action] || log.action}
                     </td>
@@ -96,7 +96,7 @@ export default async function AuditLogsPage({
                         </span>
                       )}
                     </td>
-                    <td className="max-w-xs truncate px-4 py-3 text-gray-500 text-xs">
+                    <td className="hidden md:table-cell max-w-xs truncate px-4 py-3 text-gray-500 text-xs">
                       {details}
                     </td>
                   </tr>

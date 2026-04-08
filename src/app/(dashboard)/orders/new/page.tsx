@@ -112,14 +112,14 @@ export default function NewOrderPage() {
 
   return (
     <div className="max-w-5xl">
-      <h1 className="mb-6 text-2xl font-bold">発注書新規作成</h1>
+      <h1 className="mb-6 text-xl sm:text-2xl font-bold">発注書新規作成</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <Card>
           <CardHeader>
             <CardTitle>基本情報</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="projectId">案件選択 *</Label>
                 <Select id="projectId" name="projectId" required>
@@ -143,7 +143,7 @@ export default function NewOrderPage() {
                 </Select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="subject">件名 *</Label>
                 <Input id="subject" name="subject" required />
@@ -158,7 +158,7 @@ export default function NewOrderPage() {
                 </Select>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="deliveryDeadline">納期</Label>
                 <Input id="deliveryDeadline" name="deliveryDeadline" type="date" />
@@ -176,8 +176,8 @@ export default function NewOrderPage() {
             <CardTitle>明細</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="rounded-sm border">
-              <Table>
+            <div className="overflow-x-auto rounded-sm border">
+              <Table className="min-w-[700px]">
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-8">#</TableHead>
@@ -264,7 +264,7 @@ export default function NewOrderPage() {
               </Button>
             </div>
             <div className="mt-6 flex justify-end">
-              <div className="w-72 space-y-2">
+              <div className="w-full sm:w-72 space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>小計</span>
                   <span>{formatCurrency(subtotal)}</span>
@@ -282,11 +282,11 @@ export default function NewOrderPage() {
           </CardContent>
         </Card>
 
-        <div className="flex gap-2">
-          <Button type="submit" disabled={loading}>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Button type="submit" disabled={loading} className="w-full sm:w-auto">
             {loading ? "保存中..." : "登録"}
           </Button>
-          <Button type="button" variant="outline" onClick={() => router.back()}>
+          <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
             キャンセル
           </Button>
         </div>

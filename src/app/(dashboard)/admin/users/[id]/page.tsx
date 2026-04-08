@@ -105,8 +105,8 @@ export default function EditUserPage() {
   if (!user) return <div className="text-center py-8">読み込み中...</div>
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">ユーザー編集</h1>
+    <div className="max-w-2xl mx-auto sm:mx-0">
+      <h1 className="mb-6 text-xl sm:text-2xl font-bold">ユーザー編集</h1>
       <Card>
         <CardHeader>
           <CardTitle>{user.name}</CardTitle>
@@ -132,7 +132,7 @@ export default function EditUserPage() {
                 required
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="role">ロール</Label>
                 <Select id="role" name="role" defaultValue={user.role} required>
@@ -164,22 +164,23 @@ export default function EditUserPage() {
                 空欄の場合、パスワードは変更されません
               </p>
             </div>
-            <div className="flex gap-2 pt-4">
-              <Button type="submit" disabled={loading}>
+            <div className="flex flex-col sm:flex-row gap-2 pt-4">
+              <Button type="submit" disabled={loading} className="w-full sm:w-auto">
                 {loading ? "保存中..." : "更新"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => router.back()}>
+              <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
                 戻る
               </Button>
-              <div className="flex-1" />
+              <div className="hidden sm:block sm:flex-1" />
               {showDeleteConfirm ? (
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-center gap-2">
                   <span className="text-sm text-red-600">本当に削除しますか？</span>
                   <Button
                     type="button"
                     variant="destructive"
                     onClick={handleDelete}
                     disabled={loading}
+                    className="w-full sm:w-auto"
                   >
                     削除する
                   </Button>
@@ -187,6 +188,7 @@ export default function EditUserPage() {
                     type="button"
                     variant="outline"
                     onClick={() => setShowDeleteConfirm(false)}
+                    className="w-full sm:w-auto"
                   >
                     キャンセル
                   </Button>
@@ -196,6 +198,7 @@ export default function EditUserPage() {
                   type="button"
                   variant="destructive"
                   onClick={() => setShowDeleteConfirm(true)}
+                  className="w-full sm:w-auto"
                 >
                   削除
                 </Button>

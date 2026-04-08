@@ -46,18 +46,18 @@ export default async function ApprovalsPage() {
         description="あなたの承認を待っている申請一覧です"
       />
 
-      <div className="rounded-sm border bg-white">
+      <div className="overflow-x-auto rounded-sm border bg-white">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>種別</TableHead>
               <TableHead>番号</TableHead>
-              <TableHead>案件名</TableHead>
-              <TableHead>件名</TableHead>
-              <TableHead>申請者</TableHead>
+              <TableHead className="hidden md:table-cell">案件名</TableHead>
+              <TableHead className="hidden lg:table-cell">件名</TableHead>
+              <TableHead className="hidden md:table-cell">申請者</TableHead>
               <TableHead className="text-right">金額</TableHead>
               <TableHead>ステータス</TableHead>
-              <TableHead>申請日</TableHead>
+              <TableHead className="hidden md:table-cell">申請日</TableHead>
               <TableHead>操作</TableHead>
             </TableRow>
           </TableHeader>
@@ -93,13 +93,13 @@ export default async function ApprovalsPage() {
                         "-"
                       )}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="hidden md:table-cell">
                       {isOrder ? order?.project.name : invoice?.project.name}
                     </TableCell>
-                    <TableCell className="font-medium">
+                    <TableCell className="hidden lg:table-cell font-medium">
                       {isOrder ? order?.subject : invoice?.subject}
                     </TableCell>
-                    <TableCell>{flow.requestedBy.name}</TableCell>
+                    <TableCell className="hidden md:table-cell">{flow.requestedBy.name}</TableCell>
                     <TableCell className="text-right">
                       {formatCurrency(
                         isOrder ? (order?.totalAmount ?? 0) : (invoice?.totalAmount ?? 0)
@@ -112,7 +112,7 @@ export default async function ApprovalsPage() {
                         <InvoiceStatusBadge status={invoice.status} />
                       ) : null}
                     </TableCell>
-                    <TableCell>{formatDate(step.createdAt)}</TableCell>
+                    <TableCell className="hidden md:table-cell">{formatDate(step.createdAt)}</TableCell>
                     <TableCell>
                       {isOrder && order ? (
                         <Link

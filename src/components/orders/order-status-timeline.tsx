@@ -31,19 +31,19 @@ export function OrderStatusTimeline({ currentStatus }: OrderStatusTimelineProps)
   const isRejectedOrCancelled = currentStatus === "REJECTED" || currentStatus === "CANCELLED"
 
   return (
-    <div className="rounded-sm border bg-white p-4">
-      <div className="flex items-center justify-between">
+    <div className="rounded-sm border bg-white p-3 sm:p-4">
+      <div className="flex items-center justify-between overflow-x-auto min-w-0 pb-1">
         {TIMELINE_STEPS.map((step, index) => {
           const isCompleted = currentIndex > index
           const isCurrent = currentIndex === index && !isRejectedOrCancelled
           const isUpcoming = currentIndex < index || isRejectedOrCancelled
 
           return (
-            <div key={step.status} className="flex flex-1 items-center">
-              <div className="flex flex-col items-center">
+            <div key={step.status} className="flex flex-1 items-center min-w-0">
+              <div className="flex flex-col items-center shrink-0">
                 <div
                   className={cn(
-                    "flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold",
+                    "flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full border-2 text-xs font-bold",
                     isCompleted && "border-green-500 bg-green-500 text-white",
                     isCurrent && "border-blue-500 bg-blue-50 text-blue-600",
                     isUpcoming && "border-gray-300 bg-white text-gray-400"
@@ -59,7 +59,7 @@ export function OrderStatusTimeline({ currentStatus }: OrderStatusTimelineProps)
                 </div>
                 <span
                   className={cn(
-                    "mt-1 text-xs",
+                    "mt-1 text-[10px] sm:text-xs whitespace-nowrap",
                     isCompleted && "font-medium text-green-600",
                     isCurrent && "font-bold text-blue-600",
                     isUpcoming && "text-gray-400"

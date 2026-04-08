@@ -61,8 +61,8 @@ export default function NewUserPage() {
   }
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">ユーザー新規登録</h1>
+    <div className="max-w-2xl mx-auto sm:mx-0">
+      <h1 className="mb-6 text-xl sm:text-2xl font-bold">ユーザー新規登録</h1>
       <Card>
         <CardHeader>
           <CardTitle>ユーザー情報</CardTitle>
@@ -89,7 +89,7 @@ export default function NewUserPage() {
                 8文字以上、大文字・小文字・数字を含めてください
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="role">ロール *</Label>
                 <Select id="role" name="role" required>
@@ -111,11 +111,11 @@ export default function NewUserPage() {
                 </Select>
               </div>
             </div>
-            <div className="flex gap-2 pt-4">
-              <Button type="submit" disabled={loading}>
+            <div className="flex flex-col sm:flex-row gap-2 pt-4">
+              <Button type="submit" disabled={loading} className="w-full sm:w-auto">
                 {loading ? "保存中..." : "登録"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => router.back()}>
+              <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
                 キャンセル
               </Button>
             </div>

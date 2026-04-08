@@ -130,12 +130,12 @@ export default function InvoiceDetailPage() {
 
   return (
     <div className="max-w-4xl space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold">{invoice.invoiceNumber}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">{invoice.invoiceNumber}</h1>
           <p className="text-sm text-muted-foreground mt-1">{invoice.subject}</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link href={`/invoices/${invoice.id}/print`} target="_blank">
             <Button variant="outline" size="sm">
               <Printer className="mr-2 h-4 w-4" />
@@ -171,7 +171,7 @@ export default function InvoiceDetailPage() {
           <CardTitle>請求情報</CardTitle>
         </CardHeader>
         <CardContent>
-          <dl className="grid grid-cols-2 gap-4 text-sm">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div>
               <dt className="font-medium text-muted-foreground">案件</dt>
               <dd>{invoice.project.projectCode} - {invoice.project.name}</dd>
@@ -217,35 +217,37 @@ export default function InvoiceDetailPage() {
           <CardTitle>明細</CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-8">#</TableHead>
-                <TableHead>品名</TableHead>
-                <TableHead>仕様</TableHead>
-                <TableHead className="text-right">数量</TableHead>
-                <TableHead>単位</TableHead>
-                <TableHead className="text-right">単価</TableHead>
-                <TableHead className="text-right">金額</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {invoice.items.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell>{item.itemOrder}</TableCell>
-                  <TableCell className="font-medium">{item.name}</TableCell>
-                  <TableCell>{item.specification || "-"}</TableCell>
-                  <TableCell className="text-right">{item.quantity}</TableCell>
-                  <TableCell>{item.unit}</TableCell>
-                  <TableCell className="text-right">{formatCurrency(item.unitPrice)}</TableCell>
-                  <TableCell className="text-right">{formatCurrency(item.amount)}</TableCell>
+          <div className="overflow-x-auto">
+            <Table className="min-w-[600px]">
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-8">#</TableHead>
+                  <TableHead>品名</TableHead>
+                  <TableHead className="hidden sm:table-cell">仕様</TableHead>
+                  <TableHead className="text-right">数量</TableHead>
+                  <TableHead>単位</TableHead>
+                  <TableHead className="text-right hidden sm:table-cell">単価</TableHead>
+                  <TableHead className="text-right">金額</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {invoice.items.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell>{item.itemOrder}</TableCell>
+                    <TableCell className="font-medium">{item.name}</TableCell>
+                    <TableCell className="hidden sm:table-cell">{item.specification || "-"}</TableCell>
+                    <TableCell className="text-right">{item.quantity}</TableCell>
+                    <TableCell>{item.unit}</TableCell>
+                    <TableCell className="text-right hidden sm:table-cell">{formatCurrency(item.unitPrice)}</TableCell>
+                    <TableCell className="text-right">{formatCurrency(item.amount)}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
 
           <div className="mt-4 flex justify-end">
-            <div className="w-64 space-y-2">
+            <div className="w-full sm:w-64 space-y-2">
               <div className="flex justify-between text-sm">
                 <span>小計</span>
                 <span>{formatCurrency(invoice.subtotal)}</span>
@@ -269,14 +271,15 @@ export default function InvoiceDetailPage() {
             <CardTitle>承認フロー</CardTitle>
           </CardHeader>
           <CardContent>
+            <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>順序</TableHead>
                   <TableHead>承認者</TableHead>
                   <TableHead>ステータス</TableHead>
-                  <TableHead>コメント</TableHead>
-                  <TableHead>決定日時</TableHead>
+                  <TableHead className="hidden sm:table-cell">コメント</TableHead>
+                  <TableHead className="hidden sm:table-cell">決定日時</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -287,12 +290,13 @@ export default function InvoiceDetailPage() {
                     <TableCell>
                       <InvoiceStatusBadge status={step.status === "PENDING" ? "SUBMITTED" : step.status} />
                     </TableCell>
-                    <TableCell>{step.comment || "-"}</TableCell>
-                    <TableCell>{step.decidedAt ? formatDate(step.decidedAt) : "-"}</TableCell>
+                    <TableCell className="hidden sm:table-cell">{step.comment || "-"}</TableCell>
+                    <TableCell className="hidden sm:table-cell">{step.decidedAt ? formatDate(step.decidedAt) : "-"}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
+            </div>
           </CardContent>
         </Card>
       )}

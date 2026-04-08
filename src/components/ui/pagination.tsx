@@ -90,7 +90,12 @@ export function Pagination({ currentPage, totalPages, onPageChange, baseUrl, sea
         >
           前へ
         </Link>
-        {pages.map((page, i) => renderPageButton(page, i))}
+        <span className="hidden sm:contents">
+          {pages.map((page, i) => renderPageButton(page, i))}
+        </span>
+        <span className="sm:hidden px-2 text-sm text-gray-600">
+          {currentPage} / {totalPages}
+        </span>
         <Link
           href={nextDisabled ? "#" : buildHref(currentPage + 1)}
           className={cn(
@@ -108,11 +113,16 @@ export function Pagination({ currentPage, totalPages, onPageChange, baseUrl, sea
   }
 
   return (
-    <nav className="flex items-center gap-1">
+    <nav className="flex items-center justify-center gap-1">
       <Button variant="ghost" size="sm" disabled={prevDisabled} onClick={() => onPageChange?.(currentPage - 1)}>
         前へ
       </Button>
-      {pages.map((page, i) => renderPageButton(page, i))}
+      <span className="hidden sm:contents">
+        {pages.map((page, i) => renderPageButton(page, i))}
+      </span>
+      <span className="sm:hidden px-2 text-sm text-gray-600">
+        {currentPage} / {totalPages}
+      </span>
       <Button variant="ghost" size="sm" disabled={nextDisabled} onClick={() => onPageChange?.(currentPage + 1)}>
         次へ
       </Button>

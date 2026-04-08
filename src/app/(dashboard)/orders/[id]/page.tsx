@@ -147,9 +147,9 @@ export default function OrderDetailPage() {
 
   return (
     <div className="max-w-5xl space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold">発注書詳細</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">発注書詳細</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             {order.orderNumber}
           </p>
@@ -158,7 +158,8 @@ export default function OrderDetailPage() {
           <Link href={`/orders/${order.id}/print`} target="_blank">
             <Button variant="outline" size="sm">
               <Printer className="mr-2 h-4 w-4" />
-              印刷/PDF
+              <span className="hidden sm:inline">印刷/PDF</span>
+              <span className="sm:hidden">印刷</span>
             </Button>
           </Link>
           <OrderStatusBadge status={order.status} />
@@ -172,7 +173,7 @@ export default function OrderDetailPage() {
           <CardTitle>発注情報</CardTitle>
         </CardHeader>
         <CardContent>
-          <dl className="grid grid-cols-2 gap-4 text-sm">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div>
               <dt className="font-medium text-muted-foreground">発注番号</dt>
               <dd className="mt-1">{order.orderNumber}</dd>
@@ -222,16 +223,16 @@ export default function OrderDetailPage() {
           <CardTitle>明細</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="rounded-sm border">
-            <Table>
+          <div className="overflow-x-auto rounded-sm border">
+            <Table className="min-w-[600px]">
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-8">#</TableHead>
                   <TableHead>品名</TableHead>
-                  <TableHead>仕様</TableHead>
+                  <TableHead className="hidden sm:table-cell">仕様</TableHead>
                   <TableHead className="text-right">数量</TableHead>
                   <TableHead>単位</TableHead>
-                  <TableHead className="text-right">単価</TableHead>
+                  <TableHead className="text-right hidden sm:table-cell">単価</TableHead>
                   <TableHead className="text-right">金額</TableHead>
                 </TableRow>
               </TableHeader>
@@ -240,10 +241,10 @@ export default function OrderDetailPage() {
                   <TableRow key={item.id}>
                     <TableCell className="text-center">{item.itemOrder}</TableCell>
                     <TableCell className="font-medium">{item.name}</TableCell>
-                    <TableCell>{item.specification || "-"}</TableCell>
+                    <TableCell className="hidden sm:table-cell">{item.specification || "-"}</TableCell>
                     <TableCell className="text-right">{item.quantity}</TableCell>
                     <TableCell>{item.unit}</TableCell>
-                    <TableCell className="text-right">{formatCurrency(item.unitPrice)}</TableCell>
+                    <TableCell className="text-right hidden sm:table-cell">{formatCurrency(item.unitPrice)}</TableCell>
                     <TableCell className="text-right">{formatCurrency(item.amount)}</TableCell>
                   </TableRow>
                 ))}
@@ -251,7 +252,7 @@ export default function OrderDetailPage() {
             </Table>
           </div>
           <div className="mt-6 flex justify-end">
-            <div className="w-72 space-y-2">
+            <div className="w-full sm:w-72 space-y-2">
               <div className="flex justify-between text-sm">
                 <span>小計</span>
                 <span>{formatCurrency(order.subtotal)}</span>
@@ -316,32 +317,33 @@ export default function OrderDetailPage() {
       )}
 
       {/* Action Buttons */}
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         {order.status === "DRAFT" && (
           <>
-            <Button onClick={() => setShowSubmitConfirm(true)} disabled={loading}>
+            <Button onClick={() => setShowSubmitConfirm(true)} disabled={loading} className="w-full sm:w-auto">
               {loading ? "処理中..." : "申請"}
             </Button>
-            <Button variant="outline" onClick={() => setShowDeleteConfirm(true)} disabled={loading}>
+            <Button variant="outline" onClick={() => setShowDeleteConfirm(true)} disabled={loading} className="w-full sm:w-auto">
               削除
             </Button>
           </>
         )}
         {order.status === "PENDING_APPROVAL" && (
           <>
-            <Button onClick={() => setShowApproveConfirm(true)} disabled={loading}>
+            <Button onClick={() => setShowApproveConfirm(true)} disabled={loading} className="w-full sm:w-auto">
               {loading ? "処理中..." : "承認"}
             </Button>
             <Button
               variant="outline"
               onClick={() => setShowRejectForm(!showRejectForm)}
               disabled={loading}
+              className="w-full sm:w-auto"
             >
               却下
             </Button>
           </>
         )}
-        <Button variant="outline" onClick={() => router.push("/orders")}>
+        <Button variant="outline" onClick={() => router.push("/orders")} className="w-full sm:w-auto">
           一覧に戻る
         </Button>
       </div>

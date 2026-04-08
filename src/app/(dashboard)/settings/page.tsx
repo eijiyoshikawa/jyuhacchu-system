@@ -70,8 +70,8 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">設定</h1>
+    <div className="max-w-2xl mx-auto sm:mx-0">
+      <h1 className="mb-6 text-xl sm:text-2xl font-bold">設定</h1>
       <Card>
         <CardHeader>
           <CardTitle>パスワード変更</CardTitle>

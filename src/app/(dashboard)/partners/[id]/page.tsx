@@ -76,15 +76,15 @@ export default function PartnerDetailPage() {
   if (!company) return <div className="text-center py-8">読み込み中...</div>
 
   return (
-    <div className="max-w-2xl">
-      <h1 className="mb-6 text-2xl font-bold">会社情報編集</h1>
+    <div className="max-w-2xl mx-auto sm:mx-0">
+      <h1 className="mb-6 text-xl sm:text-2xl font-bold">会社情報編集</h1>
       <Card>
         <CardHeader>
           <CardTitle>{company.name}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="code">会社コード</Label>
                 <Input id="code" name="code" defaultValue={company.code} required />
@@ -101,7 +101,7 @@ export default function PartnerDetailPage() {
               <Label htmlFor="name">会社名</Label>
               <Input id="name" name="name" defaultValue={company.name} required />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="postalCode">郵便番号</Label>
                 <Input id="postalCode" name="postalCode" defaultValue={company.postalCode || ""} />
@@ -123,18 +123,18 @@ export default function PartnerDetailPage() {
               <Label htmlFor="registrationNumber">適格請求書発行事業者登録番号</Label>
               <Input id="registrationNumber" name="registrationNumber" defaultValue={company.registrationNumber || ""} />
             </div>
-            <div className="flex gap-2 pt-4">
-              <Button type="submit" disabled={loading}>
+            <div className="flex flex-col sm:flex-row gap-2 pt-4">
+              <Button type="submit" disabled={loading} className="w-full sm:w-auto">
                 {loading ? "保存中..." : "更新"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => router.back()}>
+              <Button type="button" variant="outline" onClick={() => router.back()} className="w-full sm:w-auto">
                 戻る
               </Button>
               <Button
                 type="button"
                 variant="destructive"
                 onClick={() => setShowDeleteConfirm(true)}
-                className="ml-auto"
+                className="w-full sm:w-auto sm:ml-auto"
               >
                 削除
               </Button>
