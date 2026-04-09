@@ -3,6 +3,8 @@
 このドキュメントは、建設Lシステムの構築中に発生したエラーと解決策をまとめたものです。
 同様のプロジェクトを構築する際の参考にしてください。
 
+---
+
 ## 1. Prisma v7 互換性問題
 
 ### エラー内容
@@ -210,6 +212,44 @@ Vercel ダッシュボード → Settings → Environment Variables で必要な
 
 ---
 
+## 11. Vercel ビルドキャッシュ問題
+
+### エラー内容
+デザイン変更後、ローカルでは正常にビルドできるが、Vercel デプロイ時にビルドが失敗する。
+キャッシュされた古いアーティファクトと新しいコードの間で不整合が発生。
+
+### 解決策
+Vercel ダッシュボードからキャッシュを無効化して再デプロイ：
+1. Vercel ダッシュボード → Deployments
+2. 最新のデプロイメントを選択
+3. 「Redeploy」をクリック
+4. 「Override Build Cache」にチェックを入れて再デプロイ
+
+### 予防策
+- デザインの大幅変更後はキャッシュクリアデプロイを行う
+- `vercel.json` の `buildCommand` を確認し、`prisma generate` が含まれていることを確認
+- ビルド失敗時はまずキャッシュ無効化デプロイを試す
+
+---
+
+## エラー発生順サマリー
+
+| # | エラー | 原因 | 影響度 |
+|---|--------|------|--------|
+| 1 | Prisma v7 互換性 | メジャーバージョンのAPI変更 | 高 |
+| 2 | Google Fonts | ネットワークアクセス制限 | 低 |
+| 3 | shadcn/ui レジストリ | 認証/アクセス制限 | 中 |
+| 4 | Zod v4 enum API | メジャーバージョンのAPI変更 | 中 |
+| 5 | Next.js 16 middleware | 非推奨化 | 低 |
+| 6 | Edge Runtime + Prisma | ランタイム互換性 | 高 |
+| 7 | NextAuth trustHost | デプロイ環境固有 | 高 |
+| 8 | NextAuth handler wrapper | ライブラリ互換性 | 中 |
+| 9 | Neon channel_binding | DB接続パラメータ | 高 |
+| 10 | Vercel 環境変数 | 設定漏れ | 高 |
+| 11 | Vercel ビルドキャッシュ | キャッシュ不整合 | 中 |
+
+---
+
 ## 環境別チェックリスト
 
 ### ローカル開発
@@ -222,6 +262,15 @@ Vercel ダッシュボード → Settings → Environment Variables で必要な
 - [ ] DATABASE_URL（Neon の接続 URL、`channel_binding` パラメータなし）
 - [ ] NEXTAUTH_SECRET（`openssl rand -base64 32` で生成）
 - [ ] NEXTAUTH_URL（デプロイ先の正しい URL）
+- [ ] NTA_APP_ID（国税庁API、任意）
 - [ ] NextAuth 設定に `trustHost: true` がある
 - [ ] ミドルウェアが Edge Runtime 互換（Prisma 未インポート）
 - [ ] vercel.json の buildCommand に `prisma migrate deploy` が含まれる
+- [ ] デザイン変更後はキャッシュ無効化デプロイを検討
+
+### トラブルシューティング手順
+1. Vercel のデプロイログを確認（Build & Function Logs）
+2. ローカルで `npm run build` が通ることを確認
+3. 環境変数が全て設定されていることを確認
+4. キャッシュ無効化デプロイを試す
+5. Sentry でランタイムエラーを確認
