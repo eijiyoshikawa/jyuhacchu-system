@@ -10,6 +10,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { formatCurrency } from "@/lib/utils"
+import { calculateTax } from "@/lib/invoice-tax"
+import { TaxSummary } from "@/components/ui/tax-summary"
 import { Plus, Trash2 } from "lucide-react"
 
 interface Project {
@@ -22,6 +24,7 @@ interface Company {
   id: string
   name: string
   code: string
+  registrationNumber: string | null
 }
 
 interface OrderItem {
@@ -45,6 +48,7 @@ export default function NewOrderPage() {
   const [projects, setProjects] = useState<Project[]>([])
   const [companies, setCompanies] = useState<Company[]>([])
   const [items, setItems] = useState<OrderItem[]>([createEmptyItem()])
+  const [selectedReceiverId, setSelectedReceiverId] = useState("")
 
   useEffect(() => {
     fetch("/api/projects")
@@ -78,8 +82,11 @@ export default function NewOrderPage() {
   }
 
   const subtotal = items.reduce((sum, item) => sum + item.amount, 0)
-  const taxAmount = Math.floor(subtotal * 0.1)
-  const totalAmount = subtotal + taxAmount
+  const selectedCompany = companies.find((c) => c.id === selectedReceiverId)
+  const hasInvoiceNumber = !!selectedCompany?.registrationNumber
+  const taxCalc = calculateTax({ subtotal, hasInvoiceNumber })
+  const taxAmount = taxCalc.taxAmount
+  const totalAmount = taxCalc.totalAmount
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -133,11 +140,17 @@ export default function NewOrderPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="receiverId">協力会社選択 *</Label>
-                <Select id="receiverId" name="receiverId" required>
+                <Select
+                  id="receiverId"
+                  name="receiverId"
+                  required
+                  value={selectedReceiverId}
+                  onChange={(e) => setSelectedReceiverId(e.target.value)}
+                >
                   <option value="">選択してください</option>
                   {companies.map((company) => (
                     <option key={company.id} value={company.id}>
-                      {company.name}
+                      {company.name}{!company.registrationNumber ? "（免税事業者）" : ""}
                     </option>
                   ))}
                 </Select>
@@ -264,19 +277,19 @@ export default function NewOrderPage() {
               </Button>
             </div>
             <div className="mt-6 flex justify-end">
-              <div className="w-full sm:w-72 space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>小計</span>
-                  <span>{formatCurrency(subtotal)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>消費税（10%）</span>
-                  <span>{formatCurrency(taxAmount)}</span>
-                </div>
-                <div className="flex justify-between border-t pt-2 text-lg font-bold">
-                  <span>合計</span>
-                  <span>{formatCurrency(totalAmount)}</span>
-                </div>
+              <div className="w-full sm:w-80">
+                <TaxSummary
+                  subtotal={taxCalc.subtotal}
+                  taxRate={taxCalc.taxRate}
+                  taxAmount={taxCalc.taxAmount}
+                  totalAmount={taxCalc.totalAmount}
+                  hasInvoiceNumber={taxCalc.hasInvoiceNumber}
+                  companyName={selectedCompany?.name}
+                  deductionRate={taxCalc.deductionRate}
+                  deductibleTaxAmount={taxCalc.deductibleTaxAmount}
+                  nonDeductibleTaxAmount={taxCalc.nonDeductibleTaxAmount}
+                  periodLabel={taxCalc.periodLabel}
+                />
               </div>
             </div>
           </CardContent>
