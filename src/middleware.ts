@@ -1,8 +1,38 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
+const MARKETING_HOST = "lsystem.let-inc.net"
+const SYSTEM_FALLBACK_HOST = "https://jyuhacchu-system.vercel.app"
+
+function isMarketingPath(pathname: string): boolean {
+  return (
+    pathname === "/" ||
+    pathname === "/lp" ||
+    pathname.startsWith("/lp/") ||
+    pathname === "/subsidy" ||
+    pathname.startsWith("/subsidy/") ||
+    pathname === "/terms" ||
+    pathname === "/privacy" ||
+    pathname === "/favicon.ico" ||
+    pathname.startsWith("/images/")
+  )
+}
+
 export function middleware(req: NextRequest) {
+  const host = (req.headers.get("host") ?? "").toLowerCase()
   const pathname = req.nextUrl.pathname
+
+  // Custom marketing domain: only marketing pages are served here.
+  // System pages (/orders, /auth/login, /api/*) are redirected to the Vercel URL.
+  if (host === MARKETING_HOST) {
+    if (!isMarketingPath(pathname)) {
+      return NextResponse.redirect(
+        new URL(pathname + req.nextUrl.search, SYSTEM_FALLBACK_HOST)
+      )
+    }
+    return NextResponse.next()
+  }
+
   const isAuthPage = pathname.startsWith("/auth")
   const isApiAuth = pathname.startsWith("/api/auth")
   const isLegalPage = pathname === "/terms" || pathname === "/privacy"
@@ -13,7 +43,7 @@ export function middleware(req: NextRequest) {
     pathname === "/subsidy" ||
     pathname.startsWith("/subsidy/")
 
-  // Public routes
+  // Public routes (system domain)
   if (isApiAuth || isLegalPage || isApiHealth || isPublicMarketing) {
     return NextResponse.next()
   }
