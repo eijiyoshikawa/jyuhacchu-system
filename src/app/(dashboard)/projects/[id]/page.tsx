@@ -103,12 +103,12 @@ export default function ProjectDetailPage() {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="address">現場住所</Label>
+              <Label htmlFor="address">納入先 / 作業場所</Label>
               <Input id="address" name="address" defaultValue={project.address || ""} />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="startDate">着工日</Label>
+                <Label htmlFor="startDate">開始日</Label>
                 <Input
                   id="startDate"
                   name="startDate"
@@ -117,7 +117,7 @@ export default function ProjectDetailPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="endDate">完工予定日</Label>
+                <Label htmlFor="endDate">完了予定日</Label>
                 <Input
                   id="endDate"
                   name="endDate"

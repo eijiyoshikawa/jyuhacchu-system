@@ -54,7 +54,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
     <div>
       <PageHeader
         title="案件管理"
-        description="工事案件の一覧を管理します"
+        description="取引案件の一覧を管理します"
         createHref="/projects/new"
         createLabel="新規作成"
       />
@@ -72,9 +72,9 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
               <TableHead>案件コード</TableHead>
               <TableHead>案件名</TableHead>
               <TableHead>ステータス</TableHead>
-              <TableHead className="hidden md:table-cell">現場住所</TableHead>
-              <TableHead className="hidden lg:table-cell">着工日</TableHead>
-              <TableHead className="hidden lg:table-cell">完工予定日</TableHead>
+              <TableHead className="hidden md:table-cell">納入先 / 作業場所</TableHead>
+              <TableHead className="hidden lg:table-cell">開始日</TableHead>
+              <TableHead className="hidden lg:table-cell">完了予定日</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

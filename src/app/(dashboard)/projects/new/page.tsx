@@ -56,16 +56,16 @@ export default function NewProjectPage() {
               <Input id="description" name="description" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="address">現場住所</Label>
+              <Label htmlFor="address">納入先 / 作業場所</Label>
               <Input id="address" name="address" />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="startDate">着工日</Label>
+                <Label htmlFor="startDate">開始日</Label>
                 <Input id="startDate" name="startDate" type="date" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="endDate">完工予定日</Label>
+                <Label htmlFor="endDate">完了予定日</Label>
                 <Input id="endDate" name="endDate" type="date" />
               </div>
             </div>

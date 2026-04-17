@@ -5,8 +5,8 @@ test.describe("認証", () => {
     await page.goto("/auth/login")
 
     // ページタイトルとフォーム要素が表示される
-    await expect(page.getByText("建設Lシステム")).toBeVisible()
-    await expect(page.getByText("ログインしてください")).toBeVisible()
+    await expect(page.getByText("受発注Lシステム")).toBeVisible()
+    await expect(page.getByText("インボイス対応クラウド受発注プラットフォーム")).toBeVisible()
     await expect(page.getByLabel("メールアドレス")).toBeVisible()
     await expect(page.getByLabel("パスワード")).toBeVisible()
     await expect(page.getByRole("button", { name: "ログイン" })).toBeVisible()
@@ -15,7 +15,7 @@ test.describe("認証", () => {
   test("正しい認証情報でログインできる", async ({ page }) => {
     await page.goto("/auth/login")
 
-    await page.fill('input[name="email"]', "admin@sample-kensetsu.co.jp")
+    await page.fill('input[name="email"]', "admin@sample-trading.co.jp")
     await page.fill('input[name="password"]', "password123")
     await page.click('button[type="submit"]')
 
@@ -27,7 +27,7 @@ test.describe("認証", () => {
   test("間違ったパスワードでエラーが表示される", async ({ page }) => {
     await page.goto("/auth/login")
 
-    await page.fill('input[name="email"]', "admin@sample-kensetsu.co.jp")
+    await page.fill('input[name="email"]', "admin@sample-trading.co.jp")
     await page.fill('input[name="password"]', "wrongpassword")
     await page.click('button[type="submit"]')
 

@@ -44,10 +44,10 @@ export default function LoginPage() {
       <Card className="w-full max-w-md border-0 rounded-sm shadow-2xl">
         <CardHeader className="text-center pb-2">
           <CardTitle className="text-2xl font-black tracking-tight text-slate-800">
-            建設<span className="text-orange-500">L</span>システム
+            受発注<span className="text-orange-500">L</span>システム
           </CardTitle>
           <CardDescription className="text-sm text-slate-500">
-            受発注管理プラットフォーム
+            インボイス対応クラウド受発注プラットフォーム
           </CardDescription>
         </CardHeader>
         <CardContent>

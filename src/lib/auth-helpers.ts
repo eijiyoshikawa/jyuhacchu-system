@@ -21,8 +21,8 @@ export async function requireRole(roles: UserRole[]) {
 
 export const roleLabels: Record<string, string> = {
   ADMIN: "管理者",
-  CONTRACTOR: "元請",
-  SUBCONTRACTOR: "協力会社",
+  CONTRACTOR: "発注担当",
+  SUBCONTRACTOR: "受注担当",
 }
 
 export const orderStatusLabels: Record<string, string> = {

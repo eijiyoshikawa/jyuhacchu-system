@@ -183,11 +183,11 @@ export default function OrderDetailPage() {
               <dd className="mt-1">{order.project.projectCode} - {order.project.name}</dd>
             </div>
             <div>
-              <dt className="font-medium text-muted-foreground">元請会社</dt>
+              <dt className="font-medium text-muted-foreground">発注企業</dt>
               <dd className="mt-1">{order.issuer.name}</dd>
             </div>
             <div>
-              <dt className="font-medium text-muted-foreground">協力会社</dt>
+              <dt className="font-medium text-muted-foreground">取引先</dt>
               <dd className="mt-1">{order.receiver.name}</dd>
             </div>
             <div>

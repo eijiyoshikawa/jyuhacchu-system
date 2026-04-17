@@ -95,8 +95,8 @@ export default function NewUserPage() {
                 <Select id="role" name="role" required>
                   <option value="">選択してください</option>
                   <option value="ADMIN">管理者</option>
-                  <option value="CONTRACTOR">元請</option>
-                  <option value="SUBCONTRACTOR">協力会社</option>
+                  <option value="CONTRACTOR">発注担当</option>
+                  <option value="SUBCONTRACTOR">受注担当</option>
                 </Select>
               </div>
               <div className="space-y-2">

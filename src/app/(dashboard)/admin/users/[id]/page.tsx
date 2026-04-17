@@ -137,8 +137,8 @@ export default function EditUserPage() {
                 <Label htmlFor="role">ロール</Label>
                 <Select id="role" name="role" defaultValue={user.role} required>
                   <option value="ADMIN">管理者</option>
-                  <option value="CONTRACTOR">元請</option>
-                  <option value="SUBCONTRACTOR">協力会社</option>
+                  <option value="CONTRACTOR">発注担当</option>
+                  <option value="SUBCONTRACTOR">受注担当</option>
                 </Select>
               </div>
               <div className="space-y-2">

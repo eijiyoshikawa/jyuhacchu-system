@@ -32,9 +32,9 @@ test.describe("ダッシュボード", () => {
     await expect(page).toHaveURL(/\/orders/)
     await expect(page.getByText("発注管理")).toBeVisible()
 
-    await page.getByRole("link", { name: "協力会社管理" }).click()
+    await page.getByRole("link", { name: "取引先管理" }).click()
     await expect(page).toHaveURL(/\/partners/)
-    await expect(page.getByText("協力会社管理")).toBeVisible()
+    await expect(page.getByText("取引先管理")).toBeVisible()
 
     await page.getByRole("link", { name: "案件管理" }).click()
     await expect(page).toHaveURL(/\/projects/)

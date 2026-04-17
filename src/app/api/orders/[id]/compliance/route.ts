@@ -45,7 +45,7 @@ export async function GET(
     order,
     compliance: {
       constructionLaw: {
-        label: "建設業法",
+        label: "取引契約 必要記載事項",
         ...constructionLaw,
       },
       electronicBook: {

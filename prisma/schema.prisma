@@ -10,14 +10,14 @@ datasource db {
 // ユーザーロール
 enum UserRole {
   ADMIN          // 管理者
-  CONTRACTOR     // 元請会社
-  SUBCONTRACTOR  // 協力会社
+  CONTRACTOR     // 発注担当（発注側企業のユーザー）
+  SUBCONTRACTOR  // 受注担当（受注側企業のユーザー）
 }
 
 // 会社種別
 enum CompanyType {
-  GENERAL_CONTRACTOR  // 元請会社
-  SUBCONTRACTOR       // 協力会社
+  GENERAL_CONTRACTOR  // 発注企業
+  SUBCONTRACTOR       // 受注企業
 }
 
 // 案件ステータス
@@ -154,7 +154,7 @@ model PurchaseOrder {
   // 電子帳簿保存法対応
   confirmedAt      DateTime?   // 確定日時（タイムスタンプ）
   confirmedHash    String?     // 確定時のハッシュ値（改ざん防止）
-  // 建設業法対応
+  // 取引契約 必要記載事項（下請法・請負契約一般）
   constructionName        String?    // 工事名称
   constructionSite        String?    // 工事場所
   constructionPeriodStart DateTime?  // 工期開始

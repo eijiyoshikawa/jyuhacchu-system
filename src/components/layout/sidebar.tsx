@@ -22,7 +22,7 @@ const navigation = [
   { name: "発注管理", href: "/orders", icon: FileText },
   { name: "請求管理", href: "/invoices", icon: Receipt },
   { name: "承認", href: "/approvals", icon: ClipboardCheck },
-  { name: "協力会社管理", href: "/partners", icon: Building2 },
+  { name: "取引先管理", href: "/partners", icon: Building2 },
   { name: "設定", href: "/settings", icon: Settings },
 ]
 
@@ -44,7 +44,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
     <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
       <div className="flex h-14 items-center border-b border-gray-200 px-6">
         <h1 className="text-lg font-bold text-gray-900">
-          建設<span className="text-orange-500">L</span>システム
+          受発注<span className="text-orange-500">L</span>システム
         </h1>
       </div>
       <nav className="flex-1 space-y-0.5 px-3 py-4">

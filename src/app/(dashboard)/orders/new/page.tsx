@@ -139,7 +139,7 @@ export default function NewOrderPage() {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="receiverId">協力会社選択 *</Label>
+                <Label htmlFor="receiverId">取引先選択 *</Label>
                 <Select
                   id="receiverId"
                   name="receiverId"
@@ -165,8 +165,8 @@ export default function NewOrderPage() {
                 <Label htmlFor="orderType">発注種別</Label>
                 <Select id="orderType" name="orderType">
                   <option value="">選択してください</option>
-                  <option value="工事">工事</option>
-                  <option value="材料">材料</option>
+                  <option value="業務">業務</option>
+                  <option value="物品">物品</option>
                   <option value="その他">その他</option>
                 </Select>
               </div>

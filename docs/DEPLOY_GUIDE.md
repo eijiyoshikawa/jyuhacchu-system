@@ -1,8 +1,8 @@
-# 建設Lシステム - デプロイ手順書
+# 受発注Lシステム - デプロイ手順書
 
 ## 概要
 
-建設Lシステムの本番環境を構築する手順です。全て無料プランで運用可能です。
+受発注Lシステムの本番環境を構築する手順です。全て無料プランで運用可能です。
 
 | サービス | 用途 | プラン |
 |---------|------|--------|
@@ -17,7 +17,7 @@
 
 1. https://neon.tech にアクセス → **Sign Up**（GitHub連携推奨）
 2. **Create Project** をクリック
-   - Project name: `kensetsu-l-system`
+   - Project name: `juhacchu-l-system`
    - Region: **Asia Pacific (Tokyo)** を選択（利用可能な場合）
    - PostgreSQL version: `16`
 3. 作成完了後、**Connection Details** から接続URLをコピー
@@ -99,7 +99,7 @@ DATABASE_URL="postgresql://..." npx tsx prisma/seed.ts
 または Neon の **SQL Editor** で直接マイグレーションSQLを実行できます。
 
 ### シードデータの内容
-- 会社3社（元請1社 + 協力会社2社）
+- 会社3社（発注企業1社 + 受注企業2社）
 - ユーザー3名（各社1名）
 - 案件2件
 - 発注書1件（明細付き）
@@ -129,7 +129,7 @@ DATABASE_URL="postgresql://..." npx tsx prisma/seed.ts
 1. https://sentry.io にアクセス → **Sign Up**（GitHub連携）
 2. **Create Project**:
    - Platform: **Next.js**
-   - Project name: `kensetsu-l-system`
+   - Project name: `juhacchu-l-system`
 3. 表示される **DSN** をコピー
 4. Vercelダッシュボード → Settings → Environment Variables に追加:
 
@@ -137,7 +137,7 @@ DATABASE_URL="postgresql://..." npx tsx prisma/seed.ts
    |--------|-----|
    | `NEXT_PUBLIC_SENTRY_DSN` | コピーしたDSN |
    | `SENTRY_ORG` | Sentryの組織名 |
-   | `SENTRY_PROJECT` | `kensetsu-l-system` |
+   | `SENTRY_PROJECT` | `juhacchu-l-system` |
 
 5. **Redeploy** を実行
 
@@ -147,12 +147,12 @@ DATABASE_URL="postgresql://..." npx tsx prisma/seed.ts
 
 1. デプロイURLにアクセス → ログイン画面が表示される
 2. シードデータでログイン:
-   - 管理者: `admin@sample-kensetsu.co.jp` / `password123`
+   - 管理者: `admin@sample-trading.co.jp` / `password123`
 3. 以下を確認:
    - ダッシュボードが表示される
    - 案件・発注・請求の一覧が動作する
    - 発注書の作成→申請→承認フローが動作する
-   - 協力会社のインボイス番号検証が動作する
+   - 取引先のインボイス番号検証が動作する
 4. ヘルスチェック: `https://your-url/api/health` にアクセス
 
 ---
