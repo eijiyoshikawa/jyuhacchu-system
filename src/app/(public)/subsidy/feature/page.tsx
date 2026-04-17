@@ -191,11 +191,13 @@ export default function FeatureDocumentPage() {
         figure="Fig.4"
         caption="発注書 詳細画面（承認フロー・ステータスタイムライン表示）"
         sourceUrl="https://juhacchu-l.jp/orders/[id]"
+        src="/images/subsidy/orders-detail.png"
       />
       <ScreenshotPlaceholder
         figure="Fig.5"
         caption="発注書 印刷プレビュー（適格請求書要件対応レイアウト）"
         sourceUrl="https://juhacchu-l.jp/orders/[id]/print"
+        src="/images/subsidy/orders-print.png"
       />
 
       {/* 3-2 Partners */}
