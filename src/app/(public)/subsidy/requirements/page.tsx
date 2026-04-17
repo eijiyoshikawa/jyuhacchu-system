@@ -129,24 +129,21 @@ export default function RequirementsDocumentPage() {
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">—</td>
             </tr>
             <tr>
-              <td className="border border-slate-300 px-2 py-2 align-top font-mono font-bold">
-                汎P-07
-              </td>
+              <td className="border border-slate-300 px-2 py-2 align-top font-mono">汎P-07</td>
               <td className="border border-slate-300 px-2 py-2 align-top">
                 ⑦汎用・自動化・分析ツール
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
                 ワークフロー、グループウェア、コラボレーションツール、BI・分析専門ツール、RPA、チャットボットシステム 等
               </td>
-              <td className="border border-slate-300 px-2 py-2 align-top text-center font-bold text-orange-600">
-                ✓<br />副
-              </td>
+              <td className="border border-slate-300 px-2 py-2 align-top text-center">—</td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
-                発注書・請求書の多段階承認ワークフロー（差戻し・却下コメント・承認者指定）を標準搭載。
+                本ツールには発注書・請求書の多段階承認ワークフローが含まれるが、
+                公募要領の「業務プロセス（共P-XX）と汎用プロセス（汎P-XX）は同時選択不可」
+                の制約により、業務プロセス側（共P-02 / 共P-03）の選択を優先するため
+                本 Pコードは選択しない。
               </td>
-              <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
-                機能説明資料 p.8（§3-6）
-              </td>
+              <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">—</td>
             </tr>
           </tbody>
         </table>
@@ -154,10 +151,16 @@ export default function RequirementsDocumentPage() {
         <div className="mt-4 rounded border border-slate-200 bg-slate-50 p-3 text-xs leading-relaxed">
           <p className="font-bold">選択方針</p>
           <p className="mt-1">
-            本ツールの中核機能は <strong>共P-02（決済・債権債務・資金回収）</strong>
-            に該当し、インボイス対応類型（受発注機能）の要件を充足します。
-            補足的に <strong>共P-03</strong>（納品管理）と
-            <strong>汎P-07</strong>（ワークフロー）にも該当しますが、主機能は共P-02 です。
+            本ツールの中核機能は <strong>共P-02（決済・債権債務・資金回収）</strong> に該当し、
+            インボイス対応類型（受発注機能）の要件を充足します。
+            加えて <strong>共P-03（供給・在庫・物流）</strong> の納品管理機能も備えるため、
+            業務プロセスとして 共P-02（主）・共P-03（副）の2つを選択します。
+          </p>
+          <p className="mt-2">
+            本ツールには発注書・請求書の多段階承認ワークフロー機能も含まれますが、
+            ITツール登録要領に
+            <strong>「業務プロセス（共P-XX）と汎用プロセス（汎P-XX）は同時に選択できない」</strong>
+            旨の規定があるため、汎P-07 は選択しません。
           </p>
         </div>
       </section>
