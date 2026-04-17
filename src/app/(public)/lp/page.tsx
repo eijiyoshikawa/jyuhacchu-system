@@ -109,15 +109,15 @@ export default function LandingPage() {
                 <p className="mb-3 text-xs uppercase tracking-widest text-orange-400 font-bold">
                   Dashboard Preview
                 </p>
-                {/* Screenshot placeholder */}
-                <div
-                  className="aspect-[4/3] w-full rounded-md border border-dashed border-white/30 bg-slate-800/60 flex items-center justify-center text-center text-xs text-slate-400"
-                  data-screenshot-source="/ (dashboard after login)"
-                >
-                  ダッシュボード画面キャプチャ<br />（差し込み予定）
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/subsidy/dashboard.png"
+                  alt="受発注Lシステム ダッシュボード画面"
+                  className="w-full rounded-md border border-white/10"
+                  data-screenshot-source="/"
+                />
                 <p className="mt-3 text-xs text-slate-400">
-                  ※ 実際の画面キャプチャは公開時に差し込まれます
+                  ダッシュボード：発注件数・請求件数・承認待ち件数・今月の発注金額を一覧表示
                 </p>
               </div>
             </div>

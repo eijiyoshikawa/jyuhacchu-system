@@ -110,6 +110,7 @@ export default function FeatureDocumentPage() {
         figure="Fig.1"
         caption="ダッシュボード（サマリカード・最近の発注／請求）"
         sourceUrl="https://juhacchu-l.jp/ （ログイン後トップ）"
+        src="/images/subsidy/dashboard.png"
       />
 
       {/* 3. Feature Detail: Purchase Order */}
@@ -176,16 +177,23 @@ export default function FeatureDocumentPage() {
 
       <ScreenshotPlaceholder
         figure="Fig.2"
-        caption="発注書 新規作成画面（明細入力・税率自動計算）"
-        sourceUrl="https://juhacchu-l.jp/orders/new"
+        caption="発注管理 一覧画面"
+        sourceUrl="https://juhacchu-l.jp/orders"
+        src="/images/subsidy/orders-list.png"
       />
       <ScreenshotPlaceholder
         figure="Fig.3"
+        caption="発注書 新規作成画面（明細入力・税率自動計算・免税事業者警告表示）"
+        sourceUrl="https://juhacchu-l.jp/orders/new"
+        src="/images/subsidy/orders-new.png"
+      />
+      <ScreenshotPlaceholder
+        figure="Fig.4"
         caption="発注書 詳細画面（承認フロー・ステータスタイムライン表示）"
         sourceUrl="https://juhacchu-l.jp/orders/[id]"
       />
       <ScreenshotPlaceholder
-        figure="Fig.4"
+        figure="Fig.5"
         caption="発注書 印刷プレビュー（適格請求書要件対応レイアウト）"
         sourceUrl="https://juhacchu-l.jp/orders/[id]/print"
       />
@@ -227,14 +235,16 @@ export default function FeatureDocumentPage() {
       </section>
 
       <ScreenshotPlaceholder
-        figure="Fig.5"
-        caption="取引先管理 一覧画面"
+        figure="Fig.6"
+        caption="取引先管理 一覧画面（インボイス番号列を含む）"
         sourceUrl="https://juhacchu-l.jp/partners"
+        src="/images/subsidy/partners-list.png"
       />
       <ScreenshotPlaceholder
-        figure="Fig.6"
-        caption="取引先 新規登録画面（インボイス番号検証欄を含む）"
+        figure="Fig.7"
+        caption="取引先 新規登録画面（適格請求書発行事業者登録番号 入力欄）"
         sourceUrl="https://juhacchu-l.jp/partners/new"
+        src="/images/subsidy/partners-new.png"
       />
 
       {/* 3-3 Invoice */}
@@ -270,9 +280,16 @@ export default function FeatureDocumentPage() {
       </section>
 
       <ScreenshotPlaceholder
-        figure="Fig.7"
+        figure="Fig.8"
         caption="請求書 一覧画面"
         sourceUrl="https://juhacchu-l.jp/invoices"
+        src="/images/subsidy/invoices-list.png"
+      />
+      <ScreenshotPlaceholder
+        figure="Fig.9"
+        caption="請求書 新規作成画面（発注書からの自動引き継ぎに対応）"
+        sourceUrl="https://juhacchu-l.jp/invoices/new"
+        src="/images/subsidy/invoices-new.png"
       />
 
       {/* 3-4 Invoice compliance */}
@@ -394,9 +411,16 @@ export default function FeatureDocumentPage() {
       </section>
 
       <ScreenshotPlaceholder
-        figure="Fig.8"
-        caption="監査ログ一覧画面（ADMIN）"
+        figure="Fig.10"
+        caption="ユーザー管理 一覧画面（ロールベース権限管理）"
+        sourceUrl="https://juhacchu-l.jp/admin/users"
+        src="/images/subsidy/users.png"
+      />
+      <ScreenshotPlaceholder
+        figure="Fig.11"
+        caption="監査ログ 一覧画面（ADMIN）"
         sourceUrl="https://juhacchu-l.jp/admin/audit-logs"
+        src="/images/subsidy/audit-logs.png"
       />
 
       {/* 4. Tech stack */}
