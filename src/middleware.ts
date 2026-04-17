@@ -2,13 +2,21 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
 export function middleware(req: NextRequest) {
-  const isAuthPage = req.nextUrl.pathname.startsWith("/auth")
-  const isApiAuth = req.nextUrl.pathname.startsWith("/api/auth")
-  const isLegalPage = req.nextUrl.pathname === "/terms" || req.nextUrl.pathname === "/privacy"
-  const isApiHealth = req.nextUrl.pathname === "/api/health"
+  const pathname = req.nextUrl.pathname
+  const isAuthPage = pathname.startsWith("/auth")
+  const isApiAuth = pathname.startsWith("/api/auth")
+  const isLegalPage = pathname === "/terms" || pathname === "/privacy"
+  const isApiHealth = pathname === "/api/health"
+  const isPublicMarketing =
+    pathname === "/lp" ||
+    pathname.startsWith("/lp/") ||
+    pathname === "/subsidy" ||
+    pathname.startsWith("/subsidy/")
 
   // Public routes
-  if (isApiAuth || isLegalPage || isApiHealth) return NextResponse.next()
+  if (isApiAuth || isLegalPage || isApiHealth || isPublicMarketing) {
+    return NextResponse.next()
+  }
 
   // Check for NextAuth session token cookie
   const sessionToken =

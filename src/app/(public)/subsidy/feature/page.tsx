@@ -1,0 +1,531 @@
+import type { Metadata } from "next"
+import { DocumentShell } from "../_components/document-shell"
+import { ScreenshotPlaceholder } from "../_components/screenshot-placeholder"
+
+export const metadata: Metadata = {
+  title: "機能説明資料｜受発注Lシステム｜IT導入補助金 申請書類",
+  description:
+    "デジタル化・AI導入補助金2026 インボイス枠（インボイス対応類型）の申請添付書類。受発注Lシステムの機能詳細。",
+}
+
+export default function FeatureDocumentPage() {
+  return (
+    <DocumentShell
+      title="機能説明資料"
+      subtitle="デジタル化・AI導入補助金2026 インボイス枠（インボイス対応類型）申請添付書類"
+      pcode="主Pコード: 共P-02"
+    >
+      {/* 1. Product Overview */}
+      <section className="mb-8 avoid-break">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          1. 製品概要
+        </h2>
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            {[
+              ["ITツール名", "受発注Lシステム"],
+              ["IT導入支援事業者名", "株式会社 受発注Lシステム"],
+              ["提供形態", "クラウド型SaaS（マルチテナント／ブラウザ利用）"],
+              ["対応ブラウザ", "Chrome / Edge / Safari / Firefox 最新版"],
+              ["対応端末", "PC・タブレット・スマートフォン（レスポンシブ対応）"],
+              ["対象事業者", "中小企業・小規模事業者（業種不問／B2B取引事業者）"],
+              [
+                "主要機能",
+                "発注管理／取引先管理（インボイス番号検証）／請求管理／承認ワークフロー／監査ログ",
+              ],
+              [
+                "法令対応",
+                "適格請求書等保存方式（インボイス制度）／電子帳簿保存法（電子取引要件）／下請法・請負契約一般の必要記載事項",
+              ],
+              ["主Pコード", "共P-02（決済・債権債務・資金回収）"],
+              [
+                "副Pコード",
+                "共P-03（供給・在庫・物流）／汎P-07（汎用・自動化・分析ツール）",
+              ],
+            ].map(([k, v]) => (
+              <tr key={k} className="border-b border-slate-200">
+                <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold text-slate-700">
+                  {k}
+                </th>
+                <td className="px-3 py-2">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      {/* 2. Problem & Benefit */}
+      <section className="mb-8 avoid-break">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          2. 解決する業務課題と導入効果
+        </h2>
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr className="bg-slate-100">
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold">
+                導入前の課題
+              </th>
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold">
+                本ツールによる解決／効果
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              [
+                "発注書をExcel・Wordで個別作成しフォーマットが統一されていない",
+                "テンプレート化された発注書で全社共通フォーマットを強制。起票時間を約70%削減",
+              ],
+              [
+                "承認の押印フローで業務が数日止まる",
+                "電子承認ワークフローで承認スピードを大幅短縮。スマホからも承認可能",
+              ],
+              [
+                "取引先が適格請求書発行事業者かどうか都度確認",
+                "国税庁Web-API連携で登録番号を自動検証。登録事業者名を自動取得",
+              ],
+              [
+                "免税事業者対応の税額計算が煩雑",
+                "経過措置（80%→50%→0%）を日付基準で自動適用し、控除可能／不可な税額を表示",
+              ],
+              [
+                "電子帳簿保存法 電子取引要件が未対応",
+                "確定時にSHA-256ハッシュ＋タイムスタンプを自動付与、検索3項目を標準搭載",
+              ],
+              [
+                "監査・内部統制の証跡が残らない",
+                "全操作を監査ログに自動記録、ADMINから絞り込み閲覧可能",
+              ],
+            ].map(([before, after]) => (
+              <tr key={before}>
+                <td className="border border-slate-300 px-3 py-2 align-top">{before}</td>
+                <td className="border border-slate-300 px-3 py-2 align-top">{after}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <ScreenshotPlaceholder
+        figure="Fig.1"
+        caption="ダッシュボード（サマリカード・最近の発注／請求）"
+        sourceUrl="https://juhacchu-l.jp/ （ログイン後トップ）"
+      />
+
+      {/* 3. Feature Detail: Purchase Order */}
+      <section className="page-break-before mb-8">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          3. 機能詳細
+        </h2>
+
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-1. 発注管理機能（補助対象の中核機能）
+        </h3>
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr className="bg-slate-100">
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold w-48">
+                機能
+              </th>
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold">
+                詳細
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              [
+                "発注書作成",
+                "明細行追加／品名・仕様・数量・単位・単価・金額を入力。税抜→税込を自動計算。品目プリセット・発注書テンプレートに対応",
+              ],
+              [
+                "発注番号自動採番",
+                "PO-YYYYMMDD-XXXX 形式で連番採番し重複を防止",
+              ],
+              [
+                "承認ワークフロー",
+                "多段階承認（申請→1次承認→2次承認→…→発注済）。却下コメント必須、差戻し可能",
+              ],
+              [
+                "ステータス遷移",
+                "下書き／申請中／承認済／発注済／請負済／納品完了／検収完了／却下／取消 の9状態管理",
+              ],
+              [
+                "確定（電帳法対応）",
+                "検収完了時点で SHA-256 ハッシュと確定日時を自動記録し、以後は編集不可",
+              ],
+              [
+                "発注書印刷／PDF出力",
+                "A4最適化の印刷レイアウト。適格請求書対応の登録番号表記、取引契約必要記載事項欄を完備",
+              ],
+              [
+                "取引契約 必要記載事項チェック",
+                "案件名称・納入先・履行期間・取引金額・支払条件・契約日の欠落を自動検出し準拠バッジ表示",
+              ],
+            ].map(([k, v]) => (
+              <tr key={k}>
+                <td className="border border-slate-300 bg-slate-50 px-3 py-2 align-top text-xs font-bold">
+                  {k}
+                </td>
+                <td className="border border-slate-300 px-3 py-2 align-top">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <ScreenshotPlaceholder
+        figure="Fig.2"
+        caption="発注書 新規作成画面（明細入力・税率自動計算）"
+        sourceUrl="https://juhacchu-l.jp/orders/new"
+      />
+      <ScreenshotPlaceholder
+        figure="Fig.3"
+        caption="発注書 詳細画面（承認フロー・ステータスタイムライン表示）"
+        sourceUrl="https://juhacchu-l.jp/orders/[id]"
+      />
+      <ScreenshotPlaceholder
+        figure="Fig.4"
+        caption="発注書 印刷プレビュー（適格請求書要件対応レイアウト）"
+        sourceUrl="https://juhacchu-l.jp/orders/[id]/print"
+      />
+
+      {/* 3-2 Partners */}
+      <section className="mb-8 avoid-break">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-2. 取引先管理機能（インボイス制度対応の要）
+        </h3>
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            {[
+              [
+                "取引先マスタ CRUD",
+                "会社コード、会社種別（発注企業／受注企業）、住所、電話、メール、インボイス番号",
+              ],
+              [
+                "インボイス番号フォーマット検証",
+                "T＋13桁数字 / チェックデジットの整合性を入力時にリアルタイム検証",
+              ],
+              [
+                "国税庁Web-API 連携",
+                "公表サイトAPIで登録番号の有効性を照会し、登録事業者名を自動取得",
+              ],
+              [
+                "免税事業者判定",
+                "登録番号未設定＝免税事業者として扱い、発注書作成時に画面上で警告表示",
+              ],
+            ].map(([k, v]) => (
+              <tr key={k} className="border-b border-slate-200">
+                <th className="w-48 bg-slate-50 px-3 py-2 text-left text-xs font-bold align-top">
+                  {k}
+                </th>
+                <td className="px-3 py-2">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <ScreenshotPlaceholder
+        figure="Fig.5"
+        caption="取引先管理 一覧画面"
+        sourceUrl="https://juhacchu-l.jp/partners"
+      />
+      <ScreenshotPlaceholder
+        figure="Fig.6"
+        caption="取引先 新規登録画面（インボイス番号検証欄を含む）"
+        sourceUrl="https://juhacchu-l.jp/partners/new"
+      />
+
+      {/* 3-3 Invoice */}
+      <section className="mb-8 avoid-break">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-3. 請求管理機能
+        </h3>
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            {[
+              ["請求書作成", "発注書から請求書を自動生成（明細を引き継ぎ、再入力不要）"],
+              ["請求番号自動採番", "INV-YYYYMMDD-XXXX 形式"],
+              [
+                "適格請求書出力",
+                "登録番号・税率別合計・消費税額を明記したA4印刷レイアウトに対応",
+              ],
+              ["CSV出力", "BOM付きUTF-8でExcel直読み込み可能"],
+              ["ステータス管理", "下書き／提出済／承認済／却下／支払済 の5状態"],
+              [
+                "確定（電帳法対応）",
+                "発注書と同様に SHA-256 ハッシュ＋タイムスタンプを自動記録",
+              ],
+            ].map(([k, v]) => (
+              <tr key={k} className="border-b border-slate-200">
+                <th className="w-48 bg-slate-50 px-3 py-2 text-left text-xs font-bold align-top">
+                  {k}
+                </th>
+                <td className="px-3 py-2">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <ScreenshotPlaceholder
+        figure="Fig.7"
+        caption="請求書 一覧画面"
+        sourceUrl="https://juhacchu-l.jp/invoices"
+      />
+
+      {/* 3-4 Invoice compliance */}
+      <section className="mb-8 avoid-break">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-4. インボイス制度対応（補助金必須要件）
+        </h3>
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr className="bg-slate-100">
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold w-56">
+                要件項目
+              </th>
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold">
+                対応内容
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              [
+                "適格請求書発行事業者登録番号",
+                "取引先／自社マスタに登録。国税庁Web-APIで自動検証",
+              ],
+              [
+                "税率別合計表示",
+                "標準税率10%／軽減税率8%の混在明細に対応、税率別合計を表示・出力",
+              ],
+              [
+                "経過措置の自動適用",
+                "2023/10〜:控除80%、2026/10〜:控除50%、2029/10〜:控除0%を発注日基準で自動適用",
+              ],
+              [
+                "控除可能／不可税額の可視化",
+                "発注書作成画面の TaxSummary コンポーネントで視覚的に表示",
+              ],
+              [
+                "適格請求書レイアウト",
+                "登録番号・税率別対価・税額・発行者名等の必須項目を充足",
+              ],
+            ].map(([k, v]) => (
+              <tr key={k}>
+                <td className="border border-slate-300 bg-slate-50 px-3 py-2 align-top text-xs font-bold">
+                  {k}
+                </td>
+                <td className="border border-slate-300 px-3 py-2 align-top">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      {/* 3-5 e-book */}
+      <section className="mb-8 avoid-break">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-5. 電子帳簿保存法対応
+        </h3>
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            {[
+              [
+                "電子取引要件",
+                "発注書・請求書データをクラウドに原本保存、2024年1月の電子取引保存義務化に対応",
+              ],
+              [
+                "改ざん防止措置",
+                "確定時に SHA-256 ハッシュ＋確定タイムスタンプを自動付与",
+              ],
+              [
+                "検索要件3項目",
+                "取引年月日・取引金額・取引先名による絞り込みを標準画面で提供",
+              ],
+              [
+                "スキャナ保存要件",
+                "解像度・タイムスタンプ要件を満たす文書保管（今後のアップデートで拡張）",
+              ],
+              [
+                "データ保全",
+                "日次自動バックアップ、障害時は最大24時間前まで復旧可能",
+              ],
+            ].map(([k, v]) => (
+              <tr key={k} className="border-b border-slate-200">
+                <th className="w-48 bg-slate-50 px-3 py-2 text-left text-xs font-bold align-top">
+                  {k}
+                </th>
+                <td className="px-3 py-2">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      {/* 3-6 Workflow & 3-7 Audit */}
+      <section className="mb-8 avoid-break">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-6. 承認ワークフロー・権限管理
+        </h3>
+        <ul className="list-disc pl-6 text-sm leading-relaxed space-y-1">
+          <li>多段階承認（ApprovalFlow テーブルで柔軟な承認経路を設定）</li>
+          <li>却下時のコメント必須入力、再申請時の修正材料として保持</li>
+          <li>
+            ロールベース権限（管理者／発注担当／受注担当）によるアクセス制御
+          </li>
+          <li>
+            会社ID（companyId）によるマルチテナント自動スコープ、ADMINのみ横断参照可
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-8 avoid-break">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-7. 監査ログ・内部統制
+        </h3>
+        <ul className="list-disc pl-6 text-sm leading-relaxed space-y-1">
+          <li>作成・更新・削除・承認・却下の全操作を AuditLog に記録</li>
+          <li>操作日時・ユーザー名・IPアドレス・操作内容を保持</li>
+          <li>管理者画面から日時・対象種別・操作者で絞り込み閲覧可能</li>
+        </ul>
+      </section>
+
+      <ScreenshotPlaceholder
+        figure="Fig.8"
+        caption="監査ログ一覧画面（ADMIN）"
+        sourceUrl="https://juhacchu-l.jp/admin/audit-logs"
+      />
+
+      {/* 4. Tech stack */}
+      <section className="mb-8 avoid-break page-break-before">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          4. 技術仕様
+        </h2>
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            {[
+              ["フロントエンド", "Next.js 16（App Router）／React 19／TypeScript 5／Tailwind CSS 4"],
+              ["バックエンド", "Next.js Route Handlers（Node.js ランタイム）"],
+              ["データベース", "PostgreSQL 16（東京リージョン）"],
+              ["ORM", "Prisma 5"],
+              ["認証", "NextAuth.js v5（JWT セッション、bcrypt によるパスワードハッシュ化）"],
+              ["バリデーション", "Zod（全POST／PUTエンドポイントで検証）"],
+              ["ホスティング", "Vercel（東京リージョン hnd1、自動SSL）"],
+              ["監視", "Sentry（ランタイムエラー・パフォーマンス監視）"],
+              ["CI/CD", "GitHub Actions（ESLint・型チェック・E2Eテスト）"],
+              ["E2Eテスト", "Playwright（Chromium）"],
+            ].map(([k, v]) => (
+              <tr key={k} className="border-b border-slate-200">
+                <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">{k}</th>
+                <td className="px-3 py-2">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      {/* 5. Process flow */}
+      <section className="mb-8 avoid-break">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          5. 導入プロセス
+        </h2>
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr className="bg-slate-100">
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold w-16">
+                #
+              </th>
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold w-40">
+                フェーズ
+              </th>
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold">
+                内容
+              </th>
+              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold w-28">
+                目安期間
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ["1", "お申込み・契約", "利用規約同意、プラン選択、GビズID連携のご案内", "1〜2営業日"],
+              ["2", "アカウント発行", "管理者アカウント＋サブドメイン発行", "即日〜1営業日"],
+              [
+                "3",
+                "初期設定",
+                "自社情報・承認フロー設定、取引先マスタ登録、ユーザー登録",
+                "1〜5営業日",
+              ],
+              [
+                "4",
+                "データ移行（任意）",
+                "過去の取引先／発注／請求データCSVインポート、代行移行サービス",
+                "1〜3週間",
+              ],
+              ["5", "社内トレーニング", "運用マニュアル提供＋オンライン説明会", "1営業日"],
+              ["6", "本番運用開始", "監視／サポート契約の発効", "—"],
+            ].map(([n, phase, detail, period]) => (
+              <tr key={n}>
+                <td className="border border-slate-300 px-3 py-2 text-center">{n}</td>
+                <td className="border border-slate-300 px-3 py-2 font-bold">{phase}</td>
+                <td className="border border-slate-300 px-3 py-2">{detail}</td>
+                <td className="border border-slate-300 px-3 py-2 text-xs">{period}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      {/* 6. Support */}
+      <section className="mb-8 avoid-break">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          6. サポート体制
+        </h2>
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            {[
+              ["窓口", "メール（24時間受付／平日営業時間内対応）、チャット（標準プラン）"],
+              ["対応時間", "平日 9:00〜17:30（土日祝・年末年始を除く）"],
+              ["SLA目標", "稼働率 99.5%／障害発生時30分以内に状況通知"],
+              ["バックアップ", "日次自動バックアップ、最大24時間前までリストア可"],
+              ["セキュリティ対応", "脆弱性報告への24時間以内の初動"],
+              ["契約期間", "月額（最低契約期間なし）／年額（10%割引）"],
+            ].map(([k, v]) => (
+              <tr key={k} className="border-b border-slate-200">
+                <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">{k}</th>
+                <td className="px-3 py-2">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      {/* 7. Contact */}
+      <section className="mb-4 avoid-break">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          7. お問い合わせ
+        </h2>
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            {[
+              ["導入相談・見積", "sales@juhacchu-l.jp"],
+              ["IT導入補助金 相談", "subsidy@juhacchu-l.jp"],
+              ["技術サポート", "support@juhacchu-l.jp"],
+            ].map(([k, v]) => (
+              <tr key={k} className="border-b border-slate-200">
+                <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">{k}</th>
+                <td className="px-3 py-2 font-mono">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="mt-2 text-xs text-slate-500">
+          ※ 連絡先は仮置きです。正式公開時に確定した窓口に差し替えます。
+        </p>
+      </section>
+    </DocumentShell>
+  )
+}
