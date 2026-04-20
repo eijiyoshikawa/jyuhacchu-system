@@ -15,6 +15,25 @@ export default function FeatureDocumentPage() {
       subtitle="デジタル化・AI導入補助金2026 インボイス枠（インボイス対応類型）申請添付書類"
       pcode="主Pコード: 共P-02"
     >
+      {/* Identification banner — addresses review feedback that product name / maker were unclear */}
+      <section className="mb-8 avoid-break rounded-lg border-2 border-orange-500 bg-orange-50 p-5">
+        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-orange-700">
+          ITツール識別情報
+        </p>
+        <dl className="grid grid-cols-1 gap-y-2 sm:grid-cols-[180px_1fr] gap-x-4 text-sm">
+          <dt className="font-bold text-slate-800">ITツール正式名称</dt>
+          <dd className="text-base font-black text-slate-900">受発注Lシステム</dd>
+          <dt className="font-bold text-slate-800">開発メーカー名</dt>
+          <dd className="text-base font-black text-slate-900">株式会社LET</dd>
+          <dt className="font-bold text-slate-800">IT導入支援事業者名</dt>
+          <dd className="text-base font-black text-slate-900">株式会社TX.企画</dd>
+          <dt className="font-bold text-slate-800">提供形態</dt>
+          <dd>クラウド型SaaS（マルチテナント）</dd>
+          <dt className="font-bold text-slate-800">Pコード</dt>
+          <dd>主: 共P-02（決済・債権債務・資金回収）／副: 共P-03（供給・在庫・物流）</dd>
+        </dl>
+      </section>
+
       {/* 1. Product Overview */}
       <section className="mb-8 avoid-break">
         <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
@@ -23,8 +42,9 @@ export default function FeatureDocumentPage() {
         <table className="w-full border-collapse text-sm">
           <tbody>
             {[
-              ["ITツール名", "受発注Lシステム"],
-              ["IT導入支援事業者名", "株式会社 受発注Lシステム"],
+              ["ITツール正式名称", "受発注Lシステム"],
+              ["開発メーカー名", "株式会社LET"],
+              ["IT導入支援事業者名", "株式会社TX.企画"],
               ["提供形態", "クラウド型SaaS（マルチテナント／ブラウザ利用）"],
               ["対応ブラウザ", "Chrome / Edge / Safari / Firefox 最新版"],
               ["対応端末", "PC・タブレット・スマートフォン（レスポンシブ対応）"],
@@ -40,7 +60,7 @@ export default function FeatureDocumentPage() {
               ["主Pコード", "共P-02（決済・債権債務・資金回収）"],
               [
                 "副Pコード",
-                "共P-03（供給・在庫・物流）／汎P-07（汎用・自動化・分析ツール）",
+                "共P-03（供給・在庫・物流）",
               ],
             ].map(([k, v]) => (
               <tr key={k} className="border-b border-slate-200">
@@ -425,10 +445,240 @@ export default function FeatureDocumentPage() {
         src="/images/subsidy/audit-logs.png"
       />
 
-      {/* 4. Tech stack */}
+      {/* 4. Business Flow Diagram (added to address review feedback) */}
+      <section className="mb-8 page-break-before">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          4. 業務フロー図
+        </h2>
+        <p className="mb-4 text-sm leading-relaxed">
+          受発注Lシステムを利用した、発注企業（買い手側）と受注企業（売り手側）の
+          間の業務フローを以下に示します。発注起票から請求・支払完了までの全工程が
+          本システム上で一貫してデジタル化されます。
+        </p>
+
+        {/* Business flow diagram — pure HTML/CSS, renders cleanly on print */}
+        <div className="my-6 rounded-lg border border-slate-300 bg-white p-6 avoid-break">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+            {/* Buyer lane */}
+            <div>
+              <p className="mb-3 rounded-t-md bg-orange-500 px-3 py-1.5 text-center text-xs font-bold text-white">
+                発注企業（買い手側）
+              </p>
+              <ol className="space-y-2">
+                {[
+                  "① 案件登録（案件名／納入先／履行期間）",
+                  "② 取引先選択（インボイス番号を国税庁APIで自動検証）",
+                  "③ 発注書起票（明細・単価・税率を入力、消費税自動計算）",
+                  "④ 多段階承認ワークフロー（スマホ承認・却下コメント）",
+                  "⑤ 発注確定（SHA-256ハッシュ＋タイムスタンプ自動付与）",
+                  "⑥ 納品検収（受領確認→検収完了ステータス）",
+                  "⑦ 請求書受領・内容確認（税率別合計を自動照合）",
+                  "⑧ 支払処理・支払ステータス更新",
+                ].map((s, i) => (
+                  <li
+                    key={i}
+                    className="rounded-md border border-orange-200 bg-orange-50 px-3 py-2"
+                  >
+                    {s}
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            {/* Seller lane */}
+            <div>
+              <p className="mb-3 rounded-t-md bg-sky-600 px-3 py-1.5 text-center text-xs font-bold text-white">
+                受注企業（売り手側）
+              </p>
+              <ol className="space-y-2">
+                {[
+                  "① 発注書受領通知（メール＋システム上の新着表示）",
+                  "② 発注内容確認・受諾（受諾ステータスに遷移）",
+                  "③ 納品・作業実施（履行期間内で作業実施）",
+                  "④ 納品報告登録（納品報告ステータス）",
+                  "⑤ 検収結果確認（発注企業側の検収完了を受信）",
+                  "⑥ 請求書起票（発注書から明細を自動引き継ぎ）",
+                  "⑦ 適格請求書フォーマット出力・送付（PDF／CSV）",
+                  "⑧ 入金確認・支払済ステータス更新",
+                ].map((s, i) => (
+                  <li
+                    key={i}
+                    className="rounded-md border border-sky-200 bg-sky-50 px-3 py-2"
+                  >
+                    {s}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+
+          {/* Lifecycle flow arrow */}
+          <div className="mt-6 border-t border-dashed border-slate-300 pt-4">
+            <p className="mb-2 text-center text-xs font-bold text-slate-600">
+              システム内 ステータス遷移（発注書）
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-1 text-[10px]">
+              {[
+                "下書き",
+                "申請中",
+                "承認済",
+                "発注済",
+                "請負済",
+                "納品完了",
+                "検収完了",
+              ].map((s, i, arr) => (
+                <span key={s} className="flex items-center">
+                  <span className="rounded-full border border-slate-400 bg-slate-100 px-2 py-1 font-bold text-slate-700">
+                    {s}
+                  </span>
+                  {i < arr.length - 1 && <span className="mx-1 text-slate-400">→</span>}
+                </span>
+              ))}
+            </div>
+            <p className="mt-3 text-center text-[10px] text-slate-500">
+              各ステータス遷移時に監査ログを自動記録。検収完了時にSHA-256ハッシュと
+              確定タイムスタンプを付与し、電子帳簿保存法の改ざん防止要件に準拠します。
+            </p>
+          </div>
+        </div>
+
+        <p className="mt-4 text-xs text-slate-500">
+          ※ 図は概念図です。実運用では、承認段数・承認者を案件ごとに柔軟に設定できます。
+        </p>
+      </section>
+
+      {/* 5. How to use the IT tool (added to address review feedback) */}
+      <section className="mb-8 page-break-before">
+        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+          5. ITツールの利用方法
+        </h2>
+        <p className="mb-4 text-sm leading-relaxed">
+          受発注Lシステムの日常的な利用手順を、ユーザーの典型的な操作フローに沿って説明します。
+          Webブラウザがあれば PC・タブレット・スマートフォンのいずれからでも利用可能です。
+        </p>
+
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          5-1. 利用開始までの手順
+        </h3>
+        <ol className="list-decimal pl-6 text-sm leading-relaxed space-y-1">
+          <li>
+            IT導入支援事業者から発行された<strong>管理者アカウント（メール＋初期パスワード）</strong>
+            を受領。
+          </li>
+          <li>
+            WebブラウザからサービスURL（例: <code className="bg-slate-100 px-1 font-mono text-xs">https://juhacchu-l.jp</code>）にアクセスし、ログイン画面でメールアドレスとパスワードを入力。
+          </li>
+          <li>
+            管理者画面から
+            <strong>自社情報（会社名・住所・適格請求書発行事業者登録番号）</strong>を登録。
+          </li>
+          <li>
+            ユーザー管理画面から、発注担当者・受注担当者・承認者の各アカウントを追加
+            （ロールを指定：管理者／発注担当／受注担当）。
+          </li>
+          <li>
+            取引先管理画面から、主要な取引先の会社情報とインボイス番号を登録
+            （国税庁Web-APIにより登録番号の有効性を自動検証）。
+          </li>
+          <li>
+            承認フロー設定画面で、発注書・請求書ごとの多段階承認フローを定義
+            （承認段数と承認者を指定）。
+          </li>
+        </ol>
+
+        <h3 className="mt-6 mb-2 text-base font-bold text-slate-900">
+          5-2. 日常的な利用フロー（発注担当者）
+        </h3>
+        <ol className="list-decimal pl-6 text-sm leading-relaxed space-y-1">
+          <li>
+            ログイン → <strong>ダッシュボード</strong>で発注件数／請求件数／承認待ち件数／
+            今月の発注金額を確認。
+          </li>
+          <li>
+            サイドバーの「案件管理」→「新規作成」から案件を登録（案件名・納入先・履行期間）。
+          </li>
+          <li>
+            「発注管理」→「新規作成」で発注書を起票（案件選択、取引先選択、明細入力）。
+            消費税額と税率別合計は入力に応じて自動計算される。
+          </li>
+          <li>
+            「申請」ボタンで承認ワークフローを起動。設定された承認者にメール通知が届く。
+          </li>
+          <li>
+            すべての承認者が承認すると「承認済」→「発注済」ステータスに遷移し、
+            取引先側にも発注通知が届く。
+          </li>
+        </ol>
+
+        <h3 className="mt-6 mb-2 text-base font-bold text-slate-900">
+          5-3. 日常的な利用フロー（承認者）
+        </h3>
+        <ol className="list-decimal pl-6 text-sm leading-relaxed space-y-1">
+          <li>
+            承認依頼メール受信、もしくはログイン後のダッシュボードで「承認待ち件数」を確認。
+          </li>
+          <li>
+            「承認」画面から対象の発注書／請求書を選択し、内容を確認。
+          </li>
+          <li>
+            <strong>承認</strong>または<strong>却下（コメント必須）</strong>を選択。
+            スマートフォンからも同じ操作が可能。
+          </li>
+        </ol>
+
+        <h3 className="mt-6 mb-2 text-base font-bold text-slate-900">
+          5-4. 日常的な利用フロー（受注担当者）
+        </h3>
+        <ol className="list-decimal pl-6 text-sm leading-relaxed space-y-1">
+          <li>ログイン → 新着の発注書通知を確認。</li>
+          <li>
+            発注内容を確認し、「受諾」を押下して受諾ステータスに遷移。
+          </li>
+          <li>納品・作業完了後、「納品報告」を登録。</li>
+          <li>
+            発注企業の検収完了を受けて、「請求管理」→「新規作成」から請求書を起票
+            （発注書から明細が自動引き継がれる）。
+          </li>
+          <li>
+            「印刷／PDF出力」で適格請求書フォーマットの帳票を出力し、
+            必要に応じて取引先に送付。
+          </li>
+        </ol>
+
+        <h3 className="mt-6 mb-2 text-base font-bold text-slate-900">
+          5-5. 管理者の運用
+        </h3>
+        <ol className="list-decimal pl-6 text-sm leading-relaxed space-y-1">
+          <li>
+            <strong>ユーザー管理</strong>：新規ユーザー追加・権限変更・退職者の無効化。
+          </li>
+          <li>
+            <strong>監査ログ</strong>：日時・ユーザー・操作・対象・IPアドレスで検索
+            （内部監査・インシデント調査）。
+          </li>
+          <li>
+            <strong>取引先マスタ</strong>：インボイス番号変更時の再検証、
+            免税事業者の切り替え時期の管理。
+          </li>
+          <li>
+            <strong>承認フロー設定</strong>：組織変更時の承認者更新、
+            承認段数の追加／削減。
+          </li>
+        </ol>
+
+        <div className="mt-6 rounded border border-slate-300 bg-slate-50 p-4 text-xs leading-relaxed">
+          <p className="font-bold mb-1">サポート窓口の利用</p>
+          <p>
+            運用中の不明点は、平日9:00〜17:30のメール／チャットサポート窓口で対応します。
+            詳細は本資料「§8 サポート体制」を参照してください。
+          </p>
+        </div>
+      </section>
+
+      {/* 6. Tech stack */}
       <section className="mb-8 avoid-break page-break-before">
         <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
-          4. 技術仕様
+          6. 技術仕様
         </h2>
         <table className="w-full border-collapse text-sm">
           <tbody>
@@ -453,10 +703,10 @@ export default function FeatureDocumentPage() {
         </table>
       </section>
 
-      {/* 5. Process flow */}
+      {/* 7. Process flow */}
       <section className="mb-8 avoid-break">
         <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
-          5. 導入プロセス
+          7. 導入プロセス
         </h2>
         <table className="w-full border-collapse text-sm">
           <thead>
@@ -505,10 +755,10 @@ export default function FeatureDocumentPage() {
         </table>
       </section>
 
-      {/* 6. Support */}
+      {/* 8. Support */}
       <section className="mb-8 avoid-break">
         <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
-          6. サポート体制
+          8. サポート体制
         </h2>
         <table className="w-full border-collapse text-sm">
           <tbody>
@@ -529,10 +779,10 @@ export default function FeatureDocumentPage() {
         </table>
       </section>
 
-      {/* 7. Contact */}
+      {/* 9. Contact */}
       <section className="mb-4 avoid-break">
         <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
-          7. お問い合わせ
+          9. お問い合わせ
         </h2>
         <table className="w-full border-collapse text-sm">
           <tbody>

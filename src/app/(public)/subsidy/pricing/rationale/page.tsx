@@ -162,15 +162,190 @@ export default function PriceRationaleDocumentPage() {
         </p>
 
         <h3 className="mt-6 mb-2 text-base font-bold text-slate-900">
-          (4) 競合製品・類似サービスとの比較
+          (4) 類似ITツールとの価格及び機能の比較
         </h3>
+        <p className="text-sm leading-relaxed mb-4">
+          国内で流通する類似ITツール（受発注・請求・インボイス対応SaaS）との
+          価格および機能比較は下表のとおりです。比較対象は、本ツールと同一の
+          「インボイス制度対応・受発注機能」を有する主要SaaSカテゴリを想定した
+          公表情報ベースの参考値です。
+        </p>
+
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-xs">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="border border-slate-300 px-2 py-2 text-left font-bold w-44">
+                  製品カテゴリ
+                </th>
+                <th className="border border-slate-300 px-2 py-2 text-right font-bold w-28">
+                  年額料金<br />（税抜・参考）
+                </th>
+                <th className="border border-slate-300 px-2 py-2 text-center font-bold">
+                  適格番号<br />国税庁API<br />自動検証
+                </th>
+                <th className="border border-slate-300 px-2 py-2 text-center font-bold">
+                  税率別合計<br />／経過措置<br />自動適用
+                </th>
+                <th className="border border-slate-300 px-2 py-2 text-center font-bold">
+                  電帳法<br />SHA-256+<br />TS自動付与
+                </th>
+                <th className="border border-slate-300 px-2 py-2 text-center font-bold">
+                  多段階<br />承認<br />ワークフロー
+                </th>
+                <th className="border border-slate-300 px-2 py-2 text-center font-bold">
+                  発注・請求<br />一貫管理
+                </th>
+                <th className="border border-slate-300 px-2 py-2 text-center font-bold">
+                  初期費用
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="bg-orange-50">
+                <td className="border border-slate-300 px-2 py-2 font-bold text-orange-700">
+                  受発注Lシステム<br />（本ツール／標準）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono font-bold">
+                  ¥3,000,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">無料</td>
+              </tr>
+              <tr className="bg-orange-50">
+                <td className="border border-slate-300 px-2 py-2 font-bold text-orange-700">
+                  受発注Lシステム<br />（本ツール／最小）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono font-bold">
+                  ¥1,500,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">無料</td>
+              </tr>
+              <tr>
+                <td className="border border-slate-300 px-2 py-2">
+                  A. 大手ERP系 受発注モジュール<br />
+                  （例: NetSuite／SAP ByDesign 相当）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono">
+                  ¥5,000,000〜<br />¥8,000,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">¥1,000,000〜</td>
+              </tr>
+              <tr>
+                <td className="border border-slate-300 px-2 py-2">
+                  B. 請求書特化クラウドSaaS<br />
+                  （例: マネーフォワードクラウド請求書／楽楽明細 相当）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono">
+                  ¥100,000〜<br />¥500,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">—<br />（請求のみ）</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">無料</td>
+              </tr>
+              <tr>
+                <td className="border border-slate-300 px-2 py-2">
+                  C. 業種特化 業務管理SaaS<br />
+                  （例: ANDPAD／建設DX系 相当）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono">
+                  ¥2,000,000〜<br />¥4,000,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">¥300,000〜</td>
+              </tr>
+              <tr>
+                <td className="border border-slate-300 px-2 py-2">
+                  D. 汎用ワークフロー＋電子契約SaaS<br />
+                  （例: ジョブカンワークフロー／電子契約 相当）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono">
+                  ¥300,000〜<br />¥1,000,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center">—</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">—</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">—</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">無料〜</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p className="mt-3 text-[10px] leading-relaxed text-slate-500">
+          凡例: ◎ 標準機能として提供／○ 一部または有償オプションで提供／△ 手動対応または限定的に提供／
+          — 機能非搭載。年額料金は各カテゴリの代表的な中小企業向けプランの税抜年額相当の参考値
+          （公表価格および公開資料ベース／2026年4月時点）であり、導入構成により変動します。
+        </p>
+
+        <h4 className="mt-5 mb-2 text-sm font-bold text-slate-900">
+          比較から導かれる本ツールの価格設定の妥当性
+        </h4>
+        <ol className="list-decimal pl-6 text-sm leading-relaxed space-y-2">
+          <li>
+            <strong>機能充足度での優位性</strong>：国税庁API自動検証・税率別合計＋
+            経過措置自動適用・電帳法ハッシュ自動付与・多段階承認・受発注/請求一貫管理の
+            5要件を「◎（標準搭載）」で満たすカテゴリは他にほぼ存在せず、
+            本ツールは <strong>インボイス対応・電帳法対応を一元化できる希少性</strong>
+            を有します。
+          </li>
+          <li>
+            <strong>大手ERP系（A）との比較</strong>：機能では同等以上ですが、
+            本ツールは年額 300万円で導入可能であり、Aの価格帯（500〜800万円＋初期100万円〜）と
+            比較して <strong>約 40〜60% のコスト削減</strong>が見込めます。
+          </li>
+          <li>
+            <strong>請求書特化SaaS（B）との比較</strong>：Bは安価ですが請求機能のみで、
+            発注管理・承認ワークフロー・電帳法ハッシュは機能不足。
+            本ツールは請求のみでなく発注・承認・監査ログまで一貫提供するため、
+            <strong>複数SaaSを組み合わせる必要がない</strong>利点があります。
+          </li>
+          <li>
+            <strong>業種特化SaaS（C）との比較</strong>：Cは業種依存で汎用性が低く、
+            インボイス番号検証も手動対応にとどまることが多い。
+            本ツールは <strong>業種不問＋インボイス自動検証</strong>で差別化。
+          </li>
+          <li>
+            <strong>最小プラン（¥1,500,000／年）</strong>：請求書特化SaaS（B）の
+            上位構成と同水準の価格帯で、<strong>発注管理・承認・電帳法対応まで</strong>
+            を提供する点で市場優位性があり、中小企業向けの妥当な価格です。
+          </li>
+        </ol>
+
+        <h4 className="mt-5 mb-2 text-sm font-bold text-slate-900">
+          総括：市場における希少性
+        </h4>
         <p className="text-sm leading-relaxed">
-          国内の同等機能を提供する受発注SaaSと比較し、ユーザー数あたり・
-          取引件数あたりの利用料水準は概ね市場中央値の範囲内です。
-          一方、初期費用を設定せず標準プランで全機能を提供する価格設計は
-          中小企業にとって導入ハードルが低く、
-          IT導入補助金 インボイス枠（インボイス対応類型）の
-          補助対象経費として合理的な水準に収まるよう調整しています。
+          上表の通り、「適格請求書発行事業者番号の国税庁API自動検証」「税率別合計＋経過措置の
+          自動適用」「電子帳簿保存法 電子取引要件の自動準拠（SHA-256＋タイムスタンプ）」
+          「多段階承認ワークフロー」「発注〜請求の一貫管理」の<strong>5機能を全て標準搭載</strong>
+          している国内SaaSは現時点で極めて限定的であり、本ツールはこの機能集約性を年額
+          3,000,000円（最小 1,500,000円）で提供する点に市場希少性があります。
+          加えて、初期費用・オプション費用を一切設けないシンプルな価格体系は、
+          中小企業における IT導入補助金 インボイス枠の活用においても、
+          補助対象経費の算定・申請を容易にする設計です。
         </p>
       </Section>
 
