@@ -13,6 +13,7 @@ export default function PublicLayout({
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
           @page { margin: 15mm; size: A4; }
           .page-break-before { page-break-before: always; }
+          .page-break-after { page-break-after: always; }
           .avoid-break { page-break-inside: avoid; }
         }
       `}</style>

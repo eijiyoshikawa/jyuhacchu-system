@@ -15,28 +15,90 @@ export default function FeatureDocumentPage() {
       subtitle="デジタル化・AI導入補助金2026 インボイス枠（インボイス対応類型）申請添付書類"
       pcode="主Pコード: 共P-02"
     >
-      {/* Identification banner — addresses review feedback that product name / maker were unclear */}
-      <section className="mb-8 avoid-break rounded-lg border-2 border-orange-500 bg-orange-50 p-5">
-        <p className="mb-3 text-xs font-bold uppercase tracking-widest text-orange-700">
-          ITツール識別情報
-        </p>
-        <dl className="grid grid-cols-1 gap-y-2 sm:grid-cols-[180px_1fr] gap-x-4 text-sm">
-          <dt className="font-bold text-slate-800">ITツール正式名称</dt>
-          <dd className="text-base font-black text-slate-900">受発注Lシステム</dd>
-          <dt className="font-bold text-slate-800">開発メーカー名</dt>
-          <dd className="text-base font-black text-slate-900">株式会社LET</dd>
-          <dt className="font-bold text-slate-800">IT導入支援事業者名</dt>
-          <dd className="text-base font-black text-slate-900">株式会社TX.企画</dd>
-          <dt className="font-bold text-slate-800">提供形態</dt>
-          <dd>クラウド型SaaS（マルチテナント）</dd>
-          <dt className="font-bold text-slate-800">Pコード</dt>
-          <dd>主: 共P-02（決済・債権債務・資金回収）／副: 共P-03（供給・在庫・物流）</dd>
-        </dl>
+      {/* Cover page — print-safe with black borders & bold text, independent of background color printing */}
+      <section className="mb-8 page-break-after avoid-break">
+        <div className="border-4 border-black p-6">
+          <p className="text-center text-sm font-bold tracking-[0.4em] mb-2">
+            IT導入補助金 2026 申請添付書類
+          </p>
+          <h2 className="text-center text-3xl sm:text-4xl font-black tracking-widest border-y-4 border-black py-4 my-4">
+            機 能 説 明 資 料
+          </h2>
+
+          <table className="w-full border-collapse text-sm mt-6">
+            <tbody>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left w-56 text-sm font-bold">
+                  ITツール正式名称
+                </th>
+                <td className="border-2 border-black px-4 py-3 text-2xl font-black">
+                  受発注Lシステム
+                </td>
+              </tr>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                  開発メーカー名
+                </th>
+                <td className="border-2 border-black px-4 py-3 text-2xl font-black">
+                  株式会社LET
+                </td>
+              </tr>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                  IT導入支援事業者名
+                </th>
+                <td className="border-2 border-black px-4 py-3 text-lg font-bold">
+                  株式会社TX.企画
+                </td>
+              </tr>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                  主Pコード
+                </th>
+                <td className="border-2 border-black px-4 py-3 text-base">
+                  共P-02（決済・債権債務・資金回収）
+                </td>
+              </tr>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                  副Pコード
+                </th>
+                <td className="border-2 border-black px-4 py-3 text-base">
+                  共P-03（供給・在庫・物流）
+                </td>
+              </tr>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                  申請枠・類型
+                </th>
+                <td className="border-2 border-black px-4 py-3 text-base">
+                  インボイス枠（インボイス対応類型）
+                </td>
+              </tr>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                  版
+                </th>
+                <td className="border-2 border-black px-4 py-3 text-base">2026年4月 初版</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div className="mt-8 border-t-2 border-black pt-4">
+            <p className="text-xs leading-relaxed">
+              本資料は、デジタル化・AI導入補助金2026 インボイス枠（インボイス対応類型）の
+              ITツール登録申請における「機能説明資料」として、IT導入支援事業者
+              株式会社TX.企画 が、開発メーカー 株式会社LET が提供するITツール
+              「受発注Lシステム」の機能内容、業務フロー、利用方法、および
+              補助金要件への適合状況を説明するために作成されたものです。
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* 1. Product Overview */}
       <section className="mb-8 avoid-break">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-black pl-3 text-lg font-bold">
           1. 製品概要
         </h2>
         <table className="w-full border-collapse text-sm">
@@ -63,11 +125,11 @@ export default function FeatureDocumentPage() {
                 "共P-03（供給・在庫・物流）",
               ],
             ].map(([k, v]) => (
-              <tr key={k} className="border-b border-slate-200">
-                <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold text-slate-700">
+              <tr key={k} className="border-b-2 border-black">
+                <th className="w-40 border-2 border-black bg-slate-100 px-3 py-2 text-left text-xs font-bold text-slate-900">
                   {k}
                 </th>
-                <td className="px-3 py-2">{v}</td>
+                <td className="border-2 border-black px-3 py-2 font-medium">{v}</td>
               </tr>
             ))}
           </tbody>
@@ -445,105 +507,116 @@ export default function FeatureDocumentPage() {
         src="/images/subsidy/audit-logs.png"
       />
 
-      {/* 4. Business Flow Diagram (added to address review feedback) */}
+      {/* 4. Business Flow Diagram — SVG-based flowchart (print-safe) */}
       <section className="mb-8 page-break-before">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-black pl-3 text-lg font-bold">
           4. 業務フロー図
         </h2>
         <p className="mb-4 text-sm leading-relaxed">
           受発注Lシステムを利用した、発注企業（買い手側）と受注企業（売り手側）の
-          間の業務フローを以下に示します。発注起票から請求・支払完了までの全工程が
+          間の業務フローを以下の図に示します。発注起票から請求・支払完了までの全工程が、
           本システム上で一貫してデジタル化されます。
         </p>
 
-        {/* Business flow diagram — pure HTML/CSS, renders cleanly on print */}
-        <div className="my-6 rounded-lg border border-slate-300 bg-white p-6 avoid-break">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-            {/* Buyer lane */}
-            <div>
-              <p className="mb-3 rounded-t-md bg-orange-500 px-3 py-1.5 text-center text-xs font-bold text-white">
-                発注企業（買い手側）
-              </p>
-              <ol className="space-y-2">
-                {[
-                  "① 案件登録（案件名／納入先／履行期間）",
-                  "② 取引先選択（インボイス番号を国税庁APIで自動検証）",
-                  "③ 発注書起票（明細・単価・税率を入力、消費税自動計算）",
-                  "④ 多段階承認ワークフロー（スマホ承認・却下コメント）",
-                  "⑤ 発注確定（SHA-256ハッシュ＋タイムスタンプ自動付与）",
-                  "⑥ 納品検収（受領確認→検収完了ステータス）",
-                  "⑦ 請求書受領・内容確認（税率別合計を自動照合）",
-                  "⑧ 支払処理・支払ステータス更新",
-                ].map((s, i) => (
-                  <li
-                    key={i}
-                    className="rounded-md border border-orange-200 bg-orange-50 px-3 py-2"
-                  >
-                    {s}
-                  </li>
-                ))}
-              </ol>
-            </div>
+        <figure className="my-6 border-2 border-black p-4 avoid-break">
+          <figcaption className="mb-3 text-center text-sm font-bold">
+            ［図1］受発注Lシステム 業務フロー図（発注から支払完了まで）
+          </figcaption>
 
-            {/* Seller lane */}
-            <div>
-              <p className="mb-3 rounded-t-md bg-sky-600 px-3 py-1.5 text-center text-xs font-bold text-white">
-                受注企業（売り手側）
-              </p>
-              <ol className="space-y-2">
-                {[
-                  "① 発注書受領通知（メール＋システム上の新着表示）",
-                  "② 発注内容確認・受諾（受諾ステータスに遷移）",
-                  "③ 納品・作業実施（履行期間内で作業実施）",
-                  "④ 納品報告登録（納品報告ステータス）",
-                  "⑤ 検収結果確認（発注企業側の検収完了を受信）",
-                  "⑥ 請求書起票（発注書から明細を自動引き継ぎ）",
-                  "⑦ 適格請求書フォーマット出力・送付（PDF／CSV）",
-                  "⑧ 入金確認・支払済ステータス更新",
-                ].map((s, i) => (
-                  <li
-                    key={i}
-                    className="rounded-md border border-sky-200 bg-sky-50 px-3 py-2"
-                  >
-                    {s}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
+          <svg
+            viewBox="0 0 900 740"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto"
+            role="img"
+            aria-label="業務フロー図 受発注Lシステム"
+          >
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#000" />
+              </marker>
+            </defs>
 
-          {/* Lifecycle flow arrow */}
-          <div className="mt-6 border-t border-dashed border-slate-300 pt-4">
-            <p className="mb-2 text-center text-xs font-bold text-slate-600">
-              システム内 ステータス遷移（発注書）
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-1 text-[10px]">
-              {[
-                "下書き",
-                "申請中",
-                "承認済",
-                "発注済",
-                "請負済",
-                "納品完了",
-                "検収完了",
-              ].map((s, i, arr) => (
-                <span key={s} className="flex items-center">
-                  <span className="rounded-full border border-slate-400 bg-slate-100 px-2 py-1 font-bold text-slate-700">
-                    {s}
-                  </span>
-                  {i < arr.length - 1 && <span className="mx-1 text-slate-400">→</span>}
-                </span>
-              ))}
-            </div>
-            <p className="mt-3 text-center text-[10px] text-slate-500">
-              各ステータス遷移時に監査ログを自動記録。検収完了時にSHA-256ハッシュと
-              確定タイムスタンプを付与し、電子帳簿保存法の改ざん防止要件に準拠します。
-            </p>
-          </div>
-        </div>
+            <rect x="10" y="10" width="430" height="34" fill="#000" />
+            <text x="225" y="33" textAnchor="middle" fill="#fff" fontSize="15" fontWeight="bold">
+              発注企業（買い手側）
+            </text>
+            <rect x="460" y="10" width="430" height="34" fill="#000" />
+            <text x="675" y="33" textAnchor="middle" fill="#fff" fontSize="15" fontWeight="bold">
+              受注企業（売り手側）
+            </text>
 
-        <p className="mt-4 text-xs text-slate-500">
-          ※ 図は概念図です。実運用では、承認段数・承認者を案件ごとに柔軟に設定できます。
+            {[
+              { y: 60, t1: "① 案件登録", t2: "案件名／納入先／履行期間" },
+              { y: 130, t1: "② 取引先選択", t2: "国税庁APIで登録番号自動検証" },
+              { y: 200, t1: "③ 発注書起票", t2: "明細・単価・税率／消費税自動計算" },
+              { y: 270, t1: "④ 多段階承認", t2: "ワークフロー（スマホ承認可）" },
+              { y: 340, t1: "⑤ 発注確定", t2: "SHA-256ハッシュ＋タイムスタンプ付与" },
+              { y: 500, t1: "⑥ 納品検収", t2: "検収完了ステータスへ遷移" },
+              { y: 570, t1: "⑦ 請求書受領", t2: "税率別合計を自動照合" },
+              { y: 640, t1: "⑧ 支払処理", t2: "支払済ステータスへ更新" },
+            ].map((s) => (
+              <g key={`b-${s.y}`}>
+                <rect x="20" y={s.y} width="410" height="54" fill="#fff" stroke="#000" strokeWidth="2" />
+                <text x="225" y={s.y + 22} textAnchor="middle" fontSize="14" fontWeight="bold">{s.t1}</text>
+                <text x="225" y={s.y + 42} textAnchor="middle" fontSize="11" fill="#333">{s.t2}</text>
+              </g>
+            ))}
+
+            {[
+              { y: 60, t1: "① 発注書受領通知", t2: "メール＋システム新着表示" },
+              { y: 130, t1: "② 内容確認・受諾", t2: "受諾ステータスへ遷移" },
+              { y: 200, t1: "③ 納品・作業実施", t2: "履行期間内で作業実施" },
+              { y: 270, t1: "④ 納品報告登録", t2: "納品報告ステータス" },
+              { y: 340, t1: "⑤ 検収結果確認", t2: "発注企業側の検収完了受信" },
+              { y: 500, t1: "⑥ 請求書起票", t2: "発注書から明細を自動引継ぎ" },
+              { y: 570, t1: "⑦ 適格請求書出力", t2: "PDF／CSVで送付" },
+              { y: 640, t1: "⑧ 入金確認", t2: "支払済ステータスへ更新" },
+            ].map((s) => (
+              <g key={`s-${s.y}`}>
+                <rect x="470" y={s.y} width="410" height="54" fill="#fff" stroke="#000" strokeWidth="2" />
+                <text x="675" y={s.y + 22} textAnchor="middle" fontSize="14" fontWeight="bold">{s.t1}</text>
+                <text x="675" y={s.y + 42} textAnchor="middle" fontSize="11" fill="#333">{s.t2}</text>
+              </g>
+            ))}
+
+            {[114, 184, 254, 324, 554, 624].map((y) => (
+              <line key={`bA-${y}`} x1="225" y1={y} x2="225" y2={y + 14} stroke="#000" strokeWidth="2" markerEnd="url(#arrow)" />
+            ))}
+            {[114, 184, 254, 324, 554, 624].map((y) => (
+              <line key={`sA-${y}`} x1="675" y1={y} x2="675" y2={y + 14} stroke="#000" strokeWidth="2" markerEnd="url(#arrow)" />
+            ))}
+
+            <line x1="430" y1="87" x2="470" y2="87" stroke="#000" strokeWidth="2" markerEnd="url(#arrow)" />
+            <text x="450" y="78" textAnchor="middle" fontSize="10" fill="#000">通知</text>
+
+            <line x1="470" y1="367" x2="430" y2="527" stroke="#000" strokeWidth="2" strokeDasharray="4 2" markerEnd="url(#arrow)" />
+
+            <line x1="470" y1="597" x2="430" y2="597" stroke="#000" strokeWidth="2" markerEnd="url(#arrow)" />
+            <text x="450" y="588" textAnchor="middle" fontSize="10" fill="#000">請求書</text>
+
+            <line x1="430" y1="667" x2="470" y2="667" stroke="#000" strokeWidth="2" markerEnd="url(#arrow)" />
+            <text x="450" y="658" textAnchor="middle" fontSize="10" fill="#000">支払</text>
+
+            <rect x="20" y="420" width="860" height="58" fill="#000" />
+            <text x="450" y="443" textAnchor="middle" fill="#fff" fontSize="12" fontWeight="bold">
+              【システム内ステータス（発注書）】
+            </text>
+            <text x="450" y="465" textAnchor="middle" fill="#fff" fontSize="13" fontWeight="bold">
+              下書き → 申請中 → 承認済 → 発注済 → 請負済 → 納品完了 → 検収完了
+            </text>
+          </svg>
+
+          <p className="mt-3 text-[10px] text-slate-700 leading-relaxed">
+            凡例: 実線矢印＝同一企業内のステップ遷移／実線矢印（企業間・横方向）＝
+            システム通知・データ伝達／破線矢印＝ステータス情報の同期。
+            発注書は各ステータス遷移時に監査ログを自動記録し、検収完了時に SHA-256
+            ハッシュとタイムスタンプを付与して電子帳簿保存法の改ざん防止要件に準拠します。
+          </p>
+        </figure>
+
+        <p className="mt-2 text-xs text-slate-500">
+          ※ 図は標準的な運用フローを示した概念図です。実運用では、承認段数・承認者・
+          ステータス分岐等を案件ごとに柔軟に設定できます。
         </p>
       </section>
 

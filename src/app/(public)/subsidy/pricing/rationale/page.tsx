@@ -28,6 +28,38 @@ export default function PriceRationaleDocumentPage() {
       title="申請価格理由書"
       subtitle="デジタル化・AI導入補助金2026 インボイス枠（インボイス対応類型）申請添付書類"
     >
+      {/* Cover identification block — print-safe */}
+      <section className="mb-8 avoid-break">
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left w-56 text-sm font-bold">
+                ITツール正式名称
+              </th>
+              <td className="border-2 border-black px-4 py-3 text-xl font-black">
+                受発注Lシステム
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                開発メーカー名
+              </th>
+              <td className="border-2 border-black px-4 py-3 text-xl font-black">
+                株式会社LET
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                IT導入支援事業者名
+              </th>
+              <td className="border-2 border-black px-4 py-3 text-lg font-bold">
+                株式会社TX.企画
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
       <Section label="① IT導入支援事業者名">
         <p className="text-base">株式会社TX.企画</p>
       </Section>
@@ -148,22 +180,30 @@ export default function PriceRationaleDocumentPage() {
         </p>
 
         <h3 className="mt-6 mb-2 text-base font-bold text-slate-900">
-          (3) 運用・保守・インフラコスト
+          (3) クラウド基盤の運用インフラコスト
         </h3>
         <p className="text-sm leading-relaxed">
-          クラウドホスティング（Vercel／PostgreSQL 東京リージョン）、
-          エラー監視（Sentry）、SSL証明書、日次自動バックアップ、
-          国税庁Web-API利用料、24時間のセキュリティ監視、
-          平日9:00〜17:30のメール／チャットサポート、
-          SLA 99.5％水準の稼働維持、日次バックアップおよび障害時復旧体制などの
-          運用コストを価格に含めています。
-          また、インボイス制度・電帳法・下請法等の法改正に対する継続的な
-          システム改修費用も本価格に内包しています。
+          本ソフトウェア価格（カテゴリー1〜6に該当）には、
+          ソフトウェア提供のために必要な <strong>クラウドインフラ運用コスト</strong>
+          （Vercel／PostgreSQL 東京リージョンのホスティング、SSL証明書、
+          日次自動バックアップ、国税庁Web-API利用料、Sentryによる稼働監視）、
+          ならびに、インボイス制度・電子帳簿保存法・下請法等の法改正に対応する
+          継続的なソフトウェア改修コストが含まれます。
+        </p>
+        <p className="mt-3 text-sm leading-relaxed">
+          一方、<strong>ITツール登録要領 カテゴリー7（保守サポート）に該当する役務</strong>
+          — すなわちコールセンター対応、個別運用代行、障害対応駆けつけ等の
+          追加役務 — <strong>は本ソフトウェア価格には含めておらず</strong>、
+          本申請では保守サポート（カテゴリー7）を併せて申請する予定はありません。
+          これにより、本価格設定はカテゴリー1〜6（ソフトウェア）の単独申請として
+          明確に整理されています。
         </p>
 
-        <h3 className="mt-6 mb-2 text-base font-bold text-slate-900">
-          (4) 類似ITツールとの価格及び機能の比較
-        </h3>
+        <div className="mt-8 mb-4 page-break-before">
+          <h3 className="border-4 border-black bg-black text-white p-3 text-center text-lg font-black">
+            (4) 類似ITツールとの価格及び機能の比較
+          </h3>
+        </div>
         <p className="text-sm leading-relaxed mb-4">
           国内で流通する類似ITツール（受発注・請求・インボイス対応SaaS）との
           価格および機能比較は下表のとおりです。比較対象は、本ツールと同一の

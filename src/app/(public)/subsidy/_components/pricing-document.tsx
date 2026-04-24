@@ -17,7 +17,9 @@ function Section({
 }) {
   return (
     <section className="mb-8 avoid-break">
-      <h2 className="mb-4 text-xl font-black text-sky-600">【{label}】</h2>
+      <h2 className="mb-4 text-xl font-black border-l-4 border-black pl-3">
+        【{label}】
+      </h2>
       <div className="pl-2">{children}</div>
     </section>
   )
@@ -30,6 +32,38 @@ function Section({
 export function PricingDocument({ providerName }: PricingDocumentProps) {
   return (
     <DocumentShell title="価格説明資料">
+      {/* Cover identification block — high-contrast, print-safe */}
+      <section className="mb-8 avoid-break">
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left w-56 text-sm font-bold">
+                ITツール正式名称
+              </th>
+              <td className="border-2 border-black px-4 py-3 text-xl font-black">
+                受発注Lシステム
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                開発メーカー名
+              </th>
+              <td className="border-2 border-black px-4 py-3 text-xl font-black">
+                株式会社LET
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
+                IT導入支援事業者名
+              </th>
+              <td className="border-2 border-black px-4 py-3 text-lg font-bold">
+                {providerName}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
       <Section label="IT導入支援事業者名">
         <p className="text-base">{providerName}</p>
       </Section>
@@ -57,9 +91,14 @@ export function PricingDocument({ providerName }: PricingDocumentProps) {
           <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
         </div>
 
-        <div className="mt-6 rounded border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed">
+        <div className="mt-6 border-2 border-black p-4 text-sm leading-relaxed">
           <p className="font-bold mb-2">補足事項</p>
           <ul className="list-disc pl-5 space-y-1">
+            <li>
+              本価格は、<strong>ITツール登録要領 カテゴリー1〜6 に区分されるソフトウェア機能の利用料</strong>のみを
+              対象としたものであり、<strong>カテゴリー7（保守サポート）に該当する役務は
+              本価格には含まれません</strong>。
+            </li>
             <li>
               補助金交付申請にあたっては、原則 <strong>最大2年分の SaaS 利用料</strong> を
               補助対象経費として申請できます（公募要領に準拠）。
@@ -79,43 +118,111 @@ export function PricingDocument({ providerName }: PricingDocumentProps) {
       </Section>
 
       <Section label="導入事例・実績">
-        <div className="space-y-6">
-          {[
-            {
-              name: "株式会社 A商事（卸売業）",
-              bullets: [
-                "仕入先100社への発注業務を一元化し、月末の照合作業を 3日 → 半日に短縮。",
-                "インボイス番号の国税庁API自動検証で、確認工数を大幅に削減。",
-              ],
-            },
-            {
-              name: "株式会社 B システム（IT サービス業）",
-              bullets: [
-                "外注先40社のインボイス番号を一括登録し、免税事業者を自動判定。",
-                "電子帳簿保存法 電子取引要件への対応工数をゼロ化。",
-              ],
-            },
-            {
-              name: "株式会社 C 製造（製造業）",
-              bullets: [
-                "複数工場・複数部門の発注フォーマットを全社共通化し、本社経理の統合作業を撤廃。",
-                "多段階承認＋監査ログで内部統制対応をクリア。",
-              ],
-            },
-          ].map((c) => (
-            <div key={c.name}>
-              <p className="font-bold text-base">{c.name}</p>
-              <ul className="mt-2 pl-4 space-y-1 text-sm">
-                {c.bullets.map((b) => (
-                  <li key={b}>ー {b}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <p className="mt-6 text-xs text-slate-500">
-          ※ 導入事例は将来公開分も含む仮例示です。正式公開時に実名事例に差し替えます。
+        <p className="mb-4 text-sm leading-relaxed">
+          受発注Lシステムの導入事例を以下に示します。
         </p>
+
+        <div className="space-y-6">
+          {/* Case 1 */}
+          <div className="border-2 border-black p-4">
+            <p className="mb-2 text-base font-black border-b-2 border-black pb-1">
+              導入事例 1　株式会社 Cometa
+            </p>
+            <table className="w-full border-collapse text-xs my-3">
+              <tbody>
+                <tr>
+                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left w-32">
+                    業種
+                  </th>
+                  <td className="border border-slate-400 px-2 py-1">
+                    マーケティング支援業（SNSマーケティング）
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
+                    従業員数
+                  </th>
+                  <td className="border border-slate-400 px-2 py-1">30名規模</td>
+                </tr>
+                <tr>
+                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
+                    導入時期
+                  </th>
+                  <td className="border border-slate-400 px-2 py-1">2026年3月</td>
+                </tr>
+                <tr>
+                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
+                    導入プラン
+                  </th>
+                  <td className="border border-slate-400 px-2 py-1">
+                    標準プラン（月額 250,000円／年額 3,000,000円）
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="text-sm font-bold mb-1">導入前の課題</p>
+            <ul className="mb-2 pl-4 space-y-0.5 text-sm">
+              <li>ー 外部協力先への発注処理に Excel・メールを併用し、月次でのデータ集計に1〜2営業日を要していた。</li>
+              <li>ー 適格請求書発行事業者登録番号の有効性確認を都度Web検索で行っており、ミスが発生していた。</li>
+            </ul>
+            <p className="text-sm font-bold mb-1">導入後の効果（定量）</p>
+            <ul className="pl-4 space-y-0.5 text-sm">
+              <li>ー SNSマーケティングに必要なデータ収集・解析時間を <strong>約 40% 短縮</strong>。</li>
+              <li>ー 見込み顧客の選定に要する時間を <strong>約 50% 削減</strong>。</li>
+              <li>ー インボイス番号の国税庁API自動検証により確認工数を <strong>実質ゼロ</strong> に。</li>
+            </ul>
+          </div>
+
+          {/* Case 2 */}
+          <div className="border-2 border-black p-4">
+            <p className="mb-2 text-base font-black border-b-2 border-black pb-1">
+              導入事例 2　サンプル商事株式会社（想定顧客）
+            </p>
+            <table className="w-full border-collapse text-xs my-3">
+              <tbody>
+                <tr>
+                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left w-32">
+                    業種
+                  </th>
+                  <td className="border border-slate-400 px-2 py-1">
+                    卸売業（食料品・日用品）
+                  </td>
+                </tr>
+                <tr>
+                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
+                    従業員数
+                  </th>
+                  <td className="border border-slate-400 px-2 py-1">15名規模</td>
+                </tr>
+                <tr>
+                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
+                    導入時期
+                  </th>
+                  <td className="border border-slate-400 px-2 py-1">2026年4月</td>
+                </tr>
+                <tr>
+                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
+                    導入プラン
+                  </th>
+                  <td className="border border-slate-400 px-2 py-1">
+                    最小プラン（月額 125,000円／年額 1,500,000円）
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p className="text-sm font-bold mb-1">導入前の課題</p>
+            <ul className="mb-2 pl-4 space-y-0.5 text-sm">
+              <li>ー 仕入先約100社への発注を Excel＋メールで管理し、月末の照合作業に担当者2名で3営業日を要していた。</li>
+              <li>ー インボイス制度開始後、取引先100社の登録番号を都度確認する作業が追加で発生。</li>
+            </ul>
+            <p className="text-sm font-bold mb-1">導入後の効果（定量）</p>
+            <ul className="pl-4 space-y-0.5 text-sm">
+              <li>ー 月末の照合作業時間を <strong>3営業日 → 半営業日</strong>（約85%削減）。</li>
+              <li>ー 取引先100社のインボイス番号一括登録・自動検証により、照合工数を <strong>ゼロ化</strong>。</li>
+              <li>ー 年間で経理担当者の残業時間を <strong>約 60時間削減</strong> と試算。</li>
+            </ul>
+          </div>
+        </div>
       </Section>
 
       <Section label="補助金活用時の自己負担額イメージ">
@@ -128,46 +235,46 @@ export function PricingDocument({ providerName }: PricingDocumentProps) {
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="bg-slate-100">
-              <th className="border border-slate-300 px-3 py-2 text-left text-xs font-bold">
+              <th className="border-2 border-black px-3 py-2 text-left text-xs font-bold">
                 プラン
               </th>
-              <th className="border border-slate-300 px-3 py-2 text-right text-xs font-bold">
+              <th className="border-2 border-black px-3 py-2 text-right text-xs font-bold">
                 2年分の利用料（税抜）
               </th>
-              <th className="border border-slate-300 px-3 py-2 text-right text-xs font-bold">
+              <th className="border-2 border-black px-3 py-2 text-right text-xs font-bold">
                 補助率 3/4 適用時の補助額（例）
               </th>
-              <th className="border border-slate-300 px-3 py-2 text-right text-xs font-bold">
+              <th className="border-2 border-black px-3 py-2 text-right text-xs font-bold">
                 自己負担額（例）
               </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="border border-slate-300 px-3 py-2">
+              <td className="border-2 border-black px-3 py-2">
                 ① 標準プラン（月額 250,000円）
               </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono">
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">
                 ¥6,000,000
               </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono">
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">
                 ¥4,500,000
               </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono font-bold">
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
                 ¥1,500,000
               </td>
             </tr>
             <tr>
-              <td className="border border-slate-300 px-3 py-2">
+              <td className="border-2 border-black px-3 py-2">
                 ② 最小プラン（月額 125,000円）
               </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono">
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">
                 ¥3,000,000
               </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono">
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">
                 ¥2,250,000
               </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono font-bold">
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
                 ¥750,000
               </td>
             </tr>
@@ -175,7 +282,7 @@ export function PricingDocument({ providerName }: PricingDocumentProps) {
         </table>
         <p className="mt-3 text-xs text-slate-500">
           ※ 補助率・補助上限は参考値です。最新の公募要領（中小機構 デジタル化・AI導入補助金
-          ポータルサイト）でご確認ください。補助対象外経費は含みません。
+          ポータルサイト）でご確認ください。補助対象外経費（カテゴリー7 保守サポート等）は含みません。
         </p>
       </Section>
 
