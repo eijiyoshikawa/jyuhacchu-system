@@ -271,12 +271,25 @@ export default function PriceRationaleDocumentPage() {
                 <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">無料</td>
               </tr>
               <tr>
-                <td className="border border-slate-300 px-2 py-2">
-                  A. 大手ERP系 受発注モジュール<br />
-                  （例: NetSuite／SAP ByDesign 相当）
+                <td className="border border-slate-300 px-2 py-2 font-bold">
+                  A. <strong>Oracle NetSuite</strong>（日本オラクル株式会社）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-right font-mono">
-                  ¥5,000,000〜<br />¥8,000,000
+                  ¥6,000,000〜<br />¥12,000,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">¥1,500,000〜</td>
+              </tr>
+              <tr>
+                <td className="border border-slate-300 px-2 py-2 font-bold">
+                  A&apos;. <strong>SAP Business ByDesign</strong>（SAPジャパン株式会社）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono">
+                  ¥5,000,000〜<br />¥10,000,000
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-center">△</td>
                 <td className="border border-slate-300 px-2 py-2 text-center">○</td>
@@ -286,12 +299,11 @@ export default function PriceRationaleDocumentPage() {
                 <td className="border border-slate-300 px-2 py-2 text-center">¥1,000,000〜</td>
               </tr>
               <tr>
-                <td className="border border-slate-300 px-2 py-2">
-                  B. 請求書特化クラウドSaaS<br />
-                  （例: マネーフォワードクラウド請求書／楽楽明細 相当）
+                <td className="border border-slate-300 px-2 py-2 font-bold">
+                  B. <strong>マネーフォワード クラウド請求書 Plus</strong>（株式会社マネーフォワード）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-right font-mono">
-                  ¥100,000〜<br />¥500,000
+                  約¥360,000<br />（月額¥30,000）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-center">○</td>
                 <td className="border border-slate-300 px-2 py-2 text-center">○</td>
@@ -301,12 +313,39 @@ export default function PriceRationaleDocumentPage() {
                 <td className="border border-slate-300 px-2 py-2 text-center">無料</td>
               </tr>
               <tr>
-                <td className="border border-slate-300 px-2 py-2">
-                  C. 業種特化 業務管理SaaS<br />
-                  （例: ANDPAD／建設DX系 相当）
+                <td className="border border-slate-300 px-2 py-2 font-bold">
+                  B&apos;. <strong>楽楽明細</strong>（株式会社ラクス）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-right font-mono">
-                  ¥2,000,000〜<br />¥4,000,000
+                  約¥330,000<br />（月額¥27,500）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">—</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">—<br />（請求のみ）</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">¥100,000〜</td>
+              </tr>
+              <tr>
+                <td className="border border-slate-300 px-2 py-2 font-bold">
+                  B&apos;&apos;. <strong>バクラク請求書発行</strong>（株式会社LayerX）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono">
+                  約¥360,000〜<br />¥600,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">—<br />（請求のみ）</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">無料</td>
+              </tr>
+              <tr>
+                <td className="border border-slate-300 px-2 py-2 font-bold">
+                  C. <strong>ANDPAD 受発注</strong>（株式会社アンドパッド）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono">
+                  ¥2,400,000〜<br />¥4,800,000
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-center">△</td>
                 <td className="border border-slate-300 px-2 py-2 text-center">△</td>
@@ -316,12 +355,25 @@ export default function PriceRationaleDocumentPage() {
                 <td className="border border-slate-300 px-2 py-2 text-center">¥300,000〜</td>
               </tr>
               <tr>
-                <td className="border border-slate-300 px-2 py-2">
-                  D. 汎用ワークフロー＋電子契約SaaS<br />
-                  （例: ジョブカンワークフロー／電子契約 相当）
+                <td className="border border-slate-300 px-2 py-2 font-bold">
+                  C&apos;. <strong>AnyONE</strong>（株式会社ＲＤＳ）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-right font-mono">
-                  ¥300,000〜<br />¥1,000,000
+                  ¥1,800,000〜<br />¥3,600,000
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">△</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">○</td>
+                <td className="border border-slate-300 px-2 py-2 text-center">¥200,000〜</td>
+              </tr>
+              <tr>
+                <td className="border border-slate-300 px-2 py-2 font-bold">
+                  D. <strong>ジョブカンワークフロー</strong>（株式会社DONUTS）
+                </td>
+                <td className="border border-slate-300 px-2 py-2 text-right font-mono">
+                  約¥360,000〜<br />¥720,000<br />（10ID〜20ID）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-center">—</td>
                 <td className="border border-slate-300 px-2 py-2 text-center">—</td>
@@ -336,8 +388,9 @@ export default function PriceRationaleDocumentPage() {
 
         <p className="mt-3 text-[10px] leading-relaxed text-slate-500">
           凡例: ◎ 標準機能として提供／○ 一部または有償オプションで提供／△ 手動対応または限定的に提供／
-          — 機能非搭載。年額料金は各カテゴリの代表的な中小企業向けプランの税抜年額相当の参考値
-          （公表価格および公開資料ベース／2026年4月時点）であり、導入構成により変動します。
+          — 機能非搭載。年額料金は各製品の中小企業向け代表プランの税抜年額相当の参考値で、
+          各社公式サイトの公表価格・公開資料に基づく2026年4月時点の調査値（導入構成・契約期間により変動あり）。
+          本表はあくまで価格・機能の比較目的であり、各社製品の優劣を断定するものではありません。
         </p>
 
         <h4 className="mt-5 mb-2 text-sm font-bold text-slate-900">
@@ -347,30 +400,44 @@ export default function PriceRationaleDocumentPage() {
           <li>
             <strong>機能充足度での優位性</strong>：国税庁API自動検証・税率別合計＋
             経過措置自動適用・電帳法ハッシュ自動付与・多段階承認・受発注/請求一貫管理の
-            5要件を「◎（標準搭載）」で満たすカテゴリは他にほぼ存在せず、
-            本ツールは <strong>インボイス対応・電帳法対応を一元化できる希少性</strong>
-            を有します。
+            5要件を「◎（標準搭載）」で満たす製品は <strong>Oracle NetSuite・SAP Business
+            ByDesign の大手ERP系のみ</strong> に限定され、本ツールは
+            <strong>これらの大手ERPに匹敵する機能集約性</strong>を中小企業価格帯で
+            提供する点に希少性があります。
           </li>
           <li>
-            <strong>大手ERP系（A）との比較</strong>：機能では同等以上ですが、
-            本ツールは年額 300万円で導入可能であり、Aの価格帯（500〜800万円＋初期100万円〜）と
-            比較して <strong>約 40〜60% のコスト削減</strong>が見込めます。
+            <strong>Oracle NetSuite／SAP Business ByDesign（A・A&apos;）との比較</strong>：
+            機能では同等以上の充足度を確保しつつ、本ツールは年額 300万円（最小 150万円）で
+            導入可能であり、両製品の価格帯（500〜1,200万円＋初期100〜150万円）と比較して
+            <strong>約 50〜75% のコスト削減</strong>が見込めます。
+            ただし NetSuite／SAP は会計・在庫まで含むスーツである点で機能範囲は広い。
           </li>
           <li>
-            <strong>請求書特化SaaS（B）との比較</strong>：Bは安価ですが請求機能のみで、
-            発注管理・承認ワークフロー・電帳法ハッシュは機能不足。
-            本ツールは請求のみでなく発注・承認・監査ログまで一貫提供するため、
-            <strong>複数SaaSを組み合わせる必要がない</strong>利点があります。
+            <strong>マネーフォワード／楽楽明細／バクラク請求書（B・B&apos;・B&apos;&apos;）との比較</strong>：
+            これら請求書特化SaaSは月額3万円前後と安価ですが、対象機能は<strong>請求書発行のみ</strong>に
+            限定され、発注管理・多段階承認・取引契約必要記載事項チェック等は提供していません。
+            本ツールは発注・承認・請求・監査ログまでを一元管理するため、複数SaaSを組み合わせて
+            運用する必要がなく、<strong>SaaS間連携コストとデータ整合性リスクの両方を排除</strong>できます。
           </li>
           <li>
-            <strong>業種特化SaaS（C）との比較</strong>：Cは業種依存で汎用性が低く、
-            インボイス番号検証も手動対応にとどまることが多い。
-            本ツールは <strong>業種不問＋インボイス自動検証</strong>で差別化。
+            <strong>ANDPAD 受発注／AnyONE（C・C&apos;）との比較</strong>：
+            両製品は建設業・工務店向けの特化SaaSで、業種依存の業務フローに強い反面、
+            インボイス番号の国税庁API自動検証は標準機能ではなく手動対応となっているケースが多い。
+            本ツールは <strong>業種不問＋インボイス自動検証</strong>で差別化しており、
+            非建設業の中小企業にも導入しやすい点で優位です。
           </li>
           <li>
-            <strong>最小プラン（¥1,500,000／年）</strong>：請求書特化SaaS（B）の
-            上位構成と同水準の価格帯で、<strong>発注管理・承認・電帳法対応まで</strong>
-            を提供する点で市場優位性があり、中小企業向けの妥当な価格です。
+            <strong>ジョブカンワークフロー（D）との比較</strong>：
+            汎用ワークフローSaaSは承認機能のみを提供し、発注書／請求書の業務フローは
+            企業側が独自にテンプレート設計する必要があります。本ツールは
+            <strong>受発注業務専用に設計された業務フロー＋ワークフロー＋電帳法対応</strong>
+            を一体提供するため、業務テンプレート設計コストが不要です。
+          </li>
+          <li>
+            <strong>最小プラン（¥1,500,000／年）</strong>：請求書特化SaaS（マネーフォワード／
+            楽楽明細／バクラク請求書）の年額相当を上回るものの、それらでは賄えない
+            <strong>発注管理・多段階承認・電帳法対応・監査ログ</strong>を含む点で
+            市場優位性があり、中小企業向けの妥当な価格です。
           </li>
         </ol>
 

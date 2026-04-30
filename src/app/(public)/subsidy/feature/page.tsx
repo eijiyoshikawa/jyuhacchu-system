@@ -96,6 +96,70 @@ export default function FeatureDocumentPage() {
         </div>
       </section>
 
+      {/* Table of Contents — explicit pointer to required sections (added in response to 3rd review) */}
+      <section className="mb-8 page-break-before page-break-after avoid-break">
+        <div className="border-4 border-black p-6">
+          <h2 className="text-center text-2xl font-black tracking-widest border-y-4 border-black py-3 mb-4">
+            目　次
+          </h2>
+
+          <p className="text-xs text-slate-600 mb-3">
+            ※ 本資料の確認において特に重要な項目は ★ 印で示しています。
+          </p>
+
+          <table className="w-full border-collapse text-sm">
+            <tbody>
+              {[
+                { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.3" },
+                { no: "2", label: "解決する業務課題と導入効果", page: "P.4" },
+                { no: "3", label: "機能詳細（発注／取引先／請求／インボイス／電帳法／承認／監査）", page: "P.5" },
+                { no: "★4", label: "業務フロー図（［図1］受発注Lシステム 業務フロー図）", page: "P.7" },
+                { no: "★5", label: "ITツールの利用方法（5-1 〜 5-5）", page: "P.8" },
+                { no: "6", label: "技術仕様", page: "P.10" },
+                { no: "7", label: "導入プロセス", page: "P.11" },
+                { no: "8", label: "サポート体制", page: "P.11" },
+                { no: "9", label: "お問い合わせ", page: "P.12" },
+              ].map((row) => (
+                <tr key={row.no}>
+                  <td
+                    className={
+                      "border-2 border-black px-3 py-2 text-center font-bold w-16 " +
+                      (row.no.startsWith("★") ? "bg-black text-white text-base" : "")
+                    }
+                  >
+                    §{row.no}
+                  </td>
+                  <td
+                    className={
+                      "border-2 border-black px-3 py-2 " +
+                      (row.no.startsWith("★") ? "bg-yellow-100 font-bold text-base" : "")
+                    }
+                  >
+                    {row.label}
+                  </td>
+                  <td className="border-2 border-black px-3 py-2 text-center w-20 font-mono">
+                    {row.page}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="mt-4 border-2 border-black p-3 text-xs leading-relaxed">
+            <p className="font-bold mb-1">本資料の対象ITツール（再掲）</p>
+            <ul className="list-none pl-0 space-y-0.5">
+              <li>　ITツール正式名称：<span className="font-black text-base">受発注Lシステム</span></li>
+              <li>　開発メーカー名：<span className="font-black text-base">株式会社LET</span></li>
+              <li>　IT導入支援事業者名：<span className="font-bold">株式会社TX.企画</span></li>
+            </ul>
+          </div>
+
+          <p className="mt-3 text-xs text-slate-600">
+            ※ ページ番号は印刷時の目安です（A4・余白標準・背景グラフィック有効）。
+          </p>
+        </div>
+      </section>
+
       {/* 1. Product Overview */}
       <section className="mb-8 avoid-break">
         <h2 className="mb-3 border-l-4 border-black pl-3 text-lg font-bold">
@@ -507,10 +571,24 @@ export default function FeatureDocumentPage() {
         src="/images/subsidy/audit-logs.png"
       />
 
+      {/* §4 章扉ページ — マシン的にも視認しやすく強化 (3rd review対応) */}
+      <section className="mb-6 page-break-before avoid-break">
+        <div className="border-4 border-black p-8 text-center">
+          <p className="text-sm font-bold mb-2">CHAPTER 4</p>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-widest border-y-4 border-black py-4 my-3">
+            業 務 フ ロ ー 図
+          </h2>
+          <p className="text-sm mt-3">［図1］受発注Lシステム 業務フロー図</p>
+          <p className="text-xs mt-2 text-slate-600">
+            開発メーカー: 株式会社LET ／ ITツール: 受発注Lシステム
+          </p>
+        </div>
+      </section>
+
       {/* 4. Business Flow Diagram — SVG-based flowchart (print-safe) */}
-      <section className="mb-8 page-break-before">
-        <h2 className="mb-3 border-l-4 border-black pl-3 text-lg font-bold">
-          4. 業務フロー図
+      <section className="mb-8">
+        <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
+          §4. 業務フロー図
         </h2>
         <p className="mb-4 text-sm leading-relaxed">
           受発注Lシステムを利用した、発注企業（買い手側）と受注企業（売り手側）の
@@ -620,10 +698,24 @@ export default function FeatureDocumentPage() {
         </p>
       </section>
 
-      {/* 5. How to use the IT tool (added to address review feedback) */}
-      <section className="mb-8 page-break-before">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
-          5. ITツールの利用方法
+      {/* §5 章扉ページ — マシン的にも視認しやすく強化 (3rd review対応) */}
+      <section className="mb-6 page-break-before avoid-break">
+        <div className="border-4 border-black p-8 text-center">
+          <p className="text-sm font-bold mb-2">CHAPTER 5</p>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-widest border-y-4 border-black py-4 my-3">
+            I T ツ ー ル の 利 用 方 法
+          </h2>
+          <p className="text-sm mt-3">5-1 利用開始 ／ 5-2 発注担当 ／ 5-3 承認者 ／ 5-4 受注担当 ／ 5-5 管理者</p>
+          <p className="text-xs mt-2 text-slate-600">
+            開発メーカー: 株式会社LET ／ ITツール: 受発注Lシステム
+          </p>
+        </div>
+      </section>
+
+      {/* 5. How to use the IT tool */}
+      <section className="mb-8">
+        <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
+          §5. ITツールの利用方法
         </h2>
         <p className="mb-4 text-sm leading-relaxed">
           受発注Lシステムの日常的な利用手順を、ユーザーの典型的な操作フローに沿って説明します。

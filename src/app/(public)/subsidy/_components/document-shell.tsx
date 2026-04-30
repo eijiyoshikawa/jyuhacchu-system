@@ -6,10 +6,20 @@ interface DocumentShellProps {
   title: string
   subtitle?: string
   pcode?: string
+  /** Tool / maker identification displayed in the document header */
+  toolName?: string
+  makerName?: string
   children: React.ReactNode
 }
 
-export function DocumentShell({ title, subtitle, pcode, children }: DocumentShellProps) {
+export function DocumentShell({
+  title,
+  subtitle,
+  pcode,
+  toolName = "受発注Lシステム",
+  makerName = "株式会社LET",
+  children,
+}: DocumentShellProps) {
   function handlePrint() {
     if (typeof window !== "undefined") {
       window.print()
@@ -48,12 +58,14 @@ export function DocumentShell({ title, subtitle, pcode, children }: DocumentShel
                 <p className="mt-2 text-sm text-slate-600">{subtitle}</p>
               )}
             </div>
-            <div className="text-right text-xs text-slate-500 shrink-0 leading-relaxed">
-              <p className="font-bold text-slate-800">受発注Lシステム</p>
-              <p>株式会社 受発注Lシステム</p>
-              <p>2026年4月 版</p>
+            <div className="text-right text-xs text-slate-700 shrink-0 leading-relaxed border-2 border-black p-2">
+              <p className="font-black text-base text-black">{toolName}</p>
+              <p className="text-[10px] text-slate-500">ITツール正式名称</p>
+              <p className="font-black text-sm text-black mt-1">{makerName}</p>
+              <p className="text-[10px] text-slate-500">開発メーカー名</p>
+              <p className="text-[10px] mt-1">2026年4月 版</p>
               {pcode && (
-                <p className="mt-1 rounded bg-slate-100 px-2 py-0.5 font-mono">{pcode}</p>
+                <p className="mt-1 rounded bg-black text-white px-2 py-0.5 font-mono">{pcode}</p>
               )}
             </div>
           </div>
