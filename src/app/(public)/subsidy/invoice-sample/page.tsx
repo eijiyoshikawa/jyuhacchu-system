@@ -12,6 +12,12 @@ export const metadata: Metadata = {
 const sample = {
   invoiceNumber: "INV-20260401-0001",
   issuedAt: "2026年4月1日",
+  /** 取引年月日（消費税法における課税資産の譲渡等の年月日 = 役務提供完了日 / 商品引渡日）。
+   *  請求書発行日とは異なる。インボイス制度の必要記載事項。 */
+  transactionDate: "2026年3月25日",
+  /** 取引期間（履行期間）の開始日と終了日。複数取引が含まれる場合に使用。 */
+  transactionPeriodStart: "2026年3月1日",
+  transactionPeriodEnd: "2026年3月25日",
   dueDate: "2026年5月31日",
   subject: "2026年3月分 ネットワーク機器設置業務",
   issuer: {
@@ -38,6 +44,8 @@ const sample = {
       unitPrice: 3_000_000,
       amount: 3_000_000,
       taxRate: 10,
+      /** 取引年月日（個別明細レベル: 役務提供完了日 / 商品引渡日） */
+      transactionDate: "2026/03/20",
     },
     {
       no: 2,
@@ -48,16 +56,18 @@ const sample = {
       unitPrice: 20_000,
       amount: 2_000_000,
       taxRate: 10,
+      transactionDate: "2026/03/25",
     },
     {
       no: 3,
       name: "作業員向け弁当支給（軽減税率対象）",
-      spec: "2026/03/15 現地提供",
+      spec: "現地提供",
       qty: 20,
       unit: "食",
       unitPrice: 1_000,
       amount: 20_000,
       taxRate: 8,
+      transactionDate: "2026/03/15",
     },
   ],
 }
@@ -119,14 +129,20 @@ export default function InvoiceSamplePage() {
           <p className="font-bold mb-1">適格請求書の必要記載事項チェック</p>
           <ul className="list-disc pl-5 space-y-0.5">
             <li>① 発行者（適格請求書発行事業者）の氏名又は名称および登録番号</li>
-            <li>② 取引年月日</li>
+            <li>
+              <strong className="bg-yellow-200">② 取引年月日</strong>
+              （= 消費税法上の課税資産の譲渡等の年月日 = 役務提供完了日／商品引渡日）。
+              <strong>請求書発行日とは異なる</strong>ことに注意。
+            </li>
             <li>③ 取引内容（軽減税率対象品目はその旨）</li>
             <li>④ 税率ごとに区分して合計した対価の額（税抜 or 税込）および適用税率</li>
             <li>⑤ 税率ごとに区分した消費税額</li>
             <li>⑥ 書類の交付を受ける事業者の氏名又は名称</li>
           </ul>
           <p className="mt-2">
-            下記サンプルは上記 6 項目をすべて満たしています。
+            下記サンプルは上記 6 項目をすべて満たしています。<br />
+            ②「取引年月日」はサンプル本文の<strong>右上ヘッダ（黄色枠）</strong>と
+            <strong>明細表 第2列（黄色背景列）</strong>の2箇所に明示しています。
           </p>
         </div>
       </div>
@@ -160,6 +176,12 @@ export default function InvoiceSamplePage() {
           <div className="text-left sm:text-right text-xs space-y-1">
             <p>請求番号: {sample.invoiceNumber}</p>
             <p>発行日: {sample.issuedAt}</p>
+            <p className="border-2 border-black inline-block px-2 py-1 font-bold text-sm bg-yellow-100">
+              取引年月日: {sample.transactionDate}
+            </p>
+            <p className="text-[10px] text-gray-600">
+              （取引期間: {sample.transactionPeriodStart} 〜 {sample.transactionPeriodEnd}）
+            </p>
             <p>支払期限: {sample.dueDate}</p>
           </div>
         </div>
@@ -183,6 +205,7 @@ export default function InvoiceSamplePage() {
             <thead>
               <tr className="bg-gray-100">
                 <th className="border border-gray-300 px-2 py-2 text-center w-8">No.</th>
+                <th className="border-2 border-black bg-yellow-200 px-2 py-2 text-center w-24 font-black">取引年月日</th>
                 <th className="border border-gray-300 px-2 py-2 text-left">品名</th>
                 <th className="border border-gray-300 px-2 py-2 text-left">仕様</th>
                 <th className="border border-gray-300 px-2 py-2 text-right w-16">数量</th>
@@ -196,6 +219,9 @@ export default function InvoiceSamplePage() {
               {sample.items.map((item) => (
                 <tr key={item.no}>
                   <td className="border border-gray-300 px-2 py-1.5 text-center">{item.no}</td>
+                  <td className="border-2 border-black bg-yellow-50 px-2 py-1.5 text-center font-bold text-xs">
+                    {item.transactionDate}
+                  </td>
                   <td className="border border-gray-300 px-2 py-1.5">
                     {item.name}
                     {item.taxRate === 8 && (
@@ -273,11 +299,81 @@ export default function InvoiceSamplePage() {
         </div>
 
         {/* Legend */}
-        <div className="mb-6 rounded border border-gray-300 p-3 text-xs leading-relaxed">
-          <p className="font-bold mb-1">記載事項について</p>
-          <p>※ 上記金額は、適格請求書等保存方式（インボイス制度）に基づき、税率ごとに区分した対価の額・消費税額および適用税率を明記しています。</p>
-          <p>※ 「軽減税率対象」マーク（※）が付いた品目は、消費税法上の軽減税率（8%）が適用される対象品です。</p>
-          <p>※ 登録番号: {sample.issuer.registrationNumber}（国税庁 公表サイトで有効性を検証可能）</p>
+        <div className="mb-6 border-2 border-black p-3 text-xs leading-relaxed">
+          <p className="font-bold mb-1">記載事項について（適格請求書等保存方式 必要記載事項対応）</p>
+          <p>
+            <strong className="bg-yellow-200">※「取引年月日」</strong>欄は、消費税法における
+            「課税資産の譲渡等の年月日」（役務の提供完了日／商品の引渡日）を記載しています。
+            <strong>請求書発行日とは別の日付</strong>として、ヘッダ右上および
+            明細表に明示的な独立カラムとして表示されます。
+          </p>
+          <p>
+            ※ 上記金額は、適格請求書等保存方式（インボイス制度）に基づき、
+            税率ごとに区分した対価の額・消費税額および適用税率を明記しています。
+          </p>
+          <p>
+            ※「軽減税率対象」マーク（※）が付いた品目は、消費税法上の軽減税率（8%）が
+            適用される対象品です。
+          </p>
+          <p>
+            ※ 登録番号: {sample.issuer.registrationNumber}（国税庁 公表サイトで有効性を検証可能）
+          </p>
+        </div>
+
+        {/* Required-items checklist (added in response to 4th review) */}
+        <div className="mb-6 border-2 border-black p-3 text-xs leading-relaxed avoid-break">
+          <p className="font-bold mb-2">
+            適格請求書（インボイス）の必要記載事項チェックリスト
+          </p>
+          <table className="w-full border-collapse text-[11px]">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border border-gray-400 px-2 py-1 text-left w-56">必要記載事項</th>
+                <th className="border border-gray-400 px-2 py-1 text-center w-14">対応</th>
+                <th className="border border-gray-400 px-2 py-1 text-left">本サンプル上の該当箇所</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-gray-400 px-2 py-1">① 適格請求書発行事業者の氏名又は名称及び登録番号</td>
+                <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
+                <td className="border border-gray-400 px-2 py-1">ヘッダ右上『サンプル商事株式会社』『登録番号: T1234567890123』</td>
+              </tr>
+              <tr className="bg-yellow-100">
+                <td className="border border-gray-400 px-2 py-1 font-bold">② 取引年月日</td>
+                <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
+                <td className="border border-gray-400 px-2 py-1 font-bold">
+                  ヘッダ右側（黄色枠『取引年月日: 2026年3月25日』）／
+                  明細表 第2列（黄色背景列、明細ごとに役務提供完了日／商品引渡日を記載）
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-gray-400 px-2 py-1">③ 取引内容（軽減税率対象品目はその旨）</td>
+                <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
+                <td className="border border-gray-400 px-2 py-1">明細表『品名』『仕様』列、軽減税率対象品目には『※軽減税率対象』表記</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-400 px-2 py-1">④ 税率ごとに区分して合計した対価の額及び適用税率</td>
+                <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
+                <td className="border border-gray-400 px-2 py-1">税額集計表『10% 対象 税抜合計 / 8% 対象 税抜合計』</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-400 px-2 py-1">⑤ 税率ごとに区分した消費税額</td>
+                <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
+                <td className="border border-gray-400 px-2 py-1">税額集計表『10% 消費税額 / 8% 消費税額』</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-400 px-2 py-1">⑥ 書類の交付を受ける事業者の氏名又は名称</td>
+                <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
+                <td className="border border-gray-400 px-2 py-1">本文左上『田中サービス株式会社　御中』</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="mt-2 text-[10px] text-slate-600">
+            ※「取引年月日」とは、消費税法上の「課税資産の譲渡等の年月日」を指し、
+            役務提供の完了日（請負・サービスの場合）または商品の引渡日（物品販売の場合）を記載します。
+            請求書発行日や納品書発行日とは異なる概念です。
+          </p>
         </div>
 
         {/* Footer */}

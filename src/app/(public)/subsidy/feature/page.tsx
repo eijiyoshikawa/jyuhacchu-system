@@ -160,6 +160,118 @@ export default function FeatureDocumentPage() {
         </div>
       </section>
 
+      {/* 受発注機能 明示セクション — 4回目の不備対応（共P-02 受発注機能を有すること） */}
+      <section className="mb-8 page-break-before avoid-break">
+        <div className="border-4 border-black p-6">
+          <p className="text-center text-sm font-bold tracking-[0.4em] mb-2">
+            ITツール登録要領 2-3 (1) 4. の対応説明
+          </p>
+          <h2 className="text-center text-2xl font-black tracking-widest border-y-4 border-black py-3 mb-4">
+            本ITツールは「受発注機能」を有します
+          </h2>
+
+          <p className="text-sm leading-relaxed mb-4">
+            ITツール登録要領「2-3 各カテゴリーの内容（1）カテゴリー1 ソフトウェア
+            4. 『会計』『受発注』『決済』の3つの機能のいずれかを有するソフトウェアに関する留意事項」
+            に基づき、本ITツール「受発注Lシステム」が
+            <strong className="bg-yellow-200">『受発注』機能</strong>
+            を有していることを以下の表で明示します。
+          </p>
+
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold w-44">
+                  カテゴリ機能
+                </th>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-center text-sm font-bold w-24">
+                  本ツールでの<br />該当有無
+                </th>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold">
+                  本ツールでの実装内容
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-2 border-black px-3 py-2 font-bold">
+                  会計機能
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-center text-2xl font-black">
+                  ×
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-xs">
+                  仕訳・元帳・試算表・財務三表等の会計機能は提供しません。
+                </td>
+              </tr>
+              <tr className="bg-yellow-100">
+                <td className="border-2 border-black px-3 py-2 font-black text-base">
+                  受発注機能<br />（本ツールが該当）
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-center text-3xl font-black">
+                  ◎
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  <strong>買い手側（発注）機能</strong>:
+                  発注書作成（PO-YYYYMMDD-XXXX 自動採番）、明細・税率・消費税の自動計算、
+                  仕入管理、買掛・支払管理（ステータス: 発注済→請負済→納品完了→検収完了→支払済）。
+                  <br />
+                  <strong>売り手側（受注）機能</strong>:
+                  発注書からの請求書自動生成（INV-YYYYMMDD-XXXX 採番）、
+                  売上請求管理、売掛・回収管理（ステータス: 提出→承認→支払）、
+                  適格請求書等保存方式準拠のPDF／CSV出力。
+                  <br />
+                  <strong>取引先・契約条件管理</strong>:
+                  取引先マスタ（適格請求書発行事業者登録番号の国税庁Web-API自動検証、
+                  納入条件・支払サイト等）、案件管理（案件名・納入先・履行期間）。
+                  <br />
+                  <strong>承認・統制機能</strong>:
+                  多段階承認ワークフロー、監査ログ、SHA-256ハッシュ＋タイムスタンプ
+                  による改ざん防止（電子帳簿保存法 電子取引要件準拠）。
+                </td>
+              </tr>
+              <tr>
+                <td className="border-2 border-black px-3 py-2 font-bold">
+                  決済機能
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-center text-2xl font-black">
+                  ×
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-xs">
+                  POSレジ等の決済機能や、商品売買に伴う金銭のやり取りで債権債務を解消する機能は提供しません。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div className="mt-4 border-2 border-black p-3 text-xs leading-relaxed">
+            <p className="font-bold mb-1">対応する機能セクションへのページ参照</p>
+            <ul className="list-disc pl-5 space-y-0.5">
+              <li>
+                <strong>買い手側 受発注機能の詳細</strong> →
+                §3-1 発注管理機能（P.5）／ §3-2 取引先管理機能（P.6）
+              </li>
+              <li>
+                <strong>売り手側 受発注機能（請求）の詳細</strong> →
+                §3-3 請求管理機能（P.7）／ §3-4 インボイス制度対応（P.7）
+              </li>
+              <li>
+                <strong>業務フロー全体（買い手側／売り手側 並列）</strong> →
+                §4 業務フロー図［図1］（P.9）
+              </li>
+              <li>
+                <strong>受発注業務の利用方法（ロール別）</strong> →
+                §5 ITツールの利用方法（5-2 発注担当／5-4 受注担当）（P.10）
+              </li>
+            </ul>
+          </div>
+
+          <p className="mt-3 text-xs text-slate-600">
+            ※ 本セクションは ITツール登録要領「2-3 各カテゴリーの内容（1）4.」の留意事項に対応するために設けたものです。
+          </p>
+        </div>
+      </section>
+
       {/* 1. Product Overview */}
       <section className="mb-8 avoid-break">
         <h2 className="mb-3 border-l-4 border-black pl-3 text-lg font-bold">
