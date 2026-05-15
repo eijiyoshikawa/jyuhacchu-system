@@ -24,10 +24,38 @@ const DOCUMENTS = [
   },
   {
     href: "/subsidy/pricing",
-    label: "価格説明資料",
+    label: "価格説明資料（受発注Lシステム版）",
     description:
-      "IT導入補助金の申請様式（1プラン展開）に準拠した標準・最小価格と導入事例を明記。",
+      "IT導入補助金の申請様式（1プラン展開）に準拠した標準・最小価格と導入事例を明記。IT導入支援事業者: 株式会社 受発注Lシステム（デフォルト）。",
     pages: "約 2〜3 ページ",
+  },
+  {
+    href: "/subsidy/pricing/tx",
+    label: "価格説明資料（TX.企画版）",
+    description:
+      "上記と同内容の価格説明資料。IT導入支援事業者: 株式会社TX.企画 申請用バージョン。",
+    pages: "約 2〜3 ページ",
+  },
+  {
+    href: "/subsidy/pricing/let",
+    label: "価格説明資料（LET版）",
+    description:
+      "上記と同内容の価格説明資料。IT導入支援事業者: 株式会社LET 申請用バージョン。",
+    pages: "約 2〜3 ページ",
+  },
+  {
+    href: "/subsidy/pricing/rationale",
+    label: "申請価格理由書（TX.企画版）",
+    description:
+      "標準価格の設定理由・開発費用の回収計画・希少性・類似ITツール比較を記載した PDF 添付用ファイル。IT導入支援事業者: 株式会社TX.企画。",
+    pages: "約 6〜8 ページ",
+  },
+  {
+    href: "/subsidy/pricing/rationale/let",
+    label: "申請価格理由書（LET版）",
+    description:
+      "上記と同内容の申請価格理由書。IT導入支援事業者: 株式会社LET 申請用バージョン。",
+    pages: "約 6〜8 ページ",
   },
   {
     href: "/subsidy/requirements",
