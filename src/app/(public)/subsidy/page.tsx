@@ -10,9 +10,16 @@ export const metadata: Metadata = {
 const DOCUMENTS = [
   {
     href: "/subsidy/feature",
-    label: "機能説明資料",
+    label: "機能説明資料（TX.企画版）",
     description:
-      "発注管理・取引先管理・請求管理・承認ワークフロー等、補助金審査に必要な機能詳細を体系的に記載。ブラウザから直接PDF保存可能。",
+      "発注管理・取引先管理・請求管理・承認ワークフロー等、補助金審査に必要な機能詳細を体系的に記載。IT導入支援事業者: 株式会社TX.企画。",
+    pages: "約 10〜12 ページ",
+  },
+  {
+    href: "/subsidy/feature/let",
+    label: "機能説明資料（LET版）",
+    description:
+      "上記と同内容の機能説明資料。IT導入支援事業者: 株式会社LET（開発メーカー兼）申請用バージョン。",
     pages: "約 10〜12 ページ",
   },
   {
@@ -28,6 +35,20 @@ const DOCUMENTS = [
     description:
       "Pコード選択（共P-02 等）、インボイス制度・電子帳簿保存法の要件対応、SECURITY ACTION・GビズID対応状況を記載。",
     pages: "約 4〜5 ページ",
+  },
+  {
+    href: "/subsidy/invoice-sample",
+    label: "適格請求書 出力サンプル（TX.企画版）",
+    description:
+      "受発注Lシステムが出力する適格請求書のサンプル。取引年月日・登録番号・税率別合計・税率別消費税額・適用税率等を網羅。",
+    pages: "約 2 ページ",
+  },
+  {
+    href: "/subsidy/invoice-sample/let",
+    label: "適格請求書 出力サンプル（LET版）",
+    description:
+      "上記と同内容の適格請求書サンプル。株式会社LET 申請用バージョン。",
+    pages: "約 2 ページ",
   },
 ]
 
