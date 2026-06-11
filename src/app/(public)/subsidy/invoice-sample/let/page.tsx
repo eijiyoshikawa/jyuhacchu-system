@@ -136,7 +136,11 @@ export default function InvoiceSamplePage() {
               （= 消費税法上の課税資産の譲渡等の年月日 = 役務提供完了日／商品引渡日）。
               <strong>請求書発行日とは異なる</strong>ことに注意。
             </li>
-            <li>③ 取引内容（軽減税率対象品目はその旨）</li>
+            <li>
+              <strong className="bg-green-200">③ 取引内容</strong>
+              （軽減税率対象品目はその旨を明記）。明細表 第3列に「<strong>取引内容（品名／仕様）</strong>」
+              として記載、軽減税率対象品目は緑色背景で識別。
+            </li>
             <li>④ 税率ごとに区分して合計した対価の額（税抜 or 税込）および適用税率</li>
             <li>⑤ 税率ごとに区分した消費税額</li>
             <li>⑥ 書類の交付を受ける事業者の氏名又は名称</li>
@@ -208,8 +212,9 @@ export default function InvoiceSamplePage() {
               <tr className="bg-gray-100">
                 <th className="border border-gray-300 px-2 py-2 text-center w-8">No.</th>
                 <th className="border-2 border-black bg-yellow-200 px-2 py-2 text-center w-24 font-black">取引年月日</th>
-                <th className="border border-gray-300 px-2 py-2 text-left">品名</th>
-                <th className="border border-gray-300 px-2 py-2 text-left">仕様</th>
+                <th className="border-2 border-black bg-yellow-200 px-2 py-2 text-left font-black" colSpan={2}>
+                  取引内容（品名／仕様）
+                </th>
                 <th className="border border-gray-300 px-2 py-2 text-right w-16">数量</th>
                 <th className="border border-gray-300 px-2 py-2 text-center w-12">単位</th>
                 <th className="border border-gray-300 px-2 py-2 text-right w-24">単価</th>
@@ -224,15 +229,17 @@ export default function InvoiceSamplePage() {
                   <td className="border-2 border-black bg-yellow-50 px-2 py-1.5 text-center font-bold text-xs">
                     {item.transactionDate}
                   </td>
-                  <td className="border border-gray-300 px-2 py-1.5">
-                    {item.name}
+                  <td className={"px-2 py-1.5 " + (item.taxRate === 8 ? "border-2 border-black bg-green-50" : "border border-gray-300")}>
+                    <div className="font-bold">{item.name}</div>
                     {item.taxRate === 8 && (
-                      <span className="ml-1 rounded bg-green-100 px-1.5 py-0.5 text-[10px] font-bold text-green-700">
-                        ※軽減税率対象
+                      <span className="inline-block mt-1 border-2 border-black bg-green-200 px-2 py-0.5 text-xs font-black">
+                        ※ 軽減税率（8%）対象品目
                       </span>
                     )}
                   </td>
-                  <td className="border border-gray-300 px-2 py-1.5">{item.spec}</td>
+                  <td className={"px-2 py-1.5 " + (item.taxRate === 8 ? "border-2 border-black bg-green-50" : "border border-gray-300")}>
+                    {item.spec}
+                  </td>
                   <td className="border border-gray-300 px-2 py-1.5 text-right">{item.qty}</td>
                   <td className="border border-gray-300 px-2 py-1.5 text-center">{item.unit}</td>
                   <td className="border border-gray-300 px-2 py-1.5 text-right">{yen(item.unitPrice)}</td>
@@ -349,10 +356,13 @@ export default function InvoiceSamplePage() {
                   明細表 第2列（黄色背景列、明細ごとに役務提供完了日／商品引渡日を記載）
                 </td>
               </tr>
-              <tr>
-                <td className="border border-gray-400 px-2 py-1">③ 取引内容（軽減税率対象品目はその旨）</td>
+              <tr className="bg-green-50">
+                <td className="border border-gray-400 px-2 py-1 font-bold">③ 取引内容（軽減税率対象品目はその旨）</td>
                 <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
-                <td className="border border-gray-400 px-2 py-1">明細表『品名』『仕様』列、軽減税率対象品目には『※軽減税率対象』表記</td>
+                <td className="border border-gray-400 px-2 py-1 font-bold">
+                  明細表 第3列「<strong>取引内容（品名／仕様）</strong>」（黄色背景・黒枠ヘッダ）／
+                  軽減税率対象品目には行全体を緑色枠で囲み、<strong>「※ 軽減税率（8%）対象品目」</strong>マークを明示
+                </td>
               </tr>
               <tr>
                 <td className="border border-gray-400 px-2 py-1">④ 税率ごとに区分して合計した対価の額及び適用税率</td>

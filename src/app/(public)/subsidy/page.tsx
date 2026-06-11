@@ -65,6 +65,20 @@ const DOCUMENTS = [
     pages: "約 4〜5 ページ",
   },
   {
+    href: "/subsidy/demo-info",
+    label: "デモ機・テストアカウント情報（TX.企画版）",
+    description:
+      "審査確認用のサービスログインURL、3ロール（管理者／発注担当／受注担当）の ID・パスワード、選択プロセス（Pコード）別の機能確認手順を記載。",
+    pages: "約 3〜4 ページ",
+  },
+  {
+    href: "/subsidy/demo-info/let",
+    label: "デモ機・テストアカウント情報（LET版）",
+    description:
+      "上記と同内容のデモ機情報。株式会社LET 申請用バージョン。",
+    pages: "約 3〜4 ページ",
+  },
+  {
     href: "/subsidy/invoice-sample",
     label: "適格請求書 出力サンプル（TX.企画版）",
     description:

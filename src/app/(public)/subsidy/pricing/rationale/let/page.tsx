@@ -60,6 +60,55 @@ export default function PriceRationaleDocumentLetPage() {
         </table>
       </section>
 
+      {/* 目次 — 6回目不備対応で類似ITツール比較表の位置を明示 */}
+      <section className="mb-8 avoid-break">
+        <div className="border-4 border-black p-5">
+          <h2 className="text-center text-xl font-black tracking-widest border-y-4 border-black py-2 mb-3">
+            目　次
+          </h2>
+          <table className="w-full border-collapse text-sm">
+            <tbody>
+              {[
+                { no: "①", label: "IT導入支援事業者名", page: "P.2" },
+                { no: "②", label: "ITツール名", page: "P.2" },
+                { no: "③", label: "価格設定の内容", page: "P.3" },
+                { no: "④ (1)", label: "リリース初期における開発費用の資金回収計画", page: "P.4" },
+                { no: "④ (2)", label: "市場における希少性・独自性", page: "P.4" },
+                { no: "④ (3)", label: "クラウド基盤の運用インフラコスト", page: "P.5" },
+                { no: "★④ (4)", label: "類似ITツールとの価格及び機能の比較（実在製品8件との比較表）", page: "P.6〜P.7" },
+                { no: "⑤", label: "最小販売価格の根拠", page: "P.8" },
+                { no: "⑥", label: "価格改定方針", page: "P.8" },
+              ].map((row) => (
+                <tr key={row.no}>
+                  <td
+                    className={
+                      "border-2 border-black px-2 py-1.5 text-center font-bold w-20 " +
+                      (row.no.startsWith("★") ? "bg-black text-white" : "")
+                    }
+                  >
+                    {row.no}
+                  </td>
+                  <td
+                    className={
+                      "border-2 border-black px-3 py-1.5 " +
+                      (row.no.startsWith("★") ? "bg-yellow-100 font-bold" : "")
+                    }
+                  >
+                    {row.label}
+                  </td>
+                  <td className="border-2 border-black px-2 py-1.5 text-center w-24 font-mono text-xs">
+                    {row.page}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="mt-2 text-xs text-slate-600">
+            ※ ★ 印は審査における重要項目です。
+          </p>
+        </div>
+      </section>
+
       <Section label="① IT導入支援事業者名">
         <p className="text-base">株式会社LET</p>
       </Section>
@@ -199,16 +248,33 @@ export default function PriceRationaleDocumentLetPage() {
           明確に整理されています。
         </p>
 
-        <div className="mt-8 mb-4 page-break-before">
+        {/* 章扉ページ — 類似ITツール比較 (6回目不備対応で強化) */}
+        <div className="mt-8 mb-6 page-break-before avoid-break">
+          <div className="border-4 border-black p-8 text-center">
+            <p className="text-sm font-bold mb-2">CHAPTER ④</p>
+            <h3 className="text-2xl sm:text-3xl font-black tracking-widest border-y-4 border-black py-4 my-3">
+              類 似 I T ツ ー ル と の<br />
+              価 格 及 び 機 能 の 比 較
+            </h3>
+            <p className="text-sm mt-3">本資料 ④ (4)</p>
+            <p className="text-xs mt-2 text-slate-600">
+              開発メーカー: 株式会社LET ／ ITツール: 受発注Lシステム<br />
+              比較対象: 実在する具体的な競合製品8件（NetSuite, SAP Business ByDesign,
+              マネーフォワード, 楽楽明細, バクラク, ANDPAD, AnyONE, ジョブカン）
+            </p>
+          </div>
+        </div>
+
+        <div className="mb-4 page-break-before">
           <h3 className="border-4 border-black bg-black text-white p-3 text-center text-lg font-black">
             (4) 類似ITツールとの価格及び機能の比較
           </h3>
         </div>
         <p className="text-sm leading-relaxed mb-4">
-          国内で流通する類似ITツール（受発注・請求・インボイス対応SaaS）との
-          価格および機能比較は下表のとおりです。比較対象は、本ツールと同一の
-          「インボイス制度対応・受発注機能」を有する主要SaaSカテゴリを想定した
-          公表情報ベースの参考値です。
+          本ツール「受発注Lシステム」の標準販売価格（年額3,000,000円）および最小販売価格
+          （年額1,500,000円）の妥当性を、<strong>国内で実際に流通する具体的な競合製品8件</strong>
+          と比較した結果を下表にまとめます。比較対象は実在する製品名（提供企業名併記）であり、
+          各社の公表価格・公開資料に基づく2026年4月時点の調査値です。
         </p>
 
         <div className="overflow-x-auto">
