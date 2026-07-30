@@ -138,7 +138,7 @@ export default function SubsidyIndexPage() {
               <dt className="font-bold text-slate-700">主Pコード</dt>
               <dd>共P-02（決済・債権債務・資金回収）</dd>
               <dt className="font-bold text-slate-700">副Pコード</dt>
-              <dd>共P-03（供給・在庫・物流） / 汎P-07（汎用・自動化・分析ツール）</dd>
+              <dd>なし（共P-02 の単独申請）</dd>
               <dt className="font-bold text-slate-700">申請要件</dt>
               <dd>GビズIDプライム取得、SECURITY ACTION 宣言、みらデジ経営チェック 等</dd>
             </dl>

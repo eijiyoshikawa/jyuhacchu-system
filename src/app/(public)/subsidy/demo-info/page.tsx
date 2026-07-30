@@ -54,7 +54,7 @@ export default function DemoInfoPage() {
                 副Pコード
               </th>
               <td className="border-2 border-black px-4 py-3 text-base">
-                共P-03（供給・在庫・物流）
+                なし
               </td>
             </tr>
           </tbody>
@@ -194,14 +194,13 @@ export default function DemoInfoPage() {
           §3. 選択プロセス（Pコード）に該当する機能の確認手順
         </h2>
         <p className="mb-4 text-sm leading-relaxed">
-          申請ポータルで選択した <strong>共P-02（決済・債権債務・資金回収）</strong> および
-          <strong>共P-03（供給・在庫・物流）</strong> に該当する機能の、デモ機での
-          確認手順を以下に示します。
+          申請ポータルで選択した <strong>共P-02（決済・債権債務・資金回収）</strong>
+          に該当する機能の、デモ機での確認手順を以下に示します。
         </p>
 
         {/* 共P-02 */}
         <h3 className="mt-5 mb-2 text-base font-bold">
-          3-1. 共P-02（決済・債権債務・資金回収）の機能確認手順
+          共P-02（決済・債権債務・資金回収）の機能確認手順
         </h3>
         <div className="mb-2">
           <span className="inline-block border-2 border-black bg-yellow-200 px-3 py-1 text-xs font-black">
@@ -257,54 +256,6 @@ export default function DemoInfoPage() {
           </tbody>
         </table>
 
-        {/* 共P-03 */}
-        <h3 className="mt-6 mb-2 text-base font-bold">
-          3-2. 共P-03（供給・在庫・物流）の機能確認手順
-        </h3>
-        <div className="mb-2">
-          <span className="inline-block border-2 border-black bg-blue-100 px-3 py-1 text-xs font-black">
-            共P-03 対応 — 取引条件管理／納品管理／納品手続処理
-          </span>
-        </div>
-        <table className="w-full border-collapse text-sm">
-          <thead>
-            <tr className="bg-slate-100">
-              <th className="border-2 border-black px-2 py-2 text-left w-12">手順</th>
-              <th className="border-2 border-black px-2 py-2 text-left">操作内容</th>
-              <th className="border-2 border-black px-2 py-2 text-left w-44">確認できる機能</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border-2 border-black px-2 py-2 text-center font-bold">1</td>
-              <td className="border-2 border-black px-2 py-2 text-xs">
-                左メニュー「取引先管理」→ 既存の取引先（田中サービス株式会社等）を開く
-              </td>
-              <td className="border-2 border-black px-2 py-2 text-xs">取引条件管理（取引先・納入条件・支払サイト等）</td>
-            </tr>
-            <tr>
-              <td className="border-2 border-black px-2 py-2 text-center font-bold">2</td>
-              <td className="border-2 border-black px-2 py-2 text-xs">
-                左メニュー「案件管理」→ 既存案件を開く → 案件名・納入先・履行期間を確認
-              </td>
-              <td className="border-2 border-black px-2 py-2 text-xs">納品管理（納品先・納品期限・納品商品）</td>
-            </tr>
-            <tr>
-              <td className="border-2 border-black px-2 py-2 text-center font-bold">3</td>
-              <td className="border-2 border-black px-2 py-2 text-xs">
-                受注担当アカウント（suzuki@tanaka-service.co.jp）でログイン → 発注書詳細 → 「納品報告」ボタン
-              </td>
-              <td className="border-2 border-black px-2 py-2 text-xs">納品手続処理（納品ステータス遷移）</td>
-            </tr>
-            <tr>
-              <td className="border-2 border-black px-2 py-2 text-center font-bold">4</td>
-              <td className="border-2 border-black px-2 py-2 text-xs">
-                発注書のステータス遷移（下書き→申請中→承認済→発注済→請負済→納品完了→検収完了）
-              </td>
-              <td className="border-2 border-black px-2 py-2 text-xs">納品確認状況の追跡／確定タイムスタンプ＋SHA-256ハッシュの自動付与</td>
-            </tr>
-          </tbody>
-        </table>
       </section>
 
       {/* §4 セキュリティ・データ取扱注意 */}

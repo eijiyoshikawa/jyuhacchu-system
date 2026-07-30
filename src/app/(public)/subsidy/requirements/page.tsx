@@ -83,7 +83,7 @@ export default function RequirementsDocumentPage() {
               </td>
             </tr>
             <tr>
-              <td className="border border-slate-300 px-2 py-2 align-top font-mono font-bold">
+              <td className="border border-slate-300 px-2 py-2 align-top font-mono">
                 共P-03
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top">
@@ -92,15 +92,14 @@ export default function RequirementsDocumentPage() {
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
                 取引条件管理（取引先、納入条件）、ロケーション／入出庫管理、在庫分析、納品管理、配送業者管理
               </td>
-              <td className="border border-slate-300 px-2 py-2 align-top text-center font-bold text-orange-600">
-                ✓<br />副
+              <td className="border border-slate-300 px-2 py-2 align-top text-center">
+                —
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
-                取引先マスタに納入条件・支払サイトを保持。発注書に納期・納入先（作業場所）・履行期間を記録し、納品管理ステータス（納品完了／検収完了）を遷移管理。
+                本ツールは在庫管理・入出庫・配送業者管理等の物流機能を提供しないため、
+                本Pコードは選択しません。
               </td>
-              <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
-                機能説明資料 p.3（§3-1 ステータス遷移）
-              </td>
+              <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">—</td>
             </tr>
             <tr>
               <td className="border border-slate-300 px-2 py-2 align-top font-mono">共P-04</td>
@@ -140,7 +139,7 @@ export default function RequirementsDocumentPage() {
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
                 本ツールには発注書・請求書の多段階承認ワークフローが含まれるが、
                 公募要領の「業務プロセス（共P-XX）と汎用プロセス（汎P-XX）は同時選択不可」
-                の制約により、業務プロセス側（共P-02 / 共P-03）の選択を優先するため
+                の制約により、業務プロセス側（共P-02）の選択を優先するため
                 本 Pコードは選択しない。
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">—</td>
@@ -153,8 +152,7 @@ export default function RequirementsDocumentPage() {
           <p className="mt-1">
             本ツールの中核機能は <strong>共P-02（決済・債権債務・資金回収）</strong> に該当し、
             インボイス対応類型（受発注機能）の要件を充足します。
-            加えて <strong>共P-03（供給・在庫・物流）</strong> の納品管理機能も備えるため、
-            業務プロセスとして 共P-02（主）・共P-03（副）の2つを選択します。
+            業務プロセスとして 共P-02 の単独選択とします。
           </p>
           <p className="mt-2">
             本ツールには発注書・請求書の多段階承認ワークフロー機能も含まれますが、

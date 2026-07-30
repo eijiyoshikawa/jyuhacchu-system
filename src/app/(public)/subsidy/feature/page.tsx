@@ -64,7 +64,7 @@ export default function FeatureDocumentPage() {
                   副Pコード
                 </th>
                 <td className="border-2 border-black px-4 py-3 text-base">
-                  共P-03（供給・在庫・物流）
+                  なし
                 </td>
               </tr>
               <tr>
@@ -283,10 +283,10 @@ export default function FeatureDocumentPage() {
           </h2>
 
           <p className="text-sm leading-relaxed mb-4">
-            申請ポータルで選択した <strong>共P-02（決済・債権債務・資金回収）</strong> および
-            <strong>共P-03（供給・在庫・物流）</strong> に該当する各機能の、本機能説明資料
-            内での記載箇所を以下の通り明示します。各機能セクション冒頭にも
-            <span className="bg-yellow-200 font-bold">「共P-02 対応」「共P-03 対応」</span>
+            申請ポータルで選択した <strong>共P-02（決済・債権債務・資金回収）</strong>
+            に該当する各機能の、本機能説明資料内での記載箇所を以下の通り明示します。
+            各機能セクション冒頭にも
+            <span className="bg-yellow-200 font-bold">「共P-02 対応」</span>
             のマーカーバッジを配置していますので、併せてご確認ください。
           </p>
 
@@ -359,42 +359,6 @@ export default function FeatureDocumentPage() {
                 </td>
               </tr>
 
-              <tr className="bg-blue-50">
-                <td
-                  className="border-2 border-black px-3 py-2 align-top font-black text-base"
-                  rowSpan={3}
-                >
-                  共P-03（副）<br />
-                  <span className="text-xs">供給・在庫・物流</span>
-                </td>
-                <td className="border-2 border-black px-3 py-2 text-xs">
-                  取引条件管理（取引先・納入条件）
-                </td>
-                <td className="border-2 border-black px-3 py-2 text-xs">
-                  §3-2 取引先管理機能（取引先マスタに会社種別・住所・連絡先・インボイス番号・納入条件等を登録）<br />
-                  <strong>P.6</strong>
-                </td>
-              </tr>
-              <tr className="bg-blue-50">
-                <td className="border-2 border-black px-3 py-2 text-xs">
-                  納品管理（納品先・納品期限・納品商品・配送状況確認）
-                </td>
-                <td className="border-2 border-black px-3 py-2 text-xs">
-                  §3-1 発注管理機能 取引契約必要記載事項チェック（案件名称・納入先・履行期間・支払条件・契約日 等）／<br />
-                  §3-1 ステータス遷移（納品完了・検収完了で確定タイムスタンプ＋SHA-256 自動付与）<br />
-                  <strong>P.5</strong>
-                </td>
-              </tr>
-              <tr className="bg-blue-50">
-                <td className="border-2 border-black px-3 py-2 text-xs">
-                  納品手続処理
-                </td>
-                <td className="border-2 border-black px-3 py-2 text-xs">
-                  §4 業務フロー図［図1］<br />
-                  発注企業側「⑥ 納品検収」／受注企業側「③ 納品・作業実施」「④ 納品報告登録」<br />
-                  <strong>P.9</strong>
-                </td>
-              </tr>
             </tbody>
           </table>
 
@@ -403,8 +367,6 @@ export default function FeatureDocumentPage() {
             <p>
               各機能サブセクション（§3-1〜§3-4）の見出し直下に、対応するPコードを示す
               バッジ <span className="inline-block border-2 border-black bg-yellow-200 px-2 py-0.5 font-bold">共P-02 対応</span>
-              {" / "}
-              <span className="inline-block border-2 border-black bg-blue-100 px-2 py-0.5 font-bold">共P-03 対応</span>
               を配置しています。
             </p>
           </div>
@@ -440,10 +402,7 @@ export default function FeatureDocumentPage() {
                 "適格請求書等保存方式（インボイス制度）／電子帳簿保存法（電子取引要件）／下請法・請負契約一般の必要記載事項",
               ],
               ["主Pコード", "共P-02（決済・債権債務・資金回収）"],
-              [
-                "副Pコード",
-                "共P-03（供給・在庫・物流）",
-              ],
+              ["副Pコード", "なし"],
             ].map(([k, v]) => (
               <tr key={k} className="border-b-2 border-black">
                 <th className="w-40 border-2 border-black bg-slate-100 px-3 py-2 text-left text-xs font-bold text-slate-900">
@@ -527,9 +486,6 @@ export default function FeatureDocumentPage() {
         <div className="mb-2 flex flex-wrap gap-2">
           <span className="inline-block border-2 border-black bg-yellow-200 px-3 py-1 text-xs font-black">
             共P-02 対応（発注・仕入管理／買掛・支払管理／採算管理 等）
-          </span>
-          <span className="inline-block border-2 border-black bg-blue-100 px-3 py-1 text-xs font-black">
-            共P-03 対応（納品管理／取引条件管理）
           </span>
         </div>
         <table className="w-full border-collapse text-sm">
@@ -618,9 +574,6 @@ export default function FeatureDocumentPage() {
         <div className="mb-2 flex flex-wrap gap-2">
           <span className="inline-block border-2 border-black bg-yellow-200 px-3 py-1 text-xs font-black">
             共P-02 対応（採算管理／インボイス制度対応）
-          </span>
-          <span className="inline-block border-2 border-black bg-blue-100 px-3 py-1 text-xs font-black">
-            共P-03 対応（取引条件管理：取引先・納入条件）
           </span>
         </div>
         <table className="w-full border-collapse text-sm">
@@ -875,9 +828,6 @@ export default function FeatureDocumentPage() {
         <div className="mb-3 flex flex-wrap gap-2">
           <span className="inline-block border-2 border-black bg-yellow-200 px-3 py-1 text-xs font-black">
             共P-02 対応（発注・仕入／買掛・支払／受注・売上請求／売掛・回収 の業務フロー全体）
-          </span>
-          <span className="inline-block border-2 border-black bg-blue-100 px-3 py-1 text-xs font-black">
-            共P-03 対応（納品検収・納品報告・納品手続処理）
           </span>
         </div>
         <p className="mb-4 text-sm leading-relaxed">
