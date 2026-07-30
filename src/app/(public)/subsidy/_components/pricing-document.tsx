@@ -95,9 +95,12 @@ export function PricingDocument({ providerName }: PricingDocumentProps) {
           <p className="font-bold mb-2">補足事項</p>
           <ul className="list-disc pl-5 space-y-1">
             <li>
-              本価格は、<strong>ITツール登録要領 カテゴリー1〜6 に区分されるソフトウェア機能の利用料</strong>のみを
-              対象としたものであり、<strong>カテゴリー7（保守サポート）に該当する役務は
-              本価格には含まれません</strong>。
+              本価格は、<strong>ITツール登録要領 カテゴリー1（ソフトウェア）に区分される
+              受発注機能の年間利用料</strong>のみで構成されています。
+            </li>
+            <li>
+              含まれる機能：発注管理／取引先管理（インボイス番号 国税庁API検証）／
+              請求管理／多段階承認ワークフロー／電子帳簿保存法対応／監査ログ。
             </li>
             <li>
               補助金交付申請にあたっては、原則 <strong>最大2年分の SaaS 利用料</strong> を
@@ -111,7 +114,7 @@ export function PricingDocument({ providerName }: PricingDocumentProps) {
             </li>
             <li>
               本資料の価格は標準プランおよび最小プランの2種類のみであり、
-              <strong>オプション追加・個別割引は設定していません</strong>。
+              <strong>オプション追加・個別割引・初期費用は設定していません</strong>。
             </li>
           </ul>
         </div>
@@ -282,7 +285,7 @@ export function PricingDocument({ providerName }: PricingDocumentProps) {
         </table>
         <p className="mt-3 text-xs text-slate-500">
           ※ 補助率・補助上限は参考値です。最新の公募要領（中小機構 デジタル化・AI導入補助金
-          ポータルサイト）でご確認ください。補助対象外経費（カテゴリー7 保守サポート等）は含みません。
+          ポータルサイト）でご確認ください。上表の金額は本ソフトウェア（カテゴリー1）の年間利用料のみを対象としています。
         </p>
       </Section>
 
