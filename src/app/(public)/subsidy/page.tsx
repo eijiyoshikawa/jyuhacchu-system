@@ -59,9 +59,16 @@ const DOCUMENTS = [
   },
   {
     href: "/subsidy/requirements",
-    label: "その他要件の説明資料",
+    label: "その他要件の説明資料（TX.企画版）",
     description:
       "Pコード選択（共P-02 等）、インボイス制度・電子帳簿保存法の要件対応、SECURITY ACTION・GビズID対応状況を記載。",
+    pages: "約 4〜5 ページ",
+  },
+  {
+    href: "/subsidy/requirements/let",
+    label: "その他要件の説明資料（LET版）",
+    description:
+      "上記と同内容のその他要件説明。株式会社LET 申請用バージョン（開発メーカー＝IT導入支援事業者＝LET）。",
     pages: "約 4〜5 ページ",
   },
   {
