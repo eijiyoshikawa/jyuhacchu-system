@@ -110,6 +110,51 @@
 | `NTA_APP_ID` | 国税庁 Web-API アプリケーションID | 未設定時はフォーマットチェックのみ |
 | `NEXT_PUBLIC_SENTRY_DSN` | Sentry DSN | 任意 |
 
+### 3-5. デプロイフロー（GitHub → Vercel 自動連携）
+
+**本プロジェクトは GitHub と Vercel が連携済みで、GitHub の対象ブランチに push
+すれば Vercel が自動的にビルド・本番反映**します。**ターミナルからの
+`vercel deploy` は原則使用しません**（かつて使用していた `vercel link` /
+`vercel env pull .env.production.local` / `vercel deploy --prod` の一連の
+手順は非推奨。実施の必要なし）。
+
+#### 標準的な反映手順（コード変更時）
+
+```bash
+# ローカルで修正・コミット・push するだけ
+git add -A
+git commit -m "..."
+git push origin <対象ブランチ>
+```
+
+push 後、Vercel が数十秒〜数分で自動的にビルド → 本番デプロイ → カスタムドメイン
+（`lsystem.let-inc.net`）にも即反映。
+
+#### Production Branch
+
+Vercel の Production Branch 設定に紐づいたブランチが本番デプロイ対象になります。
+現状は `claude/create-marketing-materials-FirCs` が Production Branch。
+`it-hojo` は開発用ブランチとして並行運用しており、両ブランチを常に同期させる
+運用（`git checkout <他方> && git merge --ff-only <対象>`）を継続。
+
+将来的に運用を単純化するなら、Vercel ダッシュボード → Project → Settings → Git
+から **Production Branch を `it-hojo`（または任意の main）に一本化** することを
+推奨。
+
+#### 環境変数
+
+環境変数（`DATABASE_URL`、`NEXTAUTH_SECRET` 等）は **Vercel ダッシュボード側で
+管理**しており、ローカルの `.env.production.local` に依存しません。修正が必要な
+場合は Vercel ダッシュボード → Project → Settings → Environment Variables で
+直接編集し、再デプロイ（自動 or 手動トリガ）で反映。
+
+#### 例外: DB のシード再投入だけはターミナル操作が必要
+
+`prisma migrate reset --force` のような **DBへの直接操作** はコードの push では
+反映されないため、必要な場合のみローカルターミナルから DATABASE_URL を渡して
+実行します（DATABASE_URL は Vercel ダッシュボードから取得してコピペ）。
+これは審査用のシード再投入等、稀な運用時のみ発生。
+
 ## 4. 公開資料 URL 一覧
 
 ### 4-1. 本番URL（DNS反映後・審査書類に記載する推奨URL）
@@ -453,7 +498,18 @@ LP／機能説明資料に埋め込まれる画面キャプチャは
     - `/subsidy/pricing/rationale` → 実数値が入っているか
     - `/subsidy/invoice-sample` → サンプル請求書が表示されるか
 
-15. **PDF出力の検証**
+15. **本番反映（GitHub → Vercel 自動デプロイ）**
+    ```bash
+    git add -A
+    git commit -m "..."
+    git push origin <Production Branch>
+    ```
+    push すると Vercel が自動的にビルド → 本番反映（数十秒〜数分）。
+    `vercel deploy` コマンドは使用しない。反映確認は Vercel ダッシュボードの
+    Deployments タブ、または `curl -I https://lsystem.let-inc.net/subsidy/...` で
+    HTTP/2 200 が返ることを確認。
+
+16. **PDF出力の検証**
     各資料ページで Ctrl+P／⌘+P → 「PDFとして保存」で A4 印刷プレビューを確認:
     - 表紙の黒塗りヘッダが正しく印字される
     - SVG業務フロー図が途切れず1ページに収まる
@@ -462,23 +518,23 @@ LP／機能説明資料に埋め込まれる画面キャプチャは
 
 ### Phase E: 申請・不備対応（所要 1〜3週間／審査回転次第）
 
-16. **補助金 事業者向けポータルにログイン（GビズIDプライム）**
+17. **補助金 事業者向けポータルにログイン（GビズIDプライム）**
     - ITツール登録新規申請
     - 各画面を本 playbook の「申請画面入力チェックリスト」（§10）どおりに入力
 
-17. **PDFをアップロード**
+18. **PDFをアップロード**
     - 機能説明資料 → `/subsidy/feature` の PDF
     - 価格説明資料 → `/subsidy/pricing/tx` の PDF
     - 申請価格理由書 → `/subsidy/pricing/rationale` の PDF
     - インボイス説明資料 → `/subsidy/invoice-sample` の PDF
     - その他説明資料（任意） → `/subsidy/requirements` の PDF
 
-18. **不備指摘への対応**
+19. **不備指摘への対応**
     - 不備メールを受けたら、本 playbook §8 の過去事例と照らし合わせ
-    - 該当する .tsx を修正 → push → Vercel デプロイ → PDF再生成 → 再アップロード
+    - 該当する .tsx を修正 → git push → Vercel 自動デプロイ → PDF再生成 → 再アップロード
     - 対応1回あたり 1〜2時間が目安
 
-19. **採択後**
+20. **採択後**
     - ITツール情報（価格・機能）に変更が発生した場合、本リポジトリで更新後に PDF を再提出
     - 補助金公募要領の改定（年度更新）が出たら要件再確認
 
