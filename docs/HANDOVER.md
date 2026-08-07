@@ -48,7 +48,11 @@ URL 一覧・テストアカウントの速報版は `AGENTS.md` 冒頭を参照
    - Settings → Environment Variables に `NEXT_PUBLIC_INVITE_ORIGIN=https://dlsystem.aigrowthx.pro` を追加
    - `/partners/invite` で発行される招待URLが `https://dlsystem.aigrowthx.pro/invite/[token]` 形式になる
    - `NEXT_PUBLIC_*` はビルド時埋め込みのため **設定後に再デプロイが必要**
-3. **本番へのプロモート**
+3. **本番DBへのシード再投入（デモアカウント反映）**
+   - 受注側管理者 `admin@tanaka-service.co.jp`・招待レコード・サンプル請求書は seed 追加済みだが、**本番DBへは未投入**
+   - Vercel ダッシュボードから `DATABASE_URL` をコピーし、ローカルで
+     `DATABASE_URL="..." npx prisma db seed` を実行（冪等 upsert のため既存データは壊れない）
+4. **本番へのプロモート**
    - 最新コミット（`573b58d` 以降）が Production に反映されているか Deployments タブで確認
    - Production Branch 設定と現行開発ブランチが一致しない場合、対象デプロイを「Promote to Production」するか、Production Branch を付け替える（→ §4）
 
@@ -68,8 +72,9 @@ URL 一覧・テストアカウントの速報版は `AGENTS.md` 冒頭を参照
 | 申請枠・類型 | インボイス枠（**電子取引類型**）← 10-4 相当の設問で「電子取引類型での導入を希望する」に **チェックする** |
 | 主Pコード | 共P-02（決済・債権債務・資金回収） |
 | 副Pコード | 汎P-07（汎用・自動化・分析ツール） |
-| 標準販売価格（税抜） | 3,000,000円（月額 250,000円 × 12ヶ月） |
-| 最小販売価格（税抜） | 1,800,000円（月額 150,000円 × 12ヶ月） |
+| 標準販売価格（税抜） | 3,000,000円（月額 250,000円 × 12ヶ月＝標準プラン） |
+| 最小販売価格（税抜） | 1,800,000円（月額 150,000円 × 12ヶ月＝最小プラン） |
+| プラン構成 | 3プラン: 標準 300万円／ミドル 240万円（月額 200,000円）／最小 180万円（年・税抜）。機能差なし・招待企業数と月次取引件数の上限のみ段階設定。フォームの標準・最小販売価格はミドル追加後も不変 |
 | WEB掲載用URL | `https://dlsystem.aigrowthx.pro/` |
 | 参考URL | `https://dlsystem.aigrowthx.pro/transact/subsidy` |
 | 価格設定の内訳 | 受発注L版（Playbook §10-2）をベースに、**保守サポート系文言を含めない**こと。「クラウドホスティング・SSL・日次バックアップは運用インフラとして内包（カテゴリー7 保守サポート役務は含まない）」を PDF と一字一句整合させる |
@@ -150,9 +155,19 @@ API: `/api/invitations`（GET一覧・POST発行）、`/api/invitations/[token]`
 
 | ロール | メール | 用途 |
 |---|---|---|
-| 管理者 | `admin@sample-trading.co.jp` | 全機能・ユーザー管理・監査ログ・招待発行 |
-| 発注担当 | `tanaka@sample-trading.co.jp` | 発注書作成・承認フロー確認 |
-| 受注担当 | `suzuki@tanaka-service.co.jp` | 受注側視点・請求書確認 |
+| 発注側 管理者 | `admin@sample-trading.co.jp` | 全機能・ユーザー管理・監査ログ・**取引先招待発行** |
+| 発注側 発注担当 | `tanaka@sample-trading.co.jp` | 発注書作成・承認フロー確認 |
+| 受注側 管理者 | `admin@tanaka-service.co.jp` | **招待受諾で作成された想定の無償アカウント**（電子取引類型の審査確認用） |
+| 受注側 受注担当 | `suzuki@tanaka-service.co.jp` | 受注側視点・請求書作成/提出 |
+
+シードには上記4アカウントに加え、審査書類（`/transact/subsidy/demo-info`）記載どおりの
+サンプル発注書（`PO-20260407-0001`）・サンプル請求書（`INV-20260428-0001`・電帳法タイムスタンプ付き）・
+招待レコード（ACCEPTED 1件・PENDING 1件）が含まれる。
+seed は**冪等（upsert）**なので、稼働中DBへ `migrate reset` なしで安全に再投入できる:
+
+```bash
+DATABASE_URL="<VercelダッシュボードからコピーしたNeon接続文字列>" npx prisma db seed
+```
 
 ログイン: `https://jyuhacchu-system.vercel.app/auth/login`。
 審査提出用のまとめページは `/subsidy/demo-info`（TX.企画版）・`/subsidy/demo-info/let`（LET版）・`/transact/subsidy/demo-info`（電子取引L版）。
@@ -212,7 +227,7 @@ API: `/api/invitations`（GET一覧・POST発行）、`/api/invitations/[token]`
 
 ### 短期（申請完了に直結）
 
-- [ ] §2 の手動作業3点（ドメイン紐付け・`NEXT_PUBLIC_INVITE_ORIGIN`・プロモート）
+- [ ] §2 の手動作業4点（ドメイン紐付け・`NEXT_PUBLIC_INVITE_ORIGIN`・シード再投入・プロモート）
 - [ ] `dlsystem.aigrowthx.pro` 全 8 URL の疎通確認と PDF 出力検証（A4・10MB以下）
 - [ ] 電子取引Lシステムの ITツール登録申請をポータルから提出（§3 の入力値）
 - [ ] Vercel の Production Branch 設定を現行ブランチ体制に合わせて整理（旧 `claude/create-marketing-materials-FirCs` が残っていないか）

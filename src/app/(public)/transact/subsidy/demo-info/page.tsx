@@ -142,13 +142,13 @@ export default function TransactDemoInfoPage() {
       {/* §2 テストアカウント */}
       <section className="mb-8 avoid-break">
         <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
-          §2. テストアカウント（発注側／受注側 各3ロール）
+          §2. テストアカウント（発注側2ロール＋受注側2ロール・計4アカウント）
         </h2>
         <p className="mb-4 text-sm leading-relaxed">
           本ITツールは、招待型・両社間電子取引プラットフォームであり、
           <strong>発注側企業</strong>と<strong>招待済みの受注側企業</strong>の両方の
-          テストアカウントを提供しています。それぞれ「管理者」「発注担当（発注側のみ）」
-          「受注担当（受注側のみ）」のロールを有します。
+          テストアカウントを提供しています。発注側は「管理者」「発注担当」、
+          受注側は「管理者」「受注担当」のロールを有します。
         </p>
 
         <h3 className="mt-4 mb-2 text-base font-bold">発注側企業（サンプル商事株式会社）</h3>
@@ -257,7 +257,8 @@ export default function TransactDemoInfoPage() {
 
         <p className="mt-3 text-xs text-slate-600">
           ※ 本テストアカウントは審査確認用の共用環境です。シードデータが投入されており、
-          サンプル発注書（PO-20260407-0001）・取引先（3社）・案件（2件）・
+          サンプル発注書（PO-20260407-0001）・サンプル請求書（INV-20260428-0001・
+          電子帳簿保存法タイムスタンプ付与済み）・取引先（3社）・案件（2件）・
           既存招待レコード（受諾済み1件・PENDING1件）等が登録済みです。
           審査期間中の操作・データ追加は自由に行っていただけます。
         </p>

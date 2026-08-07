@@ -156,6 +156,17 @@ export default function TransactPriceRationalePage() {
             </tr>
             <tr>
               <td className="border border-slate-300 px-3 py-2 font-bold">
+                ミドルプラン（1年間）
+              </td>
+              <td className="border border-slate-300 px-3 py-2 text-right font-mono">
+                ¥2,400,000
+              </td>
+              <td className="border border-slate-300 px-3 py-2">
+                月額 200,000円 × 12ヶ月（中間プラン／受注側は無償）
+              </td>
+            </tr>
+            <tr>
+              <td className="border border-slate-300 px-3 py-2 font-bold">
                 最小販売価格（1年間）
               </td>
               <td className="border border-slate-300 px-3 py-2 text-right font-mono">
@@ -205,7 +216,8 @@ export default function TransactPriceRationalePage() {
 
       <Section label="④ 価格設定の理由">
         <p className="mb-4 text-sm leading-relaxed">
-          電子取引Lシステムの標準販売価格（年額 3,000,000円／月額 250,000円）および
+          電子取引Lシステムの標準販売価格（年額 3,000,000円／月額 250,000円）、
+          ミドルプラン価格（年額 2,400,000円／月額 200,000円）および
           最小販売価格（年額 1,800,000円／月額 150,000円）は、以下の4つの観点を
           総合的に勘案して設定しています。
         </p>
@@ -502,7 +514,7 @@ export default function TransactPriceRationalePage() {
           「電子帳簿保存法 電子取引要件の自動準拠（SHA-256＋タイムスタンプ）」
           「多段階承認ワークフロー」「発注〜請求の一貫管理」の<strong>5機能を全て標準搭載</strong>
           している国内SaaSは現時点で本ツールのみであり、この機能集約性を年額 3,000,000円
-          （最小 1,800,000円）で提供する点に市場希少性があります。
+          （ミドル 2,400,000円・最小 1,800,000円）で提供する点に市場希少性があります。
           加えて、初期費用・オプション費用・受注側企業への課金を一切設けない設計は、
           電子取引類型 の趣旨と完全に合致します。
         </p>
@@ -514,8 +526,12 @@ export default function TransactPriceRationalePage() {
           月次取引件数上限を標準プランより限定した「最小構成プラン」として販売店が
           顧客に提示可能な価格です。当該価格においても、招待型アカウント発行・
           インボイス制度対応・電子帳簿保存法対応・多段階承認ワークフロー等の
-          コア機能は標準プランと同等に提供します。本情報は審査目的にのみ利用され、
-          一般公開されません。
+          コア機能は標準プランと同等に提供します。
+          なお、標準プランと最小プランの間には、招待企業数・取引件数上限を
+          中規模事業者向けに設定したミドルプラン（年額 2,400,000円／月額 200,000円）を
+          設けており、事業規模に応じた段階的なプラン選択が可能です
+          （機能差はなく、いずれのプランも受注側企業への課金はありません）。
+          本情報は審査目的にのみ利用され、一般公開されません。
         </p>
       </Section>
 

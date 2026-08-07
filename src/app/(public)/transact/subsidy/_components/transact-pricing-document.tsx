@@ -81,11 +81,13 @@ export function TransactPricingDocument({ providerName }: { providerName: string
       </Section>
 
       <Section label="ITツールの価格">
-        <p className="text-base font-bold mb-4">プラン展開は1プランのみ</p>
+        <p className="text-base font-bold mb-4">
+          プラン展開は3プラン（標準／ミドル／最小）
+        </p>
 
         <div className="mb-6">
           <p className="mb-2 font-bold">
-            ① ソフトウェア(ITツール)の標準販売価格（税抜）：月額　250,000円
+            ① 標準プラン ＝ ソフトウェア(ITツール)の標準販売価格（税抜）：月額　250,000円
           </p>
           <p className="mb-2 pl-4">ー 1年間利用料：3,000,000円</p>
           <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：6,000,000円</p>
@@ -94,12 +96,26 @@ export function TransactPricingDocument({ providerName }: { providerName: string
 
         <div className="mb-6">
           <p className="mb-2 font-bold">
-            ② ソフトウェア(ITツール)の最小販売価格（税抜）：月額　150,000円
+            ② ミドルプラン（税抜）：月額　200,000円
+          </p>
+          <p className="mb-2 pl-4">ー 1年間利用料：2,400,000円</p>
+          <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：4,800,000円</p>
+          <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
+        </div>
+
+        <div className="mb-6">
+          <p className="mb-2 font-bold">
+            ③ 最小プラン ＝ ソフトウェア(ITツール)の最小販売価格（税抜）：月額　150,000円
           </p>
           <p className="mb-2 pl-4">ー 1年間利用料：1,800,000円</p>
           <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：3,600,000円</p>
           <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
         </div>
+
+        <p className="mb-4 text-sm leading-relaxed">
+          各プランの機能差はなく、招待できる受注側企業数・月次取引件数の上限のみを
+          段階的に設定しています（コア機能は全プラン共通）。
+        </p>
 
         <div className="mt-6 border-2 border-black p-4 text-sm leading-relaxed">
           <p className="font-bold mb-2">補足事項</p>
@@ -128,7 +144,7 @@ export function TransactPricingDocument({ providerName }: { providerName: string
               価格改定を行う場合は、契約更新のタイミングで適用し、既存契約の期中には影響しません。
             </li>
             <li>
-              本資料の価格は標準プランおよび最小プランの2種類のみであり、
+              本資料の価格は標準プラン・ミドルプラン・最小プランの3種類のみであり、
               <strong>オプション追加・個別割引・初期費用は設定していません</strong>。
             </li>
           </ul>
@@ -293,7 +309,21 @@ export function TransactPricingDocument({ providerName }: { providerName: string
             </tr>
             <tr>
               <td className="border-2 border-black px-3 py-2">
-                ② 最小プラン（月額 150,000円）
+                ② ミドルプラン（月額 200,000円）
+              </td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">
+                ¥4,800,000
+              </td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">
+                ¥3,200,000
+              </td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
+                ¥1,600,000
+              </td>
+            </tr>
+            <tr>
+              <td className="border-2 border-black px-3 py-2">
+                ③ 最小プラン（月額 150,000円）
               </td>
               <td className="border-2 border-black px-3 py-2 text-right font-mono">
                 ¥3,600,000

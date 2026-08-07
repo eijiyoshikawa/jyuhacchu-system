@@ -47,13 +47,16 @@
 | 招待発行画面（発注側管理者・要ログイン） | `https://jyuhacchu-system.vercel.app/partners/invite` |
 | 招待受諾ページ（公開） | `https://dlsystem.aigrowthx.pro/invite/[token]`（未紐付け時は `jyuhacchu-system.vercel.app/invite/[token]`） |
 
-## テストアカウント（3種・共通パスワード `password123`）
+## テストアカウント（4種・共通パスワード `password123`）
 
 | ロール | メールアドレス |
 |---|---|
-| 管理者 | `admin@sample-trading.co.jp` |
-| 発注担当 | `tanaka@sample-trading.co.jp` |
-| 受注担当 | `suzuki@tanaka-service.co.jp` |
+| 発注側 管理者 | `admin@sample-trading.co.jp` |
+| 発注側 発注担当 | `tanaka@sample-trading.co.jp` |
+| 受注側 管理者（電子取引L 招待受諾想定） | `admin@tanaka-service.co.jp` |
+| 受注側 受注担当 | `suzuki@tanaka-service.co.jp` |
+
+※ 受注側管理者ほか新デモデータは seed 反映待ちの場合あり（`docs/HANDOVER.md` §2）。
 
 ## 詳細ドキュメント
 
