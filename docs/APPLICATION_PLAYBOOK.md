@@ -966,17 +966,17 @@ LET名義での再申請後、Pコード選択は正しく 共P-02＋共P-03 に
 | ドメイン | 用途 | 配信内容 |
 |---|---|---|
 | `lsystem.let-inc.net` | 受発注Lシステム（インボイス対応類型） | `/` → `/lp` に rewrite ／ `/subsidy/*` ／ `/terms` ／ `/privacy` |
-| `dsystem.let-inc.net` | 電子取引Lシステム（電子取引類型） | `/` → `/transact` に rewrite ／ `/transact/*` ／ `/invite/*` ／ `/api/invitations/*` ／ `/terms` ／ `/privacy` |
+| `dlsystem.aigrowthx.pro` | 電子取引Lシステム（電子取引類型） | `/` → `/transact` に rewrite ／ `/transact/*` ／ `/invite/*` ／ `/api/invitations/*` ／ `/terms` ／ `/privacy` |
 | `jyuhacchu-system.vercel.app` | システム本体・フォールバック | 全ルート（`/orders`, `/invoices`, `/partners/invite`, `/auth/login` 等） |
 
 各カスタムドメインは対象外パスにアクセスされると `jyuhacchu-system.vercel.app` へ 302 リダイレクトする。
 
-**Vercel／DNS 設定手順（dsystem.let-inc.net 追加時）**:
-1. Vercel ダッシュボード → jyuhacchu-system プロジェクト → Settings → Domains → `dsystem.let-inc.net` を追加
-2. DNS 側で `dsystem` の CNAME を `cname.vercel-dns.com.` に設定（let-inc.net のゾーンで）
-3. SSL 自動発行を待って完了
+**Vercel 設定手順（dlsystem.aigrowthx.pro 追加時）**:
+1. `aigrowthx.pro` は Vercel 内で取得済みドメインのため、DNS 側の CNAME 設定は不要
+2. Vercel ダッシュボード → jyuhacchu-system プロジェクト → Settings → Domains → `dlsystem.aigrowthx.pro` を追加
+3. Vercel が自動で SSL を発行し、そのまま middleware ルーティングが有効になる
 
-**招待URL のブランドドメイン化**: 環境変数 `NEXT_PUBLIC_INVITE_ORIGIN=https://dsystem.let-inc.net` を Vercel の Environment Variables に設定すると、`/partners/invite` で発行される招待URLが自動的に `https://dsystem.let-inc.net/invite/[token]` 形式になる。
+**招待URL のブランドドメイン化**: 環境変数 `NEXT_PUBLIC_INVITE_ORIGIN=https://dlsystem.aigrowthx.pro` を Vercel の Environment Variables に設定すると、`/partners/invite` で発行される招待URLが自動的に `https://dlsystem.aigrowthx.pro/invite/[token]` 形式になる。
 
 ### 類似ITツール比較（8製品）
 

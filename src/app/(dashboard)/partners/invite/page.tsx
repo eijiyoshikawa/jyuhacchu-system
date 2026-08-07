@@ -45,7 +45,7 @@ export default function InvitePartnerPage() {
 
   useEffect(() => {
     // 招待URLは受注側企業に案内するため、環境変数で指定されていれば
-    // 電子取引Lシステム のブランドドメイン（例: https://dsystem.let-inc.net）を使う。
+    // 電子取引Lシステム のブランドドメイン（例: https://dlsystem.aigrowthx.pro）を使う。
     // 未設定時は現在のオリジン（ダッシュボードが動いているホスト）を使用。
     const branded = process.env.NEXT_PUBLIC_INVITE_ORIGIN
     if (branded) {

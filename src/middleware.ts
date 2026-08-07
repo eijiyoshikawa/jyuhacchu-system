@@ -4,11 +4,11 @@ import type { NextRequest } from "next/server"
 /**
  * カスタムドメインとITツールの対応
  *  - lsystem.let-inc.net → 受発注Lシステム（インボイス対応類型）の LP／申請資料
- *  - dsystem.let-inc.net → 電子取引Lシステム（電子取引類型）の LP／申請資料
+ *  - dlsystem.aigrowthx.pro → 電子取引Lシステム（電子取引類型）の LP／申請資料
  *  - jyuhacchu-system.vercel.app → システム本体（フォールバック）
  */
 const LSYSTEM_HOST = "lsystem.let-inc.net"
-const DSYSTEM_HOST = "dsystem.let-inc.net"
+const DSYSTEM_HOST = "dlsystem.aigrowthx.pro"
 const SYSTEM_FALLBACK_HOST = "https://jyuhacchu-system.vercel.app"
 
 /** lsystem.let-inc.net で配信するパス（受発注Lシステム のマーケティング領域） */
@@ -25,7 +25,7 @@ function isLsystemPath(pathname: string): boolean {
   )
 }
 
-/** dsystem.let-inc.net で配信するパス（電子取引Lシステム のマーケティング＋招待受諾） */
+/** dlsystem.aigrowthx.pro で配信するパス（電子取引Lシステム のマーケティング＋招待受諾） */
 function isDsystemPath(pathname: string): boolean {
   return (
     pathname === "/transact" ||
@@ -60,7 +60,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.next()
   }
 
-  // ── dsystem.let-inc.net: 電子取引Lシステム 用 ──────────────
+  // ── dlsystem.aigrowthx.pro: 電子取引Lシステム 用 ────────────
   if (host === DSYSTEM_HOST) {
     // ルート `/` は /transact にリライトして 電子取引Lシステム LP を配信
     if (pathname === "/") {

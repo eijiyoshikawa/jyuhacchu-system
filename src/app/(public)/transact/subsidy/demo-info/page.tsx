@@ -98,7 +98,7 @@ export default function TransactDemoInfoPage() {
                 サービスLP（公開）
               </th>
               <td className="border-2 border-black px-3 py-2 font-mono text-sm">
-                https://dsystem.let-inc.net/
+                https://dlsystem.aigrowthx.pro/
               </td>
             </tr>
             <tr>
@@ -115,7 +115,7 @@ export default function TransactDemoInfoPage() {
                 招待受諾ページURL
               </th>
               <td className="border-2 border-black px-3 py-2 font-mono text-sm">
-                https://dsystem.let-inc.net/invite/[token]<br />
+                https://dlsystem.aigrowthx.pro/invite/[token]<br />
                 <span className="text-xs text-slate-500">※ [token] は招待発行時に自動生成</span>
               </td>
             </tr>
