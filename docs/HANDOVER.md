@@ -48,12 +48,9 @@ URL 一覧・テストアカウントの速報版は `AGENTS.md` 冒頭を参照
    - Settings → Environment Variables に `NEXT_PUBLIC_INVITE_ORIGIN=https://dlsystem.aigrowthx.pro` を追加
    - `/partners/invite` で発行される招待URLが `https://dlsystem.aigrowthx.pro/invite/[token]` 形式になる
    - `NEXT_PUBLIC_*` はビルド時埋め込みのため **設定後に再デプロイが必要**
-3. **本番DBへのデモデータ投入（デモアカウント反映）**
-   - 受注側管理者 `admin@tanaka-service.co.jp`・招待レコード・サンプル請求書は seed 追加済みだが、**本番DBへは未投入**
-   - **推奨（ローカル環境不要）**: Neon Console → 対象プロジェクト → SQL Editor で
-     `prisma/demo-seed-neon.sql` の内容を貼り付けて Run（冪等・既存データは壊れない。
-     末尾の確認クエリが `4 / 1 / 2 / 2` を返せば成功）
-   - 代替: ローカルで `DATABASE_URL="<Vercelからコピー>" npx prisma db seed`（同内容・冪等 upsert）
+3. ~~**本番DBへのデモデータ投入（デモアカウント反映）**~~ ✅ **完了（2026-08-07）**
+   - Neon Console SQL Editor で `prisma/demo-seed-neon.sql` を実行済み（確認クエリ `4 / 1 / 2 / 2` を確認）
+   - 再投入が必要になった場合も同 SQL（冪等）または `DATABASE_URL="<Vercelからコピー>" npx prisma db seed` で安全に実行可能
 4. **本番へのプロモート**
    - 最新コミット（`573b58d` 以降）が Production に反映されているか Deployments タブで確認
    - Production Branch 設定と現行開発ブランチが一致しない場合、対象デプロイを「Promote to Production」するか、Production Branch を付け替える（→ §4）
@@ -98,10 +95,16 @@ URL 一覧・テストアカウントの速報版は `AGENTS.md` 冒頭を参照
 | 項目 | 内容 |
 |---|---|
 | リポジトリ | `eijiyoshikawa/jyuhacchu-system` |
-| 現行作業ブランチ | `claude/handoff-document-pending-swoy5k`（`it-hojo` の全コミットを包含） |
+| 現行作業ブランチ | `claude/handoff-document-pending-swoy5k`（`origin/it-hojo` をマージ済みで全コミットを包含） |
+| デフォルトブランチ（PR マージ先） | `claude/construction-order-system-Ph84i`（PR #1 のマージ先。やや古い状態のため最新 PR の取り込みで追従させる） |
+| Vercel Production Branch | `claude/create-marketing-materials-FirCs`（`it-hojo` と同一コミットで同期運用） |
 | 開発用ブランチ | `it-hojo`（並行運用。`git merge --ff-only` で同期を維持する運用） |
-| 旧 Production Branch | `claude/create-marketing-materials-FirCs`（リモートに現存せず。Vercel の Production Branch 設定が古いままの可能性あり → §2-3 で確認） |
 | マージ運用 | PR は CI グリーンを条件に auto-merge を有効化して取り込む |
+
+⚠️ **本番デプロイの反映には注意**: PR をデフォルトブランチにマージしただけでは
+Vercel Production Branch（`claude/create-marketing-materials-FirCs`）に反映されない。
+最新内容を本番に出すには FirCs / `it-hojo` ブランチを同コミットまで進める（fast-forward）か、
+Vercel の Production Branch 設定を付け替える。
 
 ### CI 構成（`.github/workflows/ci.yml`）
 
@@ -229,7 +232,8 @@ DATABASE_URL="<VercelダッシュボードからコピーしたNeon接続文字�
 
 ### 短期（申請完了に直結）
 
-- [ ] §2 の手動作業4点（ドメイン紐付け・`NEXT_PUBLIC_INVITE_ORIGIN`・シード再投入・プロモート）
+- [x] 本番DBへのデモデータ投入（2026-08-07 完了・確認クエリ 4/1/2/2）
+- [ ] §2 の残る手動作業3点（ドメイン紐付け・`NEXT_PUBLIC_INVITE_ORIGIN`・プロモート）
 - [ ] `dlsystem.aigrowthx.pro` 全 8 URL の疎通確認と PDF 出力検証（A4・10MB以下）
 - [ ] 電子取引Lシステムの ITツール登録申請をポータルから提出（§3 の入力値）
 - [ ] Vercel の Production Branch 設定を現行ブランチ体制に合わせて整理（旧 `claude/create-marketing-materials-FirCs` が残っていないか）

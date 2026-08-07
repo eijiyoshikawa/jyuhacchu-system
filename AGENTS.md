@@ -56,7 +56,8 @@
 | 受注側 管理者（電子取引L 招待受諾想定） | `admin@tanaka-service.co.jp` |
 | 受注側 受注担当 | `suzuki@tanaka-service.co.jp` |
 
-※ 受注側管理者ほか新デモデータは seed 反映待ちの場合あり（`docs/HANDOVER.md` §2）。
+※ 新デモデータ（受注側管理者・招待2件・サンプル請求書 `INV-20260428-0001`）は
+本番DBへ投入済み（2026-08-07・Neon SQL Editor で `prisma/demo-seed-neon.sql` 実行、確認クエリ 4/1/2/2）。
 
 ## 詳細ドキュメント
 
@@ -73,7 +74,8 @@
 2. **申請資料の装飾は背景色に依存させない**（黒塗り反転＋黒太枠＋大型太字。審査員は背景グラフィック無効で印刷する）。
 3. **「仮例示」表記は絶対 NG**。導入事例は実名 or「想定顧客」明記＋根拠ある数値。
 4. **ソフトウェア価格の説明に保守サポート系文言を入れない**（カテゴリー7 混在と判定される）。
-5. **ブランチ**: 開発は現行の claude ブランチ、`it-hojo` と同期運用。詳細は `docs/HANDOVER.md` §4。
+5. **ブランチ**: 開発は現行の claude ブランチ、`it-hojo`・`claude/create-marketing-materials-FirCs`（Vercel Production Branch）と同期運用。
+   PR のマージ先（GitHub デフォルトブランチ）は `claude/construction-order-system-Ph84i`。auto-merge（CI 緑で自動マージ）有効。詳細は `docs/HANDOVER.md` §4。
 
 ---
 
