@@ -26,37 +26,31 @@ URL 一覧・テストアカウントの速報版は `AGENTS.md` 冒頭を参照
 
 | 項目 | 状態 |
 |---|---|
-| 申請状況 | **申請準備中**（コード実装は完了、ドメイン紐付けが未了） |
+| 申請状況 | ✅ **ITツール登録申請 提出済み（2026-08-07）— 審査結果待ち** |
 | 補助上限 | 350万円（補助率 中小企業 2/3） |
 | 申請構成 | 開発メーカー・IT導入支援事業者ともに 株式会社LET |
-| Pコード | 主: 共P-02 単独（業務プロセスと汎用プロセスは同時選択不可のため 汎P-07 は選択しない） |
-| 公開ドメイン | `dlsystem.aigrowthx.pro`（**Vercel 紐付け未完了** → §2） |
-| 資料 | `/transact/subsidy/*`（6書類＋インデックス＋LP） |
+| Pコード | 主: 共P-02 単独（業務プロセスと汎用プロセスは同時選択不可のため 汎P-07 は選択しない。フォームで確認済み） |
+| 公開ドメイン | `dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・ホスト別ブランドでシステム本体も配信） |
+| 資料 | `/transact/subsidy/*`（6書類＋インデックス＋LP。機能説明資料は Fig.1〜7 全図に電子取引Lブランドの画面画像入り） |
 | 追加実装 | 招待型・受注側無償アカウント発行（Invitation モデル＋招待フロー） |
+| 提出時の主な対応 | AI搭載=なし／プラン別アカウント発行上限（標準200社・ミドル100社・最小50社）を価格資料に明記／申告理由・要件説明等の入力文例は本書§3と会話ログ参照 |
+
+**不備通知が来た場合**: 通知文を新セッションの Claude に貼り、`docs/APPLICATION_PLAYBOOK.md` §8
+（過去7回の不備対応と教訓15項目）と照合して対応すること。資料修正 → PR → マージで
+本番（Production Branch = デフォルトブランチ）に自動反映される。
 
 背景・全経緯は `docs/APPLICATION_PLAYBOOK.md` §11 を参照。
 
-## 2. 残っている手動作業（Vercel ダッシュボード操作）
+## 2. 手動作業（すべて完了 — 2026-08-07）
 
-コードは push 済みだが、以下は **Vercel ダッシュボードでの手動操作** が必要（未実施）。
-
-1. **`dlsystem.aigrowthx.pro` のドメイン紐付け**
-   - Vercel → jyuhacchu-system プロジェクト → Settings → Domains → `dlsystem.aigrowthx.pro` を追加
-   - `aigrowthx.pro` は Vercel 内で取得済みドメインのため **DNS 側の CNAME 設定は不要**
-   - 追加すると SSL 自動発行 → `src/middleware.ts` の `DSYSTEM_HOST` ルーティングが即有効
-2. **環境変数 `NEXT_PUBLIC_INVITE_ORIGIN` の設定**
-   - Settings → Environment Variables に `NEXT_PUBLIC_INVITE_ORIGIN=https://dlsystem.aigrowthx.pro` を追加
-   - `/partners/invite` で発行される招待URLが `https://dlsystem.aigrowthx.pro/invite/[token]` 形式になる
-   - `NEXT_PUBLIC_*` はビルド時埋め込みのため **設定後に再デプロイが必要**
-3. ~~**本番DBへのデモデータ投入（デモアカウント反映）**~~ ✅ **完了（2026-08-07）**
-   - Neon Console SQL Editor で `prisma/demo-seed-neon.sql` を実行済み（確認クエリ `4 / 1 / 2 / 2` を確認）
-   - 再投入が必要になった場合も同 SQL（冪等）または `DATABASE_URL="<Vercelからコピー>" npx prisma db seed` で安全に実行可能
-4. **本番へのプロモート**
-   - 最新コミット（`573b58d` 以降）が Production に反映されているか Deployments タブで確認
-   - Production Branch 設定と現行開発ブランチが一致しない場合、対象デプロイを「Promote to Production」するか、Production Branch を付け替える（→ §4）
-
-完了確認: `curl -I https://dlsystem.aigrowthx.pro/transact/subsidy` が HTTP 200 を返し、
-招待発行画面の URL が `dlsystem.aigrowthx.pro` ドメインになっていれば完了。
+1. ✅ **`dlsystem.aigrowthx.pro` のドメイン紐付け** — Vercel Domains に追加済み。
+   `src/middleware.ts` の `DSYSTEM_HOST` ルーティングが有効（システム本体も電子取引Lブランドで配信）
+2. ✅ **環境変数 `NEXT_PUBLIC_INVITE_ORIGIN`** — 設定・再デプロイ済み
+3. ✅ **本番DBへのデモデータ投入** — Neon SQL Editor で `prisma/demo-seed-neon.sql` 実行済み
+   （確認クエリ `4 / 1 / 2 / 2`）。動作確認時のテストデータ（取引先「あ」等）も削除済み。
+   再投入が必要な場合は同 SQL（冪等）または `DATABASE_URL="..." npx prisma db seed`
+4. ✅ **本番反映** — デフォルトブランチ（`claude/construction-order-system-Ph84i`）へのマージで
+   Production デプロイが自動作成される運用を確認（`target: production`）。手動 Promote は不要
 
 ## 3. 申請時の入力値（ITツール登録画面向け・電子取引Lシステム）
 
@@ -239,13 +233,18 @@ DATABASE_URL="<VercelダッシュボードからコピーしたNeon接続文字�
 
 ## 10. 未着手・将来 TODO
 
-### 短期（申請完了に直結）
+### 短期（申請完了に直結）— ✅ 2026-08-07 すべて完了
 
-- [x] 本番DBへのデモデータ投入（2026-08-07 完了・確認クエリ 4/1/2/2）
-- [ ] §2 の残る手動作業3点（ドメイン紐付け・`NEXT_PUBLIC_INVITE_ORIGIN`・プロモート）
-- [ ] `dlsystem.aigrowthx.pro` 全 8 URL の疎通確認と PDF 出力検証（A4・10MB以下）
-- [ ] 電子取引Lシステムの ITツール登録申請をポータルから提出（§3 の入力値）
-- [ ] Vercel の Production Branch 設定を現行ブランチ体制に合わせて整理（旧 `claude/create-marketing-materials-FirCs` が残っていないか）
+- [x] 本番DBへのデモデータ投入（確認クエリ 4/1/2/2）＋ テストデータ掃除
+- [x] §2 の手動作業（ドメイン紐付け・`NEXT_PUBLIC_INVITE_ORIGIN`・本番反映）
+- [x] `dlsystem.aigrowthx.pro` の稼働確認と PDF 出力（全資料・電子取引Lブランド）
+- [x] **電子取引Lシステムの ITツール登録申請をポータルから提出** → 審査結果待ち
+- [x] デフォルトブランチへのマージで Production デプロイが自動作成されることを確認
+
+### 審査待ちの間の対応
+
+- [ ] 不備通知が来たら通知文を Claude に貼付 → Playbook §8（全7回の教訓）と照合して資料修正 → PR → マージで本番反映
+- [ ] 採択後: 交付申請フェーズの案内（導入企業の GビズID・SECURITY ACTION 等）
 
 ### 中期（Playbook §9 より）
 

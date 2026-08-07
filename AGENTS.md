@@ -22,11 +22,10 @@
 | 適格請求書サンプル | `https://lsystem.let-inc.net/subsidy/invoice-sample` | — | `https://lsystem.let-inc.net/subsidy/invoice-sample/let` |
 | デモ機・テストアカウント情報 | `https://lsystem.let-inc.net/subsidy/demo-info` | — | `https://lsystem.let-inc.net/subsidy/demo-info/let` |
 
-### 電子取引Lシステム（電子取引類型・申請準備中）— 8 URL
+### 電子取引Lシステム（電子取引類型・**申請提出済み 2026-08-07・審査待ち**）— 8 URL
 
-ベースドメイン: `https://dlsystem.aigrowthx.pro`
-⚠️ **Vercel への紐付けが未完了**（`docs/HANDOVER.md` §2 参照）。反映まで
-`https://jyuhacchu-system.vercel.app` + パスで確認すること（LP は `/transact`）。
+ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中）
+不備通知が来たら通知文をそのまま Claude に貼ること（Playbook §8 の教訓と照合して対応）。
 
 | 資料 | URL |
 |---|---|
