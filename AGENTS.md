@@ -22,11 +22,10 @@
 | 適格請求書サンプル | `https://lsystem.let-inc.net/subsidy/invoice-sample` | — | `https://lsystem.let-inc.net/subsidy/invoice-sample/let` |
 | デモ機・テストアカウント情報 | `https://lsystem.let-inc.net/subsidy/demo-info` | — | `https://lsystem.let-inc.net/subsidy/demo-info/let` |
 
-### 電子取引Lシステム（電子取引類型・申請準備中）— 8 URL
+### 電子取引Lシステム（電子取引類型・**申請提出済み 2026-08-07・審査待ち**）— 8 URL
 
-ベースドメイン: `https://dlsystem.aigrowthx.pro`
-⚠️ **Vercel への紐付けが未完了**（`docs/HANDOVER.md` §2 参照）。反映まで
-`https://jyuhacchu-system.vercel.app` + パスで確認すること（LP は `/transact`）。
+ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中）
+不備通知が来たら通知文をそのまま Claude に貼ること（Playbook §8 の教訓と照合して対応）。
 
 | 資料 | URL |
 |---|---|
@@ -68,6 +67,7 @@
 | ドキュメント | 内容 |
 |---|---|
 | `docs/HANDOVER.md` | 引き継ぎ詳細（現状・残作業・申請入力値・トラブルシューティング 全10節） |
+| `docs/VENDOR_APPLICATION_GUIDE.md` | ベンダー向け ITツール登録 申請手順書（電子取引類型・画面別入力値/テンプレ/ハマりどころ） |
 | `docs/APPLICATION_PLAYBOOK.md` | 申請 Playbook（§8 不備対応履歴、§10 入力チェックリスト、§11 電子取引Lシステム） |
 | `docs/ERROR_HISTORY.md` | 構築中エラーと解決策 |
 | `docs/SYSTEM_SPEC.md` / `docs/DEPLOY_GUIDE.md` | システム仕様・デプロイ手順 |
