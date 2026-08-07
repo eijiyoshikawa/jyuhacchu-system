@@ -557,11 +557,13 @@ export default function TransactFeaturePage() {
         figure="Fig.2"
         caption="取引先招待 画面（発注側管理者による招待URL発行）"
         sourceUrl="https://dlsystem.aigrowthx.pro/partners/invite"
+        src="/images/transact/partners-invite.png"
       />
       <ScreenshotPlaceholder
         figure="Fig.3"
         caption="招待受諾ページ（受注側企業が費用ゼロでアカウント作成）"
         sourceUrl="https://dlsystem.aigrowthx.pro/invite/[token]"
+        src="/images/transact/invite-accept.png"
       />
 
       {/* 3-2 Orders */}

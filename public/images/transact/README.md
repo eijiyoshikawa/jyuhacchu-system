@@ -14,6 +14,8 @@
 | `orders-new.png` | 発注書 新規作成 | `https://dlsystem.aigrowthx.pro/orders/new` |
 | `partners-list.png` | 取引先管理 一覧（インボイス番号表示） | `https://dlsystem.aigrowthx.pro/partners` |
 | `invoices-list.png` | 請求管理 一覧 | `https://dlsystem.aigrowthx.pro/invoices` |
+| `partners-invite.png` | 取引先招待（無償アカウント発行）画面 | `https://dlsystem.aigrowthx.pro/partners/invite` |
+| `invite-accept.png` | 招待受諾ページ（受注側・公開） | `https://dlsystem.aigrowthx.pro/invite/[token]`（PENDING招待のURL） |
 
 ## 撮影条件
 
