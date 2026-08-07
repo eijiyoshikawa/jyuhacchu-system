@@ -237,6 +237,7 @@ async function main() {
       dueDate: new Date("2026-05-31"),
       confirmedAt: new Date("2026-04-28T00:00:00.000Z"),
       confirmedHash,
+      createdAt: new Date("2026-04-28T00:00:00.000Z"),
       items: {
         create: [
           {
@@ -286,6 +287,7 @@ async function main() {
       acceptedUserId: subAdmin.id,
       acceptedAt: new Date("2026-04-10T01:00:00.000Z"),
       expiresAt: new Date("2026-05-10T01:00:00.000Z"),
+      createdAt: new Date("2026-04-08T01:00:00.000Z"),
     },
   })
 
