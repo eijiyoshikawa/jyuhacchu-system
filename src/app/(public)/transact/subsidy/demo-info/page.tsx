@@ -98,7 +98,7 @@ export default function TransactDemoInfoPage() {
                 サービスLP（公開）
               </th>
               <td className="border-2 border-black px-3 py-2 font-mono text-sm">
-                https://jyuhacchu-system.vercel.app/transact
+                https://dsystem.let-inc.net/
               </td>
             </tr>
             <tr>
@@ -106,7 +106,8 @@ export default function TransactDemoInfoPage() {
                 招待発行画面URL
               </th>
               <td className="border-2 border-black px-3 py-2 font-mono text-sm">
-                https://jyuhacchu-system.vercel.app/partners/invite
+                https://jyuhacchu-system.vercel.app/partners/invite<br />
+                <span className="text-xs text-slate-500">※ ADMIN 権限でログイン後に利用可能</span>
               </td>
             </tr>
             <tr>
@@ -114,7 +115,7 @@ export default function TransactDemoInfoPage() {
                 招待受諾ページURL
               </th>
               <td className="border-2 border-black px-3 py-2 font-mono text-sm">
-                https://jyuhacchu-system.vercel.app/invite/[token]<br />
+                https://dsystem.let-inc.net/invite/[token]<br />
                 <span className="text-xs text-slate-500">※ [token] は招待発行時に自動生成</span>
               </td>
             </tr>

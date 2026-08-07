@@ -958,10 +958,25 @@ LET名義での再申請後、Pコード選択は正しく 共P-02＋共P-03 に
 | 標準プラン（月額 250,000円） | ¥6,000,000 | ¥3,500,000（補助上限適用） | ¥2,500,000 |
 | 最小プラン（月額 150,000円） | ¥3,600,000 | ¥2,400,000 | ¥1,200,000 |
 
-### ミドルウェア変更
+### ミドルウェア変更 と ドメイン分離
 
 `src/middleware.ts` で `/transact/*`、`/invite/*`、`/api/invitations/*` を公開ルートとして登録。
-lsystem.let-inc.net カスタムドメインでは `/transact/*` を含む LP／申請資料を公開。
+以下のようにドメインを切り分ける（本体は同一 Vercel プロジェクト内で middleware により分岐）:
+
+| ドメイン | 用途 | 配信内容 |
+|---|---|---|
+| `lsystem.let-inc.net` | 受発注Lシステム（インボイス対応類型） | `/` → `/lp` に rewrite ／ `/subsidy/*` ／ `/terms` ／ `/privacy` |
+| `dsystem.let-inc.net` | 電子取引Lシステム（電子取引類型） | `/` → `/transact` に rewrite ／ `/transact/*` ／ `/invite/*` ／ `/api/invitations/*` ／ `/terms` ／ `/privacy` |
+| `jyuhacchu-system.vercel.app` | システム本体・フォールバック | 全ルート（`/orders`, `/invoices`, `/partners/invite`, `/auth/login` 等） |
+
+各カスタムドメインは対象外パスにアクセスされると `jyuhacchu-system.vercel.app` へ 302 リダイレクトする。
+
+**Vercel／DNS 設定手順（dsystem.let-inc.net 追加時）**:
+1. Vercel ダッシュボード → jyuhacchu-system プロジェクト → Settings → Domains → `dsystem.let-inc.net` を追加
+2. DNS 側で `dsystem` の CNAME を `cname.vercel-dns.com.` に設定（let-inc.net のゾーンで）
+3. SSL 自動発行を待って完了
+
+**招待URL のブランドドメイン化**: 環境変数 `NEXT_PUBLIC_INVITE_ORIGIN=https://dsystem.let-inc.net` を Vercel の Environment Variables に設定すると、`/partners/invite` で発行される招待URLが自動的に `https://dsystem.let-inc.net/invite/[token]` 形式になる。
 
 ### 類似ITツール比較（8製品）
 
