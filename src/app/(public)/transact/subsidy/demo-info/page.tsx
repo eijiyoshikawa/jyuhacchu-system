@@ -21,7 +21,7 @@ export default function TransactDemoInfoPage() {
       makerName={MAKER_NAME}
       indexHref="/transact/subsidy"
       schemeLabel={SCHEME_LABEL}
-      pcode="主Pコード: 共P-02 ／ 副Pコード: 汎P-07"
+      pcode="主Pコード: 共P-02（単独）"
     >
       <section className="mb-8 avoid-break">
         <table className="w-full border-collapse text-sm">
@@ -63,7 +63,7 @@ export default function TransactDemoInfoPage() {
                 副Pコード
               </th>
               <td className="border-2 border-black px-4 py-3 text-base">
-                汎P-07（グループウェア／コラボレーション）
+                設定なし（共P-02 単独申請）
               </td>
             </tr>
             <tr>

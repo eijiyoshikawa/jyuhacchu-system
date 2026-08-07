@@ -30,7 +30,7 @@ export default function TransactPriceRationalePage() {
       makerName={MAKER_NAME}
       indexHref="/transact/subsidy"
       schemeLabel={SCHEME_LABEL}
-      pcode="主Pコード: 共P-02 ／ 副Pコード: 汎P-07"
+      pcode="主Pコード: 共P-02（単独）"
     >
       <section className="mb-8 avoid-break">
         <table className="w-full border-collapse text-sm">

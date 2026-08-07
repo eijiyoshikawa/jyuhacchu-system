@@ -21,7 +21,7 @@ export default function TransactRequirementsPage() {
       makerName={MAKER_NAME}
       indexHref="/transact/subsidy"
       schemeLabel={SCHEME_LABEL}
-      pcode="主Pコード: 共P-02 ／ 副Pコード: 汎P-07"
+      pcode="主Pコード: 共P-02（単独）"
     >
       <section className="mb-8 avoid-break">
         <table className="w-full border-collapse text-sm">
@@ -126,7 +126,7 @@ export default function TransactRequirementsPage() {
                 発注書作成（PO-YYYYMMDD-XXXX 自動採番）、承認ワークフロー、請求書作成（INV-YYYYMMDD-XXXX）、取引先マスタ（インボイス番号 国税庁API検証）、経過措置税額自動計算、支払ステータス管理。
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
-                機能説明資料 §3-1／§3-2／§3-3
+                機能説明資料 §3-2／§3-3／§3-4／§4 業務フロー図
               </td>
             </tr>
             <tr>
@@ -167,8 +167,8 @@ export default function TransactRequirementsPage() {
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">—</td>
             </tr>
-            <tr className="bg-orange-50">
-              <td className="border border-slate-300 px-2 py-2 align-top font-mono font-bold">
+            <tr>
+              <td className="border border-slate-300 px-2 py-2 align-top font-mono">
                 汎P-07
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top">
@@ -177,19 +177,13 @@ export default function TransactRequirementsPage() {
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
                 ワークフロー、グループウェア、コラボレーションツール、BI・分析専門ツール、RPA、チャットボットシステム 等
               </td>
-              <td className="border border-slate-300 px-2 py-2 align-top text-center font-black text-orange-600">
-                ✓<br />副
-              </td>
+              <td className="border border-slate-300 px-2 py-2 align-top text-center">—</td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
-                招待型プラットフォームによる<strong>両社間コラボレーション機能</strong>
-                （発注書・請求書の授受、コメント、承認ワークフロー、通知）を提供。
-                <br />
-                <strong>電子取引類型 は業務プロセス側（共P-02）と汎用プロセス側（汎P-07）の
-                併用を許容する類型</strong>のため、副Pコードとして選択します。
+                承認ワークフロー・通知等のコラボレーション機能は搭載していますが、
+                ITツール登録要領により<strong>業務プロセスと汎用プロセスは同時に選択できない</strong>ため、
+                本Pコードは選択しません。該当機能は主Pコード（共P-02）の選択プロセス内で説明します。
               </td>
-              <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
-                機能説明資料 §3-1／§3-6
-              </td>
+              <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">—</td>
             </tr>
           </tbody>
         </table>
@@ -198,9 +192,10 @@ export default function TransactRequirementsPage() {
           <p className="font-bold">選択方針</p>
           <p className="mt-1">
             本ツールの中核機能は <strong>共P-02（決済・債権債務・資金回収）</strong> に該当し、
-            電子取引類型 の要件を充足します。加えて、招待型プラットフォームによる
-            両社間コラボレーション（承認ワークフロー・通知）機能があるため、
-            <strong>副Pコードとして 汎P-07（ワークフロー／コラボレーション）</strong>を選択します。
+            電子取引類型 の要件を充足します。ITツール登録要領により業務プロセスと汎用プロセスは
+            同時に選択できないため、<strong>本申請は 共P-02 の単独選択</strong>とします。
+            招待型プラットフォームによる両社間コラボレーション（承認ワークフロー・通知）機能は、
+            共P-02 に該当する発注・請求の両社間授受機能の一部として機能説明資料 §3-1 で説明しています。
           </p>
         </div>
       </section>

@@ -99,7 +99,7 @@ export default function TransactSubsidyIndexPage() {
               <dt className="font-bold text-slate-700">主Pコード</dt>
               <dd>共P-02（決済・債権債務・資金回収）</dd>
               <dt className="font-bold text-slate-700">副Pコード</dt>
-              <dd>汎P-07（グループウェア／情報共有）</dd>
+              <dd>設定なし（共P-02 単独申請）</dd>
               <dt className="font-bold text-slate-700">類型特有要件</dt>
               <dd>
                 <strong>発注側企業が受注側企業に無償でアカウント発行する招待型プラットフォーム</strong>

@@ -30,7 +30,7 @@ export function TransactPricingDocument({ providerName }: { providerName: string
       makerName={MAKER_NAME}
       indexHref="/transact/subsidy"
       schemeLabel={SCHEME_LABEL}
-      pcode="主Pコード: 共P-02 ／ 副Pコード: 汎P-07"
+      pcode="主Pコード: 共P-02（単独）"
     >
       {/* Cover identification block */}
       <section className="mb-8 avoid-break">

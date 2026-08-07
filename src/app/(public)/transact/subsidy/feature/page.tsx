@@ -22,7 +22,7 @@ export default function TransactFeaturePage() {
       makerName={MAKER_NAME}
       indexHref="/transact/subsidy"
       schemeLabel={SCHEME_LABEL}
-      pcode="主Pコード: 共P-02 ／ 副Pコード: 汎P-07"
+      pcode="主Pコード: 共P-02（単独）"
     >
       {/* Cover page */}
       <section className="mb-8 page-break-after avoid-break">
@@ -73,7 +73,7 @@ export default function TransactFeaturePage() {
                   副Pコード
                 </th>
                 <td className="border-2 border-black px-4 py-3 text-base">
-                  汎P-07（グループウェア／コラボレーション）
+                  設定なし（共P-02 単独申請）
                 </td>
               </tr>
               <tr>
@@ -294,7 +294,7 @@ export default function TransactFeaturePage() {
                 "適格請求書等保存方式（インボイス制度）／電子帳簿保存法（電子取引要件）／下請法・請負契約一般の必要記載事項",
               ],
               ["主Pコード", "共P-02（決済・債権債務・資金回収）"],
-              ["副Pコード", "汎P-07（グループウェア／コラボレーション）"],
+              ["副Pコード", "設定なし（共P-02 単独申請）"],
             ].map(([k, v]) => (
               <tr key={k} className="border-b-2 border-black">
                 <th className="w-40 border-2 border-black bg-slate-100 px-3 py-2 text-left text-xs font-bold text-slate-900">
@@ -380,7 +380,7 @@ export default function TransactFeaturePage() {
             電子取引類型 対応（招待型アカウント発行／両社間プラットフォーム成立）
           </span>
           <span className="inline-block border-2 border-black bg-yellow-200 px-3 py-1 text-xs font-black">
-            汎P-07 対応（ワークフロー／コラボレーション）
+            共P-02 対応（両社間の発注・請求授受の基盤機能）
           </span>
         </div>
         <table className="w-full border-collapse text-sm">
