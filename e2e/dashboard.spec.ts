@@ -30,15 +30,15 @@ test.describe("ダッシュボード", () => {
     // サイドバーのナビゲーションリンクをテスト
     await page.getByRole("link", { name: "発注管理" }).click()
     await expect(page).toHaveURL(/\/orders/)
-    await expect(page.getByText("発注管理")).toBeVisible()
+    await expect(page.getByRole("heading", { name: "発注管理" })).toBeVisible()
 
     await page.getByRole("link", { name: "取引先管理" }).click()
     await expect(page).toHaveURL(/\/partners/)
-    await expect(page.getByText("取引先管理")).toBeVisible()
+    await expect(page.getByRole("heading", { name: "取引先管理" })).toBeVisible()
 
     await page.getByRole("link", { name: "案件管理" }).click()
     await expect(page).toHaveURL(/\/projects/)
-    await expect(page.getByText("案件管理")).toBeVisible()
+    await expect(page.getByRole("heading", { name: "案件管理" })).toBeVisible()
 
     // ダッシュボードに戻る
     await page.getByRole("link", { name: "ダッシュボード" }).click()
