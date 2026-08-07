@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { cn } from "@/lib/utils"
+import { useSystemBrand } from "@/components/use-system-brand"
 import {
   LayoutDashboard,
   FileText,
@@ -40,13 +41,14 @@ interface SidebarProps {
 export function Sidebar({ onNavigate }: SidebarProps) {
   const pathname = usePathname()
   const { data: session } = useSession()
+  const brand = useSystemBrand()
   const isAdmin = session?.user?.role === "ADMIN"
 
   return (
     <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
       <div className="flex h-14 items-center border-b border-gray-200 px-6">
         <h1 className="text-lg font-bold text-gray-900">
-          受発注<span className="text-orange-500">L</span>システム
+          {brand.namePrefix}<span className="text-orange-500">L</span>システム
         </h1>
       </div>
       <nav className="flex-1 space-y-0.5 px-3 py-4">

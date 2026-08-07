@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useSystemBrand } from "@/components/use-system-brand"
 
 export default function LoginPage() {
   const router = useRouter()
+  const brand = useSystemBrand()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -44,10 +46,10 @@ export default function LoginPage() {
       <Card className="w-full max-w-md border-0 rounded-sm shadow-2xl">
         <CardHeader className="text-center pb-2">
           <CardTitle className="text-2xl font-black tracking-tight text-slate-800">
-            受発注<span className="text-orange-500">L</span>システム
+            {brand.namePrefix}<span className="text-orange-500">L</span>システム
           </CardTitle>
           <CardDescription className="text-sm text-slate-500">
-            インボイス対応クラウド受発注プラットフォーム
+            {brand.tagline}
           </CardDescription>
         </CardHeader>
         <CardContent>

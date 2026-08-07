@@ -90,7 +90,7 @@ export default function TransactDemoInfoPage() {
                 サービスログインURL
               </th>
               <td className="border-2 border-black px-3 py-2 font-mono text-base bg-yellow-50">
-                https://jyuhacchu-system.vercel.app/auth/login
+                https://dlsystem.aigrowthx.pro/auth/login
               </td>
             </tr>
             <tr>
@@ -106,7 +106,7 @@ export default function TransactDemoInfoPage() {
                 招待発行画面URL
               </th>
               <td className="border-2 border-black px-3 py-2 font-mono text-sm">
-                https://jyuhacchu-system.vercel.app/partners/invite<br />
+                https://dlsystem.aigrowthx.pro/partners/invite<br />
                 <span className="text-xs text-slate-500">※ ADMIN 権限でログイン後に利用可能</span>
               </td>
             </tr>

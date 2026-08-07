@@ -126,10 +126,18 @@ GitHub → Vercel 自動連携。**push するだけで本番反映**（数十�
 | ドメイン | 用途 | 配信内容 |
 |---|---|---|
 | `lsystem.let-inc.net` | 受発注Lシステム（インボイス対応類型） | `/` → `/lp` rewrite ／ `/subsidy/*` ／ `/terms` ／ `/privacy`。対象外パスは `jyuhacchu-system.vercel.app` へ 302 |
-| `dlsystem.aigrowthx.pro` | 電子取引Lシステム（電子取引類型） | `/` → `/transact` rewrite ／ `/transact/*` ／ `/invite/*` ／ `/api/invitations/*` ／ 法務ページ。対象外パスは同上 302 |
+| `dlsystem.aigrowthx.pro` | 電子取引Lシステム（電子取引類型） | `/` → 未ログイン時 `/transact` rewrite（ログイン時はダッシュボード）／ `/transact/*` ／ `/invite/*` ／ **システム本体（`/auth/login`・ダッシュボード・API）を電子取引Lブランドで配信** ／ 法務ページ。`/lp`・`/subsidy` のみ本体ドメインへ 302 |
 | `jyuhacchu-system.vercel.app` | システム本体・フォールバック | 全ルート（ダッシュボード・`/auth/login` 等、システム本体は要ログイン） |
 
 定数: `src/middleware.ts` の `LSYSTEM_HOST` / `DSYSTEM_HOST` / `SYSTEM_FALLBACK_HOST`、`next.config.ts` の `MARKETING_HOST`。
+
+**ホスト別ブランディング**（`src/lib/brand.ts`・2026-08-07 導入）:
+システム本体（ログイン画面・サイドバー・タブタイトル・利用規約/プライバシー）は
+リクエストホストで名称を切替（`dlsystem.*` → 電子取引Lシステム／それ以外 → 受発注Lシステム）。
+公開サイトのヘッダ/フッタは `(public)/_components/marketing-chrome.tsx` を
+`lp`・`subsidy`（受発注L）／`transact`（電子取引L）の各セグメントレイアウトで適用。
+**電子取引Lの審査デモは必ず `dlsystem.aigrowthx.pro` の URL で案内すること**
+（`jyuhacchu-system.vercel.app` では受発注L表記になりツール名混在で不備になる）。
 
 ### 5-2. 技術スタック
 
@@ -174,7 +182,8 @@ seed は**冪等（upsert）**なので、稼働中DBへ `migrate reset` なし�
 DATABASE_URL="<VercelダッシュボードからコピーしたNeon接続文字列>" npx prisma db seed
 ```
 
-ログイン: `https://jyuhacchu-system.vercel.app/auth/login`。
+ログイン: 受発注L審査用 `https://jyuhacchu-system.vercel.app/auth/login` ／
+電子取引L審査用 `https://dlsystem.aigrowthx.pro/auth/login`（ホスト別ブランド表示のため使い分け必須）。
 審査提出用のまとめページは `/subsidy/demo-info`（TX.企画版）・`/subsidy/demo-info/let`（LET版）・`/transact/subsidy/demo-info`（電子取引L版）。
 
 ## 7. 過去の不備対応履歴（全7回まとめ）

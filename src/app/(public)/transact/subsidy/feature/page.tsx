@@ -475,7 +475,7 @@ export default function TransactFeaturePage() {
       <ScreenshotPlaceholder
         figure="Fig.1"
         caption="ダッシュボード（サマリカード・最近の発注／請求）"
-        sourceUrl="https://jyuhacchu-system.vercel.app/"
+        sourceUrl="https://dlsystem.aigrowthx.pro/"
         src="/images/subsidy/dashboard.png"
       />
 
@@ -556,12 +556,12 @@ export default function TransactFeaturePage() {
       <ScreenshotPlaceholder
         figure="Fig.2"
         caption="取引先招待 画面（発注側管理者による招待URL発行）"
-        sourceUrl="https://jyuhacchu-system.vercel.app/partners/invite"
+        sourceUrl="https://dlsystem.aigrowthx.pro/partners/invite"
       />
       <ScreenshotPlaceholder
         figure="Fig.3"
         caption="招待受諾ページ（受注側企業が費用ゼロでアカウント作成）"
-        sourceUrl="https://jyuhacchu-system.vercel.app/invite/[token]"
+        sourceUrl="https://dlsystem.aigrowthx.pro/invite/[token]"
       />
 
       {/* 3-2 Orders */}
@@ -617,13 +617,13 @@ export default function TransactFeaturePage() {
       <ScreenshotPlaceholder
         figure="Fig.4"
         caption="発注書 一覧画面"
-        sourceUrl="https://jyuhacchu-system.vercel.app/orders"
+        sourceUrl="https://dlsystem.aigrowthx.pro/orders"
         src="/images/subsidy/orders-list.png"
       />
       <ScreenshotPlaceholder
         figure="Fig.5"
         caption="発注書 新規作成画面（明細入力・税率自動計算・免税事業者警告表示）"
-        sourceUrl="https://jyuhacchu-system.vercel.app/orders/new"
+        sourceUrl="https://dlsystem.aigrowthx.pro/orders/new"
         src="/images/subsidy/orders-new.png"
       />
 
@@ -675,7 +675,7 @@ export default function TransactFeaturePage() {
       <ScreenshotPlaceholder
         figure="Fig.6"
         caption="取引先管理 一覧画面（インボイス番号列を含む）"
-        sourceUrl="https://jyuhacchu-system.vercel.app/partners"
+        sourceUrl="https://dlsystem.aigrowthx.pro/partners"
         src="/images/subsidy/partners-list.png"
       />
 
@@ -723,7 +723,7 @@ export default function TransactFeaturePage() {
       <ScreenshotPlaceholder
         figure="Fig.7"
         caption="請求書 一覧画面"
-        sourceUrl="https://jyuhacchu-system.vercel.app/invoices"
+        sourceUrl="https://dlsystem.aigrowthx.pro/invoices"
         src="/images/subsidy/invoices-list.png"
       />
 

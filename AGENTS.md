@@ -41,11 +41,15 @@
 
 ### 共通（システム本体）
 
-| 用途 | URL |
-|---|---|
-| ログイン | `https://jyuhacchu-system.vercel.app/auth/login` |
-| 招待発行画面（発注側管理者・要ログイン） | `https://jyuhacchu-system.vercel.app/partners/invite` |
-| 招待受諾ページ（公開） | `https://dlsystem.aigrowthx.pro/invite/[token]`（未紐付け時は `jyuhacchu-system.vercel.app/invite/[token]`） |
+⚠️ システム画面は**ホスト別ブランド表示**（`src/lib/brand.ts`）。電子取引Lシステムの審査デモは
+必ず `dlsystem.aigrowthx.pro` 側 URL を案内すること（`jyuhacchu-system.vercel.app` では
+受発注Lシステム表記になり、ツール名混在で不備になる）。
+
+| 用途 | 受発注Lシステム | 電子取引Lシステム |
+|---|---|---|
+| ログイン | `https://jyuhacchu-system.vercel.app/auth/login` | `https://dlsystem.aigrowthx.pro/auth/login` |
+| 招待発行画面（発注側管理者・要ログイン） | — | `https://dlsystem.aigrowthx.pro/partners/invite` |
+| 招待受諾ページ（公開） | — | `https://dlsystem.aigrowthx.pro/invite/[token]` |
 
 ## テストアカウント（4種・共通パスワード `password123`）
 

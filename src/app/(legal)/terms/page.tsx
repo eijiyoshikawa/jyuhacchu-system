@@ -1,6 +1,10 @@
 import Link from "next/link"
+import { headers } from "next/headers"
+import { brandFromHost } from "@/lib/brand"
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const h = await headers()
+  const brand = brandFromHost(h.get("host"))
   return (
     <div className="mx-auto max-w-4xl px-6">
       <Link
@@ -22,7 +26,7 @@ export default function TermsPage() {
             第1条（目的）
           </h2>
           <p className="leading-relaxed">
-            本利用規約（以下「本規約」といいます）は、当社が提供する受発注Lシステム（以下「本サービス」といいます）の利用条件を定めるものです。本サービスは、業種を問わない企業間取引における受発注業務のデジタル化を目的とし、発注・受注・請求・承認等のワークフローを電子的に管理することで、業務効率の向上を支援します。本サービスをご利用いただくすべてのユーザーは、本規約に同意したものとみなされます。
+            本利用規約（以下「本規約」といいます）は、当社が提供する{brand.toolName}（以下「本サービス」といいます）の利用条件を定めるものです。本サービスは、業種を問わない企業間取引における受発注業務のデジタル化を目的とし、発注・受注・請求・承認等のワークフローを電子的に管理することで、業務効率の向上を支援します。本サービスをご利用いただくすべてのユーザーは、本規約に同意したものとみなされます。
           </p>
         </section>
 
@@ -41,7 +45,7 @@ export default function TermsPage() {
               <strong>「ユーザー」</strong>とは、本サービスに利用登録を行い、本サービスを利用するすべての個人または法人をいいます。
             </li>
             <li>
-              <strong>「本サービス」</strong>とは、当社が提供する受発注Lシステムおよびこれに付随するすべてのサービスをいいます。
+              <strong>「本サービス」</strong>とは、当社が提供する{brand.toolName}およびこれに付随するすべてのサービスをいいます。
             </li>
             <li>
               <strong>「アカウント」</strong>とは、ユーザーが本サービスを利用するために必要な認証情報（メールアドレスおよびパスワード）をいいます。

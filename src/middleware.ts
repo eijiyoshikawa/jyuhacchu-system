@@ -25,23 +25,31 @@ function isLsystemPath(pathname: string): boolean {
   )
 }
 
-/** dlsystem.aigrowthx.pro で配信するパス（電子取引Lシステム のマーケティング＋招待受諾） */
-function isDsystemPath(pathname: string): boolean {
+/**
+ * dlsystem.aigrowthx.pro から他ツール（受発注Lシステム）ドメインへ退避させるパス。
+ * それ以外（/transact・/invite・システム本体・認証・API）は dlsystem 上で直接配信し、
+ * システム画面は 電子取引Lシステム ブランドで表示される（src/lib/brand.ts）。
+ */
+function isLsystemOnlyPath(pathname: string): boolean {
   return (
-    pathname === "/transact" ||
-    pathname.startsWith("/transact/") ||
-    pathname.startsWith("/invite/") ||
-    pathname.startsWith("/api/invitations/") ||
-    pathname === "/terms" ||
-    pathname === "/privacy" ||
-    pathname === "/favicon.ico" ||
-    pathname.startsWith("/images/")
+    pathname === "/lp" ||
+    pathname.startsWith("/lp/") ||
+    pathname === "/subsidy" ||
+    pathname.startsWith("/subsidy/")
   )
 }
 
 export function middleware(req: NextRequest) {
   const host = (req.headers.get("host") ?? "").toLowerCase()
   const pathname = req.nextUrl.pathname
+
+  // NextAuth セッションクッキー（ホストごとに独立）
+  const sessionToken =
+    req.cookies.get("__Secure-authjs.session-token") ??
+    req.cookies.get("authjs.session-token") ??
+    req.cookies.get("next-auth.session-token") ??
+    req.cookies.get("__Secure-next-auth.session-token")
+  const isLoggedIn = !!sessionToken
 
   // ── lsystem.let-inc.net: 受発注Lシステム 用 ────────────────
   if (host === LSYSTEM_HOST) {
@@ -62,18 +70,23 @@ export function middleware(req: NextRequest) {
 
   // ── dlsystem.aigrowthx.pro: 電子取引Lシステム 用 ────────────
   if (host === DSYSTEM_HOST) {
-    // ルート `/` は /transact にリライトして 電子取引Lシステム LP を配信
-    if (pathname === "/") {
+    // ルート `/` は未ログイン時のみ /transact にリライトして LP を配信
+    // （ログイン済みの場合はダッシュボードをこのホストで表示する）
+    if (pathname === "/" && !isLoggedIn) {
       const url = req.nextUrl.clone()
       url.pathname = "/transact"
       return NextResponse.rewrite(url)
     }
-    if (!isDsystemPath(pathname)) {
+    // 受発注Lシステム 専用領域（LP・申請資料）のみ本体ドメインへ退避。
+    // それ以外（/transact・/invite・/auth・ダッシュボード・API）は
+    // このホストで配信し、認証チェックは下の共通ロジックに委ねる
+    // （システム画面は 電子取引Lシステム ブランドで表示）。
+    if (isLsystemOnlyPath(pathname)) {
       return NextResponse.redirect(
         new URL(pathname + req.nextUrl.search, SYSTEM_FALLBACK_HOST)
       )
     }
-    return NextResponse.next()
+    // fall through: 共通の認証・公開ルート判定へ
   }
 
   // ── 本体ドメイン（jyuhacchu-system.vercel.app 他） ─────────
@@ -95,15 +108,6 @@ export function middleware(req: NextRequest) {
   if (isApiAuth || isLegalPage || isApiHealth || isPublicMarketing) {
     return NextResponse.next()
   }
-
-  // Check for NextAuth session token cookie
-  const sessionToken =
-    req.cookies.get("__Secure-authjs.session-token") ??
-    req.cookies.get("authjs.session-token") ??
-    req.cookies.get("next-auth.session-token") ??
-    req.cookies.get("__Secure-next-auth.session-token")
-
-  const isLoggedIn = !!sessionToken
 
   if (isAuthPage) {
     if (isLoggedIn) {
