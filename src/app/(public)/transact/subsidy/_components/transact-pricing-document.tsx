@@ -112,9 +112,47 @@ export function TransactPricingDocument({ providerName }: { providerName: string
           <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
         </div>
 
-        <p className="mb-4 text-sm leading-relaxed">
-          各プランの機能差はなく、招待できる受注側企業数・月次取引件数の上限のみを
-          段階的に設定しています（コア機能は全プラン共通）。
+        <p className="mb-3 text-sm leading-relaxed">
+          各プランの機能差はなく、招待できる受注側企業数（受注側アカウント発行上限）と
+          月次取引件数の上限のみを以下のとおり段階的に設定しています（コア機能は全プラン共通）。
+        </p>
+        <table className="w-full border-collapse text-sm mb-3">
+          <thead>
+            <tr className="bg-slate-100">
+              <th className="border-2 border-black px-3 py-2 text-left text-xs font-bold">
+                プラン
+              </th>
+              <th className="border-2 border-black px-3 py-2 text-right text-xs font-bold">
+                受注側アカウント発行上限<br />（招待できる受注側企業数）
+              </th>
+              <th className="border-2 border-black px-3 py-2 text-right text-xs font-bold">
+                月次取引件数上限<br />（発注書・請求書 合計）
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border-2 border-black px-3 py-2">① 標準プラン（月額 250,000円）</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">200社</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">3,000件</td>
+            </tr>
+            <tr>
+              <td className="border-2 border-black px-3 py-2">② ミドルプラン（月額 200,000円）</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">100社</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">1,500件</td>
+            </tr>
+            <tr>
+              <td className="border-2 border-black px-3 py-2">③ 最小プラン（月額 150,000円）</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">50社</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">500件</td>
+            </tr>
+          </tbody>
+        </table>
+        <p className="mb-4 text-sm leading-relaxed border-2 border-black p-3">
+          <strong>受注側アカウントの発行上限について</strong>:
+          いずれのプランも、発注側企業が発行できる受注側アカウント数には上表のとおり
+          契約上の上限が定められており、<strong>上限なく発行できる契約ではありません</strong>。
+          上限の変更はプラン変更（契約更新時）によってのみ行えます。
         </p>
 
         <div className="mt-6 border-2 border-black p-4 text-sm leading-relaxed">
