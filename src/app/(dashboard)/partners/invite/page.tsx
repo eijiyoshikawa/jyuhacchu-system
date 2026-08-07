@@ -43,23 +43,25 @@ export default function InvitePartnerPage() {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string; url?: string } | null>(null)
   const [origin, setOrigin] = useState("")
 
+  async function refresh() {
+    const res = await fetch("/api/invitations")
+    if (res.ok) setInvitations(await res.json())
+  }
+
   useEffect(() => {
     // 招待URLは受注側企業に案内するため、環境変数で指定されていれば
     // 電子取引Lシステム のブランドドメイン（例: https://dlsystem.aigrowthx.pro）を使う。
     // 未設定時は現在のオリジン（ダッシュボードが動いているホスト）を使用。
     const branded = process.env.NEXT_PUBLIC_INVITE_ORIGIN
     if (branded) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot init of client-only origin value
       setOrigin(branded.replace(/\/+$/, ""))
     } else if (typeof window !== "undefined") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot init of client-only origin value
       setOrigin(window.location.origin)
     }
     void refresh()
   }, [])
-
-  async function refresh() {
-    const res = await fetch("/api/invitations")
-    if (res.ok) setInvitations(await res.json())
-  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()

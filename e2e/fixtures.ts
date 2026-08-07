@@ -11,6 +11,7 @@ async function login(page: Page, email: string, password: string) {
 export const test = base.extend<{ authenticatedPage: Page }>({
   authenticatedPage: async ({ page }, use) => {
     await login(page, "admin@sample-trading.co.jp", "password123")
+    // eslint-disable-next-line react-hooks/rules-of-hooks -- Playwright fixture `use`, not React `use`
     await use(page)
   },
 })
