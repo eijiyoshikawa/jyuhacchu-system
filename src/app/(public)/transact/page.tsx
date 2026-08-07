@@ -115,17 +115,17 @@ export default function TransactLandingPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
-                  href="/transact/subsidy"
-                  className="inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-3 text-sm font-bold text-white hover:bg-orange-600"
-                >
-                  IT導入補助金の申請資料を見る
-                </Link>
-                <Link
                   href="#flow"
-                  className="inline-flex items-center justify-center rounded-sm border border-white/30 bg-white/5 px-6 py-3 text-sm font-bold text-white hover:bg-white/10"
+                  className="inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-3 text-sm font-bold text-white hover:bg-orange-600"
                 >
                   導入までの流れを見る
                 </Link>
+                <a
+                  href="mailto:transact@juhacchu-l.jp"
+                  className="inline-flex items-center justify-center rounded-sm border border-white/30 bg-white/5 px-6 py-3 text-sm font-bold text-white hover:bg-white/10"
+                >
+                  資料請求・導入相談
+                </a>
               </div>
             </div>
             <div className="lg:col-span-2">
@@ -271,7 +271,7 @@ export default function TransactLandingPage() {
         </div>
       </section>
 
-      {/* Subsidy CTA Banner */}
+      {/* Subsidy CTA Banner — 補助金活用の相談窓口のみ提示。申請資料は非公開経路 */}
       <section className="bg-gradient-to-br from-orange-500 to-orange-600 py-12 text-white">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <h2 className="text-xl sm:text-2xl font-black">
@@ -280,20 +280,15 @@ export default function TransactLandingPage() {
           <p className="mt-3 text-sm opacity-90">
             電子取引Lシステムは「インボイス枠 電子取引類型」の登録ITツールです。
             補助上限額 最大350万円、補助率 中小企業 2/3。
+            補助金活用のご相談は下記までお問い合わせください。
           </p>
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
-            <Link
-              href="/transact/subsidy"
+            <a
+              href="mailto:transact@juhacchu-l.jp"
               className="inline-flex items-center justify-center rounded-sm bg-white px-6 py-3 text-sm font-bold text-orange-600 hover:bg-orange-50"
             >
-              補助金活用ページを見る
-            </Link>
-            <Link
-              href="/transact/subsidy/requirements"
-              className="inline-flex items-center justify-center rounded-sm border border-white bg-transparent px-6 py-3 text-sm font-bold text-white hover:bg-white/10"
-            >
-              Pコード・要件対応を確認
-            </Link>
+              補助金活用について相談する
+            </a>
           </div>
         </div>
       </section>
@@ -340,10 +335,10 @@ export default function TransactLandingPage() {
               資料請求・導入相談
             </a>
             <Link
-              href="/transact/subsidy"
+              href="#features"
               className="inline-flex items-center justify-center rounded-sm border border-white/30 bg-transparent px-6 py-3 text-sm font-bold text-white hover:bg-white/10"
             >
-              IT導入補助金の申請資料を見る
+              機能をもう一度見る
             </Link>
           </div>
         </div>
