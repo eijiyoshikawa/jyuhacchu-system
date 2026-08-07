@@ -30,7 +30,7 @@ export function TransactPricingDocument({ providerName }: { providerName: string
       makerName={MAKER_NAME}
       indexHref="/transact/subsidy"
       schemeLabel={SCHEME_LABEL}
-      pcode="主Pコード: 共P-02 ／ 副Pコード: 汎P-07"
+      pcode="主Pコード: 共P-02（単独）"
     >
       {/* Cover identification block */}
       <section className="mb-8 avoid-break">
@@ -81,11 +81,13 @@ export function TransactPricingDocument({ providerName }: { providerName: string
       </Section>
 
       <Section label="ITツールの価格">
-        <p className="text-base font-bold mb-4">プラン展開は1プランのみ</p>
+        <p className="text-base font-bold mb-4">
+          プラン展開は3プラン（標準／ミドル／最小）
+        </p>
 
         <div className="mb-6">
           <p className="mb-2 font-bold">
-            ① ソフトウェア(ITツール)の標準販売価格（税抜）：月額　250,000円
+            ① 標準プラン ＝ ソフトウェア(ITツール)の標準販売価格（税抜）：月額　250,000円
           </p>
           <p className="mb-2 pl-4">ー 1年間利用料：3,000,000円</p>
           <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：6,000,000円</p>
@@ -94,12 +96,64 @@ export function TransactPricingDocument({ providerName }: { providerName: string
 
         <div className="mb-6">
           <p className="mb-2 font-bold">
-            ② ソフトウェア(ITツール)の最小販売価格（税抜）：月額　150,000円
+            ② ミドルプラン（税抜）：月額　200,000円
+          </p>
+          <p className="mb-2 pl-4">ー 1年間利用料：2,400,000円</p>
+          <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：4,800,000円</p>
+          <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
+        </div>
+
+        <div className="mb-6">
+          <p className="mb-2 font-bold">
+            ③ 最小プラン ＝ ソフトウェア(ITツール)の最小販売価格（税抜）：月額　150,000円
           </p>
           <p className="mb-2 pl-4">ー 1年間利用料：1,800,000円</p>
           <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：3,600,000円</p>
           <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
         </div>
+
+        <p className="mb-3 text-sm leading-relaxed">
+          各プランの機能差はなく、招待できる受注側企業数（受注側アカウント発行上限）と
+          月次取引件数の上限のみを以下のとおり段階的に設定しています（コア機能は全プラン共通）。
+        </p>
+        <table className="w-full border-collapse text-sm mb-3">
+          <thead>
+            <tr className="bg-slate-100">
+              <th className="border-2 border-black px-3 py-2 text-left text-xs font-bold">
+                プラン
+              </th>
+              <th className="border-2 border-black px-3 py-2 text-right text-xs font-bold">
+                受注側アカウント発行上限<br />（招待できる受注側企業数）
+              </th>
+              <th className="border-2 border-black px-3 py-2 text-right text-xs font-bold">
+                月次取引件数上限<br />（発注書・請求書 合計）
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border-2 border-black px-3 py-2">① 標準プラン（月額 250,000円）</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">200社</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">3,000件</td>
+            </tr>
+            <tr>
+              <td className="border-2 border-black px-3 py-2">② ミドルプラン（月額 200,000円）</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">100社</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">1,500件</td>
+            </tr>
+            <tr>
+              <td className="border-2 border-black px-3 py-2">③ 最小プラン（月額 150,000円）</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">50社</td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">500件</td>
+            </tr>
+          </tbody>
+        </table>
+        <p className="mb-4 text-sm leading-relaxed border-2 border-black p-3">
+          <strong>受注側アカウントの発行上限について</strong>:
+          いずれのプランも、発注側企業が発行できる受注側アカウント数には上表のとおり
+          契約上の上限が定められており、<strong>上限なく発行できる契約ではありません</strong>。
+          上限の変更はプラン変更（契約更新時）によってのみ行えます。
+        </p>
 
         <div className="mt-6 border-2 border-black p-4 text-sm leading-relaxed">
           <p className="font-bold mb-2">補足事項</p>
@@ -128,7 +182,7 @@ export function TransactPricingDocument({ providerName }: { providerName: string
               価格改定を行う場合は、契約更新のタイミングで適用し、既存契約の期中には影響しません。
             </li>
             <li>
-              本資料の価格は標準プランおよび最小プランの2種類のみであり、
+              本資料の価格は標準プラン・ミドルプラン・最小プランの3種類のみであり、
               <strong>オプション追加・個別割引・初期費用は設定していません</strong>。
             </li>
           </ul>
@@ -293,7 +347,21 @@ export function TransactPricingDocument({ providerName }: { providerName: string
             </tr>
             <tr>
               <td className="border-2 border-black px-3 py-2">
-                ② 最小プラン（月額 150,000円）
+                ② ミドルプラン（月額 200,000円）
+              </td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">
+                ¥4,800,000
+              </td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono">
+                ¥3,200,000
+              </td>
+              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
+                ¥1,600,000
+              </td>
+            </tr>
+            <tr>
+              <td className="border-2 border-black px-3 py-2">
+                ③ 最小プラン（月額 150,000円）
               </td>
               <td className="border-2 border-black px-3 py-2 text-right font-mono">
                 ¥3,600,000

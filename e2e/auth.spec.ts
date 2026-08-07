@@ -21,7 +21,7 @@ test.describe("認証", () => {
 
     // ダッシュボードにリダイレクトされる
     await page.waitForURL("/")
-    await expect(page.getByText("ダッシュボード")).toBeVisible()
+    await expect(page.getByRole("heading", { name: "ダッシュボード" })).toBeVisible()
   })
 
   test("間違ったパスワードでエラーが表示される", async ({ page }) => {
