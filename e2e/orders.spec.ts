@@ -118,8 +118,8 @@ test.describe("発注管理", () => {
   test("検索フィルターが動作する", async ({ authenticatedPage: page }) => {
     await page.goto("/orders")
 
-    // 検索ボックスが表示される
-    const searchInput = page.getByPlaceholder("発注番号・件名で検索")
+    // 検索ボックスが表示される（レスポンシブ実装で desktop/mobile 2 箇所に描画されるため .first()）
+    const searchInput = page.getByPlaceholder("発注番号・件名で検索").first()
     await expect(searchInput).toBeVisible()
 
     // ステータスフィルターが表示される

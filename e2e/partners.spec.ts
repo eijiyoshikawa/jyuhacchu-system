@@ -8,7 +8,8 @@ test.describe("取引先管理", () => {
     await expect(
       page.getByRole("heading", { name: "取引先管理" })
     ).toBeVisible()
-    await expect(page.getByText("取引先の会社情報を管理します")).toBeVisible()
+    // レスポンシブ実装で desktop/mobile 2 箇所に描画されるため .first()
+    await expect(page.getByText("取引先の会社情報を管理します").first()).toBeVisible()
 
     // 新規登録ボタンが表示される
     await expect(page.getByRole("link", { name: "新規登録" })).toBeVisible()
