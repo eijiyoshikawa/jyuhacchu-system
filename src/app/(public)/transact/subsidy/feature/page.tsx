@@ -476,7 +476,7 @@ export default function TransactFeaturePage() {
         figure="Fig.1"
         caption="ダッシュボード（サマリカード・最近の発注／請求）"
         sourceUrl="https://dlsystem.aigrowthx.pro/"
-        src="/images/subsidy/dashboard.png"
+        src="/images/transact/dashboard.png"
       />
 
       {/* 3-1. 招待管理機能 */}
@@ -618,13 +618,13 @@ export default function TransactFeaturePage() {
         figure="Fig.4"
         caption="発注書 一覧画面"
         sourceUrl="https://dlsystem.aigrowthx.pro/orders"
-        src="/images/subsidy/orders-list.png"
+        src="/images/transact/orders-list.png"
       />
       <ScreenshotPlaceholder
         figure="Fig.5"
         caption="発注書 新規作成画面（明細入力・税率自動計算・免税事業者警告表示）"
         sourceUrl="https://dlsystem.aigrowthx.pro/orders/new"
-        src="/images/subsidy/orders-new.png"
+        src="/images/transact/orders-new.png"
       />
 
       {/* 3-3 Partners */}
@@ -676,7 +676,7 @@ export default function TransactFeaturePage() {
         figure="Fig.6"
         caption="取引先管理 一覧画面（インボイス番号列を含む）"
         sourceUrl="https://dlsystem.aigrowthx.pro/partners"
-        src="/images/subsidy/partners-list.png"
+        src="/images/transact/partners-list.png"
       />
 
       {/* 3-4 Invoice */}
@@ -724,7 +724,7 @@ export default function TransactFeaturePage() {
         figure="Fig.7"
         caption="請求書 一覧画面"
         sourceUrl="https://dlsystem.aigrowthx.pro/invoices"
-        src="/images/subsidy/invoices-list.png"
+        src="/images/transact/invoices-list.png"
       />
 
       {/* 3-5 Invoice compliance */}
