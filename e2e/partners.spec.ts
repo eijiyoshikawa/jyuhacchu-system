@@ -1,14 +1,15 @@
 import { test, expect } from "./fixtures"
 
-test.describe("協力会社管理", () => {
-  test("協力会社一覧が表示される", async ({ authenticatedPage: page }) => {
+test.describe("取引先管理", () => {
+  test("取引先一覧が表示される", async ({ authenticatedPage: page }) => {
     await page.goto("/partners")
 
     // ページヘッダーが表示される
     await expect(
-      page.getByRole("heading", { name: "協力会社管理" })
+      page.getByRole("heading", { name: "取引先管理" })
     ).toBeVisible()
-    await expect(page.getByText("取引先の会社情報を管理します")).toBeVisible()
+    // レスポンシブ実装で desktop/mobile 2 箇所に描画されるため .first()
+    await expect(page.getByText("取引先の会社情報を管理します").first()).toBeVisible()
 
     // 新規登録ボタンが表示される
     await expect(page.getByRole("link", { name: "新規登録" })).toBeVisible()
@@ -47,10 +48,10 @@ test.describe("協力会社管理", () => {
     // フォームを送信
     await page.getByRole("button", { name: "登録" }).click()
 
-    // 協力会社一覧ページにリダイレクトされる
+    // 取引先一覧ページにリダイレクトされる
     await page.waitForURL(/\/partners$/)
     await expect(
-      page.getByRole("heading", { name: "協力会社管理" })
+      page.getByRole("heading", { name: "取引先管理" })
     ).toBeVisible()
   })
 })

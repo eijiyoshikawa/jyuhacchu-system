@@ -50,7 +50,7 @@ test.describe("発注管理", () => {
       await projectSelect.selectOption({ index: 1 })
     }
 
-    // 協力会社を選択
+    // 取引先を選択
     const receiverSelect = page.locator('select[name="receiverId"]')
     const receiverOptions = await receiverSelect.locator("option").all()
     if (receiverOptions.length > 1) {
@@ -61,7 +61,7 @@ test.describe("発注管理", () => {
     await page.fill('input[name="subject"]', "E2Eテスト発注")
 
     // 発注種別を選択
-    await page.locator('select[name="orderType"]').selectOption("工事")
+    await page.locator('select[name="orderType"]').selectOption("業務")
 
     // 明細を入力
     const itemNameInput = page
@@ -118,8 +118,8 @@ test.describe("発注管理", () => {
   test("検索フィルターが動作する", async ({ authenticatedPage: page }) => {
     await page.goto("/orders")
 
-    // 検索ボックスが表示される
-    const searchInput = page.getByPlaceholder("発注番号・件名で検索")
+    // 検索ボックスが表示される（レスポンシブ実装で desktop/mobile 2 箇所に描画されるため .first()）
+    const searchInput = page.getByPlaceholder("発注番号・件名で検索").first()
     await expect(searchInput).toBeVisible()
 
     // ステータスフィルターが表示される

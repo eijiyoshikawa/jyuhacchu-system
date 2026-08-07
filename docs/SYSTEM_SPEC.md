@@ -1,10 +1,11 @@
-# 建設Lシステム - システム仕様書
+# 受発注Lシステム - システム仕様書
 
 ## 1. 概要
 
-建設業界向けの受発注管理プラットフォーム。
-ANDPADの受発注機能を参考に、発注書作成・承認ワークフロー・請求管理・協力会社管理をデジタル化。
-インボイス制度・電子帳簿保存法・建設業法に対応。
+業種を問わず利用できる汎用B2B受発注・請求管理プラットフォーム。
+発注書作成・承認ワークフロー・請求管理・取引先管理をクラウド上でデジタル化。
+インボイス制度・電子帳簿保存法に対応し、下請法・各種取引契約に基づく必要記載事項の準拠チェックを搭載。
+IT導入補助金（デジタル化・AI導入補助金）インボイス枠 インボイス対応類型の要件（会計/受発注/決済のうち1機能以上、インボイス制度対応）に合致。
 
 **公開URL**: Vercel にデプロイ済み
 
@@ -43,7 +44,7 @@ ANDPADの受発注機能を参考に、発注書作成・承認ワークフロ�
 │   │   │   ├── orders/        # 発注管理（一覧/新規/詳細/印刷）
 │   │   │   ├── invoices/      # 請求管理（一覧/新規/詳細/印刷）
 │   │   │   ├── projects/      # 案件管理（一覧/新規/詳細）
-│   │   │   ├── partners/      # 協力会社管理（一覧/新規/詳細）
+│   │   │   ├── partners/      # 取引先管理（一覧/新規/詳細）
 │   │   │   ├── approvals/     # 承認管理
 │   │   │   ├── settings/      # 設定（パスワード変更）
 │   │   │   └── admin/         # 管理者機能（ユーザー管理/監査ログ）
@@ -77,7 +78,7 @@ ANDPADの受発注機能を参考に、発注書作成・承認ワークフロ�
 | 3 | 案件管理 | CRUD、コード自動生成（PJ-YYYYMMDD-XXXX） |
 | 4 | 発注管理 | CRUD、明細項目、番号自動生成（PO-YYYYMMDD-XXXX）、ステータスワークフロー |
 | 5 | 請求管理 | CRUD、明細項目、番号自動生成（INV-YYYYMMDD-XXXX）、発注書からの自動入力 |
-| 6 | 協力会社管理 | CRUD、インボイス番号入力・国税庁API検証 |
+| 6 | 取引先管理 | CRUD、インボイス番号入力・国税庁API検証 |
 | 7 | 承認ワークフロー | 多段階承認、承認/却下＋コメント |
 | 8 | ユーザー管理 | ADMIN専用、CRUD |
 | 9 | パスワード変更 | ポリシー検証付き |
@@ -94,7 +95,7 @@ ANDPADの受発注機能を参考に、発注書作成・承認ワークフロ�
 | # | 機能 | 説明 |
 |---|------|------|
 | 14 | 電子帳簿保存法対応 | SHA-256ハッシュ＋タイムスタンプで改ざん防止 |
-| 15 | 建設業法対応 | 第19条 必須記載事項チェック |
+| 15 | 取引契約 準拠チェック | 下請法・請負契約等の必要記載事項チェック |
 | 16 | 法令準拠バッジ | 準拠/要確認の状態バッジ表示 |
 | 17 | 利用規約 | /terms ページ |
 | 18 | プライバシーポリシー | /privacy ページ |
@@ -102,7 +103,7 @@ ANDPADの受発注機能を参考に、発注書作成・承認ワークフロ�
 ### 出力機能
 | # | 機能 | 説明 |
 |---|------|------|
-| 19 | 発注書印刷 | A4印刷最適化ページ、建設業法対応項目表示 |
+| 19 | 発注書印刷 | A4印刷最適化ページ、取引契約必要記載事項表示 |
 | 20 | 請求書印刷 | 適格請求書フォーマット、インボイス番号表示 |
 | 21 | CSV出力 | 請求一覧エクスポート（BOM付きUTF-8、Excel対応） |
 
@@ -137,7 +138,7 @@ ANDPADの受発注機能を参考に、発注書作成・承認ワークフロ�
 ### テーブル一覧
 | テーブル | 説明 | 主要カラム |
 |---------|------|-----------|
-| Company | 会社（元請・協力会社） | name, code, companyType, registrationNumber |
+| Company | 会社（発注企業・受注企業） | name, code, companyType, registrationNumber |
 | User | ユーザー | email, name, password(bcrypt), role, companyId |
 | Project | 案件 | projectCode, name, status, companyId, address |
 | PurchaseOrder | 発注書 | orderNumber, subject, status, subtotal, taxAmount, totalAmount |
@@ -185,12 +186,13 @@ PurchaseOrder と Invoice に以下のカラムを追加：
 - `confirmedAt` (DateTime) - 確定日時（タイムスタンプ）
 - `confirmedHash` (String) - 確定時のSHA-256ハッシュ値（改ざん防止）
 
-### 建設業法対応カラム（PurchaseOrder）
-- `constructionName` - 工事名称
-- `constructionSite` - 工事場所
-- `constructionPeriodStart` / `constructionPeriodEnd` - 工期
+### 取引契約 必要記載事項カラム（PurchaseOrder）
+※ 内部カラム名は従来からの互換性のため `construction*` のままだが、UI上は以下のラベルで表示する。
+- `constructionName` - 案件名称
+- `constructionSite` - 納入先 / 作業場所
+- `constructionPeriodStart` / `constructionPeriodEnd` - 履行期間
 - `paymentTerms` - 支払条件
-- `defectWarranty` - 瑕疵担保責任
+- `defectWarranty` - 契約不適合責任
 
 ## 6. 認証・認可
 
@@ -198,8 +200,8 @@ PurchaseOrder と Invoice に以下のカラムを追加：
 | ロール | 日本語 | 権限 |
 |--------|--------|------|
 | ADMIN | 管理者 | 全操作、ユーザー管理、監査ログ閲覧、全社データ参照 |
-| CONTRACTOR | 元請 | 発注作成、承認、案件管理、自社データのみ |
-| SUBCONTRACTOR | 協力会社 | 受注確認、請求書作成、自社データのみ |
+| CONTRACTOR | 発注担当 | 発注作成、承認、案件管理、自社データのみ |
+| SUBCONTRACTOR | 受注担当 | 受注確認、請求書作成、自社データのみ |
 
 ### 認証方式
 - NextAuth.js v5 (beta) + Credentials Provider
@@ -226,7 +228,7 @@ PurchaseOrder と Invoice に以下のカラムを追加：
 |--------|----------|------|
 | GET/POST | `/api/auth/[...nextauth]` | NextAuth 認証 |
 
-### 会社（協力会社管理）
+### 会社（取引先管理）
 | Method | Endpoint | 説明 |
 |--------|----------|------|
 | GET | `/api/companies` | 一覧取得（search, type クエリ対応） |
@@ -256,7 +258,7 @@ PurchaseOrder と Invoice に以下のカラムを追加：
 | POST | `/api/orders/[id]/approve` | 承認 |
 | POST | `/api/orders/[id]/reject` | 却下 |
 | POST | `/api/orders/[id]/confirm` | 確定（タイムスタンプ＋SHA-256ハッシュ記録） |
-| GET | `/api/orders/[id]/compliance` | 建設業法・電子帳簿保存法 準拠チェック |
+| GET | `/api/orders/[id]/compliance` | 取引契約必要記載事項・電子帳簿保存法 準拠チェック |
 
 ### 請求
 | Method | Endpoint | 説明 |

@@ -87,7 +87,7 @@ export default async function OrdersPage({ searchParams }: { searchParams: Promi
             <TableRow>
               <TableHead>発注番号</TableHead>
               <TableHead>案件名</TableHead>
-              <TableHead className="hidden md:table-cell">協力会社</TableHead>
+              <TableHead className="hidden md:table-cell">取引先</TableHead>
               <TableHead className="hidden lg:table-cell">件名</TableHead>
               <TableHead className="text-right">金額</TableHead>
               <TableHead>ステータス</TableHead>

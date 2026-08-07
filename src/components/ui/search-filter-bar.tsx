@@ -31,6 +31,7 @@ export function SearchFilterBar({
 
   // Sync search value when URL changes externally
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing external URL state into local input
     setSearchValue(searchParams.get("search") ?? "")
   }, [searchParams])
 

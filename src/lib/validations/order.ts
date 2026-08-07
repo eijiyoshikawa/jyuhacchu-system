@@ -12,7 +12,7 @@ export const orderItemSchema = z.object({
 
 export const orderSchema = z.object({
   projectId: z.string().min(1, "案件を選択してください"),
-  receiverId: z.string().min(1, "協力会社を選択してください"),
+  receiverId: z.string().min(1, "取引先を選択してください"),
   subject: z.string().min(1, "件名を入力してください"),
   orderType: z.string().optional(),
   taxRate: z.number().default(0.1),

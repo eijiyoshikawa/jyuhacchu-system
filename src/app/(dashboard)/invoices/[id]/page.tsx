@@ -76,6 +76,7 @@ export default function InvoiceDetailPage() {
   }, [params.id])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data fetch requires cascading setState
     fetchInvoice()
   }, [fetchInvoice])
 

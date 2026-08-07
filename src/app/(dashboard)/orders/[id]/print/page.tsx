@@ -175,31 +175,31 @@ export default async function OrderPrintPage({
           </div>
         )}
 
-        {/* Construction Law Fields */}
+        {/* Contract Required Items */}
         {(order.constructionName ||
           order.constructionSite ||
           order.constructionPeriodStart ||
           order.paymentTerms) && (
           <div className="mb-6 rounded border border-gray-200 p-4">
             <p className="mb-2 text-xs font-bold text-gray-600">
-              建設業法に基づく記載事項
+              取引契約に基づく必要記載事項
             </p>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
               {order.constructionName && (
                 <>
-                  <dt className="font-medium text-gray-600">工事名称</dt>
+                  <dt className="font-medium text-gray-600">案件名称</dt>
                   <dd>{order.constructionName}</dd>
                 </>
               )}
               {order.constructionSite && (
                 <>
-                  <dt className="font-medium text-gray-600">工事場所</dt>
+                  <dt className="font-medium text-gray-600">納入先 / 作業場所</dt>
                   <dd>{order.constructionSite}</dd>
                 </>
               )}
               {(order.constructionPeriodStart || order.constructionPeriodEnd) && (
                 <>
-                  <dt className="font-medium text-gray-600">工期</dt>
+                  <dt className="font-medium text-gray-600">履行期間</dt>
                   <dd>
                     {order.constructionPeriodStart
                       ? formatDate(order.constructionPeriodStart)
@@ -218,7 +218,7 @@ export default async function OrderPrintPage({
               )}
               {order.defectWarranty && (
                 <>
-                  <dt className="font-medium text-gray-600">瑕疵担保責任</dt>
+                  <dt className="font-medium text-gray-600">契約不適合責任</dt>
                   <dd>{order.defectWarranty}</dd>
                 </>
               )}

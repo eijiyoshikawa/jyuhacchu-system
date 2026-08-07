@@ -93,8 +93,8 @@ export default function PartnerDetailPage() {
               <div className="space-y-2">
                 <Label htmlFor="companyType">会社種別</Label>
                 <Select id="companyType" name="companyType" defaultValue={company.companyType} required>
-                  <option value="GENERAL_CONTRACTOR">元請会社</option>
-                  <option value="SUBCONTRACTOR">協力会社</option>
+                  <option value="GENERAL_CONTRACTOR">発注企業</option>
+                  <option value="SUBCONTRACTOR">受注企業</option>
                 </Select>
               </div>
             </div>

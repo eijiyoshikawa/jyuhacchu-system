@@ -11,8 +11,8 @@ const PAGE_SIZE = 20
 
 const typeOptions = [
   { value: "", label: "全て" },
-  { value: "GENERAL_CONTRACTOR", label: "元請" },
-  { value: "SUBCONTRACTOR", label: "協力会社" },
+  { value: "GENERAL_CONTRACTOR", label: "発注企業" },
+  { value: "SUBCONTRACTOR", label: "受注企業" },
 ]
 
 export default async function PartnersPage({ searchParams }: { searchParams: Promise<{ search?: string; status?: string; page?: string }> }) {
@@ -48,7 +48,7 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
   return (
     <div>
       <PageHeader
-        title="協力会社管理"
+        title="取引先管理"
         description="取引先の会社情報を管理します"
         createHref="/partners/new"
         createLabel="新規登録"
@@ -90,7 +90,7 @@ export default async function PartnersPage({ searchParams }: { searchParams: Pro
                   <TableCell className="font-medium">{company.name}</TableCell>
                   <TableCell>
                     <Badge variant={company.companyType === "GENERAL_CONTRACTOR" ? "default" : "secondary"}>
-                      {company.companyType === "GENERAL_CONTRACTOR" ? "元請" : "協力会社"}
+                      {company.companyType === "GENERAL_CONTRACTOR" ? "発注企業" : "受注企業"}
                     </Badge>
                   </TableCell>
                   <TableCell className="hidden md:table-cell">{company.phone || "-"}</TableCell>
