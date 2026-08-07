@@ -11,6 +11,8 @@ function isMarketingPath(pathname: string): boolean {
     pathname.startsWith("/lp/") ||
     pathname === "/subsidy" ||
     pathname.startsWith("/subsidy/") ||
+    pathname === "/transact" ||
+    pathname.startsWith("/transact/") ||
     pathname === "/terms" ||
     pathname === "/privacy" ||
     pathname === "/favicon.ico" ||
@@ -41,7 +43,11 @@ export function middleware(req: NextRequest) {
     pathname === "/lp" ||
     pathname.startsWith("/lp/") ||
     pathname === "/subsidy" ||
-    pathname.startsWith("/subsidy/")
+    pathname.startsWith("/subsidy/") ||
+    pathname === "/transact" ||
+    pathname.startsWith("/transact/") ||
+    pathname.startsWith("/invite/") ||
+    pathname.startsWith("/api/invitations/")
 
   // Public routes (system domain)
   if (isApiAuth || isLegalPage || isApiHealth || isPublicMarketing) {

@@ -9,6 +9,10 @@ interface DocumentShellProps {
   /** Tool / maker identification displayed in the document header */
   toolName?: string
   makerName?: string
+  /** Return-link URL and footer overrides (used for /transact variant) */
+  indexHref?: string
+  indexLabel?: string
+  schemeLabel?: string
   children: React.ReactNode
 }
 
@@ -18,6 +22,9 @@ export function DocumentShell({
   pcode,
   toolName = "受発注Lシステム",
   makerName = "株式会社LET",
+  indexHref = "/subsidy",
+  indexLabel = "← 申請資料一覧に戻る",
+  schemeLabel = "デジタル化・AI導入補助金2026 インボイス枠（インボイス対応類型）",
   children,
 }: DocumentShellProps) {
   function handlePrint() {
@@ -32,10 +39,10 @@ export function DocumentShell({
       <div className="print-hide sticky top-14 z-10 border-b border-slate-200 bg-white/95 backdrop-blur">
         <div className="mx-auto max-w-4xl flex items-center justify-between px-6 py-3">
           <Link
-            href="/subsidy"
+            href={indexHref}
             className="text-sm text-slate-600 hover:text-slate-900"
           >
-            ← 申請資料一覧に戻る
+            {indexLabel}
           </Link>
           <button
             type="button"
@@ -75,10 +82,9 @@ export function DocumentShell({
 
         {/* Footer */}
         <footer className="mt-12 border-t border-slate-300 pt-4 text-xs text-slate-500 avoid-break">
-          <p>© 2026 受発注Lシステム. All rights reserved.</p>
+          <p>© 2026 {toolName}. All rights reserved.</p>
           <p>
-            本資料はデジタル化・AI導入補助金2026 インボイス枠（インボイス対応類型）
-            の申請添付書類として作成されたものです。
+            本資料は {schemeLabel} の申請添付書類として作成されたものです。
           </p>
         </footer>
       </article>

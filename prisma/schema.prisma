@@ -62,6 +62,14 @@ enum ApprovalStatus {
   REJECTED  // 却下
 }
 
+// 招待ステータス
+enum InvitationStatus {
+  PENDING    // 招待中（未受諾）
+  ACCEPTED   // 受諾済（受注企業として登録完了）
+  REVOKED    // 発注企業側で取消
+  EXPIRED    // 有効期限切れ
+}
+
 // ==============================
 // 会社
 // ==============================
@@ -273,6 +281,33 @@ model ApprovalStep {
   updatedAt      DateTime       @updatedAt
 
   @@unique([approvalFlowId, stepOrder])
+}
+
+// ==============================
+// 取引先招待（電子取引類型：発注側→受注側 無償アカウント発行フロー）
+// ==============================
+model Invitation {
+  id                    String           @id @default(cuid())
+  token                 String           @unique // 招待URLに埋め込むトークン
+  inviterCompanyId      String           // 発注側企業（招待発行元）
+  inviterUserId         String           // 招待発行操作を行ったユーザーID
+  inviterUserName       String           // 発行者名（表示用スナップショット）
+  invitedCompanyName    String           // 招待先会社名（受諾前のスナップショット）
+  invitedContactName    String?          // 招待先担当者名（任意）
+  invitedContactEmail   String           // 招待先メールアドレス
+  message               String?          // 発注側からのメッセージ（任意）
+  status                InvitationStatus @default(PENDING)
+  acceptedCompanyId     String?          // 受諾時に作成された Company の ID
+  acceptedUserId        String?          // 受諾時に作成された User の ID
+  acceptedAt            DateTime?
+  revokedAt             DateTime?
+  expiresAt             DateTime         // 有効期限（デフォルト 30日後）
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+
+  @@index([inviterCompanyId])
+  @@index([status])
+  @@index([invitedContactEmail])
 }
 
 // ==============================

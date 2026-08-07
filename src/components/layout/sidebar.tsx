@@ -14,6 +14,7 @@ import {
   ScrollText,
   Settings,
   Users,
+  Mail,
 } from "lucide-react"
 
 const navigation = [
@@ -23,6 +24,7 @@ const navigation = [
   { name: "請求管理", href: "/invoices", icon: Receipt },
   { name: "承認", href: "/approvals", icon: ClipboardCheck },
   { name: "取引先管理", href: "/partners", icon: Building2 },
+  { name: "取引先招待", href: "/partners/invite", icon: Mail },
   { name: "設定", href: "/settings", icon: Settings },
 ]
 
