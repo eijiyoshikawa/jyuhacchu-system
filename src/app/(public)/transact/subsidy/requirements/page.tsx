@@ -1,5 +1,9 @@
 import type { Metadata } from "next"
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import {
+  DENSHI_REQUIREMENTS,
+  SCHEME_NOTE_TITLE,
+} from "@/app/(public)/transact/subsidy/_components/denshi-torihiki-requirements"
 
 export const metadata: Metadata = {
   title: "その他要件説明資料｜電子取引Lシステム｜IT導入補助金 電子取引類型",
@@ -205,6 +209,17 @@ export default function TransactRequirementsPage() {
         <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
           2. 電子取引類型 機能要件への適合
         </h2>
+        <div className="mb-4 border-4 border-black p-4">
+          <p className="mb-2 border-b-2 border-black pb-1 text-base font-black">
+            本ITツールは インボイス枠（電子取引類型）の補助対象となるソフトウェアです
+          </p>
+          <p className="text-sm leading-relaxed">
+            {SCHEME_NOTE_TITLE}に定める全{DENSHI_REQUIREMENTS.length}項目への逐条の適合表は、
+            <strong>機能説明資料および価格説明資料の「インボイス枠（電子取引類型）補助対象要件 適合表」</strong>
+            に同一の要件番号（①〜⑥）で記載しています。本資料では、当該要件を含む
+            電子取引類型の機能要件全般への適合状況を示します。
+          </p>
+        </div>
         <p className="mb-4 text-sm leading-relaxed">
           デジタル化・AI導入補助金2026 インボイス枠 <strong>電子取引類型</strong> は、
           「発注者と受注者双方が利用可能な電子取引プラットフォームであり、
@@ -258,9 +273,24 @@ export default function TransactRequirementsPage() {
                 "SaaS形態、Webブラウザのみで利用可能。専用アプリ・サーバ構築不要",
               ],
               [
-                "導入後の保守・サポートの提供",
+                "★ 発注者側／受注者側でアカウント機能が分かれ、受注者側アカウントの状況を管理できること（要件③）",
                 "✓",
-                "月額契約＋メール／チャットサポートを継続提供。SLA 99.5%、日次バックアップ",
+                "会社種別・ロールでメニューと権限を分離。発注側管理者は招待一覧で受注側アカウントのステータス（招待中／受諾済／取消／期限切れ）を管理可能",
+              ],
+              [
+                "★ 発注者側が取引内容を一元管理（契約・発注、請求等）できること（要件④）",
+                "✓",
+                "案件（契約単位）→発注書→検収→請求書→支払を同一DBで関連付けて一元管理。案件別の発注・請求金額集計にも対応",
+              ],
+              [
+                "★ 発注者側が受注者側のインボイス管理番号を管理できること（要件⑤）",
+                "✓",
+                "取引先マスタに適格請求書発行事業者登録番号欄を標準搭載し、国税庁Web-APIで自動検証。取引先一覧で全取引先の登録番号を確認可能",
+              ],
+              [
+                "★ 受注者側のアカウントを上限なく発行できる契約ではないこと（要件⑥）",
+                "✓",
+                "契約プランごとに受注側アカウント発行上限（標準200社／ミドル100社／最小50社）を設定。詳細は価格説明資料のプラン別上限表に記載",
               ],
               [
                 "最低1年以上の利用継続",

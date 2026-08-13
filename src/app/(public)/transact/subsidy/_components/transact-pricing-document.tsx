@@ -1,4 +1,9 @@
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import {
+  DENSHI_REQUIREMENTS,
+  DenshiRequirementTableForPricing,
+  SCHEME_NOTE_TITLE,
+} from "./denshi-torihiki-requirements"
 
 const TOOL_NAME = "電子取引Lシステム"
 const MAKER_NAME = "株式会社LET"
@@ -70,6 +75,57 @@ export function TransactPricingDocument({ providerName }: { providerName: string
             </tr>
           </tbody>
         </table>
+      </section>
+
+      {/* ★ 電子取引類型 補助対象要件 適合表 — 価格・契約条件の面からの適合を明示 */}
+      <section className="mb-8 page-break-before">
+        <div className="border-4 border-black p-6 mb-5 text-center">
+          <p className="text-sm font-bold tracking-[0.4em] mb-3">
+            インボイス枠（電子取引類型）補助対象要件 対応説明
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-black tracking-widest border-y-4 border-black py-3 my-3">
+            本ITツールは インボイス枠（電子取引類型）の
+            <br />
+            補助対象となるソフトウェアです
+          </h2>
+          <p className="mt-3 text-sm font-bold">{SCHEME_NOTE_TITLE}に定める全{DENSHI_REQUIREMENTS.length}項目に適合</p>
+          <div className="mx-auto mt-5 max-w-2xl border-4 border-black p-4 text-left">
+            <p className="text-base font-black mb-2">価格・契約条件の面から確認できる要件</p>
+            <ul className="list-disc pl-5 space-y-1 text-sm leading-relaxed">
+              <li>
+                <strong className="bg-yellow-200 px-1">
+                  要件② 受注者側へのアカウント無償発行
+                </strong>
+                : 利用料は<strong>発注側企業にのみ</strong>請求し、
+                <strong>受注側企業のアカウント発行料・月額利用料等は一切発生しません（0円）</strong>。
+                → 本資料「ITツールの価格」補足事項に明記
+              </li>
+              <li>
+                <strong className="bg-yellow-200 px-1">
+                  要件⑥ 受注者側アカウントを上限なく発行できる契約ではないこと
+                </strong>
+                : 契約プランごとに受注側アカウント発行上限
+                （標準200社／ミドル100社／最小50社）を定めています。
+                → 本資料「ITツールの価格」プラン別上限表に明記
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 className="mb-3 bg-black text-white px-4 py-2 text-lg font-black">
+          インボイス枠（電子取引類型）補助対象要件 適合表（全{DENSHI_REQUIREMENTS.length}項目）
+        </h3>
+        <p className="mb-3 text-sm leading-relaxed">
+          {SCHEME_NOTE_TITLE}に定める要件について、本ITツール「{TOOL_NAME}」の適合状況を
+          <strong>要件ごとに逐条で</strong>示します。要件文言は登録要領の表記のまま記載し、
+          価格説明資料（本資料）で確認できる箇所と、機能説明資料の該当箇所を併記しています。
+          <strong>本表の全{DENSHI_REQUIREMENTS.length}項目すべてに適合（◎）しています。</strong>
+        </p>
+        <DenshiRequirementTableForPricing />
+        <p className="mt-3 text-xs leading-relaxed">
+          ※ 要件番号（①〜⑥）は機能説明資料の「インボイス枠（電子取引類型）補助対象要件 適合表」と
+          同一です。機能面の実装内容の詳細は機能説明資料の該当箇所をご参照ください。
+        </p>
       </section>
 
       <Section label="IT導入支援事業者名">
@@ -148,12 +204,32 @@ export function TransactPricingDocument({ providerName }: { providerName: string
             </tr>
           </tbody>
         </table>
-        <p className="mb-4 text-sm leading-relaxed border-2 border-black p-3">
-          <strong>受注側アカウントの発行上限について</strong>:
-          いずれのプランも、発注側企業が発行できる受注側アカウント数には上表のとおり
-          契約上の上限が定められており、<strong>上限なく発行できる契約ではありません</strong>。
-          上限の変更はプラン変更（契約更新時）によってのみ行えます。
-        </p>
+        <div className="mb-4 border-4 border-black p-4">
+          <p className="mb-2 border-b-2 border-black pb-1 text-base font-black">
+            電子取引類型 要件② に対応：受注側企業への課金は一切ありません
+          </p>
+          <p className="text-sm leading-relaxed">
+            上記の利用料は<strong>発注側企業（招待する側）にのみ</strong>ご請求します。
+            発注側企業から招待を受けた<strong className="bg-yellow-200 px-1">
+            受注側企業のアカウント発行料・月額利用料・取引件数に応じた従量課金は
+            いずれも 0円（完全無償）</strong>であり、受注側企業に費用負担は発生しません。
+            これは、インボイス枠（電子取引類型）の
+            「受注者側に対してアカウントを無償で発行し、利用させることのできる機能を有すること」
+            の要件に対応するものです。
+          </p>
+        </div>
+
+        <div className="mb-4 border-4 border-black p-4">
+          <p className="mb-2 border-b-2 border-black pb-1 text-base font-black">
+            電子取引類型 要件⑥ に対応：受注側アカウントの発行上限
+          </p>
+          <p className="text-sm leading-relaxed">
+            いずれのプランも、発注側企業が発行できる受注側アカウント数には上表のとおり
+            <strong className="bg-yellow-200 px-1">契約上の上限（標準200社／ミドル100社／最小50社）</strong>
+            が定められており、<strong>上限なく発行できる契約ではありません</strong>。
+            上限の変更はプラン変更（契約更新時）によってのみ行えます。
+          </p>
+        </div>
 
         <div className="mt-6 border-2 border-black p-4 text-sm leading-relaxed">
           <p className="font-bold mb-2">補足事項</p>
