@@ -1,6 +1,11 @@
 import type { Metadata } from "next"
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
 import { ScreenshotPlaceholder } from "@/app/(public)/subsidy/_components/screenshot-placeholder"
+import {
+  DENSHI_REQUIREMENTS,
+  DenshiRequirementTableForFeature,
+  SCHEME_NOTE_TITLE,
+} from "@/app/(public)/transact/subsidy/_components/denshi-torihiki-requirements"
 
 export const metadata: Metadata = {
   title: "機能説明資料｜電子取引Lシステム｜IT導入補助金 電子取引類型",
@@ -114,16 +119,17 @@ export default function TransactFeaturePage() {
           <table className="w-full border-collapse text-sm">
             <tbody>
               {[
-                { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.3" },
-                { no: "2", label: "解決する業務課題と導入効果（受注側企業を無償招待し電子化を推進）", page: "P.4" },
-                { no: "★3-0", label: "電子取引類型 必須要件：招待型アカウント発行機能", page: "P.5" },
-                { no: "3", label: "機能詳細（招待管理／発注／取引先／請求／インボイス／電帳法／承認／監査）", page: "P.6" },
-                { no: "★4", label: "業務フロー図（招待発行→受諾→両社間電子取引成立）", page: "P.9" },
-                { no: "★5", label: "ITツールの利用方法（5-1 招待発行〜5-6 管理者運用）", page: "P.10" },
-                { no: "6", label: "技術仕様", page: "P.12" },
-                { no: "7", label: "導入プロセス", page: "P.13" },
-                { no: "8", label: "サポート体制", page: "P.13" },
-                { no: "9", label: "お問い合わせ", page: "P.14" },
+                { no: "★0", label: "インボイス枠（電子取引類型）補助対象要件 適合表（登録要領 留意事項 全6項目・逐条）", page: "P.3" },
+                { no: "★0-2", label: "本ITツールは「受発注機能」を有します（会計／受発注／決済の有無）", page: "P.6" },
+                { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.7" },
+                { no: "2", label: "解決する業務課題と導入効果（受注側企業を無償招待し電子化を推進）", page: "P.8" },
+                { no: "3", label: "機能詳細（招待管理／発注／取引先／請求／インボイス／電帳法／承認／監査）", page: "P.9" },
+                { no: "★4", label: "業務フロー図（招待発行→受諾→両社間電子取引成立）", page: "P.13" },
+                { no: "★5", label: "ITツールの利用方法（5-1 招待発行〜5-6 管理者運用）", page: "P.14" },
+                { no: "6", label: "技術仕様", page: "P.16" },
+                { no: "7", label: "導入プロセス", page: "P.17" },
+                { no: "8", label: "サポート体制", page: "P.17" },
+                { no: "9", label: "お問い合わせ", page: "P.18" },
               ].map((row) => (
                 <tr key={row.no}>
                   <td
@@ -152,7 +158,75 @@ export default function TransactFeaturePage() {
         </div>
       </section>
 
-      {/* §3-0 電子取引類型 必須要件 明示セクション */}
+      {/* ★ 電子取引類型 補助対象要件 章扉ページ — 登録要領 留意事項 への逐条適合を明示 */}
+      <section className="mb-8 page-break-before avoid-break">
+        <div className="border-4 border-black p-8 text-center">
+          <p className="text-sm font-bold tracking-[0.4em] mb-3">CHAPTER 0</p>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-widest border-y-4 border-black py-4 my-3">
+            インボイス枠（電子取引類型）
+            <br />
+            補助対象要件への適合
+          </h2>
+          <p className="mt-4 text-base font-bold">
+            {SCHEME_NOTE_TITLE}
+            <br />
+            に定める全 {DENSHI_REQUIREMENTS.length} 項目への適合状況
+          </p>
+          <div className="mx-auto mt-6 max-w-xl border-4 border-black bg-black px-4 py-3 text-white">
+            <p className="text-xl font-black">
+              本ITツールは インボイス枠（電子取引類型）の
+              <br />
+              補助対象となるソフトウェアです
+            </p>
+          </div>
+          <table className="mx-auto mt-6 w-full max-w-xl border-collapse text-sm">
+            <tbody>
+              <tr>
+                <th className="border-2 border-black bg-slate-100 px-3 py-2 text-left text-sm font-bold w-44">
+                  ITツール正式名称
+                </th>
+                <td className="border-2 border-black px-3 py-2 text-lg font-black">{TOOL_NAME}</td>
+              </tr>
+              <tr>
+                <th className="border-2 border-black bg-slate-100 px-3 py-2 text-left text-sm font-bold">
+                  開発メーカー名
+                </th>
+                <td className="border-2 border-black px-3 py-2 text-lg font-black">{MAKER_NAME}</td>
+              </tr>
+              <tr>
+                <th className="border-2 border-black bg-slate-100 px-3 py-2 text-left text-sm font-bold">
+                  申請枠・類型
+                </th>
+                <td className="border-2 border-black px-3 py-2 text-base font-bold">
+                  インボイス枠（電子取引類型）／カテゴリー1 ソフトウェア
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* ★ 電子取引類型 補助対象要件 逐条適合表 */}
+      <section className="mb-8 page-break-before">
+        <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
+          §0. インボイス枠（電子取引類型）補助対象要件 適合表（全{DENSHI_REQUIREMENTS.length}項目）
+        </h2>
+        <p className="mb-3 text-sm leading-relaxed">
+          {SCHEME_NOTE_TITLE}に定める要件について、
+          本ITツール「{TOOL_NAME}」の適合状況を <strong>要件ごとに逐条で</strong> 示します。
+          要件文言は登録要領の表記のまま記載し、各要件に対応する実装内容と
+          本資料内の該当箇所（節番号・図番号）を併記しています。
+          <strong>本表の全{DENSHI_REQUIREMENTS.length}項目すべてに適合（◎）しています。</strong>
+        </p>
+        <DenshiRequirementTableForFeature />
+        <p className="mt-3 text-xs leading-relaxed">
+          ※ 価格・契約条件の面（受注側企業への課金の有無、受注側アカウント発行上限の定め）からの
+          適合確認は、<strong>価格説明資料の「インボイス枠（電子取引類型）補助対象要件 適合表」</strong>
+          に同一の要件番号で記載しています。
+        </p>
+      </section>
+
+      {/* 電子取引プラットフォームとしての性質の説明 */}
       <section className="mb-8 page-break-before avoid-break">
         <div className="border-4 border-black p-6">
           <p className="text-center text-sm font-bold tracking-[0.4em] mb-2">
