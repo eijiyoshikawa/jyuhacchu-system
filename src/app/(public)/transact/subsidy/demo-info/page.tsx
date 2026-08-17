@@ -78,10 +78,104 @@ export default function TransactDemoInfoPage() {
         </table>
       </section>
 
-      {/* §1 デモ機 URL */}
+      {/* ★ 提出要求項目（①URL ②ID/PW）を1画面で確認できるサマリ */}
       <section className="mb-8 avoid-break">
+        <div className="border-4 border-black p-6">
+          <p className="text-center text-sm font-bold tracking-[0.3em] mb-2">
+            デモ機・テストアカウントに関する情報
+          </p>
+          <h2 className="text-center text-xl sm:text-2xl font-black tracking-wide border-y-4 border-black py-3 mb-4">
+            ① デモ機・テストアカウントのURL ／ ② ログインID・パスワード
+          </h2>
+          <p className="mb-4 text-sm leading-relaxed">
+            本資料は、ITツール登録要領「ITツール登録申請時の留意事項」「（別紙1）提出資料」に基づき
+            ご提出する<strong>「デモ機やテストアカウントに関する情報」</strong>です。
+            審査に必要な <strong>① URL</strong> と <strong>② ログインID・パスワード</strong> を
+            本ページに集約して記載しています（詳細は §1〜§3）。
+            本デモ機は<strong>実際に稼働している本番同等の環境</strong>であり、
+            下記アカウントで即時にログインしてご確認いただけます。
+          </p>
+
+          <table className="w-full border-collapse text-sm mb-4">
+            <tbody>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-3 py-3 text-left text-base font-black w-56">
+                  ① デモ機URL<br />
+                  <span className="text-xs font-bold">（ログイン画面）</span>
+                </th>
+                <td className="border-2 border-black bg-yellow-100 px-3 py-3 font-mono text-lg font-bold">
+                  https://dlsystem.aigrowthx.pro/auth/login
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p className="mb-2 text-base font-black">
+            ② ログインID・パスワード（4アカウント／パスワードは全て共通）
+          </p>
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold w-48">
+                  区分・ロール
+                </th>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold">
+                  ログインID（メールアドレス）
+                </th>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold w-44">
+                  パスワード
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["発注側企業 管理者", "admin@sample-trading.co.jp", true],
+                ["発注側企業 発注担当", "tanaka@sample-trading.co.jp", false],
+                ["受注側企業 管理者", "admin@tanaka-service.co.jp", false],
+                ["受注側企業 受注担当", "suzuki@tanaka-service.co.jp", false],
+              ].map(([role, mail, primary]) => (
+                <tr key={mail as string} className={primary ? "bg-yellow-100" : undefined}>
+                  <td className="border-2 border-black px-3 py-2 text-sm font-bold">
+                    {role as string}
+                    {primary ? (
+                      <>
+                        <br />
+                        <span className="text-xs">※ まずはこちらでログインしてください</span>
+                      </>
+                    ) : null}
+                  </td>
+                  <td className="border-2 border-black px-3 py-2 font-mono text-base font-bold">
+                    {mail as string}
+                  </td>
+                  <td className="border-2 border-black px-3 py-2 font-mono text-base font-bold bg-yellow-200">
+                    password123
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="mt-4 border-2 border-black p-3 text-sm leading-relaxed">
+            <p className="font-bold mb-1">
+              申請プロセス（主Pコード 共P-02）に該当する機能の確認手順
+            </p>
+            <p>
+              発注側企業 管理者アカウントでログイン後、左メニューの
+              「発注管理」「取引先管理」「請求管理」「承認」から、共P-02
+              （決済・債権債務・資金回収）に該当する機能をご確認いただけます。
+              画面別の具体的な操作手順は <strong>§3</strong> に記載しています。
+              サンプルデータ（発注書 PO-20260407-0001／請求書 INV-20260428-0001／
+              取引先3社／招待レコード2件）が登録済みのため、初回ログイン直後から
+              実データでご確認いただけます。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* §1 デモ機 URL */}
+      <section className="mb-8 avoid-break page-break-before">
         <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
-          §1. デモ機 URL
+          §1. デモ機 URL（詳細）
         </h2>
         <table className="w-full border-collapse text-sm">
           <tbody>
