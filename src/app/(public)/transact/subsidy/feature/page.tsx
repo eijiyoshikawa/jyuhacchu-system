@@ -119,17 +119,18 @@ export default function TransactFeaturePage() {
           <table className="w-full border-collapse text-sm">
             <tbody>
               {[
-                { no: "★0", label: "インボイス枠（電子取引類型）補助対象要件 適合表（登録要領 留意事項 全6項目・逐条）", page: "P.3" },
-                { no: "★0-2", label: "本ITツールは「受発注機能」を有します（会計／受発注／決済の有無）", page: "P.6" },
-                { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.7" },
-                { no: "2", label: "解決する業務課題と導入効果（受注側企業を無償招待し電子化を推進）", page: "P.8" },
-                { no: "3", label: "機能詳細（招待管理／発注／取引先／請求／インボイス／電帳法／承認／監査）", page: "P.9" },
-                { no: "★4", label: "業務フロー図（招待発行→受諾→両社間電子取引成立）", page: "P.13" },
-                { no: "★5", label: "ITツールの利用方法（5-1 招待発行〜5-6 管理者運用）", page: "P.14" },
-                { no: "6", label: "技術仕様", page: "P.16" },
-                { no: "7", label: "導入プロセス", page: "P.17" },
-                { no: "8", label: "サポート体制", page: "P.17" },
-                { no: "9", label: "お問い合わせ", page: "P.18" },
+                { no: "★0", label: "インボイス枠（電子取引類型）補助対象要件 適合表（登録要領 留意事項 全6項目・逐条）", page: "P.3〜5" },
+                { no: "★0-1", label: "電子取引類型 必須要件 対応説明（招待型 電子取引プラットフォーム）", page: "P.6〜7" },
+                { no: "★0-2", label: "本ITツールは「受発注機能」を有します（会計／受発注／決済の有無）", page: "P.8" },
+                { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.9" },
+                { no: "2", label: "解決する業務課題と導入効果（受注側企業を無償招待し電子化を推進）", page: "P.9" },
+                { no: "★3", label: "機能詳細（3-1 招待管理／3-2 発注／3-3 取引先／3-4 請求／3-5 インボイス／3-6 電帳法／3-7 承認／3-8 監査）", page: "P.11〜14" },
+                { no: "★4", label: "業務フロー図（招待発行→受諾→両社間電子取引成立）［図1］", page: "P.15〜16" },
+                { no: "★5", label: "ITツールの利用方法（5-1 招待発行〜5-6 管理者運用）", page: "P.17〜18" },
+                { no: "6", label: "技術仕様", page: "P.19" },
+                { no: "7", label: "導入プロセス", page: "P.19" },
+                { no: "8", label: "サポート体制", page: "P.20" },
+                { no: "9", label: "お問い合わせ", page: "P.20" },
               ].map((row) => (
                 <tr key={row.no}>
                   <td
@@ -148,7 +149,7 @@ export default function TransactFeaturePage() {
                   >
                     {row.label}
                   </td>
-                  <td className="border-2 border-black px-3 py-2 text-center w-20 font-mono">
+                  <td className="border-2 border-black px-3 py-2 text-center w-28 font-mono whitespace-nowrap">
                     {row.page}
                   </td>
                 </tr>
@@ -325,19 +326,19 @@ export default function TransactFeaturePage() {
             <ul className="list-disc pl-5 space-y-0.5">
               <li>
                 <strong>① 招待型アカウント発行機能の詳細</strong> →
-                §3-1 招待管理機能（本資料 P.6）
+                §3-1 招待管理機能（本資料 P.11）
               </li>
               <li>
                 <strong>② 両社間の発注・請求授受機能の詳細</strong> →
-                §3-2 発注管理機能／§3-4 請求管理機能（P.7〜P.8）
+                §3-2 発注管理機能（P.12）／§3-4 請求管理機能（P.13）
               </li>
               <li>
                 <strong>③ 業務フロー全体（招待発行→受諾→電子取引成立）</strong> →
-                §4 業務フロー図［図1］（P.9）
+                §4 業務フロー図［図1］（P.15〜P.16）
               </li>
               <li>
                 <strong>④ 電子取引データ保存の実装</strong> →
-                §3-6 電子帳簿保存法対応（P.8）
+                §3-6 電子帳簿保存法対応（P.13）
               </li>
             </ul>
           </div>
