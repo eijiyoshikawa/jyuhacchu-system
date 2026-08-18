@@ -15,6 +15,29 @@ export const metadata: Metadata = {
 
 const TOOL_NAME = "電子取引Lシステム"
 const MAKER_NAME = "株式会社LET"
+
+/**
+ * 本資料に掲載する画面キャプチャの一覧。
+ * page は A4 印刷時の実ページ番号（PDF を生成して実測した値）。
+ * 図を追加・削除した場合は必ず再計測して更新すること。
+ */
+const SCREEN_CAPTURES: {
+  fig: string
+  side: "買い手側" | "売り手側" | "共通"
+  desc: string
+  page: string
+}[] = [
+  { fig: "Fig.1", side: "共通", desc: "ダッシュボード（発注件数・請求件数・承認待ち件数・最近の発注／請求）", page: "P.13" },
+  { fig: "Fig.2", side: "買い手側", desc: "取引先招待 画面（受注側企業への無償アカウント発行・招待URL発行／発行済み招待一覧）", page: "P.15" },
+  { fig: "Fig.3", side: "売り手側", desc: "招待受諾ページ（受注側企業が費用ゼロでアカウントを作成）", page: "P.15" },
+  { fig: "Fig.4", side: "買い手側", desc: "発注書 一覧画面（発注管理）", page: "P.16" },
+  { fig: "Fig.5", side: "買い手側", desc: "発注書 新規作成画面（仕入明細の入力・税率別自動計算）", page: "P.17" },
+  { fig: "Fig.6", side: "買い手側", desc: "取引先管理 一覧画面（適格請求書発行事業者登録番号＝インボイス管理番号の管理）", page: "P.18" },
+  { fig: "Fig.7", side: "買い手側", desc: "請求書 一覧画面（受領請求書の確認・買掛／支払管理）", page: "P.19" },
+  { fig: "Fig.8", side: "売り手側", desc: "受注側企業が受領した発注書の一覧（受注管理）", page: "P.21" },
+  { fig: "Fig.9", side: "売り手側", desc: "受注側企業が発行した請求書の一覧（売上請求管理・売掛／回収管理）", page: "P.22" },
+  { fig: "Fig.10", side: "売り手側", desc: "受注側企業による適格請求書の新規作成画面（売上請求管理）", page: "P.22" },
+]
 const PROVIDER_NAME = "株式会社LET"
 const SCHEME_LABEL = "デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）"
 
@@ -122,15 +145,17 @@ export default function TransactFeaturePage() {
                 { no: "★0", label: "インボイス枠（電子取引類型）補助対象要件 適合表（登録要領 留意事項 全6項目・逐条）", page: "P.3〜5" },
                 { no: "★0-1", label: "電子取引類型 必須要件 対応説明（招待型 電子取引プラットフォーム）", page: "P.6〜7" },
                 { no: "★0-2", label: "本ITツールは「受発注機能」を有します（会計／受発注／決済の有無）", page: "P.8" },
-                { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.9" },
-                { no: "2", label: "解決する業務課題と導入効果（受注側企業を無償招待し電子化を推進）", page: "P.9" },
-                { no: "★3", label: "機能詳細（3-1 招待管理／3-2 発注／3-3 取引先／3-4 請求／3-5 インボイス／3-6 電帳法／3-7 承認／3-8 監査）", page: "P.11〜14" },
-                { no: "★4", label: "業務フロー図（招待発行→受諾→両社間電子取引成立）［図1］", page: "P.15〜16" },
-                { no: "★5", label: "ITツールの利用方法（5-1 招待発行〜5-6 管理者運用）", page: "P.17〜18" },
-                { no: "6", label: "技術仕様", page: "P.19" },
-                { no: "7", label: "導入プロセス", page: "P.19" },
-                { no: "8", label: "サポート体制", page: "P.20" },
-                { no: "9", label: "お問い合わせ", page: "P.20" },
+                { no: "★0-3", label: "売り手側機能・買い手側機能を両方有することの明示（電子取引類型 必須要件）", page: "P.9〜10" },
+                { no: "★0-4", label: "画面キャプチャ 一覧（全10点・買い手側／売り手側）", page: "P.11" },
+                { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.12" },
+                { no: "2", label: "解決する業務課題と導入効果（受注側企業を無償招待し電子化を推進）", page: "P.12" },
+                { no: "★3", label: "機能詳細（3-1 招待管理／3-2 発注／3-3 取引先／3-4 請求／3-5 インボイス／3-6 電帳法／3-7 承認／3-8 監査／3-9 受注側企業の画面）", page: "P.13〜22" },
+                { no: "★4", label: "業務フロー図（招待発行→受諾→両社間電子取引成立）［図1］", page: "P.23〜24" },
+                { no: "★5", label: "ITツールの利用方法（5-1 招待発行〜5-6 管理者運用）", page: "P.25〜26" },
+                { no: "6", label: "技術仕様", page: "P.27" },
+                { no: "7", label: "導入プロセス", page: "P.27" },
+                { no: "8", label: "サポート体制", page: "P.28" },
+                { no: "9", label: "お問い合わせ", page: "P.28" },
               ].map((row) => (
                 <tr key={row.no}>
                   <td
@@ -326,19 +351,19 @@ export default function TransactFeaturePage() {
             <ul className="list-disc pl-5 space-y-0.5">
               <li>
                 <strong>① 招待型アカウント発行機能の詳細</strong> →
-                §3-1 招待管理機能（本資料 P.11）
+                §3-1 招待管理機能（本資料 P.14）
               </li>
               <li>
                 <strong>② 両社間の発注・請求授受機能の詳細</strong> →
-                §3-2 発注管理機能（P.12）／§3-4 請求管理機能（P.13）
+                §3-2 発注管理機能（P.16）／§3-4 請求管理機能（P.18）
               </li>
               <li>
                 <strong>③ 業務フロー全体（招待発行→受諾→電子取引成立）</strong> →
-                §4 業務フロー図［図1］（P.15〜P.16）
+                §4 業務フロー図［図1］（P.23〜P.24）
               </li>
               <li>
                 <strong>④ 電子取引データ保存の実装</strong> →
-                §3-6 電子帳簿保存法対応（P.13）
+                §3-6 電子帳簿保存法対応（P.19）
               </li>
             </ul>
           </div>
@@ -435,19 +460,19 @@ export default function TransactFeaturePage() {
             <ul className="list-disc pl-5 space-y-0.5">
               <li>
                 <strong>買い手側 受発注機能の詳細</strong> →
-                §3-2 発注管理機能（P.7）／ §3-3 取引先管理機能（P.7）
+                §3-2 発注管理機能（P.16）／ §3-3 取引先管理機能（P.17）
               </li>
               <li>
                 <strong>売り手側 受発注機能（請求）の詳細</strong> →
-                §3-4 請求管理機能（P.8）／ §3-5 インボイス制度対応（P.8）
+                §3-4 請求管理機能（P.18）／ §3-5 インボイス制度対応（P.19）
               </li>
               <li>
                 <strong>両社間電子取引の基盤（招待型アカウント発行）</strong> →
-                §3-1 招待管理機能（P.6）
+                §3-1 招待管理機能（P.14）
               </li>
               <li>
                 <strong>業務フロー全体（発注側／受注側 並列）</strong> →
-                §4 業務フロー図［図1］（P.9）
+                §4 業務フロー図［図1］（P.23〜P.24）
               </li>
             </ul>
           </div>
@@ -456,6 +481,195 @@ export default function TransactFeaturePage() {
             ※ 本セクションは ITツール登録要領「2-3 各カテゴリーの内容（1）4.」の留意事項に対応するために設けたものです。
           </p>
         </div>
+      </section>
+
+      {/* ★ 売り手側機能・買い手側機能 の両方保有を明示（電子取引類型 必須要件） */}
+      <section className="mb-8 page-break-before">
+        <div className="border-4 border-black p-6">
+          <p className="text-center text-sm font-bold tracking-[0.3em] mb-2">
+            インボイス枠（電子取引類型）必須要件 対応説明
+          </p>
+          <h2 className="text-center text-2xl font-black tracking-widest border-y-4 border-black py-3 mb-4">
+            本ITツールは「売り手側機能」と「買い手側機能」を
+            <br />
+            両方有しています
+          </h2>
+
+          <p className="text-sm leading-relaxed mb-4">
+            インボイス枠（電子取引類型）では、ITツールが
+            <strong className="bg-yellow-200">売り手側・買い手側の機能を両方有していること</strong>
+            が必須要件とされています。本ITツール「{TOOL_NAME}」は、発注側企業（買い手側）と、
+            招待を受けた受注側企業（売り手側）が同一プラットフォーム上でそれぞれの機能を利用し、
+            両社間で発注書・請求書を電子的に授受します。
+            各機能の実装状況と、実際の<strong>画面キャプチャ</strong>の掲載箇所は以下のとおりです。
+          </p>
+
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold w-40">
+                  区分
+                </th>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold w-52">
+                  機能
+                </th>
+                <th className="border-2 border-black bg-black text-white px-2 py-2 text-center text-sm font-bold w-16">
+                  有無
+                </th>
+                <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold">
+                  本ITツールでの実装内容 ／ 画面キャプチャ
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="bg-yellow-100">
+                <td className="border-2 border-black px-3 py-2 font-black text-base" rowSpan={4}>
+                  買い手側機能
+                  <br />
+                  <span className="text-xs font-bold">
+                    （発注側企業＝有償契約者のアカウント）
+                  </span>
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">発注管理</td>
+                <td className="border-2 border-black px-2 py-2 text-center text-2xl font-black">◎</td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  発注書の作成（PO-YYYYMMDD-XXXX 自動採番）・多段階承認・発行。
+                  <strong>画面キャプチャ Fig.4（発注書一覧）・Fig.5（発注書新規作成）</strong>
+                </td>
+              </tr>
+              <tr className="bg-yellow-100">
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">
+                  仕入管理（仕入明細）
+                </td>
+                <td className="border-2 border-black px-2 py-2 text-center text-2xl font-black">◎</td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  発注明細で品名・仕様・数量・単位・単価・金額・税率を明細行単位で管理し、
+                  税抜／消費税／税込を自動計算。<strong>画面キャプチャ Fig.5</strong>
+                </td>
+              </tr>
+              <tr className="bg-yellow-100">
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">買掛・支払管理</td>
+                <td className="border-2 border-black px-2 py-2 text-center text-2xl font-black">◎</td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  受注側企業から提出された請求書の受領・確認・承認・支払ステータス管理
+                  （提出済 → 承認済 → 支払済）。<strong>画面キャプチャ Fig.7（請求書一覧）</strong>
+                </td>
+              </tr>
+              <tr className="bg-yellow-100">
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">
+                  取引先管理（インボイス番号）
+                </td>
+                <td className="border-2 border-black px-2 py-2 text-center text-2xl font-black">◎</td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  取引先の適格請求書発行事業者登録番号を管理し、国税庁Web-APIで自動検証。
+                  <strong>画面キャプチャ Fig.6（取引先一覧）</strong>
+                </td>
+              </tr>
+
+              <tr className="bg-green-50">
+                <td className="border-2 border-black px-3 py-2 font-black text-base" rowSpan={4}>
+                  売り手側機能
+                  <br />
+                  <span className="text-xs font-bold">
+                    （受注側企業＝無償招待アカウント）
+                  </span>
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">
+                  受注管理（発注書の受領）
+                </td>
+                <td className="border-2 border-black px-2 py-2 text-center text-2xl font-black">◎</td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  発注側企業が発行した発注書を受注側企業のアカウントで受領・内容確認し、
+                  受諾・納品報告を行う。<strong>画面キャプチャ Fig.8（受注側で受領した発注書一覧）</strong>
+                </td>
+              </tr>
+              <tr className="bg-green-50">
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">売上請求管理</td>
+                <td className="border-2 border-black px-2 py-2 text-center text-2xl font-black">◎</td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  受注側企業が適格請求書を作成（INV-YYYYMMDD-XXXX 自動採番／発注書からの明細引継ぎ）し、
+                  発注側企業へ電子的に提出。
+                  <strong>画面キャプチャ Fig.9（受注側の請求書一覧）・Fig.10（請求書新規作成）</strong>
+                </td>
+              </tr>
+              <tr className="bg-green-50">
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">売掛・回収管理</td>
+                <td className="border-2 border-black px-2 py-2 text-center text-2xl font-black">◎</td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  自社が発行した請求書の支払期限とステータス（提出済 → 承認済 → 支払済）を
+                  一覧で管理し、未回収債権を把握。<strong>画面キャプチャ Fig.9</strong>
+                </td>
+              </tr>
+              <tr>
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">
+                  電子記録債権・手形管理
+                </td>
+                <td className="border-2 border-black px-2 py-2 text-center text-2xl font-black">—</td>
+                <td className="border-2 border-black px-3 py-2 text-xs leading-relaxed">
+                  本ITツールでは提供していません（登録要領の例示のうち、
+                  売上請求管理・売掛・回収管理を搭載しています）。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div className="mt-4 border-2 border-black p-3 text-xs leading-relaxed">
+            <p className="font-bold mb-1">両社間で電子取引が成立することの確認方法</p>
+            <p>
+              同一の取引（案件「本社オフィス什器導入プロジェクト」）について、
+              買い手側では発注書 <span className="font-mono">PO-20260407-0001</span> を発行し
+              （<strong>Fig.4</strong>）、売り手側では同じ発注書を受領して
+              （<strong>Fig.8</strong>）請求書 <span className="font-mono">INV-20260428-0001</span> を
+              作成・提出しています（<strong>Fig.9</strong>）。
+              買い手側では当該請求書を受領・承認します（<strong>Fig.7</strong>）。
+              業務フロー全体は §4 業務フロー図［図1］を参照してください。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ★ 画面キャプチャ 一覧 */}
+      <section className="mb-8 page-break-before">
+        <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
+          画面キャプチャ 一覧（全{SCREEN_CAPTURES.length}点）
+        </h2>
+        <p className="mb-3 text-sm leading-relaxed">
+          本資料に掲載している<strong>画面キャプチャ</strong>の一覧です。
+          いずれも本ITツール「{TOOL_NAME}」の実稼働環境
+          （<span className="font-mono">https://dlsystem.aigrowthx.pro</span>）で取得した実画面です。
+          買い手側（発注側企業）・売り手側（受注側企業）それぞれのアカウントで
+          ログインした画面を掲載しています。
+        </p>
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-2 py-2 text-left text-sm font-bold w-20">
+                図番号
+              </th>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold w-24">
+                区分
+              </th>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold">
+                画面名 ／ 確認できる機能
+              </th>
+              <th className="border-2 border-black bg-black text-white px-2 py-2 text-center text-sm font-bold w-24">
+                掲載ページ
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {SCREEN_CAPTURES.map((c) => (
+              <tr key={c.fig} className={c.side === "売り手側" ? "bg-green-50" : undefined}>
+                <td className="border-2 border-black px-2 py-2 font-black">{c.fig}</td>
+                <td className="border-2 border-black px-3 py-2 text-xs font-bold">{c.side}</td>
+                <td className="border-2 border-black px-3 py-2 text-xs">{c.desc}</td>
+                <td className="border-2 border-black px-2 py-2 text-center font-mono text-xs">
+                  {c.page}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </section>
 
       {/* 1. Product Overview */}
@@ -905,6 +1119,46 @@ export default function TransactFeaturePage() {
           <li>管理者画面から日時・対象種別・操作者で絞り込み閲覧可能</li>
         </ul>
       </section>
+
+      {/* 3-9 受注側企業（売り手側）の画面 — 画面キャプチャ Fig.8〜Fig.10 */}
+      <section className="mb-8 page-break-before">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-9. 受注側企業（売り手側）の機能・画面
+        </h3>
+        <div className="mb-2 flex flex-wrap gap-2">
+          <span className="inline-block border-2 border-black bg-green-200 px-3 py-1 text-xs font-black">
+            売り手側機能（受注管理／売上請求管理／売掛・回収管理）
+          </span>
+          <span className="inline-block border-2 border-black bg-yellow-200 px-3 py-1 text-xs font-black">
+            共P-02 対応（受注・売上請求管理／売掛・回収管理）
+          </span>
+        </div>
+        <p className="mb-3 text-sm leading-relaxed">
+          以下は、招待を受けた<strong>受注側企業（売り手側）の無償アカウント</strong>
+          （田中サービス株式会社／受注担当 鈴木 三郎）でログインした実画面です。
+          発注側企業（買い手側）とは<strong>メニュー・操作権限・データ参照範囲が分離</strong>されており、
+          受注側企業は自社が受領した発注書と、自社が発行する請求書のみを扱います。
+        </p>
+      </section>
+
+      <ScreenshotPlaceholder
+        figure="Fig.8"
+        caption="【売り手側】受注側企業が受領した発注書の一覧（受注管理）"
+        sourceUrl="https://dlsystem.aigrowthx.pro/orders"
+        src="/images/transact/seller-orders.png"
+      />
+      <ScreenshotPlaceholder
+        figure="Fig.9"
+        caption="【売り手側】受注側企業が発行した請求書の一覧（売上請求管理・売掛/回収管理）"
+        sourceUrl="https://dlsystem.aigrowthx.pro/invoices"
+        src="/images/transact/seller-invoices.png"
+      />
+      <ScreenshotPlaceholder
+        figure="Fig.10"
+        caption="【売り手側】受注側企業による適格請求書の新規作成画面（売上請求管理）"
+        sourceUrl="https://dlsystem.aigrowthx.pro/invoices/new"
+        src="/images/transact/seller-invoice-new.png"
+      />
 
       {/* §4 章扉ページ */}
       <section className="mb-6 page-break-before avoid-break">
