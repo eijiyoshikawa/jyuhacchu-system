@@ -34,8 +34,13 @@ export function ScreenshotPlaceholder({
           className="w-full rounded border border-slate-300"
           data-screenshot-source={sourceUrl}
         />
-        <figcaption className="mt-2 text-center text-xs text-slate-600">
-          {figure}: {caption}
+        <figcaption className="mt-2 flex flex-wrap items-center justify-center gap-2 text-center">
+          <span className="border-2 border-black bg-black px-2 py-0.5 text-[11px] font-black text-white">
+            画面キャプチャ
+          </span>
+          <span className="text-sm font-bold text-slate-900">
+            {figure}: {caption}
+          </span>
         </figcaption>
       </figure>
     )
@@ -56,8 +61,13 @@ export function ScreenshotPlaceholder({
           </p>
         </div>
       </div>
-      <figcaption className="mt-2 text-center text-xs text-slate-600">
-        {figure}: {caption}
+      <figcaption className="mt-2 flex flex-wrap items-center justify-center gap-2 text-center">
+        <span className="border-2 border-black bg-black px-2 py-0.5 text-[11px] font-black text-white">
+          画面キャプチャ
+        </span>
+        <span className="text-sm font-bold text-slate-900">
+          {figure}: {caption}
+        </span>
       </figcaption>
     </figure>
   )

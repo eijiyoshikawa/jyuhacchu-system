@@ -124,5 +124,8 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  // 静的アセット（画像・robots）は認証・ホスト振り分けの対象外にする。
+  // ここを除外し忘れると、申請資料に埋め込んだ画面キャプチャが未ログインの
+  // 審査員に対して /auth/login へリダイレクトされ、図が一切表示されなくなる。
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|images/|robots.txt).*)"],
 }

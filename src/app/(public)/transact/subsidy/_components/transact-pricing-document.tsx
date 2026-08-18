@@ -128,6 +128,95 @@ export function TransactPricingDocument({ providerName }: { providerName: string
         </p>
       </section>
 
+      {/* ★ 料金表（プラン一覧）— 申請ITツールの価格を単独で明示 */}
+      <section className="mb-8 page-break-before">
+        <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
+          料金表（プラン一覧）／ 申請ITツール「{TOOL_NAME}」の価格
+        </h2>
+        <div className="mb-4 border-4 border-black p-4">
+          <p className="text-base font-black mb-1">
+            本料金表は、申請ITツール「{TOOL_NAME}」1製品の価格のみを記載しています
+          </p>
+          <p className="text-sm leading-relaxed">
+            本資料には、申請ITツール以外のITツールの価格は一切記載していません。
+            申請書に入力した<strong className="bg-yellow-200">標準販売価格 3,000,000円（税抜）</strong>
+            および<strong className="bg-yellow-200">最小販売価格 1,800,000円（税抜）</strong>は、
+            下表のとおり<strong>標準プランの年額</strong>および<strong>最小プランの年額</strong>に対応します。
+          </p>
+        </div>
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold">
+                プラン名
+              </th>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-right text-sm font-bold w-32">
+                月額（税抜）
+              </th>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-right text-sm font-bold w-36">
+                年額（税抜）
+              </th>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold w-44">
+                申請書の区分
+              </th>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-right text-sm font-bold w-32">
+                受注側アカウント<br />発行上限
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="bg-yellow-100">
+              <td className="border-2 border-black px-3 py-3 text-base font-black">① 標準プラン</td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono text-base font-bold">
+                250,000円
+              </td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono text-lg font-black">
+                3,000,000円
+              </td>
+              <td className="border-2 border-black px-3 py-3 text-xs font-black">
+                標準販売価格<br />（ソフトウェアの標準販売価格）
+              </td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono font-bold">200社</td>
+            </tr>
+            <tr>
+              <td className="border-2 border-black px-3 py-3 text-base font-bold">② ミドルプラン</td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono text-base">200,000円</td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono text-lg font-bold">
+                2,400,000円
+              </td>
+              <td className="border-2 border-black px-3 py-3 text-xs">中間プラン（申請書への入力対象外）</td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono font-bold">100社</td>
+            </tr>
+            <tr className="bg-yellow-100">
+              <td className="border-2 border-black px-3 py-3 text-base font-black">③ 最小プラン</td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono text-base font-bold">
+                150,000円
+              </td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono text-lg font-black">
+                1,800,000円
+              </td>
+              <td className="border-2 border-black px-3 py-3 text-xs font-black">
+                最小販売価格<br />（ソフトウェアの最小販売価格）
+              </td>
+              <td className="border-2 border-black px-3 py-3 text-right font-mono font-bold">50社</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul className="mt-3 list-disc pl-5 text-sm leading-relaxed space-y-1">
+          <li>販売形態は<strong>サブスクリプション（クラウド利用料）</strong>であり、年額は月額 × 12ヶ月です。</li>
+          <li>
+            <strong>初期費用・カスタマイズ費用・オプション費用は一切ありません。</strong>
+            全機能を全プランに標準提供しており、プラン間の機能差はありません。
+          </li>
+          <li>
+            利用料は<strong>発注側企業にのみ</strong>ご請求します。
+            <strong className="bg-yellow-200">受注側企業の費用負担は 0円（無償）</strong>です。
+          </li>
+          <li>ソフトウェア（カテゴリー1）の利用料のみで構成され、カテゴリー7 保守サポート役務は含みません。</li>
+          <li>表示は全て税抜価格です。別途、消費税（標準税率10%）をご請求いたします。</li>
+        </ul>
+      </section>
+
       <Section label="IT導入支援事業者名">
         <p className="text-base">{providerName}</p>
       </Section>
