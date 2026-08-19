@@ -942,14 +942,39 @@ LET名義での再申請後、Pコード選択は正しく 共P-02＋共P-03 に
 
 ### 提出書類（新ツール向け 6書類）
 
-| 書類 | パス |
+| 書類 | LET版 パス | TX.企画版 パス |
+|---|---|---|
+| 機能説明資料 | `/transact/subsidy/feature` | `/transact/subsidy/feature/tx` |
+| 価格説明資料 | `/transact/subsidy/pricing` | `/transact/subsidy/pricing/tx` |
+| 申請価格理由書 | `/transact/subsidy/pricing/rationale` | `/transact/subsidy/pricing/rationale/tx` |
+| その他要件説明資料 | `/transact/subsidy/requirements` | `/transact/subsidy/requirements/tx` |
+| デモ機・テストアカウント情報 | `/transact/subsidy/demo-info` | `/transact/subsidy/demo-info/tx` |
+| 適格請求書 出力サンプル | `/transact/subsidy/invoice-sample` | `/transact/subsidy/invoice-sample/tx` |
+| （参考）申請資料インデックス | `/transact/subsidy` | `/transact/subsidy/tx` |
+
+### 11-A. IT導入支援事業者 別バリアント（TX.企画版）の作り方
+
+受発注Lシステムでは TX.企画版を「別ページとして書き起こし」たため、
+不備対応のたびに片方だけ直り資料がドリフトした（§8 参照。最終的に LET 申請へ一本化）。
+電子取引Lシステムではこの反省から、**資料本文を 1 つの React コンポーネントに集約し、
+IT導入支援事業者名だけを props で差し替える**構成にしている。
+
+| 種別 | ファイル |
 |---|---|
-| 機能説明資料 | `/transact/subsidy/feature` |
-| 価格説明資料 | `/transact/subsidy/pricing` |
-| 申請価格理由書 | `/transact/subsidy/pricing/rationale` |
-| その他要件説明資料 | `/transact/subsidy/requirements` |
-| デモ機・テストアカウント情報 | `/transact/subsidy/demo-info` |
-| 適格請求書 出力サンプル | `/transact/subsidy/invoice-sample` |
+| 資料本体（唯一の実体） | `src/app/(public)/transact/subsidy/_components/transact-{feature,pricing,rationale,requirements,demo-info,invoice-sample}-document.tsx` |
+| 申請資料インデックス本体 | `src/app/(public)/transact/subsidy/_components/transact-subsidy-index.tsx` |
+| LET版ルート | `src/app/(public)/transact/subsidy/**/page.tsx`（`providerName="株式会社LET"`） |
+| TX.企画版ルート | `src/app/(public)/transact/subsidy/**/tx/page.tsx`（`providerName="株式会社TX.企画"` ＋ `variantSuffix="/tx"`） |
+
+- **開発メーカーは 株式会社LET 固定**（`MAKER_NAME` 定数）。版によって変わるのは
+  IT導入支援事業者名のみ。
+- `variantSuffix` は `DocumentShell` の `indexHref` と索引リンクの接尾辞に使う。
+  これを渡し忘れると TX 版の「申請資料一覧に戻る」が LET 版インデックスに飛び、
+  審査員が別事業者の資料を開いてしまう。
+- 別の IT導入支援事業者を追加する場合は、`**/<slug>/page.tsx` を 7 本追加して
+  `providerName` と `variantSuffix="/<slug>"` を渡すだけでよい。**資料本文は複製しないこと。**
+- 連絡先メールアドレス（`sales@juhacchu-l.jp` 等）は現状 LET のものを共有している。
+  TX.企画で申請する場合は、申請前に各資料の連絡先を差し替えるか確認すること。
 
 ### 補助金活用時の自己負担額（想定）
 

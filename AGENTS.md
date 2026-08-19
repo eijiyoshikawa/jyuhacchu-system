@@ -22,21 +22,25 @@
 | 適格請求書サンプル | `https://lsystem.let-inc.net/subsidy/invoice-sample` | — | `https://lsystem.let-inc.net/subsidy/invoice-sample/let` |
 | デモ機・テストアカウント情報 | `https://lsystem.let-inc.net/subsidy/demo-info` | — | `https://lsystem.let-inc.net/subsidy/demo-info/let` |
 
-### 電子取引Lシステム（電子取引類型・**申請提出済み 2026-08-07・審査待ち**）— 8 URL
+### 電子取引Lシステム（電子取引類型・**申請提出済み 2026-08-07・審査待ち**）— 15 URL
 
 ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中）
 不備通知が来たら通知文をそのまま Claude に貼ること（Playbook §8 の教訓と照合して対応）。
 
-| 資料 | URL |
-|---|---|
-| サービスLP | `https://dlsystem.aigrowthx.pro/`（内部的に `/transact` へ rewrite） |
-| 申請資料インデックス | `https://dlsystem.aigrowthx.pro/transact/subsidy` |
-| 機能説明資料 | `https://dlsystem.aigrowthx.pro/transact/subsidy/feature` |
-| 価格説明資料 | `https://dlsystem.aigrowthx.pro/transact/subsidy/pricing` |
-| 申請価格理由書 | `https://dlsystem.aigrowthx.pro/transact/subsidy/pricing/rationale` |
-| その他要件説明 | `https://dlsystem.aigrowthx.pro/transact/subsidy/requirements` |
-| デモ機・テストアカウント情報 | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info` |
-| 適格請求書サンプル | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample` |
+開発メーカーは **株式会社LET 固定**。IT導入支援事業者だけが版によって変わる。
+資料本文は同一コンポーネント（`_components/transact-*-document.tsx`）を共有しているため、
+**不備対応の修正は片方に入れれば両版に反映される**（版ごとに書き分けないこと）。
+
+| 資料 | LET版（申請済み・IT導入支援事業者 株式会社LET） | TX.企画版（IT導入支援事業者 株式会社TX.企画） |
+|---|---|---|
+| サービスLP | `https://dlsystem.aigrowthx.pro/`（内部的に `/transact` へ rewrite） | 同左（共通） |
+| 申請資料インデックス | `https://dlsystem.aigrowthx.pro/transact/subsidy` | `https://dlsystem.aigrowthx.pro/transact/subsidy/tx` |
+| 機能説明資料 | `https://dlsystem.aigrowthx.pro/transact/subsidy/feature` | `https://dlsystem.aigrowthx.pro/transact/subsidy/feature/tx` |
+| 価格説明資料 | `https://dlsystem.aigrowthx.pro/transact/subsidy/pricing` | `https://dlsystem.aigrowthx.pro/transact/subsidy/pricing/tx` |
+| 申請価格理由書 | `https://dlsystem.aigrowthx.pro/transact/subsidy/pricing/rationale` | `https://dlsystem.aigrowthx.pro/transact/subsidy/pricing/rationale/tx` |
+| その他要件説明 | `https://dlsystem.aigrowthx.pro/transact/subsidy/requirements` | `https://dlsystem.aigrowthx.pro/transact/subsidy/requirements/tx` |
+| デモ機・テストアカウント情報 | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info` | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info/tx` |
+| 適格請求書サンプル | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample` | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample/tx` |
 
 ### 共通（システム本体）
 
