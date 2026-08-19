@@ -26,14 +26,21 @@ function Section({
   )
 }
 
-export function TransactPricingDocument({ providerName }: { providerName: string }) {
+export function TransactPricingDocument({
+  providerName,
+  variantSuffix = "",
+}: {
+  providerName: string
+  /** バリアント用のURLサフィックス（TX.企画版は "/tx"） */
+  variantSuffix?: string
+}) {
   return (
     <DocumentShell
       title="価格説明資料"
       subtitle={`${SCHEME_LABEL} 申請添付書類`}
       toolName={TOOL_NAME}
       makerName={MAKER_NAME}
-      indexHref="/transact/subsidy"
+      indexHref={`/transact/subsidy${variantSuffix}`}
       schemeLabel={SCHEME_LABEL}
       pcode="主Pコード: 共P-02（単独）"
     >
