@@ -22,10 +22,17 @@
 | 適格請求書サンプル | `https://lsystem.let-inc.net/subsidy/invoice-sample` | — | `https://lsystem.let-inc.net/subsidy/invoice-sample/let` |
 | デモ機・テストアカウント情報 | `https://lsystem.let-inc.net/subsidy/demo-info` | — | `https://lsystem.let-inc.net/subsidy/demo-info/let` |
 
-### 電子取引Lシステム（電子取引類型・**申請提出済み 2026-08-07・審査待ち**）— 15 URL
+### 電子取引くん（電子取引類型・**旧「電子取引Lシステム」で不採択 → 改名して再申請準備中**）— 15 URL
 
-ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中）
+ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中。ホスト名は旧名称由来だが継続使用）
 不備通知が来たら通知文をそのまま Claude に貼ること（Playbook §8 の教訓と照合して対応）。
+
+> ⚠️ **再申請前の最重要事項**: 価格説明資料の「導入事例・実績」は、登録要領 別紙1（1）2.⑥ および
+> ITツール登録の手引き ❻ で **「過去の導入事例・実績」** と明記されている（手引きの書式例は
+> 「20YY年MM月 導入社数3000社達成」「AA株式会社、BB会社」といった実在の実績）。
+> 手引きには **「❸〜❼の項目で不備が頻発しています」** とも書かれている。
+> 現行資料は導入事例を「（想定）」と明記しており、この要件を満たしていない。
+> **名称変更だけでは同じ結果になる可能性が高い。** 詳細は `docs/APPLICATION_PLAYBOOK.md` §11-B。
 
 開発メーカーは **株式会社LET 固定**。IT導入支援事業者だけが版によって変わる。
 資料本文は同一コンポーネント（`_components/transact-*-document.tsx`）を共有しているため、
@@ -44,11 +51,11 @@
 
 ### 共通（システム本体）
 
-⚠️ システム画面は**ホスト別ブランド表示**（`src/lib/brand.ts`）。電子取引Lシステムの審査デモは
+⚠️ システム画面は**ホスト別ブランド表示**（`src/lib/brand.ts`）。電子取引くんの審査デモは
 必ず `dlsystem.aigrowthx.pro` 側 URL を案内すること（`jyuhacchu-system.vercel.app` では
 受発注Lシステム表記になり、ツール名混在で不備になる）。
 
-| 用途 | 受発注Lシステム | 電子取引Lシステム |
+| 用途 | 受発注Lシステム | 電子取引くん |
 |---|---|---|
 | ログイン | `https://jyuhacchu-system.vercel.app/auth/login` | `https://dlsystem.aigrowthx.pro/auth/login` |
 | 招待発行画面（発注側管理者・要ログイン） | — | `https://dlsystem.aigrowthx.pro/partners/invite` |
@@ -72,7 +79,7 @@
 |---|---|
 | `docs/HANDOVER.md` | 引き継ぎ詳細（現状・残作業・申請入力値・トラブルシューティング 全10節） |
 | `docs/VENDOR_APPLICATION_GUIDE.md` | ベンダー向け ITツール登録 申請手順書（電子取引類型・画面別入力値/テンプレ/ハマりどころ） |
-| `docs/APPLICATION_PLAYBOOK.md` | 申請 Playbook（§8 不備対応履歴、§10 入力チェックリスト、§11 電子取引Lシステム） |
+| `docs/APPLICATION_PLAYBOOK.md` | 申請 Playbook（§8 不備対応履歴、§10 入力チェックリスト、§11 電子取引くん） |
 | `docs/ERROR_HISTORY.md` | 構築中エラーと解決策 |
 | `docs/SYSTEM_SPEC.md` / `docs/DEPLOY_GUIDE.md` | システム仕様・デプロイ手順 |
 

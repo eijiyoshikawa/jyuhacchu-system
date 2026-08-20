@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server"
 /**
  * カスタムドメインとITツールの対応
  *  - lsystem.let-inc.net → 受発注Lシステム（インボイス対応類型）の LP／申請資料
- *  - dlsystem.aigrowthx.pro → 電子取引Lシステム（電子取引類型）の LP／申請資料
+ *  - dlsystem.aigrowthx.pro → 電子取引くん（電子取引類型）の LP／申請資料
  *  - jyuhacchu-system.vercel.app → システム本体（フォールバック）
  */
 const LSYSTEM_HOST = "lsystem.let-inc.net"
@@ -28,7 +28,7 @@ function isLsystemPath(pathname: string): boolean {
 /**
  * dlsystem.aigrowthx.pro から他ツール（受発注Lシステム）ドメインへ退避させるパス。
  * それ以外（/transact・/invite・システム本体・認証・API）は dlsystem 上で直接配信し、
- * システム画面は 電子取引Lシステム ブランドで表示される（src/lib/brand.ts）。
+ * システム画面は 電子取引くん ブランドで表示される（src/lib/brand.ts）。
  */
 function isLsystemOnlyPath(pathname: string): boolean {
   return (
@@ -68,7 +68,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.next()
   }
 
-  // ── dlsystem.aigrowthx.pro: 電子取引Lシステム 用 ────────────
+  // ── dlsystem.aigrowthx.pro: 電子取引くん 用 ────────────
   if (host === DSYSTEM_HOST) {
     // ルート `/` は未ログイン時のみ /transact にリライトして LP を配信
     // （ログイン済みの場合はダッシュボードをこのホストで表示する）
@@ -80,7 +80,7 @@ export function middleware(req: NextRequest) {
     // 受発注Lシステム 専用領域（LP・申請資料）のみ本体ドメインへ退避。
     // それ以外（/transact・/invite・/auth・ダッシュボード・API）は
     // このホストで配信し、認証チェックは下の共通ロジックに委ねる
-    // （システム画面は 電子取引Lシステム ブランドで表示）。
+    // （システム画面は 電子取引くん ブランドで表示）。
     if (isLsystemOnlyPath(pathname)) {
       return NextResponse.redirect(
         new URL(pathname + req.nextUrl.search, SYSTEM_FALLBACK_HOST)

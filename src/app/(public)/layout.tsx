@@ -4,7 +4,7 @@ export default function PublicLayout({
   children: React.ReactNode
 }) {
   // ヘッダ／フッタはツールごとにブランドが異なるため、
-  // 配下の lp / subsidy（受発注Lシステム）・transact（電子取引Lシステム）の
+  // 配下の lp / subsidy（受発注Lシステム）・transact（電子取引くん）の
   // 各セグメントレイアウトで MarketingChrome を適用する。
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900">

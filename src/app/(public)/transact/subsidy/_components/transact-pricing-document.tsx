@@ -1,3 +1,4 @@
+import { DSYSTEM_BRAND } from "@/lib/brand"
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
 import {
   DENSHI_REQUIREMENTS,
@@ -5,7 +6,8 @@ import {
   SCHEME_NOTE_TITLE,
 } from "./denshi-torihiki-requirements"
 
-const TOOL_NAME = "電子取引Lシステム"
+/** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
+const TOOL_NAME = DSYSTEM_BRAND.toolName
 const MAKER_NAME = "株式会社LET"
 const SCHEME_LABEL = "デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）"
 
@@ -363,7 +365,7 @@ export function TransactPricingDocument({
 
       <Section label="導入事例・実績">
         <p className="mb-4 text-sm leading-relaxed">
-          電子取引Lシステム（招待型 電子取引プラットフォーム）を活用した導入事例を以下に示します。
+          {TOOL_NAME}（招待型 電子取引プラットフォーム）を活用した導入事例を以下に示します。
         </p>
 
         <div className="space-y-6">
@@ -480,7 +482,7 @@ export function TransactPricingDocument({
       <Section label="補助金活用時の自己負担額イメージ">
         <p className="mb-4 text-sm leading-relaxed">
           デジタル化・AI導入補助金2026 インボイス枠 <strong>電子取引類型</strong> を活用した場合の、
-          電子取引Lシステム導入時の自己負担額のイメージは以下のとおりです。
+          {TOOL_NAME}導入時の自己負担額のイメージは以下のとおりです。
           補助率・補助上限・対象範囲は年度・事業規模により変動するため、
           実際の交付決定額は最新の公募要領および交付決定通知に従ってください。
         </p>

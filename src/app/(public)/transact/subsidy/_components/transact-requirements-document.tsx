@@ -1,10 +1,12 @@
+import { DSYSTEM_BRAND } from "@/lib/brand"
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
 import {
   DENSHI_REQUIREMENTS,
   SCHEME_NOTE_TITLE,
 } from "@/app/(public)/transact/subsidy/_components/denshi-torihiki-requirements"
 
-const TOOL_NAME = "電子取引Lシステム"
+/** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
+const TOOL_NAME = DSYSTEM_BRAND.toolName
 const MAKER_NAME = "株式会社LET"
 const SCHEME_LABEL = "デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）"
 
@@ -71,7 +73,7 @@ export function TransactRequirementsDocument({
           1. Pコード 選択一覧
         </h2>
         <p className="mb-4 text-sm leading-relaxed">
-          電子取引Lシステムは、以下の Pコード（業務プロセス分類）に該当します。
+          {TOOL_NAME}は、以下の Pコード（業務プロセス分類）に該当します。
           「主」は本ツールの中核機能が該当するもの、「副」は付随的に該当するものです。
           本欄は、IT導入補助金 交付申請システムの「Pコード選択画面」への入力内容と対応しています。
         </p>
@@ -223,7 +225,7 @@ export function TransactRequirementsDocument({
           デジタル化・AI導入補助金2026 インボイス枠 <strong>電子取引類型</strong> は、
           「発注者と受注者双方が利用可能な電子取引プラットフォームであり、
           両社間で商取引情報（発注書・請求書等）を電子的に授受できるソフトウェア」が対象です。
-          電子取引Lシステムの各要件への適合状況は以下のとおりです。
+          {TOOL_NAME}の各要件への適合状況は以下のとおりです。
         </p>
         <table className="w-full border-collapse text-sm">
           <thead>

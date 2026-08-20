@@ -1,5 +1,5 @@
 import Link from "next/link"
-import type { SystemBrandKey } from "@/lib/brand"
+import { DSYSTEM_BRAND, LSYSTEM_BRAND, type SystemBrandKey } from "@/lib/brand"
 
 /**
  * 公開サイト（LP・申請資料）の共通ヘッダ／フッタ。
@@ -14,11 +14,12 @@ export function MarketingChrome({
   children: React.ReactNode
 }) {
   const isD = brand === "dsystem"
-  const namePrefix = isD ? "電子取引" : "受発注"
-  const toolName = isD ? "電子取引Lシステム" : "受発注Lシステム"
+  // ツール名・ロゴ表記は src/lib/brand.ts を唯一の正とする（改名時の直し漏れ防止）
+  const b = isD ? DSYSTEM_BRAND : LSYSTEM_BRAND
+  const toolName = b.toolName
   const homeHref = isD ? "/transact" : "/lp"
   const tagline = isD
-    ? "招待型クラウド電子取引プラットフォーム"
+    ? b.tagline
     : "インボイス対応クラウド受発注・請求管理プラットフォーム"
   const schemeLine = isD
     ? "インボイス枠 電子取引類型 対応ITツール"
@@ -54,7 +55,7 @@ export function MarketingChrome({
       <header className="print-hide border-b border-slate-200 bg-white sticky top-0 z-10">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
           <Link href={homeHref} className="text-lg font-black tracking-tight text-slate-900">
-            {namePrefix}<span className="text-orange-500">L</span>システム
+            {b.logoBase}<span className="text-orange-500">{b.logoAccent}</span>{b.logoSuffix}
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
             {navLinks.map((l) => (
@@ -79,7 +80,7 @@ export function MarketingChrome({
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
               <p className="text-base font-bold text-slate-900">
-                {namePrefix}<span className="text-orange-500">L</span>システム
+                {b.logoBase}<span className="text-orange-500">{b.logoAccent}</span>{b.logoSuffix}
               </p>
               <p className="mt-2 text-xs">{tagline}</p>
               <p className="mt-4 text-xs">

@@ -1,5 +1,9 @@
 import Link from "next/link"
 import { PrintButton } from "@/app/(public)/subsidy/_components/print-button"
+import { DSYSTEM_BRAND } from "@/lib/brand"
+
+/** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
+const TOOL_NAME = DSYSTEM_BRAND.toolName
 
 const sample = {
   invoiceNumber: "INV-20260401-0001",
@@ -105,10 +109,10 @@ export function TransactInvoiceSampleDocument({
 
       <div className="print-hide mx-auto max-w-4xl px-6 pt-8">
         <div className="rounded border border-slate-200 bg-slate-50 p-4 text-sm leading-relaxed">
-          <p className="font-bold mb-1">本ページについて（電子取引Lシステム／電子取引類型 申請版）</p>
+          <p className="font-bold mb-1">本ページについて（{TOOL_NAME}／電子取引類型 申請版）</p>
           <p>
             本ページは、<strong>開発メーカー 株式会社LET ／ IT導入支援事業者 {providerName}</strong>
-            による IT導入補助金 電子取引類型 申請用に作成された、電子取引Lシステムが出力する
+            による IT導入補助金 電子取引類型 申請用に作成された、{TOOL_NAME}が出力する
             <strong>適格請求書（インボイス）のサンプル</strong>です。
             本サンプルは、<strong>招待受諾で無償アカウントを作成した受注側企業（田中サービス株式会社）</strong>
             が、発注側企業（サンプル商事株式会社）に対して発行する請求書を想定しています。
@@ -145,7 +149,7 @@ export function TransactInvoiceSampleDocument({
           <p className="font-bold mb-1">📨 電子取引類型 の要件対応</p>
           <p>
             本請求書は、発注側企業が発行した招待により<strong>無償で作成された受注側企業のアカウント</strong>
-            から、電子取引Lシステム上で発行されます。両社は同一プラットフォーム内で
+            から、{TOOL_NAME}上で発行されます。両社は同一プラットフォーム内で
             発注書・請求書の電子授受を行い、確定時にはSHA-256 ハッシュ＋タイムスタンプが
             自動付与されるため、<strong>電子帳簿保存法の電子取引データ保存義務</strong>
             にも完全対応します。
@@ -383,8 +387,8 @@ export function TransactInvoiceSampleDocument({
         </div>
 
         <div className="border-t border-gray-300 pt-3 text-xs text-gray-500 text-center">
-          <p>本サンプルは電子取引Lシステムの出力レイアウトを示すためのダミーデータです。</p>
-          <p>© 2026 電子取引Lシステム / デジタル化・AI導入補助金 2026 電子取引類型 申請添付書類</p>
+          <p>本サンプルは{TOOL_NAME}の出力レイアウトを示すためのダミーデータです。</p>
+          <p>© 2026 {TOOL_NAME} / デジタル化・AI導入補助金 2026 電子取引類型 申請添付書類</p>
         </div>
       </div>
     </>

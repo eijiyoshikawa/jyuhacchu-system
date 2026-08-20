@@ -1,3 +1,4 @@
+import { DSYSTEM_BRAND } from "@/lib/brand"
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
 import { ScreenshotPlaceholder } from "@/app/(public)/subsidy/_components/screenshot-placeholder"
 import {
@@ -6,7 +7,8 @@ import {
   SCHEME_NOTE_TITLE,
 } from "@/app/(public)/transact/subsidy/_components/denshi-torihiki-requirements"
 
-const TOOL_NAME = "電子取引Lシステム"
+/** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
+const TOOL_NAME = DSYSTEM_BRAND.toolName
 const MAKER_NAME = "株式会社LET"
 
 /**
@@ -382,7 +384,7 @@ export function TransactFeatureDocument({
           <p className="text-sm leading-relaxed mb-4">
             ITツール登録要領「2-3 各カテゴリーの内容（1）カテゴリー1 ソフトウェア
             4. 『会計』『受発注』『決済』の3つの機能のいずれかを有するソフトウェアに関する留意事項」
-            に基づき、本ITツール「電子取引Lシステム」が
+            に基づき、本ITツール「{TOOL_NAME}」が
             <strong className="bg-yellow-200">『受発注』機能</strong>
             を有していることを以下の表で明示します。
           </p>
@@ -1184,7 +1186,7 @@ export function TransactFeatureDocument({
           </span>
         </div>
         <p className="mb-4 text-sm leading-relaxed">
-          電子取引Lシステムの中核となる、招待発行から両社間電子取引成立、
+          {TOOL_NAME}の中核となる、招待発行から両社間電子取引成立、
           その後の発注→受注→請求→支払の完結までの業務フローを以下の図に示します。
         </p>
 
@@ -1198,7 +1200,7 @@ export function TransactFeatureDocument({
             xmlns="http://www.w3.org/2000/svg"
             className="w-full h-auto"
             role="img"
-            aria-label="業務フロー図 電子取引Lシステム"
+            aria-label={`業務フロー図 ${TOOL_NAME}`}
           >
             <defs>
               <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -1292,7 +1294,7 @@ export function TransactFeatureDocument({
           §5. ITツールの利用方法
         </h2>
         <p className="mb-4 text-sm leading-relaxed">
-          電子取引Lシステムの日常的な利用手順を、招待発行から両社間電子取引成立、
+          {TOOL_NAME}の日常的な利用手順を、招待発行から両社間電子取引成立、
           その後の発注・受注・請求業務までの典型的な操作フローに沿って説明します。
         </p>
 
