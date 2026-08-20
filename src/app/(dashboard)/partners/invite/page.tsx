@@ -50,7 +50,7 @@ export default function InvitePartnerPage() {
 
   useEffect(() => {
     // 招待URLは受注側企業に案内するため、環境変数で指定されていれば
-    // 電子取引Lシステム のブランドドメイン（例: https://dlsystem.aigrowthx.pro）を使う。
+    // 電子取引くん のブランドドメイン（例: https://dlsystem.aigrowthx.pro）を使う。
     // 未設定時は現在のオリジン（ダッシュボードが動いているホスト）を使用。
     const branded = process.env.NEXT_PUBLIC_INVITE_ORIGIN
     if (branded) {
@@ -149,7 +149,7 @@ export default function InvitePartnerPage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="message">招待メッセージ（任意）</Label>
-              <Textarea id="message" name="message" rows={3} placeholder="例: 弊社の受発注システムをご案内します。無料でアカウント発行いたしますので、以下のリンクからご登録をお願いします。" />
+              <Textarea id="message" name="message" rows={3} placeholder="例: 弊社の電子取引プラットフォームをご案内します。無料でアカウント発行いたしますので、以下のリンクからご登録をお願いします。" />
             </div>
             <div className="rounded-sm border border-orange-300 bg-orange-50 p-3 text-xs leading-relaxed text-orange-900">
               <p className="font-bold mb-1">📌 電子取引プラットフォーム 招待型アカウント発行について</p>

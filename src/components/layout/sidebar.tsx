@@ -48,7 +48,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
     <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
       <div className="flex h-14 items-center border-b border-gray-200 px-6">
         <h1 className="text-lg font-bold text-gray-900">
-          {brand.namePrefix}<span className="text-orange-500">L</span>システム
+          {brand.logoBase}<span className="text-orange-500">{brand.logoAccent}</span>{brand.logoSuffix}
         </h1>
       </div>
       <nav className="flex-1 space-y-0.5 px-3 py-4">

@@ -46,7 +46,7 @@ export default function LoginPage() {
       <Card className="w-full max-w-md border-0 rounded-sm shadow-2xl">
         <CardHeader className="text-center pb-2">
           <CardTitle className="text-2xl font-black tracking-tight text-slate-800">
-            {brand.namePrefix}<span className="text-orange-500">L</span>システム
+            {brand.logoBase}<span className="text-orange-500">{brand.logoAccent}</span>{brand.logoSuffix}
           </CardTitle>
           <CardDescription className="text-sm text-slate-500">
             {brand.tagline}

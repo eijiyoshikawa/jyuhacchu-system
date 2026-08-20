@@ -1,46 +1,50 @@
 import Link from "next/link"
+import { DSYSTEM_BRAND } from "@/lib/brand"
+
+/** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
+const TOOL_NAME = DSYSTEM_BRAND.toolName
 
 const DOCUMENTS = [
   {
     href: "/transact/subsidy/feature" as const,
-    label: "機能説明資料（電子取引Lシステム）",
+    label: `機能説明資料（${TOOL_NAME}）`,
     description:
       "招待型アカウント発行、発注書・請求書の電子授受、電子取引データ保存、承認ワークフロー等、補助金審査に必要な機能詳細を体系的に記載。",
     pages: "約 12〜14 ページ",
   },
   {
     href: "/transact/subsidy/pricing" as const,
-    label: "価格説明資料（電子取引Lシステム）",
+    label: `価格説明資料（${TOOL_NAME}）`,
     description:
       "IT導入補助金 電子取引類型（補助上限額 350万円）の申請様式に準拠した標準価格・最小価格・導入事例。",
     pages: "約 3〜4 ページ",
   },
   {
     href: "/transact/subsidy/pricing/rationale" as const,
-    label: "申請価格理由書（電子取引Lシステム）",
+    label: `申請価格理由書（${TOOL_NAME}）`,
     description:
       "標準価格の設定理由・開発費用の回収計画・希少性・類似ITツール比較を記載した PDF 添付用ファイル。",
     pages: "約 6〜8 ページ",
   },
   {
     href: "/transact/subsidy/requirements" as const,
-    label: "その他要件の説明資料（電子取引Lシステム）",
+    label: `その他要件の説明資料（${TOOL_NAME}）`,
     description:
       "Pコード選択、電子取引類型 特有の要件（招待型・両社間電子取引プラットフォーム）対応、SECURITY ACTION・GビズID対応状況を記載。",
     pages: "約 5〜6 ページ",
   },
   {
     href: "/transact/subsidy/demo-info" as const,
-    label: "デモ機・テストアカウント情報（電子取引Lシステム）",
+    label: `デモ機・テストアカウント情報（${TOOL_NAME}）`,
     description:
       "審査確認用のサービスログインURL、招待発行〜受諾フローの動作確認手順、ロール別テストアカウント情報を記載。",
     pages: "約 4〜5 ページ",
   },
   {
     href: "/transact/subsidy/invoice-sample" as const,
-    label: "適格請求書 出力サンプル（電子取引Lシステム）",
+    label: `適格請求書 出力サンプル（${TOOL_NAME}）`,
     description:
-      "電子取引Lシステムが出力する適格請求書のサンプル。取引年月日・登録番号・税率別合計・税率別消費税額・適用税率等を網羅。",
+      `${TOOL_NAME}が出力する適格請求書のサンプル。取引年月日・登録番号・税率別合計・税率別消費税額・適用税率等を網羅。`,
     pages: "約 2 ページ",
   },
 ]
@@ -64,7 +68,7 @@ export function TransactSubsidyIndex({
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
             IT導入補助金 申請資料
             <br />
-            <span className="text-orange-400">電子取引Lシステム</span>
+            <span className="text-orange-400">{TOOL_NAME}</span>
           </h1>
           <p className="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed">
             デジタル化・AI導入補助金2026「インボイス枠（電子取引類型）」の申請に必要な
@@ -73,7 +77,7 @@ export function TransactSubsidyIndex({
           </p>
           <dl className="mt-6 inline-grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded border border-slate-500 bg-white/10 px-4 py-3 text-sm">
             <dt className="font-bold text-slate-300">ITツール正式名称</dt>
-            <dd className="font-bold">電子取引Lシステム</dd>
+            <dd className="font-bold">{TOOL_NAME}</dd>
             <dt className="font-bold text-slate-300">開発メーカー名</dt>
             <dd className="font-bold">株式会社LET</dd>
             <dt className="font-bold text-slate-300">IT導入支援事業者名</dt>

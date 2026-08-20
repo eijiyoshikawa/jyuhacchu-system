@@ -92,7 +92,7 @@ async function main() {
     },
   })
 
-  // 受注側管理者（電子取引Lシステム: 招待受諾で作成された想定の無償アカウント）
+  // 受注側管理者（電子取引くん: 招待受諾で作成された想定の無償アカウント）
   const subAdmin = await prisma.user.upsert({
     where: { email: "admin@tanaka-service.co.jp" },
     update: {
@@ -281,7 +281,7 @@ async function main() {
       invitedContactName: "田中 一郎",
       invitedContactEmail: "admin@tanaka-service.co.jp",
       message:
-        "電子取引Lシステムへご招待します。貴社のご負担なく無償でアカウントを発行いただけます。",
+        "電子取引くんへご招待します。貴社のご負担なく無償でアカウントを発行いただけます。",
       status: "ACCEPTED",
       acceptedCompanyId: subcontractor1.id,
       acceptedUserId: subAdmin.id,
@@ -308,7 +308,7 @@ async function main() {
       invitedCompanyName: "佐藤製作所株式会社",
       invitedContactName: "佐藤 五郎",
       invitedContactEmail: "sato@sato-mfg.co.jp",
-      message: "電子取引Lシステムのご利用招待です。",
+      message: "電子取引くんのご利用招待です。",
       status: "PENDING",
       expiresAt: new Date("2027-03-31T14:59:59.000Z"),
     },

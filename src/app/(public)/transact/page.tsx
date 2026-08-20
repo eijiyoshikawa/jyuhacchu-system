@@ -2,7 +2,7 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "電子取引Lシステム｜招待型・無償アカウント発行の電子取引プラットフォーム",
+  title: "電子取引くん｜招待型・無償アカウント発行の電子取引プラットフォーム",
   description:
     "発注側企業が取引先（受注側企業）を無償招待し、発注書・請求書等の商取引情報を電子で授受できるクラウド型電子取引プラットフォーム。IT導入補助金（デジタル化・AI導入補助金2026）インボイス枠 電子取引類型 対応。",
 }
@@ -38,7 +38,7 @@ const FLOW = [
   {
     step: "STEP 1",
     title: "発注側企業が導入",
-    body: "発注側企業が電子取引Lシステムに申し込み。管理者アカウントを取得し、社内ユーザーと取引先招待の準備を行います。",
+    body: "発注側企業が電子取引くんに申し込み。管理者アカウントを取得し、社内ユーザーと取引先招待の準備を行います。",
   },
   {
     step: "STEP 2",
@@ -186,7 +186,7 @@ export default function TransactLandingPage() {
           </div>
           <p className="mt-10 text-center text-base text-slate-700">
             これらの課題を、<strong className="text-orange-600">受注側企業に費用負担を求めず</strong>
-            解決するために設計したのが「電子取引Lシステム」です。
+            解決するために設計したのが「電子取引くん」です。
           </p>
         </div>
       </section>
@@ -278,7 +278,7 @@ export default function TransactLandingPage() {
             IT導入補助金 電子取引類型で、最大2年分のクラウド利用料を補助対象に。
           </h2>
           <p className="mt-3 text-sm opacity-90">
-            電子取引Lシステムは「インボイス枠 電子取引類型」の登録ITツールです。
+            電子取引くんは「インボイス枠 電子取引類型」の登録ITツールです。
             補助上限額 最大350万円、補助率 中小企業 2/3。
             補助金活用のご相談は下記までお問い合わせください。
           </p>

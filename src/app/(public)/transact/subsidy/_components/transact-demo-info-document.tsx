@@ -1,6 +1,8 @@
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import { DSYSTEM_BRAND } from "@/lib/brand"
 
-const TOOL_NAME = "電子取引Lシステム"
+/** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
+const TOOL_NAME = DSYSTEM_BRAND.toolName
 const MAKER_NAME = "株式会社LET"
 const SCHEME_LABEL = "デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）"
 

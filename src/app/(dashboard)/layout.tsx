@@ -5,7 +5,7 @@ import { SystemBrandProvider } from "@/components/use-system-brand"
 import { DashboardShell } from "@/components/layout/dashboard-shell"
 
 // ダッシュボードのタブタイトル・表示ブランドをホスト別に切り替える
-// （dlsystem.aigrowthx.pro では「電子取引Lシステム」）
+// （dlsystem.aigrowthx.pro では「電子取引くん」）
 export async function generateMetadata(): Promise<Metadata> {
   const h = await headers()
   const brand = brandFromHost(h.get("host"))

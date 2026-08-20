@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+// 招待受諾は電子取引類型ツール専用のフローのためブランドを固定する
+import { DSYSTEM_BRAND } from "@/lib/brand"
 
 interface PageProps {
   params: Promise<{ token: string }>
@@ -122,9 +124,11 @@ export default function InviteAcceptPage({ params }: PageProps) {
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="text-center">
           <h1 className="text-xl sm:text-2xl font-black text-slate-800">
-            電子取引<span className="text-orange-500">L</span>システム
+            {DSYSTEM_BRAND.logoBase}
+            <span className="text-orange-500">{DSYSTEM_BRAND.logoAccent}</span>
+            {DSYSTEM_BRAND.logoSuffix}
           </h1>
-          <p className="text-xs text-slate-500 mt-1">招待型 電子取引プラットフォーム</p>
+          <p className="text-xs text-slate-500 mt-1">{DSYSTEM_BRAND.tagline}</p>
         </div>
 
         <Card className="border-orange-200">

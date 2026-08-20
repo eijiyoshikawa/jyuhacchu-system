@@ -1,6 +1,8 @@
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import { DSYSTEM_BRAND } from "@/lib/brand"
 
-const TOOL_NAME = "電子取引Lシステム"
+/** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
+const TOOL_NAME = DSYSTEM_BRAND.toolName
 const MAKER_NAME = "株式会社LET"
 const SCHEME_LABEL = "デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）"
 
@@ -215,7 +217,7 @@ export function TransactRationaleDocument({
 
       <Section label="④ 価格設定の理由">
         <p className="mb-4 text-sm leading-relaxed">
-          電子取引Lシステムの標準販売価格（年額 3,000,000円／月額 250,000円）、
+          {TOOL_NAME}の標準販売価格（年額 3,000,000円／月額 250,000円）、
           ミドルプラン価格（年額 2,400,000円／月額 200,000円）および
           最小販売価格（年額 1,800,000円／月額 150,000円）は、以下の4つの観点を
           総合的に勘案して設定しています。
@@ -225,7 +227,7 @@ export function TransactRationaleDocument({
           (1) リリース初期における開発費用の資金回収計画
         </h3>
         <p className="text-sm leading-relaxed">
-          電子取引Lシステムは、発注側企業と受注側企業の両方が利用可能な招待型プラットフォームとして
+          {TOOL_NAME}は、発注側企業と受注側企業の両方が利用可能な招待型プラットフォームとして
           設計されており、受発注機能・招待管理機能・両社間データ同期・電子取引データ保存
           （SHA-256 ハッシュ＋タイムスタンプ）・国税庁 Web-API 連携・多段階承認・
           監査ログ等を自社開発しています。開発工数はエンジニア延べ約 12 人月を要しており、
