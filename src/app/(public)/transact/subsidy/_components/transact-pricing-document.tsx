@@ -11,6 +11,39 @@ const TOOL_NAME = DSYSTEM_BRAND.toolName
 const MAKER_NAME = "株式会社LET"
 const SCHEME_LABEL = "デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）"
 
+/**
+ * 導入事例・実績（ITツール登録要領 別紙1（1）2.⑥ ／ ITツール登録の手引き 3-5 ❻）
+ *
+ * ⚠️ この欄は「**過去の**導入事例・実績」でなければならない。
+ *   要領 別紙1（1）2.⑥:「導入事例・実績 ※過去の導入事例・実績を説明したもの。」
+ *   手引き 3-5 ❻: 同上 ＋「※URLのみの記載は不可」。書式例は
+ *   「20YY年MM月 導入社数3000社達成」「AA株式会社、BB会社」と実在の実績を挙げている。
+ *   手引きには「※❸〜❼の項目で不備が頻発しています」とも明記されている。
+ *
+ * ⚠️ 想定・仮定の事例（「（想定）」「想定顧客」等）を書くことは要件違反であり、
+ *   2026年8月の不採択の最有力原因と考えられる（docs/APPLICATION_PLAYBOOK.md §11-B）。
+ *   **事実のみを書くこと。** 値が確認できない項目は空文字にすれば行ごと描画されない。
+ */
+const SERVICE_LAUNCH_DATE = "2026年4月20日"
+
+type CaseStudy = {
+  /** 導入企業の名称（掲載許諾済みの実名） */
+  name: string
+  industry: string
+  employees: string
+  /** 招待した受注側企業数 */
+  invitedPartners: string
+  /** 利用開始年月 */
+  startedAt: string
+  /** 契約プラン・契約形態（無償／有償の別を必ず明記する） */
+  contract: string
+  challenges: string[]
+  effects: string[]
+}
+
+/** 実在の導入実績のみを列挙する。空配列のあいだは事例カードを描画しない。 */
+const CASE_STUDIES: CaseStudy[] = []
+
 function Section({
   label,
   children,
@@ -364,118 +397,97 @@ export function TransactPricingDocument({
       </Section>
 
       <Section label="導入事例・実績">
-        <p className="mb-4 text-sm leading-relaxed">
-          {TOOL_NAME}（招待型 電子取引プラットフォーム）を活用した導入事例を以下に示します。
-        </p>
+        <table className="w-full border-collapse text-sm mb-4">
+          <tbody>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-left w-56 text-sm font-bold">
+                提供開始日
+              </th>
+              <td className="border-2 border-black px-3 py-2 text-lg font-black">
+                {SERVICE_LAUNCH_DATE}
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold">
+                導入社数（{SERVICE_LAUNCH_DATE} 提供開始〜現在）
+              </th>
+              <td className="border-2 border-black px-3 py-2 text-lg font-black">
+                {CASE_STUDIES.length} 社
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <div className="space-y-6">
-          <div className="border-2 border-black p-4">
-            <p className="mb-2 text-base font-black border-b-2 border-black pb-1">
-              導入事例 1　ハピネス建材株式会社（想定）
-            </p>
-            <table className="w-full border-collapse text-xs my-3">
-              <tbody>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left w-32">
-                    業種
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">建設資材卸売業</td>
-                </tr>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
-                    従業員数
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">45名規模（発注側）</td>
-                </tr>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
-                    招待した取引先数
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">受注側企業 120社（全社無償招待）</td>
-                </tr>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
-                    導入時期
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">2026年3月</td>
-                </tr>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
-                    導入プラン
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">
-                    標準プラン（月額 250,000円／年額 3,000,000円）
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="text-sm font-bold mb-1">導入前の課題</p>
-            <ul className="mb-2 pl-4 space-y-0.5 text-sm">
-              <li>ー 取引先120社との受発注を FAX・メール・電話で管理し、月次照合作業に担当者3名で5営業日を要していた。</li>
-              <li>ー 取引先側（受注企業）の電子化コスト負担がネックとなり、電子取引化が進まなかった。</li>
-              <li>ー 電子帳簿保存法の電子取引データ保存義務化への対応が未着手。</li>
-            </ul>
-            <p className="text-sm font-bold mb-1">導入後の効果（定量）</p>
-            <ul className="pl-4 space-y-0.5 text-sm">
-              <li>ー 受注側企業を <strong>無償招待</strong> したため、取引先の抵抗なく <strong>約 100 社が受諾</strong>（受諾率83%）。</li>
-              <li>ー 月次照合作業時間を <strong>5営業日 → 半営業日</strong>（約90%削減）。</li>
-              <li>ー FAX・電話による受発注ゼロ化により、担当者残業時間を <strong>年間 約 350時間 削減</strong> と試算。</li>
-              <li>ー 電子取引データ保存要件を <strong>100% システム側で自動対応</strong>。</li>
-            </ul>
+        {CASE_STUDIES.length === 0 && (
+          <div className="border-4 border-red-600 bg-red-50 p-4 text-sm font-black leading-relaxed">
+            ⚠️ 未記入：提出前に CASE_STUDIES（実在の導入実績）を必ず記入すること。
+            この状態のまま提出してはならない。要領 別紙1（1）2.⑥ は「過去の導入事例・実績」を
+            必須としており、未記入または想定事例は不備・不採択の直接原因となる。
           </div>
+        )}
 
-          <div className="border-2 border-black p-4">
-            <p className="mb-2 text-base font-black border-b-2 border-black pb-1">
-              導入事例 2　サンライズフーズ株式会社（想定）
-            </p>
-            <table className="w-full border-collapse text-xs my-3">
-              <tbody>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left w-32">
-                    業種
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">食品加工業</td>
-                </tr>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
-                    従業員数
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">20名規模</td>
-                </tr>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
-                    招待した取引先数
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">受注側企業 40社</td>
-                </tr>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
-                    導入時期
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">2026年4月</td>
-                </tr>
-                <tr>
-                  <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left">
-                    導入プラン
-                  </th>
-                  <td className="border border-slate-400 px-2 py-1">
-                    最小プラン（月額 150,000円／年額 1,800,000円）
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="text-sm font-bold mb-1">導入前の課題</p>
-            <ul className="mb-2 pl-4 space-y-0.5 text-sm">
-              <li>ー 原材料の仕入先40社への発注書送付が手作業（メール＋郵送）で運用されていた。</li>
-              <li>ー 請求書受領・チェックの工数増でインボイス制度対応に遅れが生じていた。</li>
-            </ul>
-            <p className="text-sm font-bold mb-1">導入後の効果（定量）</p>
-            <ul className="pl-4 space-y-0.5 text-sm">
-              <li>ー 発注→受注→請求→支払までの全プロセスを電子化し、業務時間を <strong>約 60% 削減</strong>。</li>
-              <li>ー 適格請求書発行事業者番号の自動検証により確認工数を <strong>実質ゼロ</strong>。</li>
-              <li>ー 経理担当の残業時間を <strong>月 15時間 削減</strong>。</li>
-            </ul>
+        {CASE_STUDIES.length > 0 && (
+          <div className="space-y-6">
+            {CASE_STUDIES.map((c) => (
+              <div key={c.name} className="border-2 border-black p-4 avoid-break">
+                <p className="mb-2 text-base font-black border-b-2 border-black pb-1">
+                  導入事例　{c.name}
+                </p>
+                <table className="w-full border-collapse text-xs my-3">
+                  <tbody>
+                    {([
+                      ["業種", c.industry],
+                      ["従業員数", c.employees],
+                      ["招待した取引先数", c.invitedPartners],
+                      ["利用開始", c.startedAt],
+                      ["契約プラン・契約形態", c.contract],
+                    ] as const)
+                      .filter(([, v]) => v)
+                      .map(([k, v]) => (
+                        <tr key={k}>
+                          <th className="border border-slate-400 bg-slate-100 px-2 py-1 text-left w-40">
+                            {k}
+                          </th>
+                          <td className="border border-slate-400 px-2 py-1">{v}</td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+                {c.challenges.length > 0 && (
+                  <>
+                    <p className="text-sm font-bold mb-1">導入前の課題</p>
+                    <ul className="mb-2 pl-4 space-y-0.5 text-sm">
+                      {c.challenges.map((t) => (
+                        <li key={t}>ー {t}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                {c.effects.length > 0 && (
+                  <>
+                    <p className="text-sm font-bold mb-1">導入後の効果</p>
+                    <ul className="pl-4 space-y-0.5 text-sm">
+                      {c.effects.map((t) => (
+                        <li key={t}>ー {t}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
+            ))}
           </div>
+        )}
+
+        <div className="mt-4 border-2 border-black p-3 text-sm leading-relaxed">
+          <p className="font-black mb-1">本ITツールの販売形態について</p>
+          <p>
+            本ITツールは {SERVICE_LAUNCH_DATE} に提供を開始し、
+            上記「ITツールの価格」に記載した標準販売価格により
+            <strong>一般に販売しているクラウドサービス（SaaS）</strong>です。
+            特定の顧客向けに限定して提供しているものではなく、
+            サービスサイトから業種を問わずお申し込みいただけます。
+            契約に応じたカスタマイズ開発・スクラッチ開発は行いません。
+          </p>
         </div>
       </Section>
 
