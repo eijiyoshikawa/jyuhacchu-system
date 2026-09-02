@@ -1,4 +1,5 @@
 import { DSYSTEM_BRAND } from "@/lib/brand"
+import { DENSHI_PLANS, jpy, yearly } from "./denshi-plans"
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
 import { ScreenshotPlaceholder } from "@/app/(public)/subsidy/_components/screenshot-placeholder"
 import {
@@ -682,6 +683,14 @@ export function TransactFeatureDocument({
           <tbody>
             {[
               ["ITツール正式名称", TOOL_NAME],
+              // 別紙1（1）1.【大分類Ⅰソフトウェア】No.2:
+              // 「同一のＩＴツールにおいて、複数のプラン名が存在する場合は、プラン名を明記すること」
+              [
+                "プラン名",
+                DENSHI_PLANS.map(
+                  (pl) => `${pl.name}（年額 ${jpy(yearly(pl))}・税抜）`
+                ).join(" ／ "),
+              ],
               ["開発メーカー名", MAKER_NAME],
               ["IT導入支援事業者名", providerName],
               ["提供形態", "クラウド型SaaS（マルチテナント／ブラウザ利用／招待型プラットフォーム）"],
@@ -695,6 +704,10 @@ export function TransactFeatureDocument({
               [
                 "法令対応",
                 "適格請求書等保存方式（インボイス制度）／電子帳簿保存法（電子取引要件）／下請法・請負契約一般の必要記載事項",
+              ],
+              [
+                "AIを用いた機能",
+                "搭載なし（生成AI・生成AI以外のAI技術のいずれも使用していません）",
               ],
               ["主Pコード", "共P-02（決済・債権債務・資金回収）"],
               ["副Pコード", "設定なし（共P-02 単独申請）"],
