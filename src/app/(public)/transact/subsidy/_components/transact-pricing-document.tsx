@@ -1,4 +1,17 @@
 import { DSYSTEM_BRAND } from "@/lib/brand"
+import {
+  DENSHI_PLANS,
+  MINIMUM_PLAN,
+  STANDARD_PLAN,
+  SUBSIDY_CAP,
+  isCapped,
+  jpy,
+  selfPay,
+  subsidyAmount,
+  subsidyBase,
+  yearly,
+  yen,
+} from "./denshi-plans"
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
 import {
   DENSHI_REQUIREMENTS,
@@ -202,8 +215,15 @@ export function TransactPricingDocument({
           </p>
           <p className="text-sm leading-relaxed">
             本資料には、申請ITツール以外のITツールの価格は一切記載していません。
-            申請書に入力した<strong className="bg-yellow-200">標準販売価格 3,000,000円（税抜）</strong>
-            および<strong className="bg-yellow-200">最小販売価格 1,800,000円（税抜）</strong>は、
+            申請書に入力した
+            <strong className="bg-yellow-200">
+              標準販売価格 {jpy(yearly(STANDARD_PLAN))}（税抜）
+            </strong>
+            および
+            <strong className="bg-yellow-200">
+              最小販売価格 {jpy(yearly(MINIMUM_PLAN))}（税抜）
+            </strong>
+            は、
             下表のとおり<strong>標準プランの年額</strong>および<strong>最小プランの年額</strong>に対応します。
           </p>
         </div>
@@ -228,41 +248,25 @@ export function TransactPricingDocument({
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-yellow-100">
-              <td className="border-2 border-black px-3 py-3 text-base font-black">① 標準プラン</td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono text-base font-bold">
-                250,000円
-              </td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono text-lg font-black">
-                3,000,000円
-              </td>
-              <td className="border-2 border-black px-3 py-3 text-xs font-black">
-                標準販売価格<br />（ソフトウェアの標準販売価格）
-              </td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono font-bold">200社</td>
-            </tr>
-            <tr>
-              <td className="border-2 border-black px-3 py-3 text-base font-bold">② ミドルプラン</td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono text-base">200,000円</td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono text-lg font-bold">
-                2,400,000円
-              </td>
-              <td className="border-2 border-black px-3 py-3 text-xs">中間プラン（申請書への入力対象外）</td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono font-bold">100社</td>
-            </tr>
-            <tr className="bg-yellow-100">
-              <td className="border-2 border-black px-3 py-3 text-base font-black">③ 最小プラン</td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono text-base font-bold">
-                150,000円
-              </td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono text-lg font-black">
-                1,800,000円
-              </td>
-              <td className="border-2 border-black px-3 py-3 text-xs font-black">
-                最小販売価格<br />（ソフトウェアの最小販売価格）
-              </td>
-              <td className="border-2 border-black px-3 py-3 text-right font-mono font-bold">50社</td>
-            </tr>
+            {DENSHI_PLANS.map((pl) => (
+              <tr key={pl.name} className={pl.isApplicationPrice ? "bg-yellow-100" : undefined}>
+                <td className="border-2 border-black px-3 py-3 text-base font-black">
+                  {pl.mark} {pl.name}
+                </td>
+                <td className="border-2 border-black px-3 py-3 text-right font-mono text-base font-bold">
+                  {jpy(pl.monthly)}
+                </td>
+                <td className="border-2 border-black px-3 py-3 text-right font-mono text-lg font-black">
+                  {jpy(yearly(pl))}
+                </td>
+                <td className="border-2 border-black px-3 py-3 text-xs font-black">
+                  {pl.applicationCategory}
+                </td>
+                <td className="border-2 border-black px-3 py-3 text-right font-mono font-bold">
+                  {pl.partnerAccountLimit}社
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <ul className="mt-3 list-disc pl-5 text-sm leading-relaxed space-y-1">
@@ -293,32 +297,18 @@ export function TransactPricingDocument({
           プラン展開は3プラン（標準／ミドル／最小）
         </p>
 
-        <div className="mb-6">
-          <p className="mb-2 font-bold">
-            ① 標準プラン ＝ ソフトウェア(ITツール)の標準販売価格（税抜）：月額　250,000円
-          </p>
-          <p className="mb-2 pl-4">ー 1年間利用料：3,000,000円</p>
-          <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：6,000,000円</p>
-          <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
-        </div>
-
-        <div className="mb-6">
-          <p className="mb-2 font-bold">
-            ② ミドルプラン（税抜）：月額　200,000円
-          </p>
-          <p className="mb-2 pl-4">ー 1年間利用料：2,400,000円</p>
-          <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：4,800,000円</p>
-          <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
-        </div>
-
-        <div className="mb-6">
-          <p className="mb-2 font-bold">
-            ③ 最小プラン ＝ ソフトウェア(ITツール)の最小販売価格（税抜）：月額　150,000円
-          </p>
-          <p className="mb-2 pl-4">ー 1年間利用料：1,800,000円</p>
-          <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：3,600,000円</p>
-          <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
-        </div>
+        {DENSHI_PLANS.map((pl) => (
+          <div key={pl.name} className="mb-6">
+            <p className="mb-2 font-bold">
+              {pl.mark} {pl.name}
+              {pl.isApplicationPrice ? ` ＝ ソフトウェア(ITツール)の${pl.applicationCategory.split("（")[0]}` : ""}
+              （税抜）：月額　{jpy(pl.monthly)}
+            </p>
+            <p className="mb-2 pl-4">ー 1年間利用料：{jpy(yearly(pl))}</p>
+            <p className="mb-2 pl-4">ー 2年間利用料（補助対象範囲）：{jpy(subsidyBase(pl))}</p>
+            <p className="pl-4 text-sm text-slate-600">※ 初期費用無し／オプション無し</p>
+          </div>
+        ))}
 
         <p className="mb-3 text-sm leading-relaxed">
           各プランの機能差はなく、招待できる受注側企業数（受注側アカウント発行上限）と
@@ -339,21 +329,19 @@ export function TransactPricingDocument({
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="border-2 border-black px-3 py-2">① 標準プラン（月額 250,000円）</td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">200社</td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">3,000件</td>
-            </tr>
-            <tr>
-              <td className="border-2 border-black px-3 py-2">② ミドルプラン（月額 200,000円）</td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">100社</td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">1,500件</td>
-            </tr>
-            <tr>
-              <td className="border-2 border-black px-3 py-2">③ 最小プラン（月額 150,000円）</td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">50社</td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">500件</td>
-            </tr>
+            {DENSHI_PLANS.map((pl) => (
+              <tr key={pl.name}>
+                <td className="border-2 border-black px-3 py-2">
+                  {pl.mark} {pl.name}（月額 {jpy(pl.monthly)}）
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
+                  {pl.partnerAccountLimit}社
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-right font-mono">
+                  {pl.monthlyTransactionLimit.toLocaleString("ja-JP")}件
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <div className="mb-4 border-4 border-black p-4">
@@ -537,53 +525,32 @@ export function TransactPricingDocument({
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="border-2 border-black px-3 py-2">
-                ① 標準プラン（月額 250,000円）
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">
-                ¥6,000,000
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">
-                ¥3,500,000<br />
-                <span className="text-xs">（補助上限適用）</span>
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
-                ¥2,500,000
-              </td>
-            </tr>
-            <tr>
-              <td className="border-2 border-black px-3 py-2">
-                ② ミドルプラン（月額 200,000円）
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">
-                ¥4,800,000
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">
-                ¥3,200,000
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
-                ¥1,600,000
-              </td>
-            </tr>
-            <tr>
-              <td className="border-2 border-black px-3 py-2">
-                ③ 最小プラン（月額 150,000円）
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">
-                ¥3,600,000
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono">
-                ¥2,400,000
-              </td>
-              <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
-                ¥1,200,000
-              </td>
-            </tr>
+            {DENSHI_PLANS.map((pl) => (
+              <tr key={pl.name}>
+                <td className="border-2 border-black px-3 py-2">
+                  {pl.mark} {pl.name}（月額 {jpy(pl.monthly)}）
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-right font-mono">
+                  {yen(subsidyBase(pl))}
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-right font-mono">
+                  {yen(subsidyAmount(pl))}
+                  {isCapped(pl) && (
+                    <>
+                      <br />
+                      <span className="text-xs">（補助上限適用）</span>
+                    </>
+                  )}
+                </td>
+                <td className="border-2 border-black px-3 py-2 text-right font-mono font-bold">
+                  {yen(selfPay(pl))}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <p className="mt-3 text-xs text-slate-500">
-          ※ 補助率・補助上限は電子取引類型（補助上限 350万円・補助率 中小企業 2/3）に基づく参考値です。
+          ※ 補助率・補助上限は電子取引類型（補助上限 {jpy(SUBSIDY_CAP)}・補助率 中小企業 2/3）に基づく参考値です。
           最新の公募要領（中小機構 デジタル化・AI導入補助金ポータルサイト）でご確認ください。
           上表の金額は本ソフトウェア（カテゴリー1）の年間利用料のみを対象としています。
         </p>

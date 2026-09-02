@@ -1,5 +1,13 @@
 import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
 import { DSYSTEM_BRAND } from "@/lib/brand"
+import {
+  MIDDLE_PLAN,
+  MINIMUM_PLAN,
+  STANDARD_PLAN,
+  jpy,
+  yearly,
+  yen,
+} from "./denshi-plans"
 
 /** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
 const TOOL_NAME = DSYSTEM_BRAND.toolName
@@ -144,39 +152,21 @@ export function TransactRationaleDocument({
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="border border-slate-300 px-3 py-2 font-bold">
-                標準販売価格（1年間）
-              </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono">
-                ¥3,000,000
-              </td>
-              <td className="border border-slate-300 px-3 py-2">
-                月額 250,000円 × 12ヶ月（発注側企業のみ課金／受注側は無償）
-              </td>
-            </tr>
-            <tr>
-              <td className="border border-slate-300 px-3 py-2 font-bold">
-                ミドルプラン（1年間）
-              </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono">
-                ¥2,400,000
-              </td>
-              <td className="border border-slate-300 px-3 py-2">
-                月額 200,000円 × 12ヶ月（中間プラン／受注側は無償）
-              </td>
-            </tr>
-            <tr>
-              <td className="border border-slate-300 px-3 py-2 font-bold">
-                最小販売価格（1年間）
-              </td>
-              <td className="border border-slate-300 px-3 py-2 text-right font-mono">
-                ¥1,800,000
-              </td>
-              <td className="border border-slate-300 px-3 py-2">
-                月額 150,000円 × 12ヶ月（最小プラン／受注側は無償）
-              </td>
-            </tr>
+            {([
+              [`標準販売価格（1年間）`, STANDARD_PLAN, "発注側企業のみ課金／受注側は無償"],
+              [`ミドルプラン（1年間）`, MIDDLE_PLAN, "中間プラン／受注側は無償"],
+              [`最小販売価格（1年間）`, MINIMUM_PLAN, "最小プラン／受注側は無償"],
+            ] as const).map(([label, pl, note]) => (
+              <tr key={label}>
+                <td className="border border-slate-300 px-3 py-2 font-bold">{label}</td>
+                <td className="border border-slate-300 px-3 py-2 text-right font-mono">
+                  {yen(yearly(pl))}
+                </td>
+                <td className="border border-slate-300 px-3 py-2">
+                  月額 {jpy(pl.monthly)} × 12ヶ月（{note}）
+                </td>
+              </tr>
+            ))}
             <tr>
               <td className="border border-slate-300 px-3 py-2 font-bold">
                 包括ライセンス数
@@ -217,9 +207,9 @@ export function TransactRationaleDocument({
 
       <Section label="④ 価格設定の理由">
         <p className="mb-4 text-sm leading-relaxed">
-          {TOOL_NAME}の標準販売価格（年額 3,000,000円／月額 250,000円）、
-          ミドルプラン価格（年額 2,400,000円／月額 200,000円）および
-          最小販売価格（年額 1,800,000円／月額 150,000円）は、以下の4つの観点を
+          {TOOL_NAME}の標準販売価格（年額 {jpy(yearly(STANDARD_PLAN))}／月額 {jpy(STANDARD_PLAN.monthly)}）、
+          ミドルプラン価格（年額 {jpy(yearly(MIDDLE_PLAN))}／月額 {jpy(MIDDLE_PLAN.monthly)}）および
+          最小販売価格（年額 {jpy(yearly(MINIMUM_PLAN))}／月額 {jpy(MINIMUM_PLAN.monthly)}）は、以下の4つの観点を
           総合的に勘案して設定しています。
         </p>
 
@@ -286,8 +276,8 @@ export function TransactRationaleDocument({
           </h3>
         </div>
         <p className="text-sm leading-relaxed mb-4">
-          本ツール「{TOOL_NAME}」の標準販売価格（年額3,000,000円）および最小販売価格
-          （年額1,800,000円）の妥当性を、<strong>国内で実際に流通する具体的な競合製品8件</strong>
+          本ツール「{TOOL_NAME}」の標準販売価格（年額{jpy(yearly(STANDARD_PLAN))}）および最小販売価格
+          （年額{jpy(yearly(MINIMUM_PLAN))}）の妥当性を、<strong>国内で実際に流通する具体的な競合製品8件</strong>
           と比較した結果を下表にまとめます。比較対象は実在する製品名（提供企業名併記）であり、
           各社の公表価格・公開資料に基づく2026年4月時点の調査値です。
         </p>
@@ -328,7 +318,7 @@ export function TransactRationaleDocument({
                   {TOOL_NAME}<br />（本ツール／標準）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-right font-mono font-bold">
-                  ¥3,000,000
+                  {yen(yearly(STANDARD_PLAN))}
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
                 <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
@@ -482,7 +472,8 @@ export function TransactRationaleDocument({
             <strong>招待型・両社間電子取引プラットフォームでの優位性</strong>：招待型かつ
             適格番号自動検証・電帳法 SHA-256/TS 自動付与・多段階承認・発注/請求一貫管理の
             5要件を「◎（標準搭載）」で満たす製品は本ツールのみであり、
-            <strong>電子取引類型 の趣旨に完全合致する仕様</strong>を年額300万円（最小180万円）で
+            <strong>電子取引類型 の趣旨に完全合致する仕様</strong>を
+            年額{jpy(yearly(STANDARD_PLAN))}（最小{jpy(yearly(MINIMUM_PLAN))}）で
             提供する点に市場希少性があります。
           </li>
           <li>
@@ -514,8 +505,8 @@ export function TransactRationaleDocument({
           上表の通り、「招待型・受注側企業無償」「適格請求書発行事業者番号の国税庁API自動検証」
           「電子帳簿保存法 電子取引要件の自動準拠（SHA-256＋タイムスタンプ）」
           「多段階承認ワークフロー」「発注〜請求の一貫管理」の<strong>5機能を全て標準搭載</strong>
-          している国内SaaSは現時点で本ツールのみであり、この機能集約性を年額 3,000,000円
-          （ミドル 2,400,000円・最小 1,800,000円）で提供する点に市場希少性があります。
+          している国内SaaSは現時点で本ツールのみであり、この機能集約性を年額 {jpy(yearly(STANDARD_PLAN))}
+          （ミドル {jpy(yearly(MIDDLE_PLAN))}・最小 {jpy(yearly(MINIMUM_PLAN))}）で提供する点に市場希少性があります。
           加えて、初期費用・オプション費用・受注側企業への課金を一切設けない設計は、
           電子取引類型 の趣旨と完全に合致します。
         </p>
@@ -523,14 +514,14 @@ export function TransactRationaleDocument({
 
       <Section label="⑤ 最小販売価格の根拠">
         <p className="text-sm leading-relaxed">
-          最小販売価格 1,800,000円／年（月額 150,000円）は、招待できる受注側企業数・
+          最小販売価格 {jpy(yearly(MINIMUM_PLAN))}／年（月額 {jpy(MINIMUM_PLAN.monthly)}）は、招待できる受注側企業数・
           月次取引件数上限を標準プランより限定した「最小構成プラン」
           （受注側アカウント発行上限 50社・月次取引 500件）として販売店が
           顧客に提示可能な価格です。当該価格においても、招待型アカウント発行・
           インボイス制度対応・電子帳簿保存法対応・多段階承認ワークフロー等の
           コア機能は標準プランと同等に提供します。
           なお、標準プラン（発行上限 200社・月次取引 3,000件）と最小プランの間には、
-          中規模事業者向けのミドルプラン（年額 2,400,000円／月額 200,000円・
+          中規模事業者向けのミドルプラン（年額 {jpy(yearly(MIDDLE_PLAN))}／月額 {jpy(MIDDLE_PLAN.monthly)}・
           発行上限 100社・月次取引 1,500件）を設けており、事業規模に応じた
           段階的なプラン選択が可能です（機能差はなく、いずれのプランも受注側企業への
           課金はなく、受注側アカウントを上限なく発行できる契約ではありません）。
