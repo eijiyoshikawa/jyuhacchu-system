@@ -14,18 +14,18 @@ const sample = {
   dueDate: "2026年5月31日",
   subject: "2026年3月分 ネットワーク機器設置業務",
   issuer: {
-    name: "田中サービス株式会社（招待受諾で作成された無償アカウント）",
+    name: "ケヤキ工房株式会社（招待受諾で作成された無償アカウント）",
     postal: "150-0001",
     address: "東京都渋谷区神宮前1-2-3",
     tel: "03-2345-6789",
-    registrationNumber: "T9876543210987",
+    registrationNumber: "T7070808090901",
   },
   receiver: {
-    name: "サンプル商事株式会社（発注側・招待発行元）",
+    name: "株式会社アオバ産業（発注側・招待発行元）",
     postal: "100-0001",
     address: "東京都千代田区千代田1-1-1",
     tel: "03-1234-5678",
-    registrationNumber: "T1234567890123",
+    registrationNumber: "T2020304050607",
   },
   items: [
     {
@@ -114,8 +114,8 @@ export function TransactInvoiceSampleDocument({
             本ページは、<strong>開発メーカー 株式会社LET ／ IT導入支援事業者 {providerName}</strong>
             による IT導入補助金 電子取引類型 申請用に作成された、{TOOL_NAME}が出力する
             <strong>適格請求書（インボイス）のサンプル</strong>です。
-            本サンプルは、<strong>招待受諾で無償アカウントを作成した受注側企業（田中サービス株式会社）</strong>
-            が、発注側企業（サンプル商事株式会社）に対して発行する請求書を想定しています。
+            本サンプルは、<strong>招待受諾で無償アカウントを作成した受注側企業（ケヤキ工房株式会社）</strong>
+            が、発注側企業（株式会社アオバ産業）に対して発行する請求書を想定しています。
             デジタル化・AI導入補助金2026 インボイス枠 電子取引類型 の申請時に求められる
             「インボイス制度に対応していることがわかる請求書等の出力帳票サンプル」として、
             本ページをブラウザの印刷機能（Ctrl+P / ⌘+P）で PDF 保存してご提出ください。
@@ -344,7 +344,7 @@ export function TransactInvoiceSampleDocument({
               <tr>
                 <td className="border border-gray-400 px-2 py-1">① 適格請求書発行事業者の氏名又は名称及び登録番号</td>
                 <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
-                <td className="border border-gray-400 px-2 py-1">ヘッダ右上『田中サービス株式会社』『登録番号: {sample.issuer.registrationNumber}』</td>
+                <td className="border border-gray-400 px-2 py-1">ヘッダ右上『ケヤキ工房株式会社』『登録番号: {sample.issuer.registrationNumber}』</td>
               </tr>
               <tr className="bg-yellow-100">
                 <td className="border border-gray-400 px-2 py-1 font-bold">② 取引年月日</td>
@@ -375,7 +375,7 @@ export function TransactInvoiceSampleDocument({
               <tr>
                 <td className="border border-gray-400 px-2 py-1">⑥ 書類の交付を受ける事業者の氏名又は名称</td>
                 <td className="border border-gray-400 px-2 py-1 text-center font-bold">✓</td>
-                <td className="border border-gray-400 px-2 py-1">本文左上『サンプル商事株式会社　御中』</td>
+                <td className="border border-gray-400 px-2 py-1">本文左上『株式会社アオバ産業　御中』</td>
               </tr>
             </tbody>
           </table>

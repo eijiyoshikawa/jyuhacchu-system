@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/ui/page-header"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { requireDsystem } from "@/lib/dsystem-guard"
+import { getSession } from "@/lib/auth-helpers"
 
 export const metadata = {
   title: "電子取引アーカイブ",
@@ -44,6 +45,8 @@ export default async function ArchivePage({
   searchParams: Promise<Search>
 }) {
   await requireDsystem()
+  const session = await getSession()
+  const myCompanyId = session.user.companyId
   const q = await searchParams
 
   const from = parseDate(q.from)
@@ -65,6 +68,7 @@ export default async function ArchivePage({
       ? Promise.resolve([])
       : prisma.purchaseOrder.findMany({
           where: {
+            OR: [{ issuerId: myCompanyId }, { receiverId: myCompanyId }],
             ...(dateFilter ? { createdAt: dateFilter } : {}),
             ...(amountFilter ? { totalAmount: amountFilter } : {}),
             ...(partnerFilter ? { receiver: partnerFilter } : {}),
@@ -77,6 +81,7 @@ export default async function ArchivePage({
       ? Promise.resolve([])
       : prisma.invoice.findMany({
           where: {
+            OR: [{ issuerId: myCompanyId }, { receiverId: myCompanyId }],
             ...(dateFilter ? { createdAt: dateFilter } : {}),
             ...(amountFilter ? { totalAmount: amountFilter } : {}),
             ...(partnerFilter ? { issuer: partnerFilter } : {}),
