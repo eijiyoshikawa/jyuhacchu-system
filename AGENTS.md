@@ -61,17 +61,45 @@
 | 招待発行画面（発注側管理者・要ログイン） | — | `https://dlsystem.aigrowthx.pro/partners/invite` |
 | 招待受諾ページ（公開） | — | `https://dlsystem.aigrowthx.pro/invite/[token]` |
 
-## テストアカウント（4種・共通パスワード `password123`）
+## テストアカウント（共通パスワード `password123`）
+
+⚠️ **2つのITツールでデモアカウントを分離している**（同一システムの二重登録と見られないため）。
+審査の案内では必ず該当ツールのアカウントを使うこと。
+
+### 受発注Lシステム（登録済み）
 
 | ロール | メールアドレス |
 |---|---|
 | 発注側 管理者 | `admin@sample-trading.co.jp` |
 | 発注側 発注担当 | `tanaka@sample-trading.co.jp` |
-| 受注側 管理者（電子取引L 招待受諾想定） | `admin@tanaka-service.co.jp` |
+| 受注側 管理者 | `admin@tanaka-service.co.jp` |
 | 受注側 受注担当 | `suzuki@tanaka-service.co.jp` |
 
-※ 新デモデータ（受注側管理者・招待2件・サンプル請求書 `INV-20260428-0001`）は
-本番DBへ投入済み（2026-08-07・Neon SQL Editor で `prisma/demo-seed-neon.sql` 実行、確認クエリ 4/1/2/2）。
+### 電子取引くん（再申請準備中）
+
+デモ企業: 発注側 **株式会社アオバ産業** ／ 受注側 **ケヤキ工房株式会社**（いずれも架空）
+
+| ロール | メールアドレス |
+|---|---|
+| 発注側 管理者 | `admin@aoba-sangyo.example.jp` |
+| 発注側 発注担当 | `kimura@aoba-sangyo.example.jp` |
+| 受注側 管理者（招待受諾済み） | `admin@keyaki-koubou.example.jp` |
+| 受注側 受注担当 | `mori@keyaki-koubou.example.jp` |
+
+サンプル発注書 `PO-20260422-0101` ／ サンプル請求書 `INV-20260630-0101` ／
+招待中トークン `dk-pending-9a3f7c1e5d8b2046`
+
+※ 本番DBへの投入は Neon SQL Editor で `prisma/denshi-kun-demo-seed-neon.sql` を実行する（冪等）。
+
+## 連絡先メールアドレス（ツール別に分離）
+
+| ツール | ドメイン |
+|---|---|
+| 受発注Lシステム | `@juhacchu-l.jp`（sales / support / billing / subsidy） |
+| 電子取引くん | `@aigrowthx.pro`（sales / support / billing / transact） |
+
+⚠️ **`@aigrowthx.pro` のメールボックスは申請前に必ず実際に受信できる状態にすること。**
+事務局からの連絡がここに届く。
 
 ## 詳細ドキュメント
 

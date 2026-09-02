@@ -1,4 +1,4 @@
-import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import { TransactDocumentShell, TransactSection } from "./transact-document-shell"
 import { DSYSTEM_BRAND } from "@/lib/brand"
 import {
   MIDDLE_PLAN,
@@ -14,15 +14,6 @@ const TOOL_NAME = DSYSTEM_BRAND.toolName
 const MAKER_NAME = "株式会社LET"
 const SCHEME_LABEL = "デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）"
 
-function Section({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <section className="mb-8 avoid-break">
-      <h2 className="mb-4 text-xl font-black text-sky-600">【{label}】</h2>
-      <div className="pl-2">{children}</div>
-    </section>
-  )
-}
-
 export function TransactRationaleDocument({
   providerName,
   variantSuffix = "",
@@ -32,53 +23,17 @@ export function TransactRationaleDocument({
   variantSuffix?: string
 }) {
   return (
-    <DocumentShell
+    <TransactDocumentShell
       title="申請価格理由書"
       subtitle={`${SCHEME_LABEL} 申請添付書類`}
       toolName={TOOL_NAME}
       makerName={MAKER_NAME}
+      providerName={providerName}
+      docNo="資料③ 申請価格理由書"
       indexHref={`/transact/subsidy${variantSuffix}`}
       schemeLabel={SCHEME_LABEL}
       pcode="主Pコード: 共P-02（単独）"
     >
-      <section className="mb-8 avoid-break">
-        <table className="w-full border-collapse text-sm">
-          <tbody>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left w-56 text-sm font-bold">
-                ITツール正式名称
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-xl font-black">
-                {TOOL_NAME}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                開発メーカー名
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-xl font-black">
-                {MAKER_NAME}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                IT導入支援事業者名
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-lg font-bold">
-                {providerName}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                申請枠・類型
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-base">
-                インボイス枠（電子取引類型）／補助上限 350万円／補助率 中小企業 2/3
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
 
       <section className="mb-8 avoid-break">
         <div className="border-4 border-black p-5">
@@ -128,15 +83,15 @@ export function TransactRationaleDocument({
         </div>
       </section>
 
-      <Section label="① IT導入支援事業者名">
+      <TransactSection label="① IT導入支援事業者名">
         <p className="text-base">{providerName}</p>
-      </Section>
+      </TransactSection>
 
-      <Section label="② ITツール名">
+      <TransactSection label="② ITツール名">
         <p className="text-base">{TOOL_NAME}</p>
-      </Section>
+      </TransactSection>
 
-      <Section label="③ 価格設定の内容">
+      <TransactSection label="③ 価格設定の内容">
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="bg-slate-100">
@@ -203,9 +158,9 @@ export function TransactRationaleDocument({
             </tr>
           </tbody>
         </table>
-      </Section>
+      </TransactSection>
 
-      <Section label="④ 価格設定の理由">
+      <TransactSection label="④ 価格設定の理由">
         <p className="mb-4 text-sm leading-relaxed">
           {TOOL_NAME}の標準販売価格（年額 {jpy(yearly(STANDARD_PLAN))}／月額 {jpy(STANDARD_PLAN.monthly)}）、
           ミドルプラン価格（年額 {jpy(yearly(MIDDLE_PLAN))}／月額 {jpy(MIDDLE_PLAN.monthly)}）および
@@ -510,9 +465,9 @@ export function TransactRationaleDocument({
           加えて、初期費用・オプション費用・受注側企業への課金を一切設けない設計は、
           電子取引類型 の趣旨と完全に合致します。
         </p>
-      </Section>
+      </TransactSection>
 
-      <Section label="⑤ 最小販売価格の根拠">
+      <TransactSection label="⑤ 最小販売価格の根拠">
         <p className="text-sm leading-relaxed">
           最小販売価格 {jpy(yearly(MINIMUM_PLAN))}／年（月額 {jpy(MINIMUM_PLAN.monthly)}）は、招待できる受注側企業数・
           月次取引件数上限を標準プランより限定した「最小構成プラン」
@@ -527,22 +482,22 @@ export function TransactRationaleDocument({
           課金はなく、受注側アカウントを上限なく発行できる契約ではありません）。
           本情報は審査目的にのみ利用され、一般公開されません。
         </p>
-      </Section>
+      </TransactSection>
 
-      <Section label="⑥ 価格改定方針">
+      <TransactSection label="⑥ 価格改定方針">
         <p className="text-sm leading-relaxed">
           価格改定を行う場合は、契約更新のタイミングで新価格を適用し、
           既存契約の期中には影響しません。重要な価格改定を行う際は
           2ヶ月前までに登録メールアドレスへ通知します。
           本申請期間中の価格改定予定はありません。
         </p>
-      </Section>
+      </TransactSection>
 
       <p className="mt-8 text-xs text-slate-500 leading-relaxed avoid-break">
         本書は、{SCHEME_LABEL} の交付申請において、IT導入支援事業者 {providerName} が販売する
         「{TOOL_NAME}」の販売価格設定の理由を説明する目的で作成されたものです。
         記載内容は 2026年4月時点の事業計画に基づき、将来予告なく変更される場合があります。
       </p>
-    </DocumentShell>
+    </TransactDocumentShell>
   )
 }

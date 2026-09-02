@@ -176,10 +176,10 @@ export function TransactSubsidyIndex({
             下記までお気軽にお問い合わせください。
           </p>
           <a
-            href="mailto:transact@juhacchu-l.jp"
+            href="mailto:transact@aigrowthx.pro"
             className="mt-6 inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-3 text-sm font-bold text-white hover:bg-orange-600"
           >
-            補助金活用相談 transact@juhacchu-l.jp
+            補助金活用相談 transact@aigrowthx.pro
           </a>
         </div>
       </section>

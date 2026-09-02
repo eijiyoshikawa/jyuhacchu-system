@@ -121,7 +121,7 @@ export default function TransactLandingPage() {
                   導入までの流れを見る
                 </Link>
                 <a
-                  href="mailto:transact@juhacchu-l.jp"
+                  href="mailto:transact@aigrowthx.pro"
                   className="inline-flex items-center justify-center rounded-sm border border-white/30 bg-white/5 px-6 py-3 text-sm font-bold text-white hover:bg-white/10"
                 >
                   資料請求・導入相談
@@ -284,7 +284,7 @@ export default function TransactLandingPage() {
           </p>
           <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
             <a
-              href="mailto:transact@juhacchu-l.jp"
+              href="mailto:transact@aigrowthx.pro"
               className="inline-flex items-center justify-center rounded-sm bg-white px-6 py-3 text-sm font-bold text-orange-600 hover:bg-orange-50"
             >
               補助金活用について相談する
@@ -329,7 +329,7 @@ export default function TransactLandingPage() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
             <a
-              href="mailto:transact@juhacchu-l.jp"
+              href="mailto:transact@aigrowthx.pro"
               className="inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-3 text-sm font-bold text-white hover:bg-orange-600"
             >
               資料請求・導入相談

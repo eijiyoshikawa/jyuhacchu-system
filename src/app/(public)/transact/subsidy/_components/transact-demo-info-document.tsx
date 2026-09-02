@@ -1,4 +1,4 @@
-import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import { TransactDocumentShell } from "./transact-document-shell"
 import { DSYSTEM_BRAND } from "@/lib/brand"
 
 /** ITツール正式名称。改名時は src/lib/brand.ts のみを直す */
@@ -15,69 +15,17 @@ export function TransactDemoInfoDocument({
   variantSuffix?: string
 }) {
   return (
-    <DocumentShell
+    <TransactDocumentShell
       title="デモ機・テストアカウント情報"
       subtitle={`${SCHEME_LABEL} 申請添付書類`}
       toolName={TOOL_NAME}
       makerName={MAKER_NAME}
+      providerName={providerName}
+      docNo="資料⑤ デモ機・テストアカウント情報"
       indexHref={`/transact/subsidy${variantSuffix}`}
       schemeLabel={SCHEME_LABEL}
       pcode="主Pコード: 共P-02（単独）"
     >
-      <section className="mb-8 avoid-break">
-        <table className="w-full border-collapse text-sm">
-          <tbody>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left w-56 text-sm font-bold">
-                ITツール正式名称
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-xl font-black">
-                {TOOL_NAME}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                開発メーカー名
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-xl font-black">
-                {MAKER_NAME}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                IT導入支援事業者名
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-lg font-bold">
-                {providerName}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                主Pコード
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-base">
-                共P-02（決済・債権債務・資金回収）
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                副Pコード
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-base">
-                設定なし（共P-02 単独申請）
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                申請枠・類型
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-base">
-                インボイス枠（<strong>電子取引類型</strong>）
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
 
       {/* ★ 提出要求項目（①URL ②ID/PW）を1画面で確認できるサマリ */}
       <section className="mb-8 avoid-break">
@@ -130,10 +78,10 @@ export function TransactDemoInfoDocument({
             </thead>
             <tbody>
               {[
-                ["発注側企業 管理者", "admin@sample-trading.co.jp", true],
-                ["発注側企業 発注担当", "tanaka@sample-trading.co.jp", false],
-                ["受注側企業 管理者", "admin@tanaka-service.co.jp", false],
-                ["受注側企業 受注担当", "suzuki@tanaka-service.co.jp", false],
+                ["発注側企業 管理者", "admin@aoba-sangyo.example.jp", true],
+                ["発注側企業 発注担当", "kimura@aoba-sangyo.example.jp", false],
+                ["受注側企業 管理者", "admin@keyaki-koubou.example.jp", false],
+                ["受注側企業 受注担当", "mori@keyaki-koubou.example.jp", false],
               ].map(([role, mail, primary]) => (
                 <tr key={mail as string} className={primary ? "bg-yellow-100" : undefined}>
                   <td className="border-2 border-black px-3 py-2 text-sm font-bold">
@@ -165,7 +113,7 @@ export function TransactDemoInfoDocument({
               「発注管理」「取引先管理」「請求管理」「承認」から、共P-02
               （決済・債権債務・資金回収）に該当する機能をご確認いただけます。
               画面別の具体的な操作手順は <strong>§3</strong> に記載しています。
-              サンプルデータ（発注書 PO-20260407-0001／請求書 INV-20260428-0001／
+              サンプルデータ（発注書 PO-20260422-0101／請求書 INV-20260630-0101／
               取引先3社／招待レコード2件）が登録済みのため、初回ログイン直後から
               実データでご確認いただけます。
             </p>
@@ -268,7 +216,7 @@ export function TransactDemoInfoDocument({
           受注側は「管理者」「受注担当」のロールを有します。
         </p>
 
-        <h3 className="mt-4 mb-2 text-base font-bold">発注側企業（サンプル商事株式会社）</h3>
+        <h3 className="mt-4 mb-2 text-base font-bold">発注側企業（株式会社アオバ産業）</h3>
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr>
@@ -293,7 +241,7 @@ export function TransactDemoInfoDocument({
                 <span className="text-xs">ADMIN</span>
               </td>
               <td className="border-2 border-black px-3 py-2 font-mono text-xs">
-                admin@sample-trading.co.jp
+                admin@aoba-sangyo.example.jp
               </td>
               <td className="border-2 border-black px-3 py-2 font-mono text-base font-bold bg-yellow-200">
                 password123
@@ -308,7 +256,7 @@ export function TransactDemoInfoDocument({
                 <span className="text-xs">CONTRACTOR</span>
               </td>
               <td className="border-2 border-black px-3 py-2 font-mono text-xs">
-                tanaka@sample-trading.co.jp
+                kimura@aoba-sangyo.example.jp
               </td>
               <td className="border-2 border-black px-3 py-2 font-mono text-base font-bold bg-yellow-200">
                 password123
@@ -320,7 +268,7 @@ export function TransactDemoInfoDocument({
           </tbody>
         </table>
 
-        <h3 className="mt-6 mb-2 text-base font-bold">受注側企業（田中サービス株式会社／招待済み）</h3>
+        <h3 className="mt-6 mb-2 text-base font-bold">受注側企業（ケヤキ工房株式会社／招待受諾済み）</h3>
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr>
@@ -345,7 +293,7 @@ export function TransactDemoInfoDocument({
                 <span className="text-xs">ADMIN</span>
               </td>
               <td className="border-2 border-black px-3 py-2 font-mono text-xs">
-                admin@tanaka-service.co.jp
+                admin@keyaki-koubou.example.jp
               </td>
               <td className="border-2 border-black px-3 py-2 font-mono text-base font-bold bg-yellow-200">
                 password123
@@ -360,7 +308,7 @@ export function TransactDemoInfoDocument({
                 <span className="text-xs">SUBCONTRACTOR</span>
               </td>
               <td className="border-2 border-black px-3 py-2 font-mono text-xs">
-                suzuki@tanaka-service.co.jp
+                mori@keyaki-koubou.example.jp
               </td>
               <td className="border-2 border-black px-3 py-2 font-mono text-base font-bold bg-yellow-200">
                 password123
@@ -374,7 +322,7 @@ export function TransactDemoInfoDocument({
 
         <p className="mt-3 text-xs text-slate-600">
           ※ 本テストアカウントは審査確認用の共用環境です。シードデータが投入されており、
-          サンプル発注書（PO-20260407-0001）・サンプル請求書（INV-20260428-0001・
+          サンプル発注書（PO-20260422-0101）・サンプル請求書（INV-20260630-0101・
           電子帳簿保存法タイムスタンプ付与済み）・取引先（3社）・案件（2件）・
           既存招待レコード（受諾済み1件・PENDING1件）等が登録済みです。
           審査期間中の操作・データ追加は自由に行っていただけます。
@@ -412,7 +360,7 @@ export function TransactDemoInfoDocument({
             <tr>
               <td className="border-2 border-black px-2 py-2 text-center font-bold">1</td>
               <td className="border-2 border-black px-2 py-2 text-xs">
-                発注側管理者アカウント（admin@sample-trading.co.jp）でログイン
+                発注側管理者アカウント（admin@aoba-sangyo.example.jp）でログイン
                 → 左メニュー「取引先招待」→ フォーム入力（会社名・担当者メール等）
                 → 「招待URLを発行」ボタンクリック
               </td>
@@ -532,7 +480,7 @@ export function TransactDemoInfoDocument({
         <ul className="list-disc pl-6 text-sm leading-relaxed space-y-1">
           <li>本テストアカウントは <strong>審査確認専用</strong> です。本番運用には使用しません。</li>
           <li>テスト環境内のデータは全てダミーデータです。実在の取引・取引先・金額情報は含まれません。</li>
-          <li>シードデータの会社「サンプル商事株式会社」「田中サービス株式会社」等は架空の事業者です。</li>
+          <li>シードデータの会社「株式会社アオバ産業」「ケヤキ工房株式会社」等は架空の事業者です。</li>
           <li>テストアカウントのパスワード「password123」は審査確認用の簡易パスワードです。本番環境では8文字以上＋大文字・小文字・数字を含むポリシーが適用されます。</li>
           <li>招待URLに含まれるトークンは crypto.randomBytes(24) による推測困難な文字列です。</li>
           <li>通信は全てSSL/TLSにより暗号化されており、HTTPSで保護されています。</li>
@@ -550,13 +498,13 @@ export function TransactDemoInfoDocument({
               <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">
                 技術サポート
               </th>
-              <td className="px-3 py-2 font-mono">support@juhacchu-l.jp</td>
+              <td className="px-3 py-2 font-mono">support@aigrowthx.pro</td>
             </tr>
             <tr className="border-b border-slate-200">
               <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">
                 審査確認窓口
               </th>
-              <td className="px-3 py-2 font-mono">transact@juhacchu-l.jp</td>
+              <td className="px-3 py-2 font-mono">transact@aigrowthx.pro</td>
             </tr>
             <tr className="border-b border-slate-200">
               <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">
@@ -570,6 +518,6 @@ export function TransactDemoInfoDocument({
           ※ 連絡先メールアドレスは仮置きです。本番公開時に確定した窓口に差し替えます。
         </p>
       </section>
-    </DocumentShell>
+    </TransactDocumentShell>
   )
 }

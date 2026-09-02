@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/ui/page-header"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { requireDsystem } from "@/lib/dsystem-guard"
+import { getSession } from "@/lib/auth-helpers"
 import { STANDARD_PLAN } from "@/app/(public)/transact/subsidy/_components/denshi-plans"
 
 export const metadata = {
@@ -22,15 +23,47 @@ export const metadata = {
  */
 export default async function PartnerAccountsPage() {
   await requireDsystem()
+  const session = await getSession()
+  const myCompanyId = session.user.companyId
+
+  // 自社が発行した招待と、自社と実取引のある受注側企業だけを対象にする
+  // （他の発注側企業の取引先が混ざらないようにする）
+  const myInvitations = await prisma.invitation.findMany({
+    where: { inviterCompanyId: myCompanyId },
+    orderBy: { createdAt: "desc" },
+  })
+  const relatedIds = Array.from(
+    new Set([
+      ...myInvitations.map((i) => i.acceptedCompanyId).filter((v): v is string => !!v),
+      ...(
+        await prisma.purchaseOrder.findMany({
+          where: { issuerId: myCompanyId },
+          select: { receiverId: true },
+        })
+      ).map((o) => o.receiverId),
+      ...(
+        await prisma.invoice.findMany({
+          where: { receiverId: myCompanyId },
+          select: { issuerId: true },
+        })
+      ).map((i) => i.issuerId),
+    ])
+  )
 
   const [invitations, subcontractors] = await Promise.all([
-    prisma.invitation.findMany({ orderBy: { createdAt: "desc" } }),
+    Promise.resolve(myInvitations),
     prisma.company.findMany({
-      where: { companyType: "SUBCONTRACTOR" },
+      where: { companyType: "SUBCONTRACTOR", id: { in: relatedIds } },
       include: {
         users: { select: { id: true, name: true, email: true, role: true } },
-        issuedInvoices: { select: { id: true, totalAmount: true, createdAt: true } },
-        receivedOrders: { select: { id: true, totalAmount: true, createdAt: true } },
+        issuedInvoices: {
+          where: { receiverId: myCompanyId },
+          select: { id: true, totalAmount: true, createdAt: true },
+        },
+        receivedOrders: {
+          where: { issuerId: myCompanyId },
+          select: { id: true, totalAmount: true, createdAt: true },
+        },
       },
       orderBy: { createdAt: "asc" },
     }),

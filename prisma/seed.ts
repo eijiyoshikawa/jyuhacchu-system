@@ -314,6 +314,270 @@ async function main() {
     },
   })
 
+  // ══════════════════════════════════════════════════════════
+  // 電子取引くん 専用デモデータ
+  //
+  // 受発注Lシステム（サンプル商事／田中サービス）とデモ企業・アカウントが
+  // 完全に重複していると、審査で「同一システムの二重登録」と見られるため、
+  // 電子取引くん の審査では以下の専用アカウントを案内する。
+  // ※ 会社名・所在地・登録番号はすべて架空のデモデータ。
+  // ══════════════════════════════════════════════════════════
+
+  const dkBuyer = await prisma.company.upsert({
+    where: { code: "DK-GC-001" },
+    update: {},
+    create: {
+      name: "株式会社アオバ産業",
+      code: "DK-GC-001",
+      companyType: "GENERAL_CONTRACTOR",
+      postalCode: "220-0011",
+      address: "神奈川県横浜市西区高島2-10-1",
+      phone: "045-100-2000",
+      email: "info@aoba-sangyo.example.jp",
+      registrationNumber: "T2020304050607",
+    },
+  })
+
+  const dkSeller = await prisma.company.upsert({
+    where: { code: "DK-SC-001" },
+    update: {},
+    create: {
+      name: "ケヤキ工房株式会社",
+      code: "DK-SC-001",
+      companyType: "SUBCONTRACTOR",
+      postalCode: "231-0023",
+      address: "神奈川県横浜市中区山下町5-8",
+      phone: "045-300-4000",
+      email: "info@keyaki-koubou.example.jp",
+      registrationNumber: "T7070808090901",
+    },
+  })
+
+  const dkBuyerAdmin = await prisma.user.upsert({
+    where: { email: "admin@aoba-sangyo.example.jp" },
+    update: { name: "青葉 一郎", role: "ADMIN", companyId: dkBuyer.id },
+    create: {
+      email: "admin@aoba-sangyo.example.jp",
+      name: "青葉 一郎",
+      password: hashedPassword,
+      role: "ADMIN",
+      companyId: dkBuyer.id,
+    },
+  })
+
+  const dkBuyerStaff = await prisma.user.upsert({
+    where: { email: "kimura@aoba-sangyo.example.jp" },
+    update: { name: "木村 二郎", role: "CONTRACTOR", companyId: dkBuyer.id },
+    create: {
+      email: "kimura@aoba-sangyo.example.jp",
+      name: "木村 二郎",
+      password: hashedPassword,
+      role: "CONTRACTOR",
+      companyId: dkBuyer.id,
+    },
+  })
+
+  const dkSellerAdmin = await prisma.user.upsert({
+    where: { email: "admin@keyaki-koubou.example.jp" },
+    update: { name: "欅 三郎", role: "ADMIN", companyId: dkSeller.id },
+    create: {
+      email: "admin@keyaki-koubou.example.jp",
+      name: "欅 三郎",
+      password: hashedPassword,
+      role: "ADMIN",
+      companyId: dkSeller.id,
+    },
+  })
+
+  const dkSellerStaff = await prisma.user.upsert({
+    where: { email: "mori@keyaki-koubou.example.jp" },
+    update: { name: "森 四郎", role: "SUBCONTRACTOR", companyId: dkSeller.id },
+    create: {
+      email: "mori@keyaki-koubou.example.jp",
+      name: "森 四郎",
+      password: hashedPassword,
+      role: "SUBCONTRACTOR",
+      companyId: dkSeller.id,
+    },
+  })
+
+  const dkProject = await prisma.project.upsert({
+    where: { projectCode: "PJ-20260420-0101" },
+    update: {},
+    create: {
+      projectCode: "PJ-20260420-0101",
+      name: "コーポレートサイト全面リニューアル",
+      description: "自社サイトの設計・制作および公開後の運用移行",
+      status: "IN_PROGRESS",
+      companyId: dkBuyer.id,
+      address: "神奈川県横浜市西区高島2-10-1",
+      startDate: new Date("2026-04-20"),
+      endDate: new Date("2026-10-31"),
+    },
+  })
+
+  const dkOrder = await prisma.purchaseOrder.upsert({
+    where: { orderNumber: "PO-20260422-0101" },
+    update: {},
+    create: {
+      orderNumber: "PO-20260422-0101",
+      projectId: dkProject.id,
+      issuerId: dkBuyer.id,
+      receiverId: dkSeller.id,
+      createdById: dkBuyerStaff.id,
+      subject: "コーポレートサイト制作業務",
+      orderType: "業務",
+      status: "ORDERED",
+      subtotal: 1800000,
+      taxRate: 0.1,
+      taxAmount: 180000,
+      totalAmount: 1980000,
+      issuedAt: new Date("2026-04-22"),
+      deliveryDeadline: new Date("2026-08-31"),
+      createdAt: new Date("2026-04-22T01:00:00.000Z"),
+      items: {
+        create: [
+          {
+            itemOrder: 1,
+            name: "サイト設計・ワイヤーフレーム作成",
+            specification: "全28ページ",
+            quantity: 1,
+            unit: "式",
+            unitPrice: 600000,
+            amount: 600000,
+          },
+          {
+            itemOrder: 2,
+            name: "デザイン・実装",
+            specification: "レスポンシブ対応",
+            quantity: 28,
+            unit: "ページ",
+            unitPrice: 40000,
+            amount: 1120000,
+          },
+          {
+            itemOrder: 3,
+            name: "公開作業・運用引継ぎ",
+            specification: "手順書作成含む",
+            quantity: 1,
+            unit: "式",
+            unitPrice: 80000,
+            amount: 80000,
+          },
+        ],
+      },
+    },
+  })
+
+  const dkInvoiceNumber = "INV-20260630-0101"
+  const dkHash = createHash("sha256")
+    .update(
+      JSON.stringify({
+        invoiceNumber: dkInvoiceNumber,
+        issuer: "ケヤキ工房株式会社",
+        receiver: "株式会社アオバ産業",
+        subtotal: 900000,
+        taxAmount: 90000,
+        totalAmount: 990000,
+        confirmedAt: "2026-06-30T00:00:00.000Z",
+      })
+    )
+    .digest("hex")
+
+  await prisma.invoice.upsert({
+    where: { invoiceNumber: dkInvoiceNumber },
+    update: {},
+    create: {
+      invoiceNumber: dkInvoiceNumber,
+      purchaseOrderId: dkOrder.id,
+      projectId: dkProject.id,
+      issuerId: dkSeller.id,
+      receiverId: dkBuyer.id,
+      createdById: dkSellerStaff.id,
+      subject: "コーポレートサイト制作業務（中間金）",
+      status: "SUBMITTED",
+      subtotal: 900000,
+      taxRate: 0.1,
+      taxAmount: 90000,
+      totalAmount: 990000,
+      dueDate: new Date("2026-07-31"),
+      confirmedAt: new Date("2026-06-30T00:00:00.000Z"),
+      confirmedHash: dkHash,
+      createdAt: new Date("2026-06-30T00:00:00.000Z"),
+      items: {
+        create: [
+          {
+            itemOrder: 1,
+            name: "サイト設計・ワイヤーフレーム作成",
+            specification: "全28ページ",
+            quantity: 1,
+            unit: "式",
+            unitPrice: 600000,
+            amount: 600000,
+          },
+          {
+            itemOrder: 2,
+            name: "デザイン・実装（中間金分）",
+            specification: "レスポンシブ対応",
+            quantity: 1,
+            unit: "式",
+            unitPrice: 300000,
+            amount: 300000,
+          },
+        ],
+      },
+    },
+  })
+
+  // 受諾済み招待: ケヤキ工房株式会社が無償アカウントを取得した記録
+  await prisma.invitation.upsert({
+    where: { token: "dk-accepted-4c8e1a2f6b9d3e70" },
+    update: {
+      status: "ACCEPTED",
+      acceptedCompanyId: dkSeller.id,
+      acceptedUserId: dkSellerAdmin.id,
+    },
+    create: {
+      token: "dk-accepted-4c8e1a2f6b9d3e70",
+      inviterCompanyId: dkBuyer.id,
+      inviterUserId: dkBuyerAdmin.id,
+      inviterUserName: "青葉 一郎",
+      invitedCompanyName: "ケヤキ工房株式会社",
+      invitedContactName: "欅 三郎",
+      invitedContactEmail: "admin@keyaki-koubou.example.jp",
+      message:
+        "電子取引くんへご招待します。貴社のご負担なく無償でアカウントを発行いただけます。",
+      status: "ACCEPTED",
+      acceptedCompanyId: dkSeller.id,
+      acceptedUserId: dkSellerAdmin.id,
+      acceptedAt: new Date("2026-04-21T01:00:00.000Z"),
+      expiresAt: new Date("2026-05-20T01:00:00.000Z"),
+      createdAt: new Date("2026-04-20T01:00:00.000Z"),
+    },
+  })
+
+  // 招待中（PENDING）: 招待受諾ページの審査確認用（審査期間中に失効しない期限）
+  await prisma.invitation.upsert({
+    where: { token: "dk-pending-9a3f7c1e5d8b2046" },
+    update: {
+      status: "PENDING",
+      revokedAt: null,
+      expiresAt: new Date("2027-03-31T14:59:59.000Z"),
+    },
+    create: {
+      token: "dk-pending-9a3f7c1e5d8b2046",
+      inviterCompanyId: dkBuyer.id,
+      inviterUserId: dkBuyerAdmin.id,
+      inviterUserName: "青葉 一郎",
+      invitedCompanyName: "株式会社ハルカゼ物流",
+      invitedContactName: "春風 五郎",
+      invitedContactEmail: "harukaze@harukaze-logi.example.jp",
+      message: "電子取引くんのご利用招待です。費用のご負担はありません。",
+      status: "PENDING",
+      expiresAt: new Date("2027-03-31T14:59:59.000Z"),
+    },
+  })
+
   console.log("シードデータを作成しました（冪等: 既存レコードは維持されます）")
   console.log("---")
   console.log("テストアカウント（審査提出用）:")
@@ -324,6 +588,14 @@ async function main() {
   console.log("---")
   console.log("サンプル発注書: PO-20260407-0001 ／ サンプル請求書: INV-20260428-0001")
   console.log("招待レコード: 受諾済み1件・招待中(PENDING)1件")
+  console.log("---")
+  console.log("電子取引くん 専用テストアカウント（審査提出用）:")
+  console.log("発注側 管理者:   admin@aoba-sangyo.example.jp / password123")
+  console.log("発注側 発注担当: kimura@aoba-sangyo.example.jp / password123")
+  console.log("受注側 管理者:   admin@keyaki-koubou.example.jp / password123")
+  console.log("受注側 受注担当: mori@keyaki-koubou.example.jp / password123")
+  console.log("サンプル発注書: PO-20260422-0101 ／ サンプル請求書: INV-20260630-0101")
+  console.log("招待中トークン: dk-pending-9a3f7c1e5d8b2046")
 }
 
 main()

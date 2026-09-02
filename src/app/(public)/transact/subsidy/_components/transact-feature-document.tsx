@@ -1,6 +1,6 @@
 import { DSYSTEM_BRAND } from "@/lib/brand"
 import { DENSHI_PLANS, jpy, yearly } from "./denshi-plans"
-import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import { TransactDocumentShell } from "./transact-document-shell"
 import { ScreenshotPlaceholder } from "@/app/(public)/subsidy/_components/screenshot-placeholder"
 import {
   DENSHI_REQUIREMENTS,
@@ -47,85 +47,62 @@ export function TransactFeatureDocument({
   variantSuffix?: string
 }) {
   return (
-    <DocumentShell
+    <TransactDocumentShell
       title="機能説明資料"
       subtitle={`${SCHEME_LABEL} 申請添付書類`}
       toolName={TOOL_NAME}
       makerName={MAKER_NAME}
+      providerName={providerName}
+      docNo="資料① 機能説明資料"
       indexHref={`/transact/subsidy${variantSuffix}`}
       schemeLabel={SCHEME_LABEL}
       pcode="主Pコード: 共P-02（単独）"
     >
-      {/* Cover page */}
+      {/* Cover page — 識別情報はシェルのマストヘッド表に集約し、
+          ここでは資料の位置づけと Pコードの補足のみを置く */}
       <section className="mb-8 page-break-after avoid-break">
         <div className="border-4 border-black p-6">
-          <p className="text-center text-sm font-bold tracking-[0.4em] mb-2">
-            IT導入補助金 2026 電子取引類型 申請添付書類
+          <p className="text-center text-sm font-bold tracking-[0.4em] mb-4">
+            ＩＴツール登録申請 添付書類
           </p>
-          <h2 className="text-center text-3xl sm:text-4xl font-black tracking-widest border-y-4 border-black py-4 my-4">
-            機 能 説 明 資 料
-          </h2>
-
-          <table className="w-full border-collapse text-sm mt-6">
+          <table className="w-full border-collapse text-sm">
             <tbody>
               <tr>
-                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left w-56 text-sm font-bold">
-                  ITツール正式名称
+                <th className="border-2 border-black px-4 py-3 text-left w-56 text-sm font-bold">
+                  主Ｐコード
                 </th>
-                <td className="border-2 border-black px-4 py-3 text-2xl font-black">
-                  {TOOL_NAME}
-                </td>
-              </tr>
-              <tr>
-                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                  開発メーカー名
-                </th>
-                <td className="border-2 border-black px-4 py-3 text-2xl font-black">
-                  {MAKER_NAME}
-                </td>
-              </tr>
-              <tr>
-                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                  IT導入支援事業者名
-                </th>
-                <td className="border-2 border-black px-4 py-3 text-lg font-bold">
-                  {providerName}
-                </td>
-              </tr>
-              <tr>
-                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                  主Pコード
-                </th>
-                <td className="border-2 border-black px-4 py-3 text-base">
+                <td className="border-2 border-black px-4 py-3 text-base font-black">
                   共P-02（決済・債権債務・資金回収）
                 </td>
               </tr>
               <tr>
-                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                  副Pコード
+                <th className="border-2 border-black px-4 py-3 text-left text-sm font-bold">
+                  副Ｐコード
                 </th>
                 <td className="border-2 border-black px-4 py-3 text-base">
                   設定なし（共P-02 単独申請）
                 </td>
               </tr>
               <tr>
-                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                  申請枠・類型
+                <th className="border-2 border-black px-4 py-3 text-left text-sm font-bold">
+                  補助上限額／補助率
                 </th>
                 <td className="border-2 border-black px-4 py-3 text-base">
-                  インボイス枠（<strong>電子取引類型</strong>）／補助上限 350万円
+                  350万円 ／ 中小企業 2/3・小規模事業者 1/2
                 </td>
               </tr>
               <tr>
-                <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                  版
+                <th className="border-2 border-black px-4 py-3 text-left text-sm font-bold">
+                  ＡＩを用いた機能
                 </th>
-                <td className="border-2 border-black px-4 py-3 text-base">2026年4月 初版</td>
+                <td className="border-2 border-black px-4 py-3 text-base">
+                  搭載なし（生成ＡＩ・生成ＡＩ以外のＡＩ技術のいずれも使用していません）
+                </td>
               </tr>
             </tbody>
           </table>
 
-          <div className="mt-8 border-t-2 border-black pt-4">
+          <div className="mt-8 border-t-4 border-black pt-4">
             <p className="text-xs leading-relaxed">
               本資料は、{SCHEME_LABEL} の ITツール登録申請における「機能説明資料」として、
               IT導入支援事業者 {providerName} が、開発メーカー {MAKER_NAME} が提供するITツール
@@ -150,7 +127,7 @@ export function TransactFeatureDocument({
                 { no: "★0-1", label: "電子取引類型 必須要件 対応説明（招待型 電子取引プラットフォーム）", page: "P.6〜7" },
                 { no: "★0-2", label: "本ITツールは「受発注機能」を有します（会計／受発注／決済の有無）", page: "P.8" },
                 { no: "★0-3", label: "売り手側機能・買い手側機能を両方有することの明示（電子取引類型 必須要件）", page: "P.9〜10" },
-                { no: "★0-4", label: "画面キャプチャ 一覧（全10点・買い手側／売り手側）", page: "P.11" },
+                { no: "★0-4", label: "画面キャプチャ 一覧（全12点・買い手側／売り手側）", page: "P.11" },
                 { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.12" },
                 { no: "2", label: "解決する業務課題と導入効果（受注側企業を無償招待し電子化を推進）", page: "P.12" },
                 { no: "★3", label: "機能詳細（3-1 招待管理／3-2 発注／3-3 取引先／3-4 請求／3-5 インボイス／3-6 電帳法／3-7 承認／3-8 監査／3-9 受注側企業の画面／3-10 アカウント利用状況／3-11 電子取引アーカイブ）", page: "P.13〜24" },
@@ -1151,7 +1128,7 @@ export function TransactFeatureDocument({
         </div>
         <p className="mb-3 text-sm leading-relaxed">
           以下は、招待を受けた<strong>受注側企業（売り手側）の無償アカウント</strong>
-          （田中サービス株式会社／受注担当 鈴木 三郎）でログインした実画面です。
+          （ケヤキ工房株式会社／受注担当 森 四郎）でログインした実画面です。
           発注側企業（買い手側）とは<strong>メニュー・操作権限・データ参照範囲が分離</strong>されており、
           受注側企業は自社が受領した発注書と、自社が発行する請求書のみを扱います。
         </p>
@@ -1543,9 +1520,9 @@ export function TransactFeatureDocument({
         <table className="w-full border-collapse text-sm">
           <tbody>
             {[
-              ["導入相談・見積", "sales@juhacchu-l.jp"],
-              ["IT導入補助金 相談", "transact@juhacchu-l.jp"],
-              ["技術サポート", "support@juhacchu-l.jp"],
+              ["導入相談・見積", "sales@aigrowthx.pro"],
+              ["IT導入補助金 相談", "transact@aigrowthx.pro"],
+              ["技術サポート", "support@aigrowthx.pro"],
             ].map(([k, v]) => (
               <tr key={k} className="border-b border-slate-200">
                 <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">{k}</th>
@@ -1558,6 +1535,6 @@ export function TransactFeatureDocument({
           ※ 連絡先は仮置きです。正式公開時に確定した窓口に差し替えます。
         </p>
       </section>
-    </DocumentShell>
+    </TransactDocumentShell>
   )
 }

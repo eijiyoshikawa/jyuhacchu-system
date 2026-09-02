@@ -12,7 +12,7 @@ import {
   yearly,
   yen,
 } from "./denshi-plans"
-import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import { TransactDocumentShell, TransactSection } from "./transact-document-shell"
 import {
   DENSHI_REQUIREMENTS,
   DenshiRequirementTableForPricing,
@@ -78,23 +78,6 @@ const CASE_STUDIES: CaseStudy[] = [
   },
 ]
 
-function Section({
-  label,
-  children,
-}: {
-  label: string
-  children: React.ReactNode
-}) {
-  return (
-    <section className="mb-8 avoid-break">
-      <h2 className="mb-4 text-xl font-black border-l-4 border-black pl-3">
-        【{label}】
-      </h2>
-      <div className="pl-2">{children}</div>
-    </section>
-  )
-}
-
 export function TransactPricingDocument({
   providerName,
   variantSuffix = "",
@@ -104,54 +87,18 @@ export function TransactPricingDocument({
   variantSuffix?: string
 }) {
   return (
-    <DocumentShell
+    <TransactDocumentShell
       title="価格説明資料"
       subtitle={`${SCHEME_LABEL} 申請添付書類`}
       toolName={TOOL_NAME}
       makerName={MAKER_NAME}
+      providerName={providerName}
+      docNo="資料② 価格説明資料"
       indexHref={`/transact/subsidy${variantSuffix}`}
       schemeLabel={SCHEME_LABEL}
       pcode="主Pコード: 共P-02（単独）"
     >
       {/* Cover identification block */}
-      <section className="mb-8 avoid-break">
-        <table className="w-full border-collapse text-sm">
-          <tbody>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left w-56 text-sm font-bold">
-                ITツール正式名称
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-xl font-black">
-                {TOOL_NAME}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                開発メーカー名
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-xl font-black">
-                {MAKER_NAME}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                IT導入支援事業者名
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-lg font-bold">
-                {providerName}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                申請枠・類型
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-base">
-                インボイス枠（<strong>電子取引類型</strong>）／補助上限 350万円／補助率 中小企業 2/3
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
 
       {/* ★ 電子取引類型 補助対象要件 適合表 — 価格・契約条件の面からの適合を明示 */}
       <section className="mb-8 page-break-before">
@@ -284,15 +231,15 @@ export function TransactPricingDocument({
         </ul>
       </section>
 
-      <Section label="IT導入支援事業者名">
+      <TransactSection label="IT導入支援事業者名">
         <p className="text-base">{providerName}</p>
-      </Section>
+      </TransactSection>
 
-      <Section label="ITツール名">
+      <TransactSection label="ITツール名">
         <p className="text-base">{TOOL_NAME}</p>
-      </Section>
+      </TransactSection>
 
-      <Section label="ITツールの価格">
+      <TransactSection label="ITツールの価格">
         <p className="text-base font-bold mb-4">
           プラン展開は3プラン（標準／ミドル／最小）
         </p>
@@ -403,9 +350,9 @@ export function TransactPricingDocument({
             </li>
           </ul>
         </div>
-      </Section>
+      </TransactSection>
 
-      <Section label="導入事例・実績">
+      <TransactSection label="導入事例・実績">
         <table className="w-full border-collapse text-sm mb-4">
           <tbody>
             <tr>
@@ -498,9 +445,9 @@ export function TransactPricingDocument({
             契約に応じたカスタマイズ開発・スクラッチ開発は行いません。
           </p>
         </div>
-      </Section>
+      </TransactSection>
 
-      <Section label="補助金活用時の自己負担額イメージ">
+      <TransactSection label="補助金活用時の自己負担額イメージ">
         <p className="mb-4 text-sm leading-relaxed">
           デジタル化・AI導入補助金2026 インボイス枠 <strong>電子取引類型</strong> を活用した場合の、
           {TOOL_NAME}導入時の自己負担額のイメージは以下のとおりです。
@@ -554,32 +501,32 @@ export function TransactPricingDocument({
           最新の公募要領（中小機構 デジタル化・AI導入補助金ポータルサイト）でご確認ください。
           上表の金額は本ソフトウェア（カテゴリー1）の年間利用料のみを対象としています。
         </p>
-      </Section>
+      </TransactSection>
 
-      <Section label="お問い合わせ">
+      <TransactSection label="お問い合わせ">
         <table className="w-full border-collapse text-sm">
           <tbody>
             <tr className="border-b border-slate-200">
               <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">
                 料金・導入相談
               </th>
-              <td className="px-3 py-2 font-mono">sales@juhacchu-l.jp</td>
+              <td className="px-3 py-2 font-mono">sales@aigrowthx.pro</td>
             </tr>
             <tr className="border-b border-slate-200">
               <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">
                 補助金活用相談
               </th>
-              <td className="px-3 py-2 font-mono">transact@juhacchu-l.jp</td>
+              <td className="px-3 py-2 font-mono">transact@aigrowthx.pro</td>
             </tr>
             <tr className="border-b border-slate-200">
               <th className="w-40 bg-slate-50 px-3 py-2 text-left text-xs font-bold">
                 請求・契約関連
               </th>
-              <td className="px-3 py-2 font-mono">billing@juhacchu-l.jp</td>
+              <td className="px-3 py-2 font-mono">billing@aigrowthx.pro</td>
             </tr>
           </tbody>
         </table>
-      </Section>
-    </DocumentShell>
+      </TransactSection>
+    </TransactDocumentShell>
   )
 }

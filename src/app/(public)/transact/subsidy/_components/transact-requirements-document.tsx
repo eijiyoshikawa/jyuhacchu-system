@@ -1,5 +1,5 @@
 import { DSYSTEM_BRAND } from "@/lib/brand"
-import { DocumentShell } from "@/app/(public)/subsidy/_components/document-shell"
+import { TransactDocumentShell } from "./transact-document-shell"
 import {
   DENSHI_REQUIREMENTS,
   SCHEME_NOTE_TITLE,
@@ -19,53 +19,17 @@ export function TransactRequirementsDocument({
   variantSuffix?: string
 }) {
   return (
-    <DocumentShell
+    <TransactDocumentShell
       title="その他要件の説明資料"
       subtitle={`Pコード選択 ／ 電子取引類型 要件適合 ／ 付随要件の対応状況`}
       toolName={TOOL_NAME}
       makerName={MAKER_NAME}
+      providerName={providerName}
+      docNo="資料④ その他要件説明資料"
       indexHref={`/transact/subsidy${variantSuffix}`}
       schemeLabel={SCHEME_LABEL}
       pcode="主Pコード: 共P-02（単独）"
     >
-      <section className="mb-8 avoid-break">
-        <table className="w-full border-collapse text-sm">
-          <tbody>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left w-56 text-sm font-bold">
-                ITツール正式名称
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-xl font-black">
-                {TOOL_NAME}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                開発メーカー名
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-xl font-black">
-                {MAKER_NAME}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                IT導入支援事業者名
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-lg font-bold">
-                {providerName}
-              </td>
-            </tr>
-            <tr>
-              <th className="border-2 border-black bg-black text-white px-4 py-3 text-left text-sm font-bold">
-                申請枠・類型
-              </th>
-              <td className="border-2 border-black px-4 py-3 text-base">
-                インボイス枠（<strong>電子取引類型</strong>）／補助上限 350万円／補助率 中小企業 2/3
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
 
       {/* 1. P-Code Selection */}
       <section className="mb-8">
@@ -437,6 +401,6 @@ export function TransactRequirementsDocument({
           <li>みらデジ経営チェック — 中小機構 みらデジ</li>
         </ul>
       </section>
-    </DocumentShell>
+    </TransactDocumentShell>
   )
 }
