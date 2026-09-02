@@ -207,6 +207,28 @@ export function TransactDemoInfoDocument({
             </tr>
             <tr>
               <th className="border-2 border-black bg-slate-100 px-3 py-2 text-left text-sm font-bold">
+                アカウント利用状況URL
+              </th>
+              <td className="border-2 border-black px-3 py-2 font-mono text-sm">
+                https://dlsystem.aigrowthx.pro/partners/accounts<br />
+                <span className="text-xs text-slate-500">
+                  ※ 発行済み受注側アカウントの一覧・インボイス管理番号・発行上限の消化状況（本ITツール固有機能）
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-slate-100 px-3 py-2 text-left text-sm font-bold">
+                電子取引アーカイブURL
+              </th>
+              <td className="border-2 border-black px-3 py-2 font-mono text-sm">
+                https://dlsystem.aigrowthx.pro/archive<br />
+                <span className="text-xs text-slate-500">
+                  ※ 電子帳簿保存法 検索要件3項目（取引年月日・取引金額・取引先）での横断検索（本ITツール固有機能）
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-slate-100 px-3 py-2 text-left text-sm font-bold">
                 招待受諾ページURL
               </th>
               <td className="border-2 border-black px-3 py-2 font-mono text-sm">

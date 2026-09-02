@@ -5,34 +5,8 @@ import { usePathname } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { cn } from "@/lib/utils"
 import { useSystemBrand } from "@/components/use-system-brand"
-import {
-  LayoutDashboard,
-  FileText,
-  Building2,
-  FolderOpen,
-  Receipt,
-  ClipboardCheck,
-  ScrollText,
-  Settings,
-  Users,
-  Mail,
-} from "lucide-react"
-
-const navigation = [
-  { name: "ダッシュボード", href: "/", icon: LayoutDashboard },
-  { name: "案件管理", href: "/projects", icon: FolderOpen },
-  { name: "発注管理", href: "/orders", icon: FileText },
-  { name: "請求管理", href: "/invoices", icon: Receipt },
-  { name: "承認", href: "/approvals", icon: ClipboardCheck },
-  { name: "取引先管理", href: "/partners", icon: Building2 },
-  { name: "取引先招待", href: "/partners/invite", icon: Mail },
-  { name: "設定", href: "/settings", icon: Settings },
-]
-
-const adminNavigation = [
-  { name: "監査ログ", href: "/admin/audit-logs", icon: ScrollText },
-  { name: "ユーザー管理", href: "/admin/users", icon: Users },
-]
+import { BrandWordmark } from "@/components/layout/brand-wordmark"
+import { adminNavigation, isNavActive, navigation, visibleNav } from "@/components/layout/nav-items"
 
 interface SidebarProps {
   onNavigate?: () => void
@@ -48,15 +22,12 @@ export function Sidebar({ onNavigate }: SidebarProps) {
     <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
       <div className="flex h-14 items-center border-b border-gray-200 px-6">
         <h1 className="text-lg font-bold text-gray-900">
-          {brand.logoBase}<span className="text-orange-500">{brand.logoAccent}</span>{brand.logoSuffix}
+          <BrandWordmark />
         </h1>
       </div>
       <nav className="flex-1 space-y-0.5 px-3 py-4">
-        {navigation.map((item) => {
-          const isActive =
-            item.href === "/"
-              ? pathname === "/"
-              : pathname.startsWith(item.href)
+        {visibleNav(navigation, brand.key).map((item) => {
+          const isActive = isNavActive(pathname, item.href)
           return (
             <Link
               key={item.name}
@@ -82,7 +53,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
               管理者メニュー
             </div>
             {adminNavigation.map((item) => {
-              const isActive = pathname.startsWith(item.href)
+              const isActive = isNavActive(pathname, item.href)
               return (
                 <Link
                   key={item.name}
