@@ -10,35 +10,42 @@ const DOCUMENTS = [
     label: `機能説明資料（${TOOL_NAME}）`,
     description:
       "招待型アカウント発行、発注書・請求書の電子授受、電子取引データ保存、承認ワークフロー等、補助金審査に必要な機能詳細を体系的に記載。",
-    pages: "約 12〜14 ページ",
+    pages: "30 ページ",
   },
   {
     href: "/transact/subsidy/pricing" as const,
     label: `価格説明資料（${TOOL_NAME}）`,
     description:
       "IT導入補助金 電子取引類型（補助上限額 350万円）の申請様式に準拠した標準価格・最小価格・導入事例。",
-    pages: "約 3〜4 ページ",
+    pages: "8 ページ",
+  },
+  {
+    href: "/transact/subsidy/price-list" as const,
+    label: `料金表（別添）（${TOOL_NAME}）`,
+    description:
+      "ITツール登録の手引き 3-5 ❼「料金表・カタログ・プラン一覧等を別添する」に対応する別添資料。プラン一覧・価格・プラン別上限・補助対象経費の目安を記載。",
+    pages: "約 2 ページ",
   },
   {
     href: "/transact/subsidy/pricing/rationale" as const,
     label: `申請価格理由書（${TOOL_NAME}）`,
     description:
       "標準価格の設定理由・開発費用の回収計画・希少性・類似ITツール比較を記載した PDF 添付用ファイル。",
-    pages: "約 6〜8 ページ",
+    pages: "7 ページ",
   },
   {
     href: "/transact/subsidy/requirements" as const,
     label: `その他要件の説明資料（${TOOL_NAME}）`,
     description:
       "Pコード選択、電子取引類型 特有の要件（招待型・両社間電子取引プラットフォーム）対応、SECURITY ACTION・GビズID対応状況を記載。",
-    pages: "約 5〜6 ページ",
+    pages: "5 ページ",
   },
   {
     href: "/transact/subsidy/demo-info" as const,
     label: `デモ機・テストアカウント情報（${TOOL_NAME}）`,
     description:
       "審査確認用のサービスログインURL、招待発行〜受諾フローの動作確認手順、ロール別テストアカウント情報を記載。",
-    pages: "約 4〜5 ページ",
+    pages: "6 ページ",
   },
   {
     href: "/transact/subsidy/invoice-sample" as const,
@@ -62,13 +69,13 @@ export function TransactSubsidyIndex({
       {/* Hero */}
       <section className="bg-[#0f1e2e] text-white py-16">
         <div className="mx-auto max-w-5xl px-6">
-          <div className="mb-3 inline-block rounded-full bg-orange-500 px-3 py-1 text-xs font-bold">
+          <div className="mb-3 inline-block rounded-full bg-teal-600 px-3 py-1 text-xs font-bold">
             IT導入補助金 2026 インボイス枠 電子取引類型 対応
           </div>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight">
             IT導入補助金 申請資料
             <br />
-            <span className="text-orange-400">{TOOL_NAME}</span>
+            <span className="text-teal-300">{TOOL_NAME}</span>
           </h1>
           <p className="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed">
             デジタル化・AI導入補助金2026「インボイス枠（電子取引類型）」の申請に必要な
@@ -98,7 +105,7 @@ export function TransactSubsidyIndex({
               <dd>インボイス枠</dd>
               <dt className="font-bold text-slate-700">類型</dt>
               <dd>
-                <strong className="text-orange-600">電子取引類型</strong>
+                <strong className="text-teal-700">電子取引類型</strong>
               </dd>
               <dt className="font-bold text-slate-700">補助上限額</dt>
               <dd>最大 350万円（下限 なし）</dd>
@@ -177,7 +184,7 @@ export function TransactSubsidyIndex({
           </p>
           <a
             href="mailto:transact@aigrowthx.pro"
-            className="mt-6 inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-3 text-sm font-bold text-white hover:bg-orange-600"
+            className="mt-6 inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-sm font-bold text-white hover:bg-teal-700"
           >
             補助金活用相談 transact@aigrowthx.pro
           </a>

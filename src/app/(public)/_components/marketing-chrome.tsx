@@ -55,7 +55,7 @@ export function MarketingChrome({
       <header className="print-hide border-b border-slate-200 bg-white sticky top-0 z-10">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
           <Link href={homeHref} className="text-lg font-black tracking-tight text-slate-900">
-            {b.logoBase}<span className="text-orange-500">{b.logoAccent}</span>{b.logoSuffix}
+            {b.logoBase}<span className={b.theme.accentText}>{b.logoAccent}</span>{b.logoSuffix}
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
             {navLinks.map((l) => (
@@ -65,7 +65,7 @@ export function MarketingChrome({
             ))}
             <Link
               href="/auth/login"
-              className="rounded-sm bg-orange-500 px-4 py-2 text-white hover:bg-orange-600"
+              className={`px-4 py-2 ${isD ? "rounded-lg" : "rounded-sm"} ${b.theme.primaryButton}`}
             >
               ログイン
             </Link>
@@ -80,7 +80,7 @@ export function MarketingChrome({
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
               <p className="text-base font-bold text-slate-900">
-                {b.logoBase}<span className="text-orange-500">{b.logoAccent}</span>{b.logoSuffix}
+                {b.logoBase}<span className={b.theme.accentText}>{b.logoAccent}</span>{b.logoSuffix}
               </p>
               <p className="mt-2 text-xs">{tagline}</p>
               <p className="mt-4 text-xs">
