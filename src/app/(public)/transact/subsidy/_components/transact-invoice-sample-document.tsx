@@ -126,7 +126,7 @@ export function TransactInvoiceSampleDocument({
           </p>
         </div>
 
-        <div className="mt-4 rounded border border-orange-200 bg-orange-50 p-4 text-xs leading-relaxed">
+        <div className="mt-4 rounded border border-teal-200 bg-teal-50 p-4 text-xs leading-relaxed">
           <p className="font-bold mb-1">適格請求書の必要記載事項チェック</p>
           <ul className="list-disc pl-5 space-y-0.5">
             <li>① 発行者（適格請求書発行事業者）の氏名又は名称および登録番号</li>
@@ -163,7 +163,7 @@ export function TransactInvoiceSampleDocument({
           <p>〒{sample.issuer.postal}</p>
           <p>{sample.issuer.address}</p>
           <p>TEL: {sample.issuer.tel}</p>
-          <p className="mt-1 rounded bg-orange-100 inline-block px-2 py-0.5 font-bold text-orange-800">
+          <p className="mt-1 rounded bg-teal-100 inline-block px-2 py-0.5 font-bold text-teal-800">
             登録番号: {sample.issuer.registrationNumber}
           </p>
         </div>

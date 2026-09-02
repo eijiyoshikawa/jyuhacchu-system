@@ -704,7 +704,7 @@ export function TransactFeatureDocument({
 
       {/* 2. Problem & Benefit */}
       <section className="mb-8 avoid-break">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           2. 解決する業務課題と導入効果
         </h2>
         <table className="w-full border-collapse text-sm">
@@ -763,7 +763,7 @@ export function TransactFeatureDocument({
 
       {/* 3-1. 招待管理機能 */}
       <section className="page-break-before mb-8">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           3. 機能詳細
         </h2>
 
@@ -1425,7 +1425,7 @@ export function TransactFeatureDocument({
 
       {/* 6. Tech stack */}
       <section className="mb-8 avoid-break page-break-before">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           6. 技術仕様
         </h2>
         <table className="w-full border-collapse text-sm">
@@ -1454,7 +1454,7 @@ export function TransactFeatureDocument({
 
       {/* 7. Process flow */}
       <section className="mb-8 avoid-break">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           7. 導入プロセス
         </h2>
         <table className="w-full border-collapse text-sm">
@@ -1489,7 +1489,7 @@ export function TransactFeatureDocument({
 
       {/* 8. Support */}
       <section className="mb-8 avoid-break">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           8. サポート体制
         </h2>
         <table className="w-full border-collapse text-sm">
@@ -1514,7 +1514,7 @@ export function TransactFeatureDocument({
 
       {/* 9. Contact */}
       <section className="mb-4 avoid-break">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           9. お問い合わせ
         </h2>
         <table className="w-full border-collapse text-sm">

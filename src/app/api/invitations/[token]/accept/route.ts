@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs"
 import { prisma } from "@/lib/prisma"
 import { apiError, apiSuccess, validateBody } from "@/lib/api-helpers"
 import { invitationAcceptSchema } from "@/lib/validations/invitation"
+import { dsystemApiGuard } from "@/lib/dsystem-guard"
 
 interface RouteContext {
   params: Promise<{ token: string }>
@@ -15,6 +16,10 @@ interface RouteContext {
  * 受注企業側は費用ゼロ（本フローに課金要素なし）
  */
 export async function POST(req: NextRequest, ctx: RouteContext) {
+  // 招待APIは 電子取引くん 固有機能
+  const guard = await dsystemApiGuard()
+  if (guard) return guard
+
   const { token } = await ctx.params
   const invitation = await prisma.invitation.findUnique({ where: { token } })
   if (!invitation) return apiError("招待が見つかりません", 404)

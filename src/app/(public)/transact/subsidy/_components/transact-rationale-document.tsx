@@ -268,33 +268,33 @@ export function TransactRationaleDocument({
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-orange-50">
-                <td className="border border-slate-300 px-2 py-2 font-bold text-orange-700">
+              <tr className="bg-teal-50">
+                <td className="border border-slate-300 px-2 py-2 font-bold text-teal-700">
                   {TOOL_NAME}<br />（本ツール／標準）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-right font-mono font-bold">
                   {yen(yearly(STANDARD_PLAN))}
                 </td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">無料</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">無料</td>
               </tr>
-              <tr className="bg-orange-50">
-                <td className="border border-slate-300 px-2 py-2 font-bold text-orange-700">
+              <tr className="bg-teal-50">
+                <td className="border border-slate-300 px-2 py-2 font-bold text-teal-700">
                   {TOOL_NAME}<br />（本ツール／最小）
                 </td>
                 <td className="border border-slate-300 px-2 py-2 text-right font-mono font-bold">
                   ¥1,800,000
                 </td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">◎</td>
-                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-orange-700">無料</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">◎</td>
+                <td className="border border-slate-300 px-2 py-2 text-center font-bold text-teal-700">無料</td>
               </tr>
               <tr>
                 <td className="border border-slate-300 px-2 py-2 font-bold">

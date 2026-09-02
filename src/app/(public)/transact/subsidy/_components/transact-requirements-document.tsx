@@ -33,7 +33,7 @@ export function TransactRequirementsDocument({
 
       {/* 1. P-Code Selection */}
       <section className="mb-8">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           1. Pコード 選択一覧
         </h2>
         <p className="mb-4 text-sm leading-relaxed">
@@ -78,7 +78,7 @@ export function TransactRequirementsDocument({
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">—</td>
             </tr>
-            <tr className="bg-orange-50">
+            <tr className="bg-teal-50">
               <td className="border border-slate-300 px-2 py-2 align-top font-mono font-bold">
                 共P-02
               </td>
@@ -88,7 +88,7 @@ export function TransactRequirementsDocument({
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
                 発注・仕入管理、買掛・支払管理、受注・売上請求管理、売掛・回収管理、電子記録債権・手形管理、採算管理
               </td>
-              <td className="border border-slate-300 px-2 py-2 align-top text-center font-black text-orange-600">
+              <td className="border border-slate-300 px-2 py-2 align-top text-center font-black text-teal-700">
                 ✓<br />主
               </td>
               <td className="border border-slate-300 px-2 py-2 align-top text-[11px]">
@@ -171,7 +171,7 @@ export function TransactRequirementsDocument({
 
       {/* 2. Denshi-torihiki-type requirements */}
       <section className="mb-8 page-break-before">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           2. 電子取引類型 機能要件への適合
         </h2>
         <div className="mb-4 border-4 border-black p-4">
@@ -265,7 +265,7 @@ export function TransactRequirementsDocument({
             ].map(([k, mark, v]) => (
               <tr key={k}>
                 <td className="border border-slate-300 px-3 py-2 align-top">{k}</td>
-                <td className="border border-slate-300 px-3 py-2 align-top text-center font-bold text-orange-600">
+                <td className="border border-slate-300 px-3 py-2 align-top text-center font-bold text-teal-700">
                   {mark}
                 </td>
                 <td className="border border-slate-300 px-3 py-2 align-top text-xs">{v}</td>
@@ -277,7 +277,7 @@ export function TransactRequirementsDocument({
 
       {/* 3. Applicant-side requirements */}
       <section className="mb-8 avoid-break">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           3. 交付申請者（中小企業・小規模事業者）側で必要な要件
         </h2>
         <p className="mb-3 text-sm leading-relaxed">
@@ -331,7 +331,7 @@ export function TransactRequirementsDocument({
 
       {/* 4. Security */}
       <section className="mb-8 avoid-break">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           4. セキュリティ・信頼性の対応状況
         </h2>
         <table className="w-full border-collapse text-sm">
@@ -382,7 +382,7 @@ export function TransactRequirementsDocument({
 
       {/* 5. References */}
       <section className="mb-4 avoid-break">
-        <h2 className="mb-3 border-l-4 border-orange-500 pl-3 text-lg font-bold">
+        <h2 className="mb-3 border-l-4 border-teal-700 pl-3 text-lg font-bold">
           5. 根拠資料・参照先
         </h2>
         <ul className="list-disc pl-6 space-y-1 text-xs leading-relaxed">

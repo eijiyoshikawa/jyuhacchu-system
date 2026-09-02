@@ -1,4 +1,10 @@
 import Link from "next/link"
+import {
+  DENSHI_PLANS,
+  STANDARD_PLAN,
+  jpy,
+  yearly,
+} from "@/app/(public)/transact/subsidy/_components/denshi-plans"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -76,7 +82,7 @@ const FAQ = [
   },
   {
     q: "既存の取引先が多数いるのですが、まとめて招待できますか？",
-    a: "はい。CSVによる一括招待機能を提供予定です。既存の取引先マスタから招待対象を選択し、一括で招待メールを送付できます。",
+    a: "招待は1社ずつ発行しますが、発行できる件数に制限はありません（契約プランの上限数まで）。発行済みの招待は一覧でステータス（招待中／受諾済／取消／期限切れ）を管理でき、取消も行えます。",
   },
   {
     q: "解約時のデータはどうなりますか？",
@@ -87,125 +93,131 @@ const FAQ = [
 export default function TransactLandingPage() {
   return (
     <div className="text-slate-900">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0f1e2e] text-white">
-        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
-            <div className="lg:col-span-3 space-y-6">
-              <div className="flex flex-wrap gap-2 text-xs font-bold">
-                <span className="rounded-full bg-orange-500 px-3 py-1 text-white">
-                  IT導入補助金 2026 電子取引類型 対応
-                </span>
-                <span className="rounded-full bg-white/10 px-3 py-1 text-white">
-                  招待型・受注企業は完全無償
-                </span>
-                <span className="rounded-full bg-white/10 px-3 py-1 text-white">
-                  電子帳簿保存法対応
-                </span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight">
-                取引先を招待するだけで、<br />
-                商取引を電子化。
-              </h1>
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-                発注書・請求書の授受を紙とメールから解放。<br />
-                発注側企業が取引先を招待し、受注企業は無償でアカウント発行。
-                <strong className="text-orange-400">両社間の電子取引を一気通貫でデジタル化</strong>する
-                クラウド型プラットフォーム。
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="#flow"
-                  className="inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-3 text-sm font-bold text-white hover:bg-orange-600"
-                >
-                  導入までの流れを見る
-                </Link>
-                <a
-                  href="mailto:transact@aigrowthx.pro"
-                  className="inline-flex items-center justify-center rounded-sm border border-white/30 bg-white/5 px-6 py-3 text-sm font-bold text-white hover:bg-white/10"
-                >
-                  資料請求・導入相談
-                </a>
-              </div>
-            </div>
-            <div className="lg:col-span-2">
-              <div className="rounded-lg bg-white/5 border border-white/10 p-5 text-sm">
-                <p className="mb-3 text-xs uppercase tracking-widest text-orange-400 font-bold">
-                  Invitation Flow
-                </p>
-                <div className="space-y-3">
-                  <div className="rounded-md bg-white/5 border border-white/10 p-3">
-                    <p className="text-[10px] text-orange-300 font-bold">発注側企業</p>
-                    <p className="text-white text-sm mt-1">取引先を招待</p>
-                    <p className="text-slate-400 text-xs">会社名・メール入力 → URL発行</p>
-                  </div>
-                  <div className="text-center text-orange-400">↓ 招待URL送付</div>
-                  <div className="rounded-md bg-orange-500/10 border border-orange-500/40 p-3">
-                    <p className="text-[10px] text-orange-300 font-bold">受注側企業（無償）</p>
-                    <p className="text-white text-sm mt-1">アカウント作成</p>
-                    <p className="text-slate-400 text-xs">費用負担ゼロで利用開始</p>
-                  </div>
-                  <div className="text-center text-orange-400">↓</div>
-                  <div className="rounded-md bg-white/5 border border-white/10 p-3">
-                    <p className="text-[10px] text-orange-300 font-bold">電子取引成立</p>
-                    <p className="text-white text-sm mt-1">発注書・請求書の電子授受</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem Statement */}
-      <section className="bg-slate-50 py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-center text-2xl sm:text-3xl font-black mb-10">
-            紙とメールの取引で、こんな課題ありませんか？
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                h: "取引先ごとにフォーマット違い",
-                p: "発注書・請求書のフォーマットが取引先ごとにバラバラ。転記ミス・確認漏れ・催促連絡が絶えない。",
-              },
-              {
-                h: "受注側の導入コスト問題",
-                p: "自社が電子化しても、取引先（受注側）が費用負担できないため電子化が進まず、結局紙運用が残る。",
-              },
-              {
-                h: "電子帳簿保存法の未対応",
-                p: "2024年1月に電子取引データの電子保存が義務化。紙・PDFメールのままでは要件を満たせない。",
-              },
-            ].map((c) => (
-              <div key={c.h} className="rounded-lg border border-slate-200 bg-white p-6">
-                <h3 className="mb-2 font-bold text-slate-900">{c.h}</h3>
-                <p className="text-sm leading-relaxed text-slate-600">{c.p}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-10 text-center text-base text-slate-700">
-            これらの課題を、<strong className="text-orange-600">受注側企業に費用負担を求めず</strong>
-            解決するために設計したのが「電子取引くん」です。
-          </p>
-        </div>
-      </section>
-
-      {/* Flow */}
-      <section id="flow" className="py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-500">Flow</p>
-            <h2 className="mt-2 text-2xl sm:text-3xl font-black">導入までの4ステップ</h2>
-            <p className="mt-3 text-sm text-slate-600">
-              招待→受諾→電子取引開始まで、最短即日
+      {/* ── Hero: 左コピー + 右に招待フローのミニカード ── */}
+      <section className="bg-slate-950 text-white">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-24">
+          <div>
+            <p className="inline-block border border-teal-400/60 px-3 py-1 text-[11px] font-bold tracking-widest text-teal-300">
+              インボイス枠 電子取引類型 対応ITツール
             </p>
+            <h1 className="mt-5 text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
+              取引先を<span className="text-teal-300">無償で招待</span>して、
+              <br />
+              発注から請求までを電子化する。
+            </h1>
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
+              発注側企業が取引先（受注側企業）に無償でアカウントを発行し、
+              発注書・請求書を両社間で電子的に授受できるクラウド型の電子取引プラットフォームです。
+              受注側企業の費用負担はありません。
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="#flow"
+                className="rounded-lg bg-teal-500 px-6 py-3 text-sm font-bold text-slate-950 hover:bg-teal-400"
+              >
+                導入の流れを見る
+              </Link>
+              <Link
+                href="mailto:sales@aigrowthx.pro"
+                className="rounded-lg border border-slate-600 px-6 py-3 text-sm font-bold text-white hover:bg-slate-800"
+              >
+                資料請求・お問い合わせ
+              </Link>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {FLOW.map((f) => (
-              <div key={f.step} className="rounded-lg border border-slate-200 bg-white p-6">
-                <p className="text-xs font-bold text-orange-500">{f.step}</p>
-                <h3 className="mt-2 text-base font-bold text-slate-900">{f.title}</h3>
+
+          <div className="rounded-2xl border border-slate-700 bg-slate-900 p-6">
+            <p className="text-xs font-bold tracking-widest text-teal-300">招待から電子取引まで</p>
+            <ol className="mt-4 space-y-4">
+              {[
+                ["発注側が招待URLを発行", "取引先の会社名とメールアドレスを入力するだけ"],
+                ["受注側が受諾・アカウント作成", "費用負担ゼロ。ブラウザだけで完了"],
+                ["両社間で発注書・請求書を授受", "紙・FAX・押印は不要"],
+              ].map(([t, d], i) => (
+                <li key={t} className="flex gap-4">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-teal-400 text-sm font-black text-teal-300">
+                    {i + 1}
+                  </span>
+                  <span>
+                    <span className="block text-sm font-bold">{t}</span>
+                    <span className="block text-xs text-slate-400">{d}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 数字で見る ── */}
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto grid max-w-6xl gap-px bg-slate-200 px-6 py-0 sm:grid-cols-3">
+          {[
+            ["0円", "受注側企業の利用料", "アカウント発行料・月額利用料とも発生しません"],
+            [`${STANDARD_PLAN.partnerAccountLimit}社`, "招待できる取引先数（標準プラン）", "上限なく発行できる契約は提供していません"],
+            ["3項目", "電帳法の検索要件に標準対応", "取引年月日・取引金額・取引先で横断検索"],
+          ].map(([n, t, d]) => (
+            <div key={t} className="bg-white px-2 py-10 text-center">
+              <p className="text-4xl font-black text-teal-700">{n}</p>
+              <p className="mt-2 text-sm font-bold">{t}</p>
+              <p className="mt-1 text-xs text-slate-500">{d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── 課題と解決（2カラム対比） ── */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionLabel no="01" title="取引先の電子化が進まない理由" />
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div className="border-2 border-slate-300 p-6">
+              <p className="mb-4 text-sm font-black text-slate-500">これまでの課題</p>
+              <ul className="space-y-3 text-sm leading-relaxed">
+                {[
+                  "取引先にシステム利用料を負担してもらえず、電子化に協力を得られない",
+                  "発注書はメール、請求書は郵送と、書類ごとに経路がばらばら",
+                  "2024年1月に義務化された電子取引データの電子保存に対応できていない",
+                  "適格請求書発行事業者登録番号の確認を目視で行っている",
+                ].map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <span className="text-slate-400">×</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="border-2 border-teal-700 p-6">
+              <p className="mb-4 text-sm font-black text-teal-700">電子取引くんの解決</p>
+              <ul className="space-y-3 text-sm leading-relaxed">
+                {[
+                  "受注側企業のアカウントは無償。取引先に費用負担を求めません",
+                  "発注書・請求書の授受を同一プラットフォーム上で完結",
+                  "確定時に SHA-256 ハッシュとタイムスタンプを自動付与して保存",
+                  "登録番号を国税庁Web-APIで自動照合し、経過措置も自動適用",
+                ].map((t) => (
+                  <li key={t} className="flex gap-2">
+                    <span className="font-black text-teal-700">○</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 主要機能（番号付きリスト） ── */}
+      <section id="features" className="border-y border-slate-200 bg-slate-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionLabel no="02" title="主要機能" />
+          <div className="mt-8 grid gap-x-10 gap-y-8 md:grid-cols-2">
+            {FEATURES.map((f, i) => (
+              <div key={f.title} className="border-l-4 border-teal-700 pl-5">
+                <p className="text-xs font-black text-teal-700">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-1 text-base font-bold">{f.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{f.body}</p>
               </div>
             ))}
@@ -213,136 +225,142 @@ export default function TransactLandingPage() {
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="py-16 sm:py-20 bg-slate-50">
+      {/* ── 導入フロー（横型ステッパー） ── */}
+      <section id="flow" className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-500">Features</p>
-            <h2 className="mt-2 text-2xl sm:text-3xl font-black">主要機能</h2>
-            <p className="mt-3 text-sm text-slate-600">
-              発注・請求の電子授受と両社間コミュニケーションを、1つのプラットフォームで
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {FEATURES.map((f) => (
+          <SectionLabel no="03" title="導入までの4ステップ" />
+          <ol className="mt-8 grid gap-6 md:grid-cols-4">
+            {FLOW.map((f, i) => (
+              <li key={f.step} className="relative">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-950 text-sm font-black text-teal-300">
+                    {i + 1}
+                  </span>
+                  {i < FLOW.length - 1 && (
+                    <span className="hidden h-px flex-1 bg-slate-300 md:block" />
+                  )}
+                </div>
+                <h3 className="mt-3 text-sm font-bold">{f.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">{f.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ── 料金プラン ── */}
+      <section id="pricing" className="border-y border-slate-200 bg-slate-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionLabel no="04" title="料金プラン" />
+          <p className="mt-4 text-sm text-slate-600">
+            発注側企業のみの課金です。初期費用・オプション費用はありません。
+            プラン間で機能差はなく、招待できる取引先数と月次取引件数の上限のみが異なります。
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {DENSHI_PLANS.map((pl) => (
               <div
-                key={f.title}
-                className="rounded-lg border border-slate-200 bg-white p-6 hover:shadow-md transition-shadow"
+                key={pl.name}
+                className="flex flex-col border-2 border-slate-900 bg-white p-6"
               >
-                <h3 className="mb-2 text-base font-bold text-slate-900">{f.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-600">{f.body}</p>
+                <p className="text-sm font-black">{pl.name}</p>
+                <p className="mt-4 text-3xl font-black">
+                  {jpy(pl.monthly)}
+                  <span className="text-sm font-bold text-slate-500">／月（税抜）</span>
+                </p>
+                <p className="mt-1 text-xs text-slate-500">年額 {jpy(yearly(pl))}（税抜）</p>
+                <dl className="mt-5 space-y-2 border-t border-slate-200 pt-4 text-xs">
+                  <div className="flex justify-between">
+                    <dt className="text-slate-500">招待できる取引先</dt>
+                    <dd className="font-bold">{pl.partnerAccountLimit}社まで</dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-slate-500">月次取引件数</dt>
+                    <dd className="font-bold">
+                      {pl.monthlyTransactionLimit.toLocaleString("ja-JP")}件まで
+                    </dd>
+                  </div>
+                  <div className="flex justify-between">
+                    <dt className="text-slate-500">受注側企業の利用料</dt>
+                    <dd className="font-bold text-teal-700">0円</dd>
+                  </div>
+                </dl>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Compliance Section */}
-      <section className="bg-slate-900 py-16 sm:py-20 text-white">
+      {/* ── 補助金 ── */}
+      <section className="bg-slate-950 py-16 text-white sm:py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-400">Compliance</p>
-            <h2 className="mt-2 text-2xl sm:text-3xl font-black">
-              電子帳簿保存法・インボイス制度 完全対応
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="rounded-lg bg-white/5 border border-white/10 p-6">
-              <h3 className="mb-4 text-lg font-bold text-orange-400">電子取引データ保存</h3>
-              <ul className="space-y-2 text-sm leading-relaxed text-slate-200">
-                <li>✓ 確定時にSHA-256ハッシュ＋タイムスタンプ自動記録</li>
-                <li>✓ 検索要件3項目（取引年月日・取引金額・取引先）標準搭載</li>
-                <li>✓ 訂正・削除履歴を改ざん不可なログに保持</li>
-                <li>✓ 検索性・見読性・完全性の3要件を満たす保存フォーマット</li>
-                <li>✓ 電子取引要件（2024年1月義務化）完全対応</li>
-              </ul>
-            </div>
-            <div className="rounded-lg bg-white/5 border border-white/10 p-6">
-              <h3 className="mb-4 text-lg font-bold text-orange-400">インボイス制度対応</h3>
-              <ul className="space-y-2 text-sm leading-relaxed text-slate-200">
-                <li>✓ 適格請求書発行事業者登録番号を国税庁Web-APIで自動検証</li>
-                <li>✓ 標準税率10% / 軽減税率8% 混在計算対応</li>
-                <li>✓ 免税事業者からの仕入は経過措置を自動適用</li>
-                <li>✓ 適格請求書レイアウトでのPDF出力</li>
-                <li>✓ 電子交付・電子受領のいずれもインボイス要件を満たす</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Subsidy CTA Banner — 補助金活用の相談窓口のみ提示。申請資料は非公開経路 */}
-      <section className="bg-gradient-to-br from-orange-500 to-orange-600 py-12 text-white">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <h2 className="text-xl sm:text-2xl font-black">
-            IT導入補助金 電子取引類型で、最大2年分のクラウド利用料を補助対象に。
+          <p className="text-xs font-bold tracking-widest text-teal-300">IT導入補助金</p>
+          <h2 className="mt-2 text-2xl font-black sm:text-3xl">
+            デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）の登録ITツールです
           </h2>
-          <p className="mt-3 text-sm opacity-90">
-            電子取引くんは「インボイス枠 電子取引類型」の登録ITツールです。
-            補助上限額 最大350万円、補助率 中小企業 2/3。
-            補助金活用のご相談は下記までお問い合わせください。
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300">
+            補助上限額 最大350万円、補助率 中小企業 2/3・小規模事業者 1/2。
+            クラウド利用料は最大2年分を補助対象経費として申請できます。
+            交付申請に必要な資料のご用意も、IT導入支援事業者としてお手伝いします。
           </p>
-          <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
-            <a
-              href="mailto:transact@aigrowthx.pro"
-              className="inline-flex items-center justify-center rounded-sm bg-white px-6 py-3 text-sm font-bold text-orange-600 hover:bg-orange-50"
-            >
-              補助金活用について相談する
-            </a>
-          </div>
+          <Link
+            href="mailto:transact@aigrowthx.pro"
+            className="mt-8 inline-block rounded-lg bg-teal-500 px-6 py-3 text-sm font-bold text-slate-950 hover:bg-teal-400"
+          >
+            補助金の活用について相談する
+          </Link>
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* ── FAQ ── */}
       <section id="faq" className="py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-6">
-          <div className="mb-10 text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-orange-500">FAQ</p>
-            <h2 className="mt-2 text-2xl sm:text-3xl font-black">よくあるご質問</h2>
-          </div>
-          <div className="space-y-4">
-            {FAQ.map((item) => (
-              <details
-                key={item.q}
-                className="group rounded-lg border border-slate-200 bg-white p-5"
-              >
-                <summary className="cursor-pointer font-bold text-slate-900 list-none flex items-start justify-between gap-3">
-                  <span>{item.q}</span>
-                  <span className="shrink-0 text-orange-500 group-open:rotate-45 transition-transform">＋</span>
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{item.a}</p>
-              </details>
+        <div className="mx-auto max-w-4xl px-6">
+          <SectionLabel no="05" title="よくあるご質問" />
+          <dl className="mt-8 divide-y divide-slate-200 border-y border-slate-200">
+            {FAQ.map((f) => (
+              <div key={f.q} className="py-6">
+                <dt className="flex gap-3 text-sm font-bold">
+                  <span className="text-teal-700">Q.</span>
+                  {f.q}
+                </dt>
+                <dd className="mt-2 flex gap-3 text-sm leading-relaxed text-slate-600">
+                  <span className="font-bold text-slate-400">A.</span>
+                  {f.a}
+                </dd>
+              </div>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="bg-slate-900 py-16 text-white">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="text-2xl sm:text-3xl font-black">
-            取引先の電子化、うちが主導しませんか。
-          </h2>
-          <p className="mt-4 text-sm text-slate-300 leading-relaxed">
-            受注側企業に費用負担を求めないから、電子化が進む。
-            IT導入補助金 電子取引類型の活用で、貴社の商取引デジタル化を強力に後押しします。
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
-            <a
-              href="mailto:transact@aigrowthx.pro"
-              className="inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-3 text-sm font-bold text-white hover:bg-orange-600"
-            >
-              資料請求・導入相談
-            </a>
-            <Link
-              href="#features"
-              className="inline-flex items-center justify-center rounded-sm border border-white/30 bg-transparent px-6 py-3 text-sm font-bold text-white hover:bg-white/10"
-            >
-              機能をもう一度見る
-            </Link>
+      {/* ── CTA ── */}
+      <section className="border-t-4 border-teal-700 bg-white py-14">
+        <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-xl font-black sm:text-2xl">
+              取引先を無償で招待して、電子取引をはじめませんか。
+            </h2>
+            <p className="mt-2 text-sm text-slate-600">
+              導入のご相談・お見積り・デモのご依頼を承っています。
+            </p>
           </div>
+          <Link
+            href="mailto:sales@aigrowthx.pro"
+            className="shrink-0 rounded-lg bg-slate-950 px-8 py-4 text-sm font-bold text-white hover:bg-slate-800"
+          >
+            お問い合わせ
+          </Link>
         </div>
       </section>
+    </div>
+  )
+}
+
+/** 番号付きの区切り見出し（受発注L版の中央寄せ見出しとは別形状） */
+function SectionLabel({ no, title }: { no: string; title: string }) {
+  return (
+    <div className="flex items-end gap-4 border-b-2 border-slate-900 pb-3">
+      <span className="text-3xl font-black text-teal-700">{no}</span>
+      <h2 className="text-2xl font-black sm:text-3xl">{title}</h2>
     </div>
   )
 }

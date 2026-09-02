@@ -2,6 +2,7 @@ import { NextRequest } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { auth } from "@/lib/auth"
 import { apiError, apiSuccess } from "@/lib/api-helpers"
+import { dsystemApiGuard } from "@/lib/dsystem-guard"
 
 interface RouteContext {
   params: Promise<{ token: string }>
@@ -13,6 +14,10 @@ interface RouteContext {
  * 受注側企業がアクセスした際に招待情報を取得するために使用
  */
 export async function GET(_req: NextRequest, ctx: RouteContext) {
+  // 招待APIは 電子取引くん 固有機能
+  const guard = await dsystemApiGuard()
+  if (guard) return guard
+
   const { token } = await ctx.params
   const invitation = await prisma.invitation.findUnique({
     where: { token },
@@ -47,6 +52,10 @@ export async function GET(_req: NextRequest, ctx: RouteContext) {
  * 発注側企業が招待を取消（要ログイン、発行元企業のみ）
  */
 export async function DELETE(_req: NextRequest, ctx: RouteContext) {
+  // 招待APIは 電子取引くん 固有機能
+  const guard = await dsystemApiGuard()
+  if (guard) return guard
+
   const session = await auth()
   if (!session?.user) return apiError("Unauthorized", 401)
 

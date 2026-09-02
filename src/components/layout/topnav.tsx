@@ -36,7 +36,7 @@ export function TopNav() {
           )}
         </div>
       </div>
-      <nav className="flex flex-wrap items-stretch gap-0.5 px-2 lg:px-4">
+      <nav className="flex items-stretch gap-0.5 overflow-x-auto px-2 [scrollbar-width:none] lg:flex-wrap lg:overflow-visible lg:px-4 [&::-webkit-scrollbar]:hidden">
         {items.map((item) => {
           const active = isNavActive(pathname, item.href)
           return (

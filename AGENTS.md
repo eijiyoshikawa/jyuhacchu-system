@@ -22,7 +22,7 @@
 | 適格請求書サンプル | `https://lsystem.let-inc.net/subsidy/invoice-sample` | — | `https://lsystem.let-inc.net/subsidy/invoice-sample/let` |
 | デモ機・テストアカウント情報 | `https://lsystem.let-inc.net/subsidy/demo-info` | — | `https://lsystem.let-inc.net/subsidy/demo-info/let` |
 
-### 電子取引くん（電子取引類型・**旧「電子取引Lシステム」で不採択 → 改名して再申請準備中**）— 15 URL
+### 電子取引くん（電子取引類型・**旧「電子取引Lシステム」で不採択 → 改名して再申請準備中**）— 17 URL
 
 ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中。ホスト名は旧名称由来だが継続使用）
 不備通知が来たら通知文をそのまま Claude に貼ること（Playbook §8 の教訓と照合して対応）。
@@ -48,6 +48,7 @@
 | その他要件説明 | `https://dlsystem.aigrowthx.pro/transact/subsidy/requirements` | `https://dlsystem.aigrowthx.pro/transact/subsidy/requirements/tx` |
 | デモ機・テストアカウント情報 | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info` | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info/tx` |
 | 適格請求書サンプル | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample` | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample/tx` |
+| 料金表（別添） | `https://dlsystem.aigrowthx.pro/transact/subsidy/price-list` | `https://dlsystem.aigrowthx.pro/transact/subsidy/price-list/tx` |
 
 ### 共通（システム本体）
 

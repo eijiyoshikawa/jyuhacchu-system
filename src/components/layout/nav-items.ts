@@ -35,7 +35,7 @@ export const navigation: NavItem[] = [
   { name: "請求管理", href: "/invoices", icon: Receipt },
   { name: "承認", href: "/approvals", icon: ClipboardCheck },
   { name: "取引先管理", href: "/partners", icon: Building2 },
-  { name: "取引先招待", href: "/partners/invite", icon: Mail },
+  { name: "取引先招待", href: "/partners/invite", icon: Mail, onlyFor: "dsystem" },
   { name: "アカウント利用状況", href: "/partners/accounts", icon: UserCheck, onlyFor: "dsystem" },
   { name: "電子取引アーカイブ", href: "/archive", icon: Archive, onlyFor: "dsystem" },
   { name: "設定", href: "/settings", icon: Settings },

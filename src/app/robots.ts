@@ -7,9 +7,14 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         disallow: [
-          // IT導入補助金 申請資料は審査員向けの非公開経路
+          // IT導入補助金 申請資料は審査員向けの経路のため検索結果に出さない
+          // （受発注Lシステム・電子取引くんの双方を対称に扱う）
+          "/subsidy",
+          "/subsidy/",
           "/transact/subsidy",
           "/transact/subsidy/",
+          // 招待受諾ページはトークン付きの個別URLのためインデックスさせない
+          "/invite/",
         ],
       },
     ],
