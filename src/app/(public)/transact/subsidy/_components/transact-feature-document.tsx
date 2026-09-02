@@ -33,6 +33,8 @@ const SCREEN_CAPTURES: {
   { fig: "Fig.8", side: "売り手側", desc: "受注側企業が受領した発注書の一覧（受注管理）", page: "P.21" },
   { fig: "Fig.9", side: "売り手側", desc: "受注側企業が発行した請求書の一覧（売上請求管理・売掛／回収管理）", page: "P.22" },
   { fig: "Fig.10", side: "売り手側", desc: "受注側企業による適格請求書の新規作成画面（売上請求管理）", page: "P.22" },
+  { fig: "Fig.11", side: "買い手側", desc: "アカウント利用状況（発行済み受注側アカウント一覧・インボイス管理番号・発行上限の消化状況）", page: "P.23" },
+  { fig: "Fig.12", side: "買い手側", desc: "電子取引アーカイブ（電帳法 検索要件3項目による横断検索・SHA-256ハッシュ／タイムスタンプ）", page: "P.24" },
 ]
 const SCHEME_LABEL = "デジタル化・AI導入補助金2026 インボイス枠（電子取引類型）"
 
@@ -151,13 +153,13 @@ export function TransactFeatureDocument({
                 { no: "★0-4", label: "画面キャプチャ 一覧（全10点・買い手側／売り手側）", page: "P.11" },
                 { no: "1", label: "製品概要（ITツール正式名称・開発メーカー名・IT導入支援事業者名）", page: "P.12" },
                 { no: "2", label: "解決する業務課題と導入効果（受注側企業を無償招待し電子化を推進）", page: "P.12" },
-                { no: "★3", label: "機能詳細（3-1 招待管理／3-2 発注／3-3 取引先／3-4 請求／3-5 インボイス／3-6 電帳法／3-7 承認／3-8 監査／3-9 受注側企業の画面）", page: "P.13〜22" },
-                { no: "★4", label: "業務フロー図（招待発行→受諾→両社間電子取引成立）［図1］", page: "P.23〜24" },
-                { no: "★5", label: "ITツールの利用方法（5-1 招待発行〜5-6 管理者運用）", page: "P.25〜26" },
-                { no: "6", label: "技術仕様", page: "P.27" },
-                { no: "7", label: "導入プロセス", page: "P.27" },
-                { no: "8", label: "サポート体制", page: "P.28" },
-                { no: "9", label: "お問い合わせ", page: "P.28" },
+                { no: "★3", label: "機能詳細（3-1 招待管理／3-2 発注／3-3 取引先／3-4 請求／3-5 インボイス／3-6 電帳法／3-7 承認／3-8 監査／3-9 受注側企業の画面／3-10 アカウント利用状況／3-11 電子取引アーカイブ）", page: "P.13〜24" },
+                { no: "★4", label: "業務フロー図（招待発行→受諾→両社間電子取引成立）［図1］", page: "P.25〜26" },
+                { no: "★5", label: "ITツールの利用方法（5-1 招待発行〜5-6 管理者運用）", page: "P.27〜28" },
+                { no: "6", label: "技術仕様", page: "P.29" },
+                { no: "7", label: "導入プロセス", page: "P.29" },
+                { no: "8", label: "サポート体制", page: "P.30" },
+                { no: "9", label: "お問い合わせ", page: "P.30" },
               ].map((row) => (
                 <tr key={row.no}>
                   <td
@@ -361,7 +363,7 @@ export function TransactFeatureDocument({
               </li>
               <li>
                 <strong>③ 業務フロー全体（招待発行→受諾→電子取引成立）</strong> →
-                §4 業務フロー図［図1］（P.23〜P.24）
+                §4 業務フロー図［図1］（P.25〜P.26）
               </li>
               <li>
                 <strong>④ 電子取引データ保存の実装</strong> →
@@ -474,7 +476,7 @@ export function TransactFeatureDocument({
               </li>
               <li>
                 <strong>業務フロー全体（発注側／受注側 並列）</strong> →
-                §4 業務フロー図［図1］（P.23〜P.24）
+                §4 業務フロー図［図1］（P.25〜P.26）
               </li>
             </ul>
           </div>
@@ -1172,6 +1174,77 @@ export function TransactFeatureDocument({
         caption="【売り手側】受注側企業による適格請求書の新規作成画面（売上請求管理）"
         sourceUrl="https://dlsystem.aigrowthx.pro/invoices/new"
         src="/images/transact/seller-invoice-new.png"
+      />
+
+      {/* 3-10 アカウント利用状況管理 — 画面キャプチャ Fig.11 */}
+      <section className="mb-8 page-break-before">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-10. アカウント利用状況管理（発行済み受注側アカウントの一覧）
+        </h3>
+        <div className="mb-2 flex flex-wrap gap-2">
+          <span className="inline-block border-2 border-black bg-blue-200 px-3 py-1 text-xs font-black">
+            買い手側機能（発行した受注側アカウントの状況管理）
+          </span>
+          <span className="inline-block border-2 border-black bg-yellow-200 px-3 py-1 text-xs font-black">
+            留意事項 ③ 対応（発行した受注者側アカウントと利用者の状況管理）
+          </span>
+          <span className="inline-block border-2 border-black bg-yellow-200 px-3 py-1 text-xs font-black">
+            留意事項 ⑥ 対応（発行上限の管理）
+          </span>
+        </div>
+        <p className="mb-3 text-sm leading-relaxed">
+          発注側企業の管理者は「アカウント利用状況」画面で、<strong>無償発行した受注側企業アカウントの
+          利用状況を一覧で管理</strong>できます。事業者名・<strong>適格請求書発行事業者登録番号
+          （インボイス管理番号）</strong>・アカウント発行経路（招待受諾／直接登録）・利用者数・
+          直近の取引日・受領発注件数／発行請求件数を一画面で確認できます。
+        </p>
+        <p className="mb-3 text-sm leading-relaxed">
+          あわせて、画面上部に<strong>契約プランの発行上限に対する消化状況</strong>
+          （発行済みアカウント数／招待中件数／上限数）を表示します。
+          上限に達すると新規の招待発行は行えず、<strong>受注側アカウントを上限なく発行できる契約は
+          提供していません</strong>。各行には受注側企業の<strong>利用料 0円</strong>を明示しています。
+        </p>
+      </section>
+
+      <ScreenshotPlaceholder
+        figure="Fig.11"
+        caption="【買い手側】アカウント利用状況（発行済み受注側アカウントの一覧・インボイス管理番号・発行上限の消化状況）"
+        sourceUrl="https://dlsystem.aigrowthx.pro/partners/accounts"
+        src="/images/transact/partner-accounts.png"
+      />
+
+      {/* 3-11 電子取引アーカイブ — 画面キャプチャ Fig.12 */}
+      <section className="mb-8 page-break-before">
+        <h3 className="mt-5 mb-2 text-base font-bold text-slate-900">
+          3-11. 電子取引アーカイブ（電子帳簿保存法 検索要件への対応）
+        </h3>
+        <div className="mb-2 flex flex-wrap gap-2">
+          <span className="inline-block border-2 border-black bg-blue-200 px-3 py-1 text-xs font-black">
+            買い手側機能（電子取引データの検索・保存）
+          </span>
+          <span className="inline-block border-2 border-black bg-green-200 px-3 py-1 text-xs font-black">
+            電子帳簿保存法 電子取引要件 対応
+          </span>
+        </div>
+        <p className="mb-3 text-sm leading-relaxed">
+          電子帳簿保存法が電子取引データの保存に求める<strong>検索要件3項目
+          （① 取引年月日 ② 取引金額 ③ 取引先）</strong>で、発注書と請求書を
+          <strong>横断検索</strong>できる専用画面を標準搭載しています。
+          取引年月日と取引金額は<strong>範囲検索</strong>に、3項目は
+          <strong>組み合わせ検索</strong>に対応します。
+        </p>
+        <p className="mb-3 text-sm leading-relaxed">
+          検索結果には、各データの<strong>確定日時（タイムスタンプ）</strong>と
+          <strong>SHA-256 ハッシュ値</strong>を併記し、改ざん防止措置が講じられていることを
+          画面上で確認できます。
+        </p>
+      </section>
+
+      <ScreenshotPlaceholder
+        figure="Fig.12"
+        caption="【買い手側】電子取引アーカイブ（電子帳簿保存法 検索要件3項目による発注書・請求書の横断検索／SHA-256ハッシュ・タイムスタンプ表示）"
+        sourceUrl="https://dlsystem.aigrowthx.pro/archive"
+        src="/images/transact/archive.png"
       />
 
       {/* §4 章扉ページ */}
