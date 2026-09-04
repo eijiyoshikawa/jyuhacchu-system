@@ -210,6 +210,35 @@ DATABASE_URL="<VercelダッシュボードからコピーしたNeon接続文字�
 
 ## 9. トラブルシューティング
 
+### 9-0. デプロイしたのに本番に反映されない（2026-09-04 発生）
+
+**症状**: `vercel deploy --prod --yes` が `✓ Ready` で終わるのに、
+`dlsystem.aigrowthx.pro` / `lsystem.let-inc.net` が古い内容を配信し続ける。
+
+**原因**: `vercel deploy --prod` はデプロイを作るだけで、カスタムドメインを張り替えない。
+Vercel の Production Branch が `claude/create-marketing-materials-FirCs` のままのため、
+別ブランチからの CLI デプロイでは本番ドメインが自動割当されない。
+CLI の出力で `▲ Aliased` にカスタムドメインが出ていなければ未反映。
+
+**対処**: `vercel promote <Production URL>` を実行する。
+
+```
+vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
+```
+
+`vercel alias set ... dlsystem.aigrowthx.pro` は
+「You don't have access to the domain」で失敗するため使わない
+（apex `aigrowthx.pro` がチームのドメイン一覧に無い）。promote なら3ドメインとも張り替わる。
+
+**確認方法**: 配信中のビルドは HTML の `data-dpl-id` 属性で分かる。
+手軽な判別としては `curl -s https://dlsystem.aigrowthx.pro/robots.txt` に
+`Disallow: /invite/` が含まれていれば PR #15 以降のビルド。
+
+**恒久対策**: Vercel ダッシュボード → Settings → Git → Production Branch を
+`claude/construction-order-system-Ph84i`（GitHub デフォルトブランチ）に変更すると、
+`vercel deploy --prod` だけで本番ドメインが張り替わるようになる。
+
+
 ### 9-1. カスタムドメインで 404 / 意図しないリダイレクト
 
 - ホスト分岐は `src/middleware.ts`（`LSYSTEM_HOST`/`DSYSTEM_HOST` の許可パスリスト）と `next.config.ts` の rewrites が担う。新ページを追加したら **許可パスリストへの追記漏れ** を疑う

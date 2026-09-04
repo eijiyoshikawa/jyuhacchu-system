@@ -114,7 +114,29 @@
 
 ## 運用ルール要点
 
-1. **デプロイは git push のみ**。GitHub → Vercel 自動連携。`vercel deploy` は使用しない。
+1. **デプロイは CLI から。`vercel deploy --prod` だけでは本番ドメインに反映されない。**
+   GitHub → Vercel の自動連携はフラグが立っており動作していない（2026-08〜）。手順:
+
+   ```
+   cd ~/jyuhacchu-system
+   git fetch origin claude/construction-order-system-Ph84i
+   git checkout claude/construction-order-system-Ph84i
+   git pull origin claude/construction-order-system-Ph84i
+   vercel link --yes --scope eijiyoshikawas-projects --project jyuhacchu-system
+   vercel deploy --prod --yes
+   vercel promote <出力された Production URL>      # ← これを省くと反映されない
+   ```
+
+   - `vercel link` を省くと `Error: Not authorized` になる（CLI 更新でリンクが切れるため）。
+   - **`vercel deploy --prod` はカスタムドメインを張り替えない**。Vercel の Production Branch が
+     `claude/create-marketing-materials-FirCs` のままで、別ブランチからの CLI デプロイでは
+     本番ドメインが自動割当されない。**必ず `vercel promote` まで実行すること**
+     （2026-09-04 に PR #12・#14・#15 の3回分が本番未反映のまま放置されていた事故あり）。
+   - `vercel alias set ... dlsystem.aigrowthx.pro` は
+     「You don't have access to the domain」で失敗する（apex `aigrowthx.pro` がチームの
+     ドメイン一覧に無いため）。**alias ではなく promote を使う。**
+   - 反映確認: `curl -s https://dlsystem.aigrowthx.pro/robots.txt` に
+     `Disallow: /invite/` が含まれていれば PR #15 以降のビルド。
 2. **申請資料の装飾は背景色に依存させない**（黒塗り反転＋黒太枠＋大型太字。審査員は背景グラフィック無効で印刷する）。
 3. **「仮例示」表記は絶対 NG**。導入事例は実名 or「想定顧客」明記＋根拠ある数値。
 4. **ソフトウェア価格の説明に保守サポート系文言を入れない**（カテゴリー7 混在と判定される）。
