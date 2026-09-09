@@ -260,32 +260,34 @@ vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
 
 その他の既知エラー（Prisma v7 非互換 → v5 固定、Google Fonts ビルド失敗 → システムフォント等)は `docs/ERROR_HISTORY.md` を参照。
 
-## 10. 残作業（2026-09-04 時点）
+## 10. 残作業（2026-09-09 時点）
 
 ### A. ユーザー側の作業（Claude では実行できないもの）
 
-- [ ] **本番DBへの SQL 実行**（Neon SQL Editor・どちらも冪等）
+- [x] ~~**本番DBへの SQL 実行**（Neon SQL Editor・どちらも冪等）~~ → **2026-09-09 実行完了**
   1. `prisma/denshi-kun-demo-seed-neon.sql` — 電子取引くん専用デモデータ
   2. `prisma/rename-to-denshi-kun-neon.sql` — 招待メッセージの旧ツール名置換
-- [ ] **`@aigrowthx.pro` のメールボックスを受信可能にする**
+- [ ] **`@aigrowthx.pro` のメールボックスを受信可能にする**  ← **提出前の最後のブロッカー**
   `sales@` `support@` `billing@` `transact@` の4つ（またはキャッチオール転送）。
   MXレコード追加で対応。アドレスを資料に書くだけでは不十分。
   ※ 事務局の公式通知先は IT事業者ポータル登録アドレスであり、そちらは変更不要。
-- [ ] **株式会社Cometa との有償契約**（2026年10月予定）
-  プラン選択が未決。取引先5社の実態には**最小プラン（年額1,200,000円・50社まで）**が
-  最も整合的。標準プラン（200社まで）は上限が40倍で不自然に見えるおそれ。
-  ⚠️ 要件充足のためだけの形式的契約は要領 5-2「商取引の偽装」に該当し登録取消。
-  Cometa は4月から実利用しているため実態は問題ない。
-- [ ] **Vercel の Production Branch を `claude/construction-order-system-Ph84i` に変更**（推奨）
-  現在 `claude/create-marketing-materials-FirCs` のままのため
-  `vercel deploy --prod` で本番ドメインが張り替わらない（§9-0 参照）
+- [x] ~~**株式会社Cometa との有償契約**~~ → **2026-09 締結完了**
+  **最小プラン 年額1,200,000円（税抜）・50社まで**。2026年4〜8月は無償パイロット、
+  9月に有償契約へ移行。価格説明資料（PR #19）に反映済み・本番反映も確認済み。
+- [ ] ~~**Vercel の Production Branch を変更**~~ → **保留（GitHub 側の制限のため実行不可）**
+  Vercel Settings → Git が "Error: Project Link not found" となり、
+  Production Branch フィールド自体が表示されない。GitHub 側で Vercel App の
+  インストール／認可がアカウントのフラグにより拒否されるため再連携できない。
+  **GitHub Support チケット #4649386（2026-08-10 起票・3回目の再発）の解除待ち。**
+  ⚠️ **申請には一切影響しない**（本番サイトは `vercel promote` で正常に更新できている）。
+  解除されるまでは §9-0 の CLI 手順（`vercel link` → `deploy --prod` → `promote`）で運用する。
+  副作用として GitHub Actions の CI も起動しない（workflow は active だが実行数 0）ため、
+  マージ前の `tsc` / `lint` / `next build` / E2E は Claude 側のコンテナで実行して確認する。
 - [ ] **ITツール登録申請の提出**（IT事業者ポータル）
 
-### B. 契約締結後に Claude が行う作業
+### B. Claude 側の作業
 
-- [ ] `transact-pricing-document.tsx` の `CASE_STUDIES[0].contract` を
-      「無償によるパイロット導入」→ 有償契約の内容に書き換え
-      （契約日・プラン名・年額を事実どおり記載）
+**現時点で未着手のものはない。** 不備通知が来た場合の対応（E）のみ。
 
 ### C. 確認済み・対応不要になったもの
 
@@ -295,6 +297,8 @@ vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
 - [x] 受発注Lシステムとの分離（デモデータ・アカウント・連絡先・機能構成・配色・資料デザイン）
 - [x] 料金表の別添資料を追加（手引き ❼ 対応）
 - [x] 機能説明資料にプラン名・AI搭載有無を追加（別紙1 No.2・No.5 の未充足を解消）
+- [x] 導入事例を有償契約の実績に更新（PR #19・2026-09-09 本番反映確認済み）
+- [x] 本番デプロイ（`dlsystem.aigrowthx.pro` が PR #19 を含むビルドを配信中）
 
 ### D. 申請フォーム入力値（前回申請から変わったもの）
 

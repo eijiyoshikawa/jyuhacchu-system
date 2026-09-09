@@ -115,7 +115,18 @@
 ## 運用ルール要点
 
 1. **デプロイは CLI から。`vercel deploy --prod` だけでは本番ドメインに反映されない。**
-   GitHub → Vercel の自動連携はフラグが立っており動作していない（2026-08〜）。手順:
+   GitHub → Vercel の自動連携はフラグが立っており動作していない（2026-08〜）。
+
+   > 🔒 **原因は GitHub アカウント側のフラグ（調査済み・2026-09-09）。再調査しないこと。**
+   > GitHub で Vercel App のインストール／認可が拒否され（"only your admin can update it"）、
+   > Vercel Settings → Git は "Error: Project Link not found" になり
+   > Production Branch フィールドすら表示されない。**GitHub Support #4649386（2026-08-10 起票・
+   > 3回目の再発／#4466708・#4434545 の続き）の解除待ちで保留。**
+   > 同じ原因で GitHub Actions の CI も起動しない（workflow は active・実行数 0）ため、
+   > マージ前の `tsc` / `lint` / `next build` / E2E は Claude 側のコンテナで実行して確認する。
+   > **ITツール登録申請には一切影響しない**（本番サイトは下記手順で正常に更新できている）。
+
+   手順:
 
    ⚠️ **ユーザーに手順を提示するときは、山括弧のプレースホルダを絶対に含めないこと。**
    そのまま貼り付けて `zsh: parse error near '\n'` になる事故が2回発生している。
