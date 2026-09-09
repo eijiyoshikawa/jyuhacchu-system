@@ -117,14 +117,28 @@
 1. **デプロイは CLI から。`vercel deploy --prod` だけでは本番ドメインに反映されない。**
    GitHub → Vercel の自動連携はフラグが立っており動作していない（2026-08〜）。手順:
 
+   ⚠️ **ユーザーに手順を提示するときは、山括弧のプレースホルダを絶対に含めないこと。**
+   そのまま貼り付けて `zsh: parse error near '\n'` になる事故が2回発生している。
+   デプロイURLはシェル変数で受け渡す、以下の形をそのまま渡す:
+
    ```
-   cd ~/jyuhacchu-system
-   git fetch origin claude/construction-order-system-Ph84i
-   git checkout claude/construction-order-system-Ph84i
-   git pull origin claude/construction-order-system-Ph84i
-   vercel link --yes --scope eijiyoshikawas-projects --project jyuhacchu-system
-   vercel deploy --prod --yes
-   vercel promote <出力された Production URL>      # ← これを省くと反映されない
+   cd ~/jyuhacchu-system && \
+   git fetch origin claude/construction-order-system-Ph84i && \
+   git checkout claude/construction-order-system-Ph84i && \
+   git pull origin claude/construction-order-system-Ph84i && \
+   vercel link --yes --scope eijiyoshikawas-projects --project jyuhacchu-system && \
+   URL=$(vercel deploy --prod --yes) && \
+   echo "deployed: $URL" && \
+   vercel promote "$URL"
+   ```
+
+   （`vercel deploy` はデプロイURLだけを標準出力に出すため `$(...)` で受け取れる。
+   `vercel promote` を省くとカスタムドメインが張り替わらない。）
+
+   反映確認も1行で:
+
+   ```
+   curl -s https://dlsystem.aigrowthx.pro/robots.txt | grep -q 'Disallow: /invite/' && echo "OK 最新" || echo "NG 未反映"
    ```
 
    - `vercel link` を省くと `Error: Not authorized` になる（CLI 更新でリンクが切れるため）。
