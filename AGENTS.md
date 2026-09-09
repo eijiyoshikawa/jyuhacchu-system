@@ -100,13 +100,14 @@
 | 電子取引くん | `@aigrowthx.pro`（sales / support / billing / transact） |
 
 ⚠️ **`@aigrowthx.pro` のメールボックスは申請前に必ず実際に受信できる状態にすること。**
-事務局からの連絡がここに届く。
+事務局からの連絡がここに届く。**Vercel はメールサーバーを提供していない**ため、
+メール事業者の契約＋Vercel DNS への MX レコード追加が必要。手順は `docs/HANDOVER.md` §11。
 
 ## 詳細ドキュメント
 
 | ドキュメント | 内容 |
 |---|---|
-| `docs/HANDOVER.md` | 引き継ぎ詳細（現状・残作業・申請入力値・トラブルシューティング 全10節） |
+| `docs/HANDOVER.md` | 引き継ぎ詳細（現状・残作業・申請入力値・トラブルシューティング・メールボックス開設手順 全11節） |
 | `docs/VENDOR_APPLICATION_GUIDE.md` | ベンダー向け ITツール登録 申請手順書（電子取引類型・画面別入力値/テンプレ/ハマりどころ） |
 | `docs/APPLICATION_PLAYBOOK.md` | 申請 Playbook（§8 不備対応履歴、§10 入力チェックリスト、§11 電子取引くん） |
 | `docs/ERROR_HISTORY.md` | 構築中エラーと解決策 |
