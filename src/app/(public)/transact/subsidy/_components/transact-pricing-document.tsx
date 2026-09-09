@@ -67,13 +67,15 @@ const CASE_STUDIES: CaseStudy[] = [
     employees: "5名",
     invitedPartners: "受注側企業 5社（全社を無償招待）",
     startedAt: "2026年4月（本ITツールの提供開始月より利用）",
-    contract: "無償によるパイロット導入",
+    contract:
+      "最小プラン 年額 1,200,000円（税抜）／2026年9月 有償契約締結（同年4月〜8月は無償パイロット導入）",
     challenges: [
       "WEB制作の外注をはじめとする取引が、取引先ごとに個別のやり取り（メール・チャット等）に分散しており、発注内容と請求状況を一元的に把握できていなかった。",
     ],
     effects: [
       "取引先5社との発注・請求を本ITツール上に一元化し、単一の画面で取引状況を確認できるようになった。",
       "招待した受注側企業5社はいずれも無償アカウントで参加しており、取引先側の費用負担は発生していない。",
+      "無償パイロット導入を経て 2026年9月に有償契約（最小プラン 年額1,200,000円）へ移行した。",
     ],
   },
 ]
@@ -369,6 +371,14 @@ export function TransactPricingDocument({
               </th>
               <td className="border-2 border-black px-3 py-2 text-lg font-black">
                 {CASE_STUDIES.length} 社
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-black text-white px-3 py-2 text-left text-sm font-bold">
+                うち有償契約
+              </th>
+              <td className="border-2 border-black px-3 py-2 text-lg font-black">
+                1 社（2026年9月 締結）
               </td>
             </tr>
           </tbody>
