@@ -269,7 +269,7 @@ vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
   2. `prisma/rename-to-denshi-kun-neon.sql` — 招待メッセージの旧ツール名置換
 - [ ] **`@aigrowthx.pro` のメールボックスを受信可能にする**  ← **提出前の最後のブロッカー**
   `sales@` `support@` `billing@` `transact@` の4つ（またはキャッチオール転送）。
-  MXレコード追加で対応。アドレスを資料に書くだけでは不十分。
+  アドレスを資料に書くだけでは不十分。**具体的な手順は §11 を参照。**
   ※ 事務局の公式通知先は IT事業者ポータル登録アドレスであり、そちらは変更不要。
 - [x] ~~**株式会社Cometa との有償契約**~~ → **2026-09 締結完了**
   **最小プラン 年額1,200,000円（税抜）・50社まで**。2026年4〜8月は無償パイロット、
@@ -327,3 +327,88 @@ vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
 - [ ] 変数テンプレート化（`config/application.ts` へ集約、1ファイルでブランド差し替え）
 - [ ] 開発工数（8人月／12百万円）の根拠資料を社内保管
 - [ ] GitHub → Vercel 自動連携の復旧（フラグが立っており CLI デプロイ運用が続いている）
+
+## 11. `@aigrowthx.pro` メールボックス開設手順
+
+⚠️ **Vercel はメールサーバーを提供していない。** Vercel でできるのは DNS レコードの管理だけ。
+メール事業者を別途契約し、そこへ向ける MX レコードを Vercel の DNS に追加する、という2段構え。
+
+### 11-0. ドメインを持っているチームを特定する
+
+Vercel アカウントにはチームが2つある。
+
+| チーム | slug |
+|---|---|
+| LET | `let-9aa5c48c` |
+| eijiyoshikawa's projects | `eijiyoshikawas-projects` |
+
+`dlsystem.aigrowthx.pro` は `eijiyoshikawas-projects` の `jyuhacchu-system` プロジェクトに
+付いているが、**apex の `aigrowthx.pro` は別チームで管理されている可能性が高い**
+（`vercel alias set ... dlsystem.aigrowthx.pro` が "You don't have access to the domain" で
+失敗するため）。ダッシュボードでチームを切り替え、Domains タブに `aigrowthx.pro` が
+現れる方で DNS 作業を行う。
+
+### 11-1. メール事業者の選択
+
+| | ImprovMX（推奨） | Google Workspace |
+|---|---|---|
+| 費用 | 無料 | 約¥1,000/月〜（1ユーザー） |
+| 機能 | 受信のみ（Gmail へ転送） | 送受信（当該アドレスから返信可） |
+| 所要時間 | 約10分 | 約30分 |
+| 4アドレス | catch-all `*` で一括 | 1ユーザー＋エイリアス3つ（無料） |
+
+**申請提出の要件は「届くこと」なので ImprovMX で足りる。** 返信が必要になったら
+MX レコードを差し替えるだけで Google Workspace へ移行できる。両方を同時には設定できない。
+
+### 11-2. ImprovMX 側
+
+improvmx.com でドメイン `aigrowthx.pro` を登録し、エイリアスを `*`（catch-all）、
+転送先を運用中の受信可能なアドレスにする。catch-all にしておけば
+`sales@` `support@` `billing@` `transact@` を含め取りこぼしがない。
+
+### 11-3. Vercel DNS へのレコード追加
+
+ダッシュボード → 該当チーム → **Domains** → `aigrowthx.pro` → **DNS Records** → **Add**。
+
+| Type | Name | Value | Priority |
+|---|---|---|---|
+| MX | （空欄） | `mx1.improvmx.com` | `10` |
+| MX | （空欄） | `mx2.improvmx.com` | `20` |
+| TXT | （空欄） | `v=spf1 include:spf.improvmx.com ~all` | — |
+
+- **Name は空欄のまま**にする。空欄が apex を意味する。`@` や `aigrowthx.pro` と
+  入力すると `@.aigrowthx.pro` のような誤ったレコードになることがある。
+- ⚠️ **既存レコードを消さない・編集しない。** 特に `dlsystem` の A / CNAME に触ると
+  本番サイトが落ちる。今回は追加のみ。
+- ⚠️ SPF（`v=spf1` で始まる TXT）が既にある場合は新規追加せず、既存のものに
+  `include:spf.improvmx.com` を書き足す。**SPF はドメインに1つまで**で、
+  2つあると両方が無効になる。
+
+### 11-4. 反映確認
+
+DNS 反映は通常5〜30分。ImprovMX の管理画面が緑（MX records are valid）になれば成功。
+
+コマンドで確認する場合（macOS 標準）:
+
+```
+dig +short MX aigrowthx.pro
+```
+
+`10 mx1.improvmx.com.` `20 mx2.improvmx.com.` の2行が返れば OK。
+
+**最終確認は実送信で行う。** 4アドレスすべてに1通ずつ送り、転送先に届くことを確認する。
+これが通れば申請提出のブロッカーは解消。
+
+### 11-5. Google Workspace を選ぶ場合の差分
+
+11-2・11-3 のみ変わる。主アドレスを `sales@aigrowthx.pro` として1ユーザー契約し、
+`support@` `billing@` `transact@` を管理コンソールでエイリアス登録（追加料金なし・最大30個）。
+DNS は Google の管理画面が表示する値をそのまま入れる。現行の推奨は以下。
+
+| Type | Name | Value | Priority |
+|---|---|---|---|
+| MX | （空欄） | `smtp.google.com` | `1` |
+| TXT | （空欄） | `v=spf1 include:_spf.google.com ~all` | — |
+| TXT | （空欄） | Google が表示する `google-site-verification=` で始まる文字列 | — |
+
+古い形式（`aspmx.l.google.com` など5本）が表示された場合は画面の指示に従う。
