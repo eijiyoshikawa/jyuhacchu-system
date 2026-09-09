@@ -39,6 +39,21 @@
 | ⑤ | デモ機・テストアカウント情報 | `…/transact/subsidy/demo-info` | 資料添付「その他説明資料」（過去審査で提出を求められた実績あり） |
 | ⑥ | 適格請求書 出力サンプル | `…/transact/subsidy/invoice-sample` | 国の政策画面「インボイス説明資料」（必須） |
 | ⑦ | アカウント利用一覧の画面キャプチャ | デモ機 `/partners`（取引先一覧・インボイス番号表示）＋ `/partners/invite`（招待一覧・受諾済/招待中） | 電子取引類型要件「取引先のアカウント利用一覧の画面キャプチャ」 |
+| ⑧ | 料金表（別添） | `…/transact/subsidy/price-list` | 資料添付「その他説明資料」（ITツール登録の手引き 3-5 ❼「別添する」への対応） |
+
+電子取引くんの実URL（LET版）。TX.企画版は各パスの末尾に `/tx` を付ける。
+
+| # | URL |
+|---|---|
+| ① | `https://dlsystem.aigrowthx.pro/transact/subsidy/feature` |
+| ② | `https://dlsystem.aigrowthx.pro/transact/subsidy/pricing` |
+| ③ | `https://dlsystem.aigrowthx.pro/transact/subsidy/pricing/rationale` |
+| ④ | `https://dlsystem.aigrowthx.pro/transact/subsidy/requirements` |
+| ⑤ | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info` |
+| ⑥ | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample` |
+| ⑧ | `https://dlsystem.aigrowthx.pro/transact/subsidy/price-list` |
+
+⑦ の撮影は発注側管理者 `admin@aoba-sangyo.example.jp` / `password123` でログインして行う。
 
 **機能説明資料の画面キャプチャは必ず申請ツールのブランド表示で撮影する**
 （別ツール名のロゴが写り込むと不備。撮影条件: Chrome 幅1280〜1440px・PNG）。
@@ -99,6 +114,10 @@
 **該当ページ（テンプレE）**:
 > 「本ITツールは受発注機能を有します」ページ（目次直後・会計/受発注/決済の有無表）、§3-2 発注管理・§3-3 取引先管理・§3-4 請求管理、§4 業務フロー図。各節の見出し直下に「共P-02 対応」マーカーを明示。
 
+⚠️ **ページ番号は 2026-09 の改訂で変わっている。** 機能説明資料は全30ページ構成となり、
+**業務フロー図は P.25〜26**（旧 P.23〜24）、Fig.11 アカウント利用状況は P.23、
+Fig.12 電子取引アーカイブは P.24。該当ページを数値で書く欄はこの値を使うこと。
+
 ## 5. 画面4: インボイス枠の申請に係る要件（電子取引類型の核心）
 
 | 質問 | 回答 |
@@ -152,7 +171,9 @@
 
 ### 6-3. 資料添付（最終画面）
 
-機能説明資料=①、価格説明資料=②、その他説明資料=⑤。添付漏れ確認 → 提出。
+機能説明資料=①、価格説明資料=②、その他説明資料=⑤・⑧（＋任意で④）。添付漏れ確認 → 提出。
+
+**添付は最終画面だけではない。** 画面2 に③、画面4 に②と⑦、画面5 に⑥ を添付する。
 
 ### 6-4. ブランド一致の徹底（本申請最大の学び）
 
