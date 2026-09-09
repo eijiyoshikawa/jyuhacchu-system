@@ -22,17 +22,21 @@
 | 適格請求書サンプル | `https://lsystem.let-inc.net/subsidy/invoice-sample` | — | `https://lsystem.let-inc.net/subsidy/invoice-sample/let` |
 | デモ機・テストアカウント情報 | `https://lsystem.let-inc.net/subsidy/demo-info` | — | `https://lsystem.let-inc.net/subsidy/demo-info/let` |
 
-### 電子取引くん（電子取引類型・**旧「電子取引Lシステム」で不採択 → 改名して再申請準備中**）— 17 URL
+### 電子取引くん（電子取引類型・**2026-09-09 再申請提出済み・審査待ち**）— 17 URL
 
 ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中。ホスト名は旧名称由来だが継続使用）
-不備通知が来たら通知文をそのまま Claude に貼ること（Playbook §8 の教訓と照合して対応）。
 
-> ⚠️ **再申請前の最重要事項**: 価格説明資料の「導入事例・実績」は、登録要領 別紙1（1）2.⑥ および
-> ITツール登録の手引き ❻ で **「過去の導入事例・実績」** と明記されている（手引きの書式例は
-> 「20YY年MM月 導入社数3000社達成」「AA株式会社、BB会社」といった実在の実績）。
-> 手引きには **「❸〜❼の項目で不備が頻発しています」** とも書かれている。
-> 現行資料は導入事例を「（想定）」と明記しており、この要件を満たしていない。
-> **名称変更だけでは同じ結果になる可能性が高い。** 詳細は `docs/APPLICATION_PLAYBOOK.md` §11-B。
+> 🕒 **現在の状態: 審査待ち。着手すべき作業はない。**
+> 旧「電子取引Lシステム」が 2026-08 に不採択（理由の記載なし）→ 名称を「電子取引くん」に変更し、
+> 価格改定（300万→240万円）・導入事例の実績化（株式会社Cometa 有償契約）・受発注Lシステムとの
+> 実態分離を行って 2026-09-09 に再提出した。
+> `it_tool_id = a51a4327-ddae-43c7-bbed-5e75292f4055`
+> **全画面の提出値は `docs/VENDOR_APPLICATION_GUIDE.md` §8 に記録済み**（画面ID・入力文・添付割当）。
+>
+> **不備通知が来たら通知文を全文そのまま Claude に貼ること。**
+> `docs/APPLICATION_PLAYBOOK.md` §8（過去7回の不備対応・教訓15項目）と §11-B に照合して対応する。
+> ⚠️ 別紙1(2)「**資料内で前回からの修正箇所を明記すること**」を必ず実施する（過去4回怠っていた）。
+> 修正後は PR → マージ → **CLI デプロイ**（下記 運用ルール1）→ PDF再出力 → 再提出。
 
 開発メーカーは **株式会社LET 固定**。IT導入支援事業者だけが版によって変わる。
 資料本文は同一コンポーネント（`_components/transact-*-document.tsx`）を共有しているため、
@@ -99,9 +103,9 @@
 | 受発注Lシステム | `@juhacchu-l.jp`（sales / support / billing / subsidy） |
 | 電子取引くん | `@aigrowthx.pro`（sales / support / billing / transact） |
 
-⚠️ **`@aigrowthx.pro` のメールボックスは申請前に必ず実際に受信できる状態にすること。**
-事務局からの連絡がここに届く。**Vercel はメールサーバーを提供していない**ため、
-メール事業者の契約＋Vercel DNS への MX レコード追加が必要。手順は `docs/HANDOVER.md` §11。
+✅ **`@aigrowthx.pro` は受信可能（2026-09-09 設定完了）。** ImprovMX の catch-all `*` で
+4アドレスすべてを `eiyoshi99@gmail.com` に転送している。構成と落とし穴（Gmail の重複排除で
+「届かない」と誤認する事象）は `docs/HANDOVER.md` §11。
 
 ## 詳細ドキュメント
 
