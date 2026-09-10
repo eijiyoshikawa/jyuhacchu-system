@@ -279,9 +279,15 @@ vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
 - [x] `@aigrowthx.pro` メールボックス開設（ImprovMX catch-all → Gmail 転送・受信確認済み）
 - [x] 本番デプロイ（`dlsystem.aigrowthx.pro` が最新ビルドを配信中）
 
-### B. 審査待ち（次のアクション待ち）
+### B. 不備対応中（2026-09-10 通知・2項目）
 
-**現時点で着手すべき作業はない。** 審査は概ね1〜3週間で回転する。
+2026-09-10 に不備通知（①標準販売価格の適正性が確認できない → 申請価格理由書を「その他説明資料」に添付し備考欄に記載、
+②デモ機でログインできない）。原因と対応は `docs/APPLICATION_PLAYBOOK.md` §8-8、再提出手順は
+`docs/VENDOR_APPLICATION_GUIDE.md` §8-11。**ユーザー側の残作業: Neon で修復SQL実行 → ログイン確認 →
+PRマージ → CLIデプロイ → `/transact/subsidy/attachments` をPDF化 → 再提出（備考欄テンプレH）。**
+Vercel 環境変数 `NEXTAUTH_URL`（`AUTH_URL`）は削除推奨（ログアウト先が本体ドメインになる原因）。
+
+以下は通知前の記述（参考）。審査は概ね1〜3週間で回転する。
 
 不備通知が来たら **通知文を全文そのまま Claude に貼る**こと。
 `docs/APPLICATION_PLAYBOOK.md` §8（過去7回の不備対応・教訓）および §11-B と照合して対応する。

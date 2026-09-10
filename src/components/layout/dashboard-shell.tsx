@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { signOut } from "next-auth/react"
+import { logoutToLogin } from "@/lib/logout"
 import { Sidebar } from "@/components/layout/sidebar"
 import { TopNav } from "@/components/layout/topnav"
 import { Header } from "@/components/layout/header"
@@ -26,7 +26,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         <TopNav />
         <div className="flex items-center justify-end px-4 py-2 lg:px-6">
           <button
-            onClick={() => signOut({ callbackUrl: "/auth/login" })}
+            onClick={() => logoutToLogin()}
             className="flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50"
           >
             <LogOut className="h-3.5 w-3.5" />

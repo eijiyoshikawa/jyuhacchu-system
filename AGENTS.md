@@ -26,7 +26,11 @@
 
 ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中。ホスト名は旧名称由来だが継続使用）
 
-> 🕒 **現在の状態: 審査待ち。着手すべき作業はない。**
+> 🛠 **現在の状態: 不備対応中（2026-09-10 通知・①価格の適正性→申請価格理由書を その他説明資料 に添付 ②デモ機ログイン不可）。**
+> 原因・対応は `docs/APPLICATION_PLAYBOOK.md` §8-8、再提出手順は `docs/VENDOR_APPLICATION_GUIDE.md` §8-11。
+> その他説明資料の添付は `https://dlsystem.aigrowthx.pro/transact/subsidy/attachments`（理由書＋デモ機情報の連結）。
+> デモアカウントは `prisma/denshi-kun-demo-seed-neon.sql`（上書き型）を Neon で実行し、
+> `https://dlsystem.aigrowthx.pro/api/health` の `denshiKunDemoUsers` が 4 になることを確認する。
 > 旧「電子取引Lシステム」が 2026-08 に不採択（理由の記載なし）→ 名称を「電子取引くん」に変更し、
 > 価格改定（300万→240万円）・導入事例の実績化（株式会社Cometa 有償契約）・受発注Lシステムとの
 > 実態分離を行って 2026-09-09 に再提出した。
@@ -53,6 +57,7 @@
 | デモ機・テストアカウント情報 | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info` | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info/tx` |
 | 適格請求書サンプル | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample` | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample/tx` |
 | 料金表（別添） | `https://dlsystem.aigrowthx.pro/transact/subsidy/price-list` | `https://dlsystem.aigrowthx.pro/transact/subsidy/price-list/tx` |
+| その他説明資料（理由書＋デモ機情報 連結） | `https://dlsystem.aigrowthx.pro/transact/subsidy/attachments` | `https://dlsystem.aigrowthx.pro/transact/subsidy/attachments/tx` |
 
 ### 共通（システム本体）
 
