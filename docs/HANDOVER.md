@@ -291,6 +291,15 @@ vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
 修正 → PR → マージ の後、**本番反映には CLI デプロイが必要**（AGENTS.md 運用ルール1）。
 PDFを再出力して再提出する。
 
+### B-2. 次の登録計画（生成AIツール・通常枠）— 2026-09-10 着手
+
+会計freee（登録済み・共P-01）と組み合わせ、他社製の生成AIツール（まず Claude Team）を
+通常枠向けに登録する。計画・画面別入力値・価格設計・役務（導入コンサルティング／導入研修）の
+相場・未決事項は **`docs/AI_TOOLS_REGISTRATION_PLAN.md`**。資料は
+`/ai-tools/claude/subsidy/*`（LET版）と `/ai-tools/claude/subsidy/*/tx`（TX.企画版）。
+未決事項（同書 §8: プラン・名義・換算レート・導入事例・登録画面の分岐）の回答後に、
+画面キャプチャ配置 → 導入事例記入 → PR → CLI デプロイ → PDF出力 → 登録の順で進める。
+
 ### C. 保留中（申請には影響しない）
 
 - [ ] **Vercel の Production Branch 変更／GitHub 連携の復旧**

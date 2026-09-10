@@ -96,6 +96,23 @@
 
 ※ 本番DBへの投入は Neon SQL Editor で `prisma/denshi-kun-demo-seed-neon.sql` を実行する（冪等）。
 
+### 生成AIツール（Claude Team ほか・**通常枠**・計画中）
+
+会計freee（登録済み・共P-01）と組み合わせて通常枠で交付申請するため、他社製の生成AIツールを
+IT導入支援事業者としてITツール登録する計画。**計画・入力値・価格設計・未決事項は
+`docs/AI_TOOLS_REGISTRATION_PLAN.md`**（§8 の未決事項を回答してもらってから登録着手）。
+資料は製品ブランドを持たない無地シェルで `jyuhacchu-system.vercel.app` から配信する。
+
+| 資料 | LET版 | TX.企画版 |
+|---|---|---|
+| 申請資料インデックス | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy` | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/tx` |
+| 機能説明資料 | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/feature` | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/feature/tx` |
+| 価格説明資料 | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/pricing` | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/pricing/tx` |
+| 申請価格理由書 | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/pricing/rationale` | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/pricing/rationale/tx` |
+
+価格・役務・導入事例は `src/app/(public)/ai-tools/_components/claude-plans.ts` だけを直す。
+画面キャプチャは `public/images/ai-tools/claude/` に置くと差し替わる。導入事例は実名・有償のみ。
+
 ## 連絡先メールアドレス（ツール別に分離）
 
 | ツール | ドメイン |
@@ -113,6 +130,7 @@
 |---|---|
 | `docs/HANDOVER.md` | 引き継ぎ詳細（現状・残作業・申請入力値・トラブルシューティング・メールボックス開設手順 全11節） |
 | `docs/VENDOR_APPLICATION_GUIDE.md` | ベンダー向け ITツール登録 申請手順書（電子取引類型・画面別入力値/テンプレ/ハマりどころ） |
+| `docs/AI_TOOLS_REGISTRATION_PLAN.md` | 生成AIツール（Claude Team ほか）通常枠 登録計画（枠の適否・価格設計・役務相場・画面別入力値・未決事項） |
 | `docs/APPLICATION_PLAYBOOK.md` | 申請 Playbook（§8 不備対応履歴、§10 入力チェックリスト、§11 電子取引くん） |
 | `docs/ERROR_HISTORY.md` | 構築中エラーと解決策 |
 | `docs/SYSTEM_SPEC.md` / `docs/DEPLOY_GUIDE.md` | システム仕様・デプロイ手順 |

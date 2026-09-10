@@ -13,6 +13,7 @@ export default function robots(): MetadataRoute.Robots {
           "/subsidy/",
           "/transact/subsidy",
           "/transact/subsidy/",
+          "/ai-tools/",
           // 招待受諾ページはトークン付きの個別URLのためインデックスさせない
           "/invite/",
         ],
