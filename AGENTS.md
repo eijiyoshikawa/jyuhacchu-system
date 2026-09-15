@@ -142,10 +142,15 @@ IT導入支援事業者としてITツール登録する計画。**計画・入�
 
 ## 運用ルール要点
 
-1. **デプロイは CLI から。`vercel deploy --prod` だけでは本番ドメインに反映されない。**
-   GitHub → Vercel の自動連携はフラグが立っており動作していない（2026-08〜）。
+1. **本番反映は当面 CLI から（下記手順）。GitHub 連携は 2026-09-15 に復旧したが、自動デプロイが本番ドメインまで通ることを1回確認するまで CLI 手順を正とする。**
 
-   > 🔒 **原因は GitHub アカウント側のフラグ（調査済み・2026-09-09）。再調査しないこと。**
+   > ✅ **2026-09-15 GitHub アカウントのフラグが解除され、連携が復旧。** 再発防止策は運用ルール6。
+   > 復旧後にユーザーが行う設定: Vercel → Settings → Git で Production Branch を
+   > `claude/construction-order-system-Ph84i` に変更する（現状は `claude/create-marketing-materials-FirCs` のまま）。
+   > これが済み、PR マージで `dlsystem.aigrowthx.pro` が自動更新されることを確認できたら、
+   > CLI 手順は「連携が止まったときの予備手段」に格下げする。
+   >
+   > 🔒 以下は停止中（2026-08〜09-15）の記録。**再調査しないこと。**
    > GitHub で Vercel App のインストール／認可が拒否され（"only your admin can update it"）、
    > Vercel Settings → Git は "Error: Project Link not found" になり
    > Production Branch フィールドすら表示されない。**GitHub Support #4649386（2026-08-10 起票・
@@ -195,6 +200,25 @@ IT導入支援事業者としてITツール登録する計画。**計画・入�
 4. **ソフトウェア価格の説明に保守サポート系文言を入れない**（カテゴリー7 混在と判定される）。
 5. **ブランチ**: 開発は現行の claude ブランチ、`it-hojo`・`claude/create-marketing-materials-FirCs`（Vercel Production Branch）と同期運用。
    PR のマージ先（GitHub デフォルトブランチ）は `claude/construction-order-system-Ph84i`。auto-merge（CI 緑で自動マージ）有効。詳細は `docs/HANDOVER.md` §4。
+6. **GitHub アカウントのフラグ再発防止（2026-09-15 制定）。** 過去3回のフラグ（2026-07〜08）は、
+   いずれも Claude セッションからの自動化された活動が短時間に集中した直後に発生した
+   （例: 2026-08-07 は 90 分間に push 10 回・CI 63 回目、PR 4 本）。GitHub のスパム検知は
+   「新しめのアカウント × データセンター IP からの高頻度な push/PR/Actions」に反応するため、
+   以下を守る。
+
+   | # | ルール | 仕組み |
+   |---|---|---|
+   | 6-1 | **push は 1 タスク 1 回にまとめる**（WIP を小刻みに push しない）。24 時間に 6 回を超えたら止まる | `.claude/settings.json` の PreToolUse フック → `scripts/git-push-guard.sh` が 24h 6 回超と `--force` を拒否（`--force-with-lease` は可） |
+   | 6-2 | **PR は 1 トピック 1 本**。作って閉じる・作り直す・ブランチを量産する、をしない | 運用（本ルール） |
+   | 6-3 | **CI は PR とデフォルトブランチへのマージ時だけ起動**。作業ブランチへの push では起動しない。同一 ref の実行が重なったら古い方を取り消す | `.github/workflows/ci.yml`（`pull_request` / `push: デフォルトブランチ` のみ・`concurrency` cancel-in-progress・`timeout-minutes`） |
+   | 6-4 | **GitHub App（Vercel 等）のインストール／認可が拒否されても連打しない**。1 回で止めて Support に連絡する | 運用（本ルール） |
+   | 6-5 | コミットの作者は変更しない（Claude 作者＋署名付きのまま）。作者だけ人間名義に変えると署名不一致で unverified になり逆効果 | 運用（本ルール） |
+   | 6-6 | **週次監視**: 毎週月曜 09:00 JST に Routine「GitHub フラグ再発の週次監視（jyuhacchu-system）」が、直近 7 日の push に対して CI 実行が 0 件なら通知する | claude.ai Routines（`trig_01DEbuoe68XawDhPxYfxMbMf`） |
+
+   フラグが立ったときの症状: GitHub Actions が一切起動しない／Vercel の Git 設定が
+   "Project Link not found"／GitHub App 認可が "only your admin can update it"。
+   その場合は GitHub Support に「account flagged」で起票し（過去チケット #4434545 → #4466708 → #4649386）、
+   解除まで本番反映は運用ルール1 の CLI 手順で行う。
 
 ---
 

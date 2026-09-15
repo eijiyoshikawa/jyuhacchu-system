@@ -104,7 +104,9 @@ Vercel の Production Branch 設定を付け替える。
 
 ### CI 構成（`.github/workflows/ci.yml`）
 
-- トリガ: `main`・`claude/*` への push、`main` への PR
+- トリガ（2026-09-15 変更）: デフォルトブランチ `claude/construction-order-system-Ph84i`（と `main`）への PR と push のみ。
+  作業ブランチ（`claude/*`）への push では起動しない（GitHub フラグ再発防止・AGENTS.md 運用ルール6）。
+  同一 ref の実行は `concurrency` で古い方を取り消し、各ジョブに `timeout-minutes` を設定
 - ジョブ: `lint-and-typecheck`（ESLint + `tsc --noEmit`）→ `build`（PostgreSQL 16 サービスコンテナ + `prisma migrate deploy` + `next build`）→ `e2e`（Playwright/Chromium）
 - Node 22 / npm ci / `prisma generate` 前提
 
@@ -308,9 +310,9 @@ PDFを再出力して再提出する。
 
 ### C. 保留中（申請には影響しない）
 
-- [ ] **Vercel の Production Branch 変更／GitHub 連携の復旧**
-      GitHub アカウント側のフラグにより実行不可。Support #4649386 の解除待ち。
-      詳細は AGENTS.md 運用ルール1 の注記を参照。**再調査しないこと。**
+- [x] **GitHub 連携の復旧** — 2026-09-15 にフラグ解除。再発防止策（push 頻度フック・CI トリガ縮小・週次監視 Routine）は AGENTS.md 運用ルール6
+- [ ] **Vercel の Production Branch 変更** — Vercel → Settings → Git で `claude/construction-order-system-Ph84i` に変更し、
+      PR マージで `dlsystem.aigrowthx.pro` が自動更新されることを 1 回確認する。確認できるまで本番反映は CLI 手順
 
 ### D. 登録完了後
 
