@@ -26,7 +26,11 @@
 
 ベースドメイン: `https://dlsystem.aigrowthx.pro`（✅ Vercel 紐付け済み・稼働中。ホスト名は旧名称由来だが継続使用）
 
-> 🕒 **現在の状態: 審査待ち。着手すべき作業はない。**
+> 🛠 **現在の状態: 不備対応中（2026-09-10 通知・①価格の適正性→申請価格理由書を その他説明資料 に添付 ②デモ機ログイン不可）。**
+> 原因・対応は `docs/APPLICATION_PLAYBOOK.md` §8-8、再提出手順は `docs/VENDOR_APPLICATION_GUIDE.md` §8-11。
+> その他説明資料の添付は `https://dlsystem.aigrowthx.pro/transact/subsidy/attachments`（理由書＋デモ機情報の連結）。
+> デモアカウントは `prisma/denshi-kun-demo-seed-neon.sql`（上書き型）を Neon で実行し、
+> `https://dlsystem.aigrowthx.pro/api/health` の `denshiKunDemoUsers` が 4 になることを確認する。
 > 旧「電子取引Lシステム」が 2026-08 に不採択（理由の記載なし）→ 名称を「電子取引くん」に変更し、
 > 価格改定（300万→240万円）・導入事例の実績化（株式会社Cometa 有償契約）・受発注Lシステムとの
 > 実態分離を行って 2026-09-09 に再提出した。
@@ -53,6 +57,7 @@
 | デモ機・テストアカウント情報 | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info` | `https://dlsystem.aigrowthx.pro/transact/subsidy/demo-info/tx` |
 | 適格請求書サンプル | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample` | `https://dlsystem.aigrowthx.pro/transact/subsidy/invoice-sample/tx` |
 | 料金表（別添） | `https://dlsystem.aigrowthx.pro/transact/subsidy/price-list` | `https://dlsystem.aigrowthx.pro/transact/subsidy/price-list/tx` |
+| その他説明資料（理由書＋デモ機情報 連結） | `https://dlsystem.aigrowthx.pro/transact/subsidy/attachments` | `https://dlsystem.aigrowthx.pro/transact/subsidy/attachments/tx` |
 
 ### 共通（システム本体）
 
@@ -96,6 +101,23 @@
 
 ※ 本番DBへの投入は Neon SQL Editor で `prisma/denshi-kun-demo-seed-neon.sql` を実行する（冪等）。
 
+### 生成AIツール（Claude Team ほか・**通常枠**・計画中）
+
+会計freee（登録済み・共P-01）と組み合わせて通常枠で交付申請するため、他社製の生成AIツールを
+IT導入支援事業者としてITツール登録する計画。**計画・入力値・価格設計・未決事項は
+`docs/AI_TOOLS_REGISTRATION_PLAN.md`**（§8 の未決事項を回答してもらってから登録着手）。
+資料は製品ブランドを持たない無地シェルで `jyuhacchu-system.vercel.app` から配信する。
+
+| 資料 | LET版 | TX.企画版 |
+|---|---|---|
+| 申請資料インデックス | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy` | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/tx` |
+| 機能説明資料 | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/feature` | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/feature/tx` |
+| 価格説明資料 | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/pricing` | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/pricing/tx` |
+| 申請価格理由書 | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/pricing/rationale` | `https://jyuhacchu-system.vercel.app/ai-tools/claude/subsidy/pricing/rationale/tx` |
+
+価格・役務・導入事例は `src/app/(public)/ai-tools/_components/claude-plans.ts` だけを直す。
+画面キャプチャは `public/images/ai-tools/claude/` に置くと差し替わる。導入事例は実名・有償のみ。
+
 ## 連絡先メールアドレス（ツール別に分離）
 
 | ツール | ドメイン |
@@ -113,16 +135,22 @@
 |---|---|
 | `docs/HANDOVER.md` | 引き継ぎ詳細（現状・残作業・申請入力値・トラブルシューティング・メールボックス開設手順 全11節） |
 | `docs/VENDOR_APPLICATION_GUIDE.md` | ベンダー向け ITツール登録 申請手順書（電子取引類型・画面別入力値/テンプレ/ハマりどころ） |
+| `docs/AI_TOOLS_REGISTRATION_PLAN.md` | 生成AIツール（Claude Team ほか）通常枠 登録計画（枠の適否・価格設計・役務相場・画面別入力値・未決事項） |
 | `docs/APPLICATION_PLAYBOOK.md` | 申請 Playbook（§8 不備対応履歴、§10 入力チェックリスト、§11 電子取引くん） |
 | `docs/ERROR_HISTORY.md` | 構築中エラーと解決策 |
 | `docs/SYSTEM_SPEC.md` / `docs/DEPLOY_GUIDE.md` | システム仕様・デプロイ手順 |
 
 ## 運用ルール要点
 
-1. **デプロイは CLI から。`vercel deploy --prod` だけでは本番ドメインに反映されない。**
-   GitHub → Vercel の自動連携はフラグが立っており動作していない（2026-08〜）。
+1. **本番反映は当面 CLI から（下記手順）。GitHub 連携は 2026-09-15 に復旧したが、自動デプロイが本番ドメインまで通ることを1回確認するまで CLI 手順を正とする。**
 
-   > 🔒 **原因は GitHub アカウント側のフラグ（調査済み・2026-09-09）。再調査しないこと。**
+   > ✅ **2026-09-15 GitHub アカウントのフラグが解除され、連携が復旧。** 再発防止策は運用ルール6。
+   > 復旧後にユーザーが行う設定: Vercel → Settings → Git で Production Branch を
+   > `claude/construction-order-system-Ph84i` に変更する（現状は `claude/create-marketing-materials-FirCs` のまま）。
+   > これが済み、PR マージで `dlsystem.aigrowthx.pro` が自動更新されることを確認できたら、
+   > CLI 手順は「連携が止まったときの予備手段」に格下げする。
+   >
+   > 🔒 以下は停止中（2026-08〜09-15）の記録。**再調査しないこと。**
    > GitHub で Vercel App のインストール／認可が拒否され（"only your admin can update it"）、
    > Vercel Settings → Git は "Error: Project Link not found" になり
    > Production Branch フィールドすら表示されない。**GitHub Support #4649386（2026-08-10 起票・
@@ -172,6 +200,25 @@
 4. **ソフトウェア価格の説明に保守サポート系文言を入れない**（カテゴリー7 混在と判定される）。
 5. **ブランチ**: 開発は現行の claude ブランチ、`it-hojo`・`claude/create-marketing-materials-FirCs`（Vercel Production Branch）と同期運用。
    PR のマージ先（GitHub デフォルトブランチ）は `claude/construction-order-system-Ph84i`。auto-merge（CI 緑で自動マージ）有効。詳細は `docs/HANDOVER.md` §4。
+6. **GitHub アカウントのフラグ再発防止（2026-09-15 制定）。** 過去3回のフラグ（2026-07〜08）は、
+   いずれも Claude セッションからの自動化された活動が短時間に集中した直後に発生した
+   （例: 2026-08-07 は 90 分間に push 10 回・CI 63 回目、PR 4 本）。GitHub のスパム検知は
+   「新しめのアカウント × データセンター IP からの高頻度な push/PR/Actions」に反応するため、
+   以下を守る。
+
+   | # | ルール | 仕組み |
+   |---|---|---|
+   | 6-1 | **push は 1 タスク 1 回にまとめる**（WIP を小刻みに push しない）。24 時間に 6 回を超えたら止まる | `.claude/settings.json` の PreToolUse フック → `scripts/git-push-guard.sh` が 24h 6 回超と `--force` を拒否（`--force-with-lease` は可） |
+   | 6-2 | **PR は 1 トピック 1 本**。作って閉じる・作り直す・ブランチを量産する、をしない | 運用（本ルール） |
+   | 6-3 | **CI は PR とデフォルトブランチへのマージ時だけ起動**。作業ブランチへの push では起動しない。同一 ref の実行が重なったら古い方を取り消す | `.github/workflows/ci.yml`（`pull_request` / `push: デフォルトブランチ` のみ・`concurrency` cancel-in-progress・`timeout-minutes`） |
+   | 6-4 | **GitHub App（Vercel 等）のインストール／認可が拒否されても連打しない**。1 回で止めて Support に連絡する | 運用（本ルール） |
+   | 6-5 | コミットの作者は変更しない（Claude 作者＋署名付きのまま）。作者だけ人間名義に変えると署名不一致で unverified になり逆効果 | 運用（本ルール） |
+   | 6-6 | **週次監視**: 毎週月曜 09:00 JST に Routine「GitHub フラグ再発の週次監視（jyuhacchu-system）」が、直近 7 日の push に対して CI 実行が 0 件なら通知する | claude.ai Routines（`trig_01DEbuoe68XawDhPxYfxMbMf`） |
+
+   フラグが立ったときの症状: GitHub Actions が一切起動しない／Vercel の Git 設定が
+   "Project Link not found"／GitHub App 認可が "only your admin can update it"。
+   その場合は GitHub Support に「account flagged」で起票し（過去チケット #4434545 → #4466708 → #4649386）、
+   解除まで本番反映は運用ルール1 の CLI 手順で行う。
 
 ---
 

@@ -48,6 +48,13 @@ const DOCUMENTS = [
     pages: "6 ページ",
   },
   {
+    href: "/transact/subsidy/attachments" as const,
+    label: `その他説明資料（申請価格理由書＋デモ機・テストアカウント情報）（${TOOL_NAME}）`,
+    description:
+      "申請ポータル「その他説明資料（任意）」欄に添付する1ファイル版。2026-09-10 の不備通知（申請価格理由書の添付要請・デモ機ログイン不可）への対応として資料③と資料⑤を連結。",
+    pages: "約 15 ページ",
+  },
+  {
     href: "/transact/subsidy/invoice-sample" as const,
     label: `適格請求書 出力サンプル（${TOOL_NAME}）`,
     description:

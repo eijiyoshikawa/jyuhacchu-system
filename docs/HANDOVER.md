@@ -104,7 +104,9 @@ Vercel の Production Branch 設定を付け替える。
 
 ### CI 構成（`.github/workflows/ci.yml`）
 
-- トリガ: `main`・`claude/*` への push、`main` への PR
+- トリガ（2026-09-15 変更）: デフォルトブランチ `claude/construction-order-system-Ph84i`（と `main`）への PR と push のみ。
+  作業ブランチ（`claude/*`）への push では起動しない（GitHub フラグ再発防止・AGENTS.md 運用ルール6）。
+  同一 ref の実行は `concurrency` で古い方を取り消し、各ジョブに `timeout-minutes` を設定
 - ジョブ: `lint-and-typecheck`（ESLint + `tsc --noEmit`）→ `build`（PostgreSQL 16 サービスコンテナ + `prisma migrate deploy` + `next build`）→ `e2e`（Playwright/Chromium）
 - Node 22 / npm ci / `prisma generate` 前提
 
@@ -279,9 +281,15 @@ vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
 - [x] `@aigrowthx.pro` メールボックス開設（ImprovMX catch-all → Gmail 転送・受信確認済み）
 - [x] 本番デプロイ（`dlsystem.aigrowthx.pro` が最新ビルドを配信中）
 
-### B. 審査待ち（次のアクション待ち）
+### B. 不備対応中（2026-09-10 通知・2項目）
 
-**現時点で着手すべき作業はない。** 審査は概ね1〜3週間で回転する。
+2026-09-10 に不備通知（①標準販売価格の適正性が確認できない → 申請価格理由書を「その他説明資料」に添付し備考欄に記載、
+②デモ機でログインできない）。原因と対応は `docs/APPLICATION_PLAYBOOK.md` §8-8、再提出手順は
+`docs/VENDOR_APPLICATION_GUIDE.md` §8-11。**ユーザー側の残作業: Neon で修復SQL実行 → ログイン確認 →
+PRマージ → CLIデプロイ → `/transact/subsidy/attachments` をPDF化 → 再提出（備考欄テンプレH）。**
+Vercel 環境変数 `NEXTAUTH_URL`（`AUTH_URL`）は削除推奨（ログアウト先が本体ドメインになる原因）。
+
+以下は通知前の記述（参考）。審査は概ね1〜3週間で回転する。
 
 不備通知が来たら **通知文を全文そのまま Claude に貼る**こと。
 `docs/APPLICATION_PLAYBOOK.md` §8（過去7回の不備対応・教訓）および §11-B と照合して対応する。
@@ -291,11 +299,20 @@ vercel promote jyuhacchu-system-xxxxxxxxx-eijiyoshikawas-projects.vercel.app
 修正 → PR → マージ の後、**本番反映には CLI デプロイが必要**（AGENTS.md 運用ルール1）。
 PDFを再出力して再提出する。
 
+### B-2. 次の登録計画（生成AIツール・通常枠）— 2026-09-10 着手
+
+会計freee（登録済み・共P-01）と組み合わせ、他社製の生成AIツール（まず Claude Team）を
+通常枠向けに登録する。計画・画面別入力値・価格設計・役務（導入コンサルティング／導入研修）の
+相場・未決事項は **`docs/AI_TOOLS_REGISTRATION_PLAN.md`**。資料は
+`/ai-tools/claude/subsidy/*`（LET版）と `/ai-tools/claude/subsidy/*/tx`（TX.企画版）。
+未決事項（同書 §8: プラン・名義・換算レート・導入事例・登録画面の分岐）の回答後に、
+画面キャプチャ配置 → 導入事例記入 → PR → CLI デプロイ → PDF出力 → 登録の順で進める。
+
 ### C. 保留中（申請には影響しない）
 
-- [ ] **Vercel の Production Branch 変更／GitHub 連携の復旧**
-      GitHub アカウント側のフラグにより実行不可。Support #4649386 の解除待ち。
-      詳細は AGENTS.md 運用ルール1 の注記を参照。**再調査しないこと。**
+- [x] **GitHub 連携の復旧** — 2026-09-15 にフラグ解除。再発防止策（push 頻度フック・CI トリガ縮小・週次監視 Routine）は AGENTS.md 運用ルール6
+- [ ] **Vercel の Production Branch 変更** — Vercel → Settings → Git で `claude/construction-order-system-Ph84i` に変更し、
+      PR マージで `dlsystem.aigrowthx.pro` が自動更新されることを 1 回確認する。確認できるまで本番反映は CLI 手順
 
 ### D. 登録完了後
 

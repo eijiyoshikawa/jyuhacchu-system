@@ -101,6 +101,8 @@ export function middleware(req: NextRequest) {
     pathname.startsWith("/subsidy/") ||
     pathname === "/transact" ||
     pathname.startsWith("/transact/") ||
+    // 他社製 生成AIツール（通常枠）の申請資料。製品ブランドを持たないため本体ドメインで配信
+    pathname.startsWith("/ai-tools/") ||
     pathname.startsWith("/invite/") ||
     pathname.startsWith("/api/invitations/")
 

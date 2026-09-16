@@ -121,6 +121,40 @@ export function TransactDemoInfoDocument({
         </div>
       </section>
 
+      {/* ★ 前回提出からの修正箇所 — 別紙1(2) */}
+      <section className="mb-8 avoid-break">
+        <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
+          ★ 前回提出（2026-09-09）からの修正箇所
+        </h2>
+        <p className="mb-3 text-sm leading-relaxed">
+          2026-09-10 付の事務局からの修正依頼「提出されたデモ機・テストアカウントで『ログインの実行』が
+          できませんでした」への対応として、以下を実施しました。
+        </p>
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr className="bg-slate-100">
+              <th className="border-2 border-black px-2 py-1.5 text-left text-xs font-bold w-10">#</th>
+              <th className="border-2 border-black px-2 py-1.5 text-left text-xs font-bold">修正内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              "本番環境（デモ機）のデータベースに、本資料 §2 記載の4アカウント（メールアドレス・パスワード・所属企業・権限）を再投入し、記載どおりの ID・パスワードでログインできることを IT導入支援事業者が再確認しました。",
+              "ログアウト後の遷移先を本デモ機（dlsystem.aigrowthx.pro）のログイン画面に固定しました（他システムの画面へ遷移しないよう修正）。",
+              "デモ機の稼働状態を外部から確認できる URL を §1 に追加しました（https://dlsystem.aigrowthx.pro/api/health — denshiKunDemoUsers が 4 であればテストアカウントが有効です）。",
+            ].map((t, i) => (
+              <tr key={t}>
+                <td className="border-2 border-black px-2 py-1.5 text-center font-bold">{i + 1}</td>
+                <td className="border-2 border-black px-2 py-1.5">{t}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="mt-2 text-xs text-slate-600">
+          ※ テストアカウントの ID・パスワード自体に変更はありません。ID・パスワードは半角英数で、前後に空白を入れずに入力してください。
+        </p>
+      </section>
+
       {/* §1 デモ機 URL */}
       <section className="mb-8 avoid-break page-break-before">
         <h2 className="mb-3 bg-black text-white px-4 py-2 text-xl font-black">
@@ -182,6 +216,17 @@ export function TransactDemoInfoDocument({
               <td className="border-2 border-black px-3 py-2 font-mono text-sm">
                 https://dlsystem.aigrowthx.pro/invite/[token]<br />
                 <span className="text-xs text-slate-500">※ [token] は招待発行時に自動生成</span>
+              </td>
+            </tr>
+            <tr>
+              <th className="border-2 border-black bg-slate-100 px-3 py-2 text-left text-sm font-bold">
+                稼働確認URL（ログイン不要）
+              </th>
+              <td className="border-2 border-black px-3 py-2 font-mono text-sm">
+                https://dlsystem.aigrowthx.pro/api/health<br />
+                <span className="text-xs text-slate-500">
+                  ※ 応答の denshiKunDemoUsers が 4 であれば、§2 の4アカウントが有効な状態です
+                </span>
               </td>
             </tr>
             <tr>

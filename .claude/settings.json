@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git push*)",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/scripts/git-push-guard.sh",
+            "timeout": 10,
+            "statusMessage": "git push の頻度を確認中（GitHub フラグ再発防止）"
+          }
+        ]
+      }
+    ]
+  }
+}

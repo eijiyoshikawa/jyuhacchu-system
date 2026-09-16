@@ -1,6 +1,7 @@
 "use client"
 
-import { signOut, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
+import { logoutToLogin } from "@/lib/logout"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { LogOut } from "lucide-react"
@@ -26,7 +27,7 @@ export function Header() {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => signOut({ callbackUrl: "/auth/login" })}
+            onClick={() => logoutToLogin()}
             className="text-slate-500 hover:text-slate-800"
           >
             <LogOut className="h-4 w-4" />
