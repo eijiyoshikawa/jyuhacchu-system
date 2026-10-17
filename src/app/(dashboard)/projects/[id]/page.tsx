@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { FormPageSkeleton } from "@/components/ui/skeleton"
 import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 
 interface Project {
@@ -71,7 +72,7 @@ export default function ProjectDetailPage() {
     }
   }
 
-  if (!project) return <div className="text-center py-8">読み込み中...</div>
+  if (!project) return <FormPageSkeleton fields={5} />
 
   return (
     <div className="max-w-2xl mx-auto sm:mx-0">

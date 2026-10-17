@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { DetailPageSkeleton } from "@/components/ui/skeleton"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Textarea } from "@/components/ui/textarea"
 import { InvoiceStatusBadge } from "@/components/ui/status-badge"
@@ -122,7 +123,7 @@ export default function InvoiceDetailPage() {
   }
 
   if (loading) {
-    return <div className="py-8 text-center text-muted-foreground">読み込み中...</div>
+    return <DetailPageSkeleton fields={8} itemColumns={5} timeline={false} className="max-w-4xl" />
   }
 
   if (!invoice) {

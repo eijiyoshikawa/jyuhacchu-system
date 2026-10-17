@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter, useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { DetailPageSkeleton } from "@/components/ui/skeleton"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Textarea } from "@/components/ui/textarea"
 import { OrderStatusBadge } from "@/components/ui/status-badge"
@@ -141,7 +142,7 @@ export default function OrderDetailPage() {
     }
   }
 
-  if (!order) return <div className="text-center py-8">読み込み中...</div>
+  if (!order) return <DetailPageSkeleton fields={8} itemColumns={5} className="max-w-5xl" />
 
   const orderTypeLabel = order.orderType || "-"
 

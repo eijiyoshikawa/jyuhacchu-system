@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { FormFieldSkeleton, LoadingAnnouncement, Skeleton } from "@/components/ui/skeleton"
 // 招待受諾は電子取引類型ツール専用のフローのためブランドを固定する
 import { DSYSTEM_BRAND } from "@/lib/brand"
 
@@ -88,9 +89,32 @@ export default function InviteAcceptPage({ params }: PageProps) {
   }
 
   if (loading) {
+    // 招待情報の取得中は、受諾フォームと同じ骨格のスケルトンを出す
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-100 px-4">
-        <p className="text-sm text-slate-500">招待情報を読み込み中...</p>
+      <div className="min-h-screen bg-slate-100 py-8 px-4">
+        <LoadingAnnouncement label="招待情報を読み込み中" />
+        <div className="max-w-2xl mx-auto space-y-6">
+          <div className="flex flex-col items-center gap-2">
+            <Skeleton className="h-7 w-48" />
+            <Skeleton className="h-3 w-64 max-w-full" />
+          </div>
+          <Card className="border-orange-200">
+            <CardHeader className="bg-orange-50 border-b border-orange-200">
+              <Skeleton className="h-5 w-56 max-w-full" />
+              <Skeleton className="mt-2 h-4 w-72 max-w-full" />
+            </CardHeader>
+            <CardContent className="space-y-4 pt-6">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <FormFieldSkeleton />
+                <FormFieldSkeleton />
+              </div>
+              <FormFieldSkeleton />
+              <FormFieldSkeleton />
+              <FormFieldSkeleton />
+              <Skeleton className="h-10 w-full" />
+            </CardContent>
+          </Card>
+        </div>
       </div>
     )
   }
