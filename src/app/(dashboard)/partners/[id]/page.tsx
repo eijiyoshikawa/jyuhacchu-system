@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { FormPageSkeleton } from "@/components/ui/skeleton"
 import { ConfirmDialog } from "@/components/ui/confirm-dialog"
 import { InvoiceNumberInput } from "@/components/ui/invoice-number-input"
 
@@ -74,7 +75,7 @@ export default function PartnerDetailPage() {
     }
   }
 
-  if (!company) return <div className="text-center py-8">読み込み中...</div>
+  if (!company) return <FormPageSkeleton pairedFields={1} fields={5} />
 
   return (
     <div className="max-w-2xl mx-auto sm:mx-0">

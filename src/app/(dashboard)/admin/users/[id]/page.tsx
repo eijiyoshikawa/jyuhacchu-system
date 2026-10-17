@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { FormPageSkeleton } from "@/components/ui/skeleton"
 
 interface User {
   id: string
@@ -102,7 +103,7 @@ export default function EditUserPage() {
     }
   }
 
-  if (!user) return <div className="text-center py-8">読み込み中...</div>
+  if (!user) return <FormPageSkeleton fields={5} />
 
   return (
     <div className="max-w-2xl mx-auto sm:mx-0">

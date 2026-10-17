@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { TableSkeleton } from "@/components/ui/skeleton"
 import { formatDate } from "@/lib/utils"
 
 interface Invitation {
@@ -39,13 +40,19 @@ function statusColor(s: Invitation["status"]) {
 
 export default function InvitePartnerPage() {
   const [invitations, setInvitations] = useState<Invitation[]>([])
+  // 初回の一覧取得が終わるまではスケルトンを出す（「まだ招待を発行していません」の誤表示を防ぐ）
+  const [listLoading, setListLoading] = useState(true)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string; url?: string } | null>(null)
   const [origin, setOrigin] = useState("")
 
   async function refresh() {
-    const res = await fetch("/api/invitations")
-    if (res.ok) setInvitations(await res.json())
+    try {
+      const res = await fetch("/api/invitations")
+      if (res.ok) setInvitations(await res.json())
+    } finally {
+      setListLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -54,10 +61,10 @@ export default function InvitePartnerPage() {
     // 未設定時は現在のオリジン（ダッシュボードが動いているホスト）を使用。
     const branded = process.env.NEXT_PUBLIC_INVITE_ORIGIN
     if (branded) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot init of client-only origin value
+       
       setOrigin(branded.replace(/\/+$/, ""))
     } else if (typeof window !== "undefined") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot init of client-only origin value
+       
       setOrigin(window.location.origin)
     }
     void refresh()
@@ -194,7 +201,9 @@ export default function InvitePartnerPage() {
           <CardTitle>発行済みの招待一覧</CardTitle>
         </CardHeader>
         <CardContent>
-          {invitations.length === 0 ? (
+          {listLoading ? (
+            <TableSkeleton columns={7} rows={3} bare />
+          ) : invitations.length === 0 ? (
             <p className="text-sm text-slate-500 py-4 text-center">まだ招待を発行していません。</p>
           ) : (
             <div className="overflow-x-auto">

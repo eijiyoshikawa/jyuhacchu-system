@@ -1,27 +1,6 @@
-import { cn } from "@/lib/utils"
+import { ListPageSkeleton } from "@/components/ui/skeleton"
 
-function Skeleton({ className }: { className?: string }) {
-  return <div className={cn("animate-pulse rounded-sm bg-gray-200", className)} />
-}
-
+/** 発注管理 一覧（発注番号／案件名／取引先／件名／金額／ステータス／発注日）。 */
 export default function OrdersLoading() {
-  return (
-    <div className="space-y-6">
-      {/* Page header */}
-      <div className="flex items-center justify-between">
-        <Skeleton className="h-8 w-32" />
-        <Skeleton className="h-9 w-28" />
-      </div>
-
-      {/* Table */}
-      <div className="rounded-sm border bg-card p-6">
-        <div className="space-y-3">
-          <Skeleton className="h-10 w-full" />
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Skeleton key={i} className="h-12 w-full" />
-          ))}
-        </div>
-      </div>
-    </div>
-  )
+  return <ListPageSkeleton columns={7} />
 }

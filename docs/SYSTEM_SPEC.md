@@ -116,7 +116,7 @@ IT導入補助金（デジタル化・AI導入補助金）インボイス枠 イ
 | 25 | 確認ダイアログ | 削除・ステータス変更前の確認 |
 | 26 | トースト通知 | 操作成功/失敗のフィードバック |
 | 27 | エラーページ | error.tsx、not-found.tsx |
-| 28 | ローディングUI | Skeleton Screen |
+| 28 | ローディングUI | Skeleton Screen。ダッシュボード配下の全セグメント（一覧・詳細・新規作成・編集・設定・管理画面）に `loading.tsx` を配置し、クライアント側 fetch の詳細画面と招待受諾ページはデータ到着までスケルトンを表示 |
 
 ### セキュリティ・インフラ
 | # | 機能 | 説明 |
@@ -369,6 +369,7 @@ PurchaseOrder と Invoice に以下のカラムを追加：
 | Pagination | pagination.tsx | ページネーション |
 | SearchFilterBar | search-filter-bar.tsx | 検索・フィルターバー |
 | PageHeader | page-header.tsx | ページヘッダー |
+| Skeleton | skeleton.tsx | スケルトンローディング部品（Skeleton / ListPageSkeleton / DetailPageSkeleton / FormPageSkeleton / TableSkeleton / StatCardsSkeleton ほか）。各 `loading.tsx` とクライアント fetch 画面で共用 |
 | Toaster | toaster.tsx | トースト通知 |
 | InvoiceNumberInput | invoice-number-input.tsx | インボイス番号入力・検証 |
 | TaxSummary | tax-summary.tsx | 経過措置税額サマリー |
@@ -397,7 +398,7 @@ PurchaseOrder と Invoice に以下のカラムを追加：
 ### Vercel設定（vercel.json）
 ```json
 {
-  "buildCommand": "npx prisma generate && npx prisma migrate deploy && npm run build",
+  "buildCommand": "npx prisma generate && bash scripts/prisma-migrate-deploy-retry.sh && npm run build",
   "framework": "nextjs",
   "regions": ["hnd1"]
 }

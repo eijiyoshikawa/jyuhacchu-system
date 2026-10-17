@@ -232,6 +232,45 @@ Vercel ダッシュボードからキャッシュを無効化して再デプロ�
 
 ---
 
+## 12. Vercel 本番ビルドが Neon 接続失敗（P1001）で止まる
+
+### エラー内容
+PR #25 のマージ（2026-09-16）で GitHub 連携による本番デプロイが自動で走ったが、
+ビルドコマンド内の `npx prisma migrate deploy` が
+`Error: P1001: Can't reach database server at ep-...-pooler.ap-southeast-1.aws.neon.tech:5432`
+で失敗し、デプロイが ERROR になった。同時刻にランタイムの `/api/health` は `dbConnected: true` を返していた。
+
+### 解決策
+一時的な接続失敗（Neon のコンピュート休止からの復帰待ち等）なので、Vercel ダッシュボードで
+失敗したデプロイを開き「Redeploy」（Build Cache は使わない）。再発する場合は Neon コンソールで
+プロジェクトを開いて DB を起こしてから再実行する。CLI 手順（AGENTS.md 運用ルール1）でも可。
+
+### 予防策
+- 本番反映後は必ず Vercel の Deployments で最新が **Ready** になっていることを確認する
+  （自動デプロイは「走った」だけでは本番に乗らない）。
+- 2026-10-17 に PR #26 のプレビュービルドでも再発したため、`vercel.json` の buildCommand を
+  `scripts/prisma-migrate-deploy-retry.sh`（最大5回・10秒間隔で再試行）に差し替えた。
+  Neon のコンピュートが休止中だと最初の接続が Prisma 既定の 5 秒タイムアウトを超えるのが原因で、
+  1回目の接続で起き上がるため再試行で通る。
+- それでも落ちる場合は Vercel の `DATABASE_URL` に `?connect_timeout=15` を付ける（Neon 推奨）。
+
+## 13. ローカル検証まわりの落とし穴（スケルトン実装時・2026-10-17）
+
+### エラー内容
+1. 検証用ページを `src/app/(public)/ai-tools/__preview/page.tsx` に置いたらビルドには載るのに 404。
+2. `npx next start` が全ページ 404（`output: standalone` 構成のため）。
+3. 古いサーバーを `pkill -f "...standalone/server.js"` で止めようとしたら、自分のシェルごと落ちた（exit 144）。
+
+### 解決策
+1. App Router では先頭が `_` のフォルダは **プライベートフォルダ**（ルーティング対象外）。名前を変える。
+2. 本番相当の確認は `cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/ && PORT=3101 node .next/standalone/server.js`。
+3. `pkill -f` のパターンが自分のコマンドラインにも一致する。`ps` で PID を特定して `kill <PID>` する。
+   `npx next start` を kill しても子の `next-server` が残ってポートを掴み続けるので、残骸も PID で止める。
+
+### 予防策
+- 一時ページは `_` なしの名前で作り、コミット前に削除する。
+- ローカルでの表示確認は standalone サーバーを使う（`next start` は使わない）。
+
 ## エラー発生順サマリー
 
 | # | エラー | 原因 | 影響度 |
@@ -247,6 +286,8 @@ Vercel ダッシュボードからキャッシュを無効化して再デプロ�
 | 9 | Neon channel_binding | DB接続パラメータ | 高 |
 | 10 | Vercel 環境変数 | 設定漏れ | 高 |
 | 11 | Vercel ビルドキャッシュ | キャッシュ不整合 | 中 |
+| 12 | Neon P1001（本番ビルド） | DB 一時接続失敗 | 高 |
+| 13 | ローカル検証の落とし穴 | 開発環境 | 低 |
 
 ---
 
@@ -261,11 +302,11 @@ Vercel ダッシュボードからキャッシュを無効化して再デプロ�
 ### Vercel デプロイ
 - [ ] DATABASE_URL（Neon の接続 URL、`channel_binding` パラメータなし）
 - [ ] NEXTAUTH_SECRET（`openssl rand -base64 32` で生成）
-- [ ] NEXTAUTH_URL（デプロイ先の正しい URL）
+- [ ] NEXTAUTH_URL / AUTH_URL は **設定しない**（`trustHost: true` でリクエストのホストから導出。設定するとログアウト時に本体ドメインへ飛び、電子取引くん側のブランド分離が崩れる。PR #25）
 - [ ] NTA_APP_ID（国税庁API、任意）
 - [ ] NextAuth 設定に `trustHost: true` がある
 - [ ] ミドルウェアが Edge Runtime 互換（Prisma 未インポート）
-- [ ] vercel.json の buildCommand に `prisma migrate deploy` が含まれる
+- [ ] vercel.json の buildCommand に `scripts/prisma-migrate-deploy-retry.sh`（再試行付き migrate deploy）が含まれる
 - [ ] デザイン変更後はキャッシュ無効化デプロイを検討
 
 ### トラブルシューティング手順
