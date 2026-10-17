@@ -398,7 +398,7 @@ PurchaseOrder と Invoice に以下のカラムを追加：
 ### Vercel設定（vercel.json）
 ```json
 {
-  "buildCommand": "npx prisma generate && npx prisma migrate deploy && npm run build",
+  "buildCommand": "npx prisma generate && bash scripts/prisma-migrate-deploy-retry.sh && npm run build",
   "framework": "nextjs",
   "regions": ["hnd1"]
 }

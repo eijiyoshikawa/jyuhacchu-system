@@ -72,14 +72,14 @@ postgresql://username:password@ep-xxx.ap-southeast-1.aws.neon.tech/neondb?sslmod
 
 ```json
 {
-  "buildCommand": "npx prisma generate && npx prisma migrate deploy && npm run build",
+  "buildCommand": "npx prisma generate && bash scripts/prisma-migrate-deploy-retry.sh && npm run build",
   "framework": "nextjs",
   "regions": ["hnd1"]
 }
 ```
 
 - `prisma generate`: Prisma Client 生成
-- `prisma migrate deploy`: DBマイグレーション実行
+- `scripts/prisma-migrate-deploy-retry.sh`: `prisma migrate deploy` を最大5回（10秒間隔）再試行。Neon のコンピュート休止中に P1001 で落ちるのを防ぐ（`PRISMA_MIGRATE_ATTEMPTS` / `PRISMA_MIGRATE_SLEEP` で調整可）
 - `regions: ["hnd1"]`: 東京リージョン
 
 ---

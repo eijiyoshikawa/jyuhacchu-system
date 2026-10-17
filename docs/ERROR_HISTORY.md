@@ -248,8 +248,11 @@ PR #25 のマージ（2026-09-16）で GitHub 連携による本番デプロイ�
 ### 予防策
 - 本番反映後は必ず Vercel の Deployments で最新が **Ready** になっていることを確認する
   （自動デプロイは「走った」だけでは本番に乗らない）。
-- `prisma migrate deploy` に再試行を入れる改善は未実施（要望があれば `vercel.json` の
-  buildCommand をリトライ付きスクリプトに差し替える）。
+- 2026-10-17 に PR #26 のプレビュービルドでも再発したため、`vercel.json` の buildCommand を
+  `scripts/prisma-migrate-deploy-retry.sh`（最大5回・10秒間隔で再試行）に差し替えた。
+  Neon のコンピュートが休止中だと最初の接続が Prisma 既定の 5 秒タイムアウトを超えるのが原因で、
+  1回目の接続で起き上がるため再試行で通る。
+- それでも落ちる場合は Vercel の `DATABASE_URL` に `?connect_timeout=15` を付ける（Neon 推奨）。
 
 ## 13. ローカル検証まわりの落とし穴（スケルトン実装時・2026-10-17）
 
@@ -303,7 +306,7 @@ PR #25 のマージ（2026-09-16）で GitHub 連携による本番デプロイ�
 - [ ] NTA_APP_ID（国税庁API、任意）
 - [ ] NextAuth 設定に `trustHost: true` がある
 - [ ] ミドルウェアが Edge Runtime 互換（Prisma 未インポート）
-- [ ] vercel.json の buildCommand に `prisma migrate deploy` が含まれる
+- [ ] vercel.json の buildCommand に `scripts/prisma-migrate-deploy-retry.sh`（再試行付き migrate deploy）が含まれる
 - [ ] デザイン変更後はキャッシュ無効化デプロイを検討
 
 ### トラブルシューティング手順
